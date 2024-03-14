@@ -26,7 +26,6 @@ class LoginControllerTest extends WebTestCase
     {
         parent::setUp();
         $this->client = static::createClient();
-        $this->userRepository = static::getContainer()->get('doctrine')->getRepository(User::class);
         $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class)->get();
     }
 
@@ -42,22 +41,20 @@ class LoginControllerTest extends WebTestCase
     {
 
         $this->databaseTool->loadFixtures([UserFixtures::class]);
-//        $user = $this->userRepository->findOneBy(["email"=>"simple@exempl.es"]);
-//        $this->client->loginUser($user);
 
-        $crawler = $this->client->request('GET', '/login');
+        $this->client->request('GET', '/login');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Connexion');
 
-//        dd($crawler->selectButton('Connexion')->form());
-        $crawler = $this->client->submitForm('Connexion',[
+        $this->client->submitForm('Connexion',[
             "_username" => "admin@exempl.es",
             "_password" => "password"
         ]);
 
-        $crawler = $this->client->request('GET', '/admin');
+        $this->assertResponseRedirects('/admin/');
+
+        $this->client->request('GET', '/admin/');
         $this->assertResponseIsSuccessful();
-//        $this->assertResponseRedirects("admin/");
     }
 
     protected function tearDown(): void
