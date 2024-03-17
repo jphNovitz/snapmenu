@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}title.product.index {% endtrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}title.product.index {% endtrans %}</h1>
+
+    <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
+        <thead>
+        <tr>
+            <th>{% trans %}title.product.name{%  endtrans %}</th>
+            <th class="hidden xl:table-cell">{%  trans %}title.product.description{%  endtrans %}</th>
+            <th class="text-center">{%  trans %}title.product.price_home{%  endtrans %}</th>
+            <th class="text-center">{%  trans %}title.product.price_away{%  endtrans %}</th>
+            <th class="text-center">{%  trans %}title.product.veggie{%  endtrans %}</th>
+            <th class="text-center">{%  trans %}title.product.halal{%  endtrans %}</th>
+            <th>{%  trans %}actions{%  endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr class="even:bg-gray-200 py-4">
+                <td>{{ product.name }}</td>
+                <td class="hidden xl:table-cell">{{ product.Description }}</td>
+                <td class="text-center">{{ product.priceHome }}</td>
+                <td class="text-center">{{ product.priceAway }}</td>
+                <td class="text-center">{{ product.veggie ? 'Yes' : 'No' }}</td>
+                <td class="text-center">{{ product.halal ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('admin_product_edit', {'id': product.id}) }}">
+                        {% trans %}button.edit {% endtrans %}
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_product_new') }}"  class="border border-gray-400 rounded-sm px-4 py-1">{% trans %}button.new {% endtrans %}</a>
+{% endblock %}
