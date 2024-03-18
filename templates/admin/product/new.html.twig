@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}title.product.create {% endtrans %}{% endblock %}
+
+{% block body %}
+    <twig:Title:H1>{% trans %}title.product.create {% endtrans %}</twig:Title:H1>
+
+    {{ include('admin/product/_form.html.twig', {'button_label': 'button.create'}) }}
+
+    <div class="my-8">
+        <a href="{{ path('admin_product_index') }}" class="border border-gray-400 rounded-sm px-4 py-1">{% trans %} button.back {% endtrans %}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{{ form_start(form) }}
+ {{ form_widget(form._token) }}
+<div class="flex space-x-4 my-4">
+    <div class="flex flex-col w-1/2 space-y-4">
+        {{ form_errors(form.name) }}
+        {{ form_label(form.name, null , {
+            'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'px-2 py-1'}}) }}
+    </div>
+    <div class="flex flex-col w-1/4 space-y-4">
+        {{ form_errors(form.priceHome) }}
+        {{ form_label(form.priceHome, null , {
+            'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.priceHome, {'attr': {'class': 'px-2 py-1'}}) }}
+    </div>
+    <div class="flex flex-col w-1/4 space-y-4">
+        {{ form_errors(form.priceAway) }}
+        {{ form_label(form.priceAway, null , {
+            'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.priceAway, {'attr': {'class': 'px-2 py-1'}}) }}
+    </div>
+</div>
+<div class="flex flex-col space-y-4 my-4">
+    {{ form_errors(form.description) }}
+    {{ form_label(form.description, null , {
+        'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'px-2 py-1'}}) }}
+</div>
+<div class="flex flex-col space-y-4 my-4">
+    {{ form_errors(form.ingredients) }}
+    {{ form_label(form.ingredients, null , {
+        'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.ingredients, {'attr': {'class': 'px-2 py-1'}}) }}
+</div>
+<div class="flex justify-between space-y-4 my-4">
+    <div>
+        {{ form_errors(form.veggie) }}
+        {{ form_label(form.veggie, null , {
+            'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.veggie) }}
+    </div>
+    <div>
+        {{ form_errors(form.halal) }}
+        {{ form_label(form.halal, null , {
+            'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.halal) }}
+    </div>
+    <div>
+        Allergenes
+    </div>
+</div>
+<div class="my-8">
+    <button class="border border-gray-400 rounded-sm px-4 py-1">{{ button_label|default('Save')|trans }}</button>
+</div>
+{{ form_end(form) }}

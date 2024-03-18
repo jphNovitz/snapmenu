@@ -3,7 +3,7 @@
 {% block title %}{% trans %}title.product.index {% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>{% trans %}title.product.index {% endtrans %}</h1>
+    <twig:Title:H1>{% trans %}title.product.index {% endtrans %} </twig:Title:H1>
 
     <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
         <thead>
@@ -20,13 +20,13 @@
         <tbody>
         {% for product in products %}
             <tr class="even:bg-gray-200 py-4">
-                <td>{{ product.name }}</td>
-                <td class="hidden xl:table-cell">{{ product.Description }}</td>
-                <td class="text-center">{{ product.priceHome }}</td>
-                <td class="text-center">{{ product.priceAway }}</td>
-                <td class="text-center">{{ product.veggie ? 'Yes' : 'No' }}</td>
-                <td class="text-center">{{ product.halal ? 'Yes' : 'No' }}</td>
-                <td>
+                <td class="px-2 py-1">{{ product.name }}</td>
+                <td class="hidden xl:table-cell px-2 py-1">{{ product.Description }}</td>
+                <td class="text-center px-2 py-1">{{ product.priceHome }}</td>
+                <td class="text-center px-2 py-1">{{ product.priceAway }}</td>
+                <td class="text-center px-2 py-1">{{ product.veggie ? 'Yes' : 'No' }}</td>
+                <td class="text-center px-2 py-1">{{ product.halal ? 'Yes' : 'No' }}</td>
+                <td class="px-2 py-1">
                     <a href="{{ path('admin_product_edit', {'id': product.id}) }}">
                         {% trans %}button.edit {% endtrans %}
                     </a>
