@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}title.category.create {% endtrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}title.category.create {% endtrans %}</h1>
+
+    {{ include('admin/category/_form.html.twig', {'button_label': 'button.create'}) }}
+
+    <div class="my-8">
+        <a href="{{ path('admin_category_index') }}" class="border border-gray-400 rounded-sm px-4 py-1">{% trans %} button.back {% endtrans %}</a>
+    </div>
+{% endblock %}

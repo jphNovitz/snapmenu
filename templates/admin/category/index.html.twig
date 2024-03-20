@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %} title.category.index {% endtrans %}{% endblock %}
+
+{% block body %}
+    <twig:Title:H1>{% trans %} title.category.index {% endtrans %}</twig:Title:H1>
+
+    <div class="my-8">
+        <twig:Title:H2> {% trans %} title.category_default.index {% endtrans %} </twig:Title:H2>
+        <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
+            <thead>
+            <tr>
+                <th>{% trans %}title.product.name{% endtrans %}</th>
+                <th>{% trans %}actions{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category_default in category_defaults %}
+                <tr class="even:bg-gray-200 py-4">
+                    <td class="px-2 py-1">{{ category_default.name }}</td>
+                    <td>
+                        <a href="{{ path('admin_category_edit', {'id': category_default.id}) }}">{% trans %}button.edit {% endtrans %}</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('admin_category_default_new') }}"
+           class="border border-gray-400 rounded-sm px-4 py-1">
+            {% trans %}button.new {% endtrans %}
+        </a>
+    </div>
+    <div class="my-8">
+        <twig:Title:H2> {% trans %} title.category_custom.index {% endtrans %} </twig:Title:H2>
+        <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
+            <thead>
+            <tr>
+                <th>{% trans %}title.product.name{% endtrans %}</th>
+                <th>{% trans %}actions{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category_custom in category_customs %}
+                <tr class="even:bg-gray-200 py-4">
+                    <td class="px-2 py-1">{{ category_custom.name }}</td>
+                    <td>
+                        <a href="{{ path('admin_category_edit', {'id': category_custom.id}) }}">{% trans %}button.edit {% endtrans %}</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('admin_category_custom_new') }}"
+           class="border border-gray-400 rounded-sm px-4 py-1">
+            {% trans %}button.new {% endtrans %}
+        </a>
+    </div>
+
+{% endblock %}
