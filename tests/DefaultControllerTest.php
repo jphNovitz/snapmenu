@@ -8,6 +8,7 @@ class DefaultControllerTest extends WebTestCase
 {
     public function test_default_index_is_accessible(): void
     {
+
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
 
