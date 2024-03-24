@@ -13,9 +13,6 @@ use Doctrine\ORM\Mapping\InheritanceType;
 
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[InheritanceType('SINGLE_TABLE')]
-#[DiscriminatorColumn(name: 'type', type: 'string')]
-#[DiscriminatorMap(['default' => CategoryDefault::class, 'custom' => CategoryCustom::class])]
 class Category
 {
     #[ORM\Id]
@@ -29,6 +26,9 @@ class Category
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
+
+    #[ORM\ManyToOne]
+    private ?User $owner;
 
     public function __construct()
     {
@@ -82,5 +82,15 @@ class Category
         return $this;
     }
 
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
 
+    public function setOwner(?User $owner): static
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
 }
