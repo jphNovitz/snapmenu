@@ -30,6 +30,9 @@ class Category
     #[ORM\ManyToOne]
     private ?User $owner;
 
+    #[ORM\Column(length: 10)]
+    private ?string $type = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -90,6 +93,18 @@ class Category
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
