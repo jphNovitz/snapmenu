@@ -1,11 +1,13 @@
 App\Entity\User:
-  user_admin:
+#  user_admin:
+  user_1:
     email: "admin@exempl.es"
-    roles: [ 'ROLE_ADMIN', 'ROLE_USER' ]
+    roles: [ 'ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER' ]
     password: <symfonyPassword("password", "salt")>
     is_verified: true
-  user_simple:
+#  user_simple:
+  user_2:
     email: "simple@exempl.es"
-    roles: [ 'ROLE_USER' ]
+    roles: [ 'ROLE_ADMIN', 'ROLE_USER' ]
     password: <symfonyPassword("password", "salt")>
     is_verified: true

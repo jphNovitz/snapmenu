@@ -1,0 +1,10 @@
+App\Entity\categoryDefault:
+  category_{1..6}:
+    name: <words(3, true)>
+    type: 'default'
+
+App\Entity\CategoryCustom:
+  category_{7..10}:
+    name: <words(4, true)>
+    type: 'custom'
+    owner: '@user_*'
