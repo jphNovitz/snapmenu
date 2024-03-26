@@ -1,23 +1,21 @@
 <?php
 
-namespace Admin;
+namespace Admin\Category;
 
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Category;
-use App\Entity\CategoryCustom;
-use App\Entity\Product;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use JetBrains\PhpStorm\NoReturn;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Faker;
 
 class CategoryControllerTest extends WebTestCase
 {
@@ -73,30 +71,6 @@ class CategoryControllerTest extends WebTestCase
         $this->assertStringContainsString("Ajouter", $crawler->text());
     }
 
-    #[NoReturn] public function test_admin_can_add_a_category(): void
-    {
-        $this->databaseTool->loadFixtures([
-            UserFixtures::class]);
-
-        $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
-        $this->client->disableReboot();
-        $this->client->loginUser($user);
-
-        $this->client->request('GET', sprintf('%snew', $this->path));
-
-//        Page new is accessible
-        $this->assertResponseStatusCodeSame(200);
-        $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains("h1", 'Ajouter une categorie');
-
-        $crawler = $this->client->submitForm('Ajouter', [
-            'category_custom[name]' => $this->faker->name(),
-        ]);
-
-        $this->assertResponseRedirects($this->path, 302);
-        $this->assertSame(1, $this->categoryRepository->count([]));
-    }
-
     public function test_admin_can_update_a_category(): void
     {
         $this->databaseTool->loadFixtures([
@@ -120,7 +94,7 @@ class CategoryControllerTest extends WebTestCase
 
 //        Submit the 'new product form'
         $this->client->submitForm('Modifier', [
-            'category_custom[name]' => $name
+            'category[name]' => $name
         ]);
 
         $this->assertResponseStatusCodeSame(302);
