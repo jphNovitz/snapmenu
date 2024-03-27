@@ -27,15 +27,17 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
 
-    #[ORM\ManyToOne]
-    private ?User $owner;
-
     #[ORM\Column(length: 10)]
     private ?string $type = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: CategoryInStore::class)]
+    private Collection $categoryInStores;
+
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->categoryInStores = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,18 +87,6 @@ class Category
         return $this;
     }
 
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): static
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
     public function getType(): ?string
     {
         return $this->type;
@@ -108,4 +98,36 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, CategoryInStore>
+     */
+    public function getCategoryInStores(): Collection
+    {
+        return $this->categoryInStores;
+    }
+
+    public function addCategoryInStore(CategoryInStore $categoryInStore): static
+    {
+        if (!$this->categoryInStores->contains($categoryInStore)) {
+            $this->categoryInStores->add($categoryInStore);
+            $categoryInStore->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategoryInStore(CategoryInStore $categoryInStore): static
+    {
+        if ($this->categoryInStores->removeElement($categoryInStore)) {
+            // set the owning side to null (unless already changed)
+            if ($categoryInStore->getCategory() === $this) {
+                $categoryInStore->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
