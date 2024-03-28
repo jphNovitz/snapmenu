@@ -21,6 +21,25 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function findByStore($user): array
+    {
+        $store = $user->getStore();
+
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.category', 'c')
+            ->innerJoin('c.categoryInStores', 'category_in_store')
+            ->select('p, c, category_in_store') // Include category_in_store
+            ->where('category_in_store.store = :storeId') // Filter by store ID
+                ->setParameter('storeId', $store->getId())
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */
