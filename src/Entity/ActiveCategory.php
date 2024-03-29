@@ -2,27 +2,24 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryInStoreRepository;
-use Doctrine\DBAL\Types\Types;
+use App\Repository\ActiveCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoryInStoreRepository::class)]
-class CategoryInStore
+#[ORM\Entity(repositoryClass: ActiveCategoryRepository::class)]
+class ActiveCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $rowOrder = 1;
+    #[ORM\Column(nullable: true)]
+    private ?int $rowOrder = null;
 
-    #[ORM\ManyToOne(inversedBy: 'categoryInStores')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'activeCategories')]
     private ?Category $category = null;
 
-    #[ORM\ManyToOne(inversedBy: 'categoryInStores')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'activeCategories')]
     private ?Store $store = null;
 
     public function getId(): ?int
@@ -35,7 +32,7 @@ class CategoryInStore
         return $this->rowOrder;
     }
 
-    public function setRowOrder(int $rowOrder): static
+    public function setRowOrder(?int $rowOrder): static
     {
         $this->rowOrder = $rowOrder;
 
