@@ -1,0 +1,12 @@
+App\Entity\Store:
+  store_{1..5}:
+    name: <company()>
+    description: <sentence()>
+    street_name: <streetName()>
+    house_number: <numberBetween(1,10)>
+    post_code: <postCode(4)>
+    city: <city()>
+    phone_number: <phoneNumber()>
+    email: <email()>
+    vat_number: <vat(false)>
+    owner: '@user_<current()>'

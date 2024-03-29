@@ -11,3 +11,8 @@ App\Entity\User:
     roles: [ 'ROLE_ADMIN', 'ROLE_USER' ]
     password: <symfonyPassword("password", "salt")>
     is_verified: true
+  user_{3..5}:
+    email: <email()>
+    roles: [ 'ROLE_ADMIN', 'ROLE_USER' ]
+    password: <symfonyPassword("password", "salt")>
+    is_verified: true
