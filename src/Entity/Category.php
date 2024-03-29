@@ -30,14 +30,17 @@ class Category
     #[ORM\Column(length: 10)]
     private ?string $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: CategoryInStore::class)]
-    private Collection $categoryInStores;
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    private ?Store $owner = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: ActiveCategory::class)]
+    private Collection $activeCategories;
 
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
-        $this->categoryInStores = new ArrayCollection();
+        $this->activeCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,30 +102,42 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection<int, CategoryInStore>
-     */
-    public function getCategoryInStores(): Collection
+    public function getOwner(): ?Store
     {
-        return $this->categoryInStores;
+        return $this->owner;
     }
 
-    public function addCategoryInStore(CategoryInStore $categoryInStore): static
+    public function setOwner(?Store $owner): static
     {
-        if (!$this->categoryInStores->contains($categoryInStore)) {
-            $this->categoryInStores->add($categoryInStore);
-            $categoryInStore->setCategory($this);
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ActiveCategory>
+     */
+    public function getActiveCategories(): Collection
+    {
+        return $this->activeCategories;
+    }
+
+    public function addActiveCategory(ActiveCategory $activeCategory): static
+    {
+        if (!$this->activeCategories->contains($activeCategory)) {
+            $this->activeCategories->add($activeCategory);
+            $activeCategory->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeCategoryInStore(CategoryInStore $categoryInStore): static
+    public function removeActiveCategory(ActiveCategory $activeCategory): static
     {
-        if ($this->categoryInStores->removeElement($categoryInStore)) {
+        if ($this->activeCategories->removeElement($activeCategory)) {
             // set the owning side to null (unless already changed)
-            if ($categoryInStore->getCategory() === $this) {
-                $categoryInStore->setCategory(null);
+            if ($activeCategory->getCategory() === $this) {
+                $activeCategory->setCategory(null);
             }
         }
 

@@ -45,16 +45,20 @@ class Store
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
+    private Collection $categories;
+
     #[ORM\OneToOne(inversedBy: 'store', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
-    #[ORM\OneToMany(mappedBy: 'store', targetEntity: CategoryInStore::class)]
-    private Collection $categories;
+    #[ORM\OneToMany(mappedBy: 'store', targetEntity: ActiveCategory::class)]
+    private Collection $activeCategories;
+
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->activeCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,12 +186,42 @@ class Store
         return $this;
     }
 
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getOwner() === $this) {
+                $category->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(User $owner): static
+    public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
 
@@ -195,35 +229,33 @@ class Store
     }
 
     /**
-     * @return Collection<int, CategoryInStore>
+     * @return Collection<int, ActiveCategory>
      */
-    public function getCategories(): Collection
+    public function getActiveCategories(): Collection
     {
-        return $this->categories;
+        return $this->activeCategories;
     }
 
-    public function addCategory(CategoryInStore $category): static
+    public function addActiveCategory(ActiveCategory $activeCategory): static
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->setStore($this);
+        if (!$this->activeCategories->contains($activeCategory)) {
+            $this->activeCategories->add($activeCategory);
+            $activeCategory->setStore($this);
         }
 
         return $this;
     }
 
-    public function removeCategory(CategoryInStore $category): static
+    public function removeActiveCategory(ActiveCategory $activeCategory): static
     {
-        if ($this->categories->removeElement($category)) {
+        if ($this->activeCategories->removeElement($activeCategory)) {
             // set the owning side to null (unless already changed)
-            if ($category->getStore() === $this) {
-                $category->setStore(null);
+            if ($activeCategory->getStore() === $this) {
+                $activeCategory->setStore(null);
             }
         }
 
         return $this;
     }
-
-
 
 }
