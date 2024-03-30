@@ -21,6 +21,25 @@ class ActiveCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, ActiveCategory::class);
     }
 
+        /**
+         * @return ActiveCategory[] Returns an array of ActiveCategory objects
+         */
+        public function findids($store): array
+        {
+            $result =  $this->createQueryBuilder('a')
+                ->innerJoin('a.category', 'category')
+                ->select('category.id')
+                ->andWhere('a.store = :store')
+                ->setParameter('store', $store)
+                ->orderBy('a.id', 'ASC')
+                ->getQuery()
+                ->getArrayResult();
+
+            return array_map(function ($r) {
+                return $r['id'];
+            }, $result);
+        }
+
     //    /**
     //     * @return ActiveCategory[] Returns an array of ActiveCategory objects
     //     */
