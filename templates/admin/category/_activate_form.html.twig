@@ -1,0 +1,10 @@
+<form method="post" action="{{ path('admin_category_activate', {'id': category.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('activate' ~ category.id) }}">
+    <button {% if button_label == "button.activate" %}
+        class="border border-green-400 rounded-sm px-4 py-1"
+    {% else %}
+        class="border bg-green-400 rounded-sm px-4 py-1"
+            {% endif %}>
+        {{ button_label|default('button.activate')|trans }}
+    </button>
+</form>

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Category;
 
+use App\Entity\ActiveCategory;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,17 +22,24 @@ class CategoryController extends AbstractController
     #[Route('/', name: 'admin_category_index', methods: ['GET'])]
     public function index(): Response
     {
+        $activeIds = $this->entityManager
+            ->getRepository(ActiveCategory::class)
+            ->findids($this->getUser()
+                ->getStore());
+
         $categoryDefaults = $this->entityManager
             ->getRepository(Category::class)
-            ->findAll();
+            ->findBy(['type' => 'default']);
+
 
         $categoryCustoms = $this->entityManager
             ->getRepository(Category::class)
-            ->findCustomsCategories($this->getUser());
+            ->findCategories($this->getUser(), 'custom');
 
         return $this->render('admin/category/index.html.twig', [
             'category_defaults' => $categoryDefaults,
             'category_customs' => $categoryCustoms,
+            'active_ids' => $activeIds
         ]);
     }
 
@@ -64,4 +72,28 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
     }
+
+    #[Route('/{id}/activate', name: 'admin_category_activate', methods: ['GET', 'POST'])]
+    public function activate(Request $request, Category $category, EntityManagerInterface $entityManager): Response
+    {
+//        if ($this->isCsrfTokenValid('activate' . $category->getId(), $request->request->get('_token'))) {
+        $activeCategory = $entityManager->getRepository(ActiveCategory::class)
+            ->findOneBy(['category' => $category, 'store' => $this->getUser()->getStore()]);
+
+//            dd(!$activeCategory);
+
+        if (!$activeCategory) {
+            $activeCategory = new ActiveCategory();
+            $activeCategory->setCategory($category);
+            $activeCategory->setStore($this->getUser()->getStore());
+            $entityManager->persist($activeCategory);
+        } else {
+            $entityManager->remove($activeCategory);
+        }
+        $entityManager->flush();
+//        }
+
+        return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
+    }
+
 }

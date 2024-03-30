@@ -6,7 +6,7 @@
     <twig:Title:H1>{% trans %} title.category.index {% endtrans %}</twig:Title:H1>
 
     <div class="my-8">
-        <twig:Title:H2> {% trans %} title.category_default.index {% endtrans %} </twig:Title:H2>
+        <twig:Title:H2> {% trans %} title.category.default_index {% endtrans %} </twig:Title:H2>
         <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
             <thead>
             <tr>
@@ -15,11 +15,18 @@
             </tr>
             </thead>
             <tbody>
-            {% for category_default in category_defaults %}
+            {% for category in category_defaults %}
                 <tr class="even:bg-gray-200 py-4">
-                    <td class="px-2 py-1">{{ category_default.name }}</td>
+                    <td class="px-2 py-1">{{ category.name }}</td>
                     <td>
-                        <a href="{{ path('admin_category_edit', {'id': category_default.id}) }}">{% trans %}button.edit {% endtrans %}</a>
+                        {% if category.id in active_ids %}
+                            {% include 'admin/category/_activate_form.html.twig' with {'button_label': 'button.deactivate'} %}
+                        {% else %}
+                            {% include 'admin/category/_activate_form.html.twig' with {'button_label': 'button.activate'} %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_category_edit', {'id': category.id}) }}">{% trans %}button.edit {% endtrans %}</a>
                     </td>
                 </tr>
             {% else %}
@@ -36,7 +43,7 @@
         </a>
     </div>
     <div class="my-8">
-        <twig:Title:H2> {% trans %} title.category_custom.index {% endtrans %} </twig:Title:H2>
+        <twig:Title:H2> {% trans %} title.category.custom_index {% endtrans %} </twig:Title:H2>
         <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
             <thead>
             <tr>
@@ -45,11 +52,20 @@
             </tr>
             </thead>
             <tbody>
-            {% for category_custom in category_customs %}
+            {% for category in category_customs %}
                 <tr class="even:bg-gray-200 py-4">
-                    <td class="px-2 py-1">{{ category_custom.name }}</td>
+                    <td class="px-2 py-1">{{ category.name }}</td>
                     <td>
-                        <a href="{{ path('admin_category_edit', {'id': category_custom.id}) }}">{% trans %}button.edit {% endtrans %}</a>
+                        {% if category.id in active_ids %}
+                            {% include 'admin/category/_activate_form.html.twig' with {'button_label': 'button.deactivate'} %}
+                        {% else %}
+                            {% include 'admin/category/_activate_form.html.twig' with {'button_label': 'button.activate'} %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_category_edit', {'id': category.id}) }}">
+                            {% trans %}button.edit {% endtrans %}
+                        </a>
                     </td>
                 </tr>
             {% else %}
