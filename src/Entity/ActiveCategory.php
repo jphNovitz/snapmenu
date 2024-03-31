@@ -14,7 +14,7 @@ class ActiveCategory
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $rowOrder = null;
+    private ?int $rowOrder = 5;
 
     #[ORM\ManyToOne(inversedBy: 'activeCategories')]
     private ?Category $category = null;
