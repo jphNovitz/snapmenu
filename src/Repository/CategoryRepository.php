@@ -28,16 +28,14 @@ class CategoryRepository extends ServiceEntityRepository
      */
     public function findCategories(User $user = null, string $type = "default"): array
     {
+//        dd($user->getStore());
         return $this->createQueryBuilder('c')
-            ->innerJoin('c.categoryInStores', 'category_in_store')
-            ->select('c')
+            ->innerJoin('c.owner', 'owner')
             ->andWhere('c.type = :type')
-            ->andwhere('category_in_store.store = :storeId')
+            ->andwhere('owner = :storeId')
             ->setParameter('type', $type)
             ->setParameter('storeId', $user->getStore()->getId())
-            ->orderBy('category_in_store.rowOrder', 'ASC')
-//        return $this->getEntityManager()->createQuery('SELECT c FROM App\Entity\Category c WHERE c.owner = :user')
-//            ->setParameter('user', $user)
+            ->orderBy('c.name', 'ASC')
             ->getQuery()
             ->getResult();
     }
