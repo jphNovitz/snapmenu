@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToOne(mappedBy: 'owner', cascade: ['persist', 'remove'])]
+    private ?Store $store = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,4 +116,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function isIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function getStore(): ?Store
+    {
+        return $this->store;
+    }
+
+    public function setStore(?Store $store): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($store === null && $this->store !== null) {
+            $this->store->setOwner(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($store !== null && $store->getOwner() !== $this) {
+            $store->setOwner($this);
+        }
+
+        $this->store = $store;
+
+        return $this;
+    }
+
 }
