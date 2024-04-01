@@ -46,11 +46,25 @@ class CategoryController extends AbstractController
     #[Route('/{id}/edit', name: 'admin_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(CategoryType::class, $category);
+        $active = $entityManager
+            ->getRepository(ActiveCategory::class)
+            ->findBy([
+                'store' => $this->getUser()->getStore(),
+                'category' => $category
+            ]);
+
+        if ($active)
+            $initialRow = $active[0]->getRowOrder();
+        else $initialRow = null;
+
+        $form = $this->createForm(CategoryType::class, $category,
+            ['row_order_initial_value' => $initialRow]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($rowOrder = $form->get('rowOrder')->getData())
+                $active->setRowOrder($rowOrder);
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
@@ -59,6 +73,7 @@ class CategoryController extends AbstractController
         return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
+
         ]);
     }
 
@@ -76,24 +91,23 @@ class CategoryController extends AbstractController
     #[Route('/{id}/activate', name: 'admin_category_activate', methods: ['GET', 'POST'])]
     public function activate(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
-//        if ($this->isCsrfTokenValid('activate' . $category->getId(), $request->request->get('_token'))) {
-        $activeCategory = $entityManager->getRepository(ActiveCategory::class)
-            ->findOneBy(['category' => $category, 'store' => $this->getUser()->getStore()]);
+        $referer = $request->headers->get('referer');
+        if ($this->isCsrfTokenValid('activate' . $category->getId(), $request->request->get('_token'))) {
+            $activeCategory = $entityManager->getRepository(ActiveCategory::class)
+                ->findOneBy(['category' => $category, 'store' => $this->getUser()->getStore()]);
 
-//            dd(!$activeCategory);
-
-        if (!$activeCategory) {
-            $activeCategory = new ActiveCategory();
-            $activeCategory->setCategory($category);
-            $activeCategory->setStore($this->getUser()->getStore());
-            $entityManager->persist($activeCategory);
-        } else {
-            $entityManager->remove($activeCategory);
+            if (!$activeCategory) {
+                $activeCategory = new ActiveCategory();
+                $activeCategory->setCategory($category);
+                $activeCategory->setStore($this->getUser()->getStore());
+                $entityManager->persist($activeCategory);
+            } else {
+                $entityManager->remove($activeCategory);
+            }
+            $entityManager->flush();
         }
-        $entityManager->flush();
-//        }
-
-        return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
+          return $this->redirect($referer);
+//        return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
     }
 
 }
