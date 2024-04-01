@@ -29,11 +29,9 @@ class ProductRepository extends ServiceEntityRepository
         $store = $user->getStore();
 
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.category', 'c')
-            ->innerJoin('c.categoryInStores', 'category_in_store')
-            ->select('p, c, category_in_store') // Include category_in_store
-            ->where('category_in_store.store = :storeId') // Filter by store ID
-                ->setParameter('storeId', $store->getId())
+            ->innerJoin('p.category', 'category')
+            ->andWhere('p.owner = :store')
+                ->setParameter('store', $store)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
             ->getResult()
