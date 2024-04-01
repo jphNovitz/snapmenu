@@ -21,24 +21,42 @@ class ActiveCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, ActiveCategory::class);
     }
 
-        /**
-         * @return ActiveCategory[] Returns an array of ActiveCategory objects
-         */
-        public function findids($store): array
-        {
-            $result =  $this->createQueryBuilder('a')
-                ->innerJoin('a.category', 'category')
-                ->select('category.id')
-                ->andWhere('a.store = :store')
-                ->setParameter('store', $store)
-                ->orderBy('a.id', 'ASC')
-                ->getQuery()
-                ->getArrayResult();
+    /**
+     * @return ActiveCategory[] Returns an array of ActiveCategory objects
+     */
+    public function findids($store): array
+    {
+        $result = $this->createQueryBuilder('a')
+            ->innerJoin('a.category', 'category')
+            ->select('category.id')
+            ->andWhere('a.store = :store')
+            ->setParameter('store', $store)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
 
-            return array_map(function ($r) {
-                return $r['id'];
-            }, $result);
-        }
+        return array_map(function ($r) {
+            return $r['id'];
+        }, $result);
+    }
+
+    /**
+     * @return ActiveCategory[] Returns an array of ActiveCategory objects
+     */
+    public function findMenu($store): array
+    {
+        return $this->createQueryBuilder('a')
+            ->innerJoin('a.store', 'store')
+            ->innerJoin('a.category', 'category')
+            ->innerJoin('category.products', 'products')
+            ->select('a, category, products')
+            ->andWhere('store = :store')
+            ->andWhere('products.owner = :store')
+            ->setParameter('store', $store)
+            ->orderBy('a.rowOrder', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return ActiveCategory[] Returns an array of ActiveCategory objects

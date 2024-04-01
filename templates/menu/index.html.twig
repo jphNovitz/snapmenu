@@ -5,23 +5,33 @@
 {% block body %}
     <twig:Title:H1>Menu</twig:Title:H1>
     <div>
-        {% for product in menu %}
-            <div class="mb-8">
-                <div class="w-full grid grid-cols-8 lg:grid-cols-12 font-extrabold">
-                    <div class="col-span-6 lg:col-span-8  leading-loose uppercase"> {{ product.name }}</div>
-                    {#                <div> {{ product.veggie ? 'Veggie' : '' }}</div> #}
-                    {#                <div> {{ product.halal ? 'Halal' : '' }}</div> #}
-                    <div> {{ product.priceHome }}</div>
-                    <div> {{ product.priceAway }}</div>
-                </div>
-                <div class="flex -mt-2">
-                    {% if product.veggie %}<span class="mr-4"> Veggie</span> {% endif %}
-                    {% if product.halal %}<span>Halal</span> {% endif %}
-                </div>
+        {{ dump(menu[0].category) }}
+        {% for activeCategory in menu %}
+{#            {% for category in activeCategory.catego  %}#}
+                {{ dump(activeCategory.category) }}
+                            {% if activeCategory.category.products is not empty %}
+                                <twig:Title:H2 class="mt-12">{{ activeCategory.category.name }}</twig:Title:H2>
+                                {% for product in activeCategory.category.products %}
+                                    <div class="mb-8">
+                                        <div class="w-full grid grid-cols-8 lg:grid-cols-12 font-extrabold">
+                                            <div class="col-span-6 lg:col-span-8  leading-loose uppercase"> {{ product.name }}</div>
+                                                            <div> {{ product.veggie ? 'Veggie' : '' }}</div>
+                                                            <div> {{ product.halal ? 'Halal' : '' }}</div>
+                                            <div> {{ product.priceHome }}</div>
+                                            <div> {{ product.priceAway }}</div>
+                                        </div>
+                                        <div class="flex -mt-2">
+                                            {% if product.veggie %}<span class="mr-4"> Veggie</span> {% endif %}
+                                            {% if product.halal %}<span>Halal</span> {% endif %}
+                                        </div>
 
-                <div> {{ product.description ? product.description : '' }}</div>
-                <div class="text-sm italiq"> Ingredients: {{ product.description ? product.ingredients : '' }}</div>
-            </div>
+                                        <div> {{ product.description ? product.description : '' }}</div>
+                                        <div class="text-sm italiq">
+                                            Ingredients: {{ product.description ? product.ingredients : '' }}</div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+{#            {% endfor %}#}
         {% endfor %}
     </div>
 {% endblock %}
