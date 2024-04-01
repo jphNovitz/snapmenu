@@ -42,10 +42,11 @@ class ProductType extends AbstractType
                     'class' => Category::class,
                     'query_builder' => function (EntityRepository $er): QueryBuilder {
                         return $er->createQueryBuilder('c')
-                            ->andWhere('c.type = :default OR (c.type = :custom AND c.owner = :user)')
-                            ->setParameter('default', 'default')
-                            ->setParameter('custom', 'custom')
-                            ->setParameter('user', $this->security->getUser())
+                            ->innerJoin('c.categoryInStores', 'category_in_store')
+                            ->select('c, category_in_store') // Include category_in_store
+                            ->where('c.type = :default OR (category_in_store.store = :storeId)') // Filter by store ID
+                            ->setParameter('default','default'  )
+                            ->setParameter('storeId', $this->security->getUser()->getStore()->getId())
                             ->orderBy('c.id', 'ASC');
                     },
                     'choice_label' => 'name',
