@@ -54,11 +54,15 @@ class Store
     #[ORM\OneToMany(mappedBy: 'store', targetEntity: ActiveCategory::class)]
     private Collection $activeCategories;
 
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Product::class)]
+    private Collection $products;
+
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->activeCategories = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -252,6 +256,36 @@ class Store
             // set the owning side to null (unless already changed)
             if ($activeCategory->getStore() === $this) {
                 $activeCategory->setStore(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): static
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): static
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getOwner() === $this) {
+                $product->setOwner(null);
             }
         }
 
