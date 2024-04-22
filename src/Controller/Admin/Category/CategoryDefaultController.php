@@ -3,23 +3,26 @@
 namespace App\Controller\Admin\Category;
 
 use App\Entity\Category;
+use App\Entity\CategoryInStore;
+use App\Form\CategoryInStoreType;
 use App\Form\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use function PHPUnit\Framework\isInstanceOf;
 
 #[Route('/admin/category')]
 class CategoryDefaultController extends AbstractController
 {
-
     #[Route('/default/new', name: 'admin_category_default_new', methods: ['GET', 'POST'])]
     public function newDefault(Request $request, EntityManagerInterface $entityManager): Response
     {
         $category = new Category();
         $category->setType('default');
+//        $categoryInStore = new CategoryInStore();
+//        $categoryInStore->setCategory($category);
+
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
