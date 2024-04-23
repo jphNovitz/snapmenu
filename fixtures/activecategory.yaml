@@ -1,0 +1,4 @@
+App\Entity\ActiveCategory:
+  active_{1..50}:
+    category:  '@category_*'
+    store:  '@store_*'

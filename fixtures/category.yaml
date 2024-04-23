@@ -1,4 +1,4 @@
-App\Entity\category:
+App\Entity\Category:
   category_{1..10}:
     name: <words(3, true)>
     type: 'default'
