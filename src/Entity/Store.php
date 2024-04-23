@@ -6,6 +6,7 @@ use App\Repository\StoreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: StoreRepository::class)]
 class Store
@@ -56,6 +57,14 @@ class Store
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Product::class)]
     private Collection $products;
+
+    /**
+     * @ORM\Column(type="string", length=100, unique=true)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private ?string $slug = null;
 
 
     public function __construct()
@@ -288,6 +297,18 @@ class Store
                 $product->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
