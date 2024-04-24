@@ -21,6 +21,21 @@ class StoreRepository extends ServiceEntityRepository
         parent::__construct($registry, Store::class);
     }
 
+
+        /**
+         * @return Store[] Returns an array of Store objects
+         */
+        public function findList(): array
+        {
+            return $this->createQueryBuilder('s')
+                ->select('s.name, s.slug')
+                ->orderBy('s.slug', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
+
     //    /**
     //     * @return Store[] Returns an array of Store objects
     //     */
