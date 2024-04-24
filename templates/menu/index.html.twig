@@ -5,7 +5,7 @@
 {% block body %}
     <twig:Title:H1>Menu</twig:Title:H1>
     <div>
-        {{ dump(menu[0].category) }}
+{#        {{ dump(menu[0].category) }}#}
         {% for activeCategory in menu %}
 {#            {% for category in activeCategory.catego  %}#}
                 {{ dump(activeCategory.category) }}
