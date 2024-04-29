@@ -6,14 +6,18 @@
     <div class="py-16">
         <h1 class="text-3xl font-black">Welcome to snapmenu ✅</h1>
         <div class="py-16">
-            <ul>
-                {% for store in stores %}
-                    <li><a href="{{ path('app_menu', {slug: store.slug}) }}">{{ store.name }}</a></li>
-                {% else %}
-                    no store
+            <div class="w-3/4 h-80 flex flex-nowrap overflow-hidden">
+                <div class="flex flex-nowrap overflow-hidden">
+                    {% for store in stores %}
+                        <div class="{# min-w-[30%] #} flex flex-none justify-center items-center w-64 aspect-square border border-2 border-black mx-12">
+                            <a href="{{ path('app_menu', {slug: store.slug}) }}">{{ store.name }}</a>
+                        </div>
+                    {% else %}
+                        no store
 
-                {% endfor %}
-            </ul>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

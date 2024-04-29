@@ -13,7 +13,7 @@ class DefaultController extends AbstractController
     public function index(StoreRepository $storeRepository): Response
     {
         return $this->render('default/index.html.twig', [
-            'store' => $storeRepository->findList(),
+            'stores' => $storeRepository->findList(),
         ]);
     }
 }
