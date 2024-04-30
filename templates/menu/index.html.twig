@@ -3,35 +3,52 @@
 {% block title %}Menu{% endblock %}
 
 {% block body %}
-    <twig:Title:H1>Menu</twig:Title:H1>
+    <twig:Title:H1>menu</twig:Title:H1>
     <div>
-{#        {{ dump(menu[0].category) }}#}
+        {#        {{ dump(menu[0].category) }} #}
         {% for activeCategory in menu %}
-{#            {% for category in activeCategory.catego  %}#}
-                {{ dump(activeCategory.category) }}
-                            {% if activeCategory.category.products is not empty %}
-                                <twig:Title:H2 class="mt-12">{{ activeCategory.category.name }}</twig:Title:H2>
-                                {% for product in activeCategory.category.products %}
-                                    <div class="mb-8">
-                                        <div class="w-full grid grid-cols-8 lg:grid-cols-12 font-extrabold">
-                                            <div class="col-span-6 lg:col-span-8  leading-loose uppercase"> {{ product.name }}</div>
-                                                            <div> {{ product.veggie ? 'Veggie' : '' }}</div>
-                                                            <div> {{ product.halal ? 'Halal' : '' }}</div>
-                                            <div> {{ product.priceHome }}</div>
-                                            <div> {{ product.priceAway }}</div>
-                                        </div>
-                                        <div class="flex -mt-2">
-                                            {% if product.veggie %}<span class="mr-4"> Veggie</span> {% endif %}
-                                            {% if product.halal %}<span>Halal</span> {% endif %}
-                                        </div>
-
-                                        <div> {{ product.description ? product.description : '' }}</div>
-                                        <div class="text-sm italiq">
-                                            Ingredients: {{ product.description ? product.ingredients : '' }}</div>
+            {#            {% for category in activeCategory.catego  %} #}
+            {#                {{ dump(activeCategory.category) }} #}
+            {% if activeCategory.category.products is not empty %}
+                <twig:Title:H2 class="mt-12 border-b border-b-2 border-red-500">
+                    {{ activeCategory.category.name }}
+                </twig:Title:H2>
+                {% for product in activeCategory.category.products %}
+                    <div class="my-4 first:mt-0 last:mb-8">
+                        <div class="w-full grid grid-cols-12">
+                            <div class="col-span-10">
+                                <div class="flex justify-between items-start mr-4">
+                                    <div class="uppercase"> {{ product.name }}</div>
+                                    <div>
+                                        {{ product.veggie ? 'Veggie' : '' }}
+                                        {{ product.halal ? 'Halal' : '' }}
                                     </div>
-                                {% endfor %}
-                            {% endif %}
-{#            {% endfor %}#}
+                                </div>
+                                {#                            <div class="flex -mt-2"> #}
+                                {#                                {% if product.veggie %}<span class="mr-4"> Veggie</span> {% endif %} #}
+                                {#                                {% if product.halal %}<span>Halal</span> {% endif %} #}
+                                {#                            </div> #}
+
+                                <div class="mt-4 mb-2"> {{ product.description ? product.description : '' }}</div>
+                                <div class="text-sm italic">
+                                    Ingredients: {{ product.description ? product.ingredients : '' }}</div>
+                            </div>
+                            <div class="col-span-2 grid grid-rows-2">
+                                <div class="bg-gray-300 flex flex-col items-center">
+                                    <span>home </span>
+                                    <span class="after:content-[' €']">{{ product.priceHome }}</span>
+                                </div>
+                                <div class="bg-gray-400 flex flex-col items-center">
+                                    <span>away</span>
+                                    {{ product.priceAway }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            {% endif %}
+            {#            {% endfor %} #}
         {% endfor %}
     </div>
 {% endblock %}
