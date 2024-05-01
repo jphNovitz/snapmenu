@@ -20,6 +20,7 @@ class MenuController extends AbstractController
         $menu = $this->activeCategoryRepository->findMenu($store);
 
         return $this->render('menu/index.html.twig', [
+            'store' => $store,
             'menu' => $menu,
         ]);
     }
