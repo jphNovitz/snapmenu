@@ -18,7 +18,8 @@
         </div>
 
         <div>
-            CODE QR
+            {% set  uri = 'snapmenu.be'~path('app_menu', {slug: store.slug}) %}
+            <img src="{{ qr_code_url(uri) }}" />
         </div>
 
 
@@ -32,6 +33,7 @@
                 <li class="semibold">{{ store.streetName }} {{ store.houseNumber }} </li>
                 <li class="semibold">{{ store.postCode }}&nbsp;&nbsp;&nbsp;&nbsp; {{ store.city }} </li>
                 <li class="semibold">{{ store.phoneNumber }} </li>
+                <li class="semibold">{{ store.email }} </li>
             </ul>
         </div>
 
