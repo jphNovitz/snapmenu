@@ -3,6 +3,7 @@
 namespace Admin\Category;
 
 use App\DataFixtures\tests\CategoryFixtures;
+use App\DataFixtures\tests\StoreFixtures;
 use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Category;
 use App\Entity\User;
@@ -55,6 +56,7 @@ class CategoryControllerTest extends WebTestCase
     {
         $this->databaseTool->loadFixtures([
             UserFixtures::class,
+            StoreFixtures::class,
             CategoryFixtures::class]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
