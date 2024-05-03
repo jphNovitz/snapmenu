@@ -17,7 +17,7 @@ class UserFixtures extends Fixture
          $user = new User();
          $user->setEmail("admin@exempl.es");
          $user->setPassword($this->hasher->hashPassword($user, 'password'));
-         $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+         $user->setRoles(['ROLE_ADMIN', 'ROLE_SUPERADMIN', 'ROLE_USER']);
          $user->setIsVerified(true);
          $manager->persist($user);
 

@@ -31,7 +31,6 @@ class CategoryController extends AbstractController
             ->getRepository(Category::class)
             ->findBy(['type' => 'default']);
 
-
         $categoryCustoms = $this->entityManager
             ->getRepository(Category::class)
             ->findCategories($this->getUser(), 'custom');
@@ -48,14 +47,14 @@ class CategoryController extends AbstractController
     {
         $active = $entityManager
             ->getRepository(ActiveCategory::class)
-            ->findBy([
+            ->findOneBy([
                 'store' => $this->getUser()->getStore(),
                 'category' => $category
             ]);
 
         if ($active)
-            $initialRow = $active[0]->getRowOrder();
-        else $initialRow = null;
+            $initialRow = $active->getRowOrder();
+        else $initialRow = 5;
 
         $form = $this->createForm(CategoryType::class, $category,
             ['row_order_initial_value' => $initialRow]);
@@ -63,8 +62,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($rowOrder = $form->get('rowOrder')->getData())
-                $active->setRowOrder($rowOrder);
+                $active->setRowOrder($form->get('rowOrder')->getData());
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
