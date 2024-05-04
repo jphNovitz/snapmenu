@@ -8,8 +8,6 @@ use App\DataFixtures\tests\ProductFixtures;
 use App\DataFixtures\tests\StoreFixtures;
 use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Category;
-use App\Entity\CategoryCustom;
-use App\Entity\CategoryDefault;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
