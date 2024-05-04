@@ -2,8 +2,11 @@
 
 namespace App\Tests\Repository;
 
+use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\ProductFixtures;
+use App\DataFixtures\tests\StoreFixtures;
+use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Category;
 use App\Entity\CategoryCustom;
 use App\Entity\CategoryDefault;
@@ -28,14 +31,19 @@ class CategoryRepositoryTest extends KernelTestCase
 
     public function test_category_repository(): void
     {
-        $this->databaseTool->loadFixtures([CategoryFixtures::class]);
+        $this->databaseTool->loadFixtures([
+                UserFixtures::class,
+                StoreFixtures::class,
+                CategoryFixtures::class]);
+
 
         $defaults = $this->entityManager
             ->getRepository(Category::class)
             ->findBy(['name'=> 'Lorem Default']);
 
         foreach ($defaults as $category) {
-            $this->assertInstanceOf(CategoryDefault::class, $category);
+            $this->assertInstanceOf(Category::class, $category);
+            $this->assertEquals('default', $category->getType());
         }
 
         $customs = $this->entityManager
@@ -43,7 +51,8 @@ class CategoryRepositoryTest extends KernelTestCase
             ->findBy(['name'=> 'Lorem Custom']);
 
         foreach ($customs as $category) {
-            $this->assertInstanceOf(CategoryCustom::class, $category);
+            $this->assertInstanceOf(Category::class, $category);
+            $this->assertEquals('custom', $category->getType());
         }
     }
 

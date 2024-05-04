@@ -28,7 +28,7 @@ class CategoryRepository extends ServiceEntityRepository
      */
     public function findCategories(User $user = null, string $type = "default"): array
     {
-//        dd($user->getStore());
+//        dd($user);
         return $this->createQueryBuilder('c')
             ->innerJoin('c.owner', 'owner')
             ->andWhere('c.type = :type')

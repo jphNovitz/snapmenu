@@ -2,6 +2,7 @@
 
 namespace Admin\Category;
 
+use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\StoreFixtures;
 use App\DataFixtures\tests\UserFixtures;
@@ -77,15 +78,18 @@ class CategoryControllerTest extends WebTestCase
     {
         $this->databaseTool->loadFixtures([
             UserFixtures::class,
-            categoryFixtures::class]);
+            StoreFixtures::class,
+            CategoryFixtures::class,
+            ActiveCategoryFixtures::class]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
-        $product = $this->categoryRepository->findOneBy(['name' => 'Lorem Custom']);
+        $category = $this->categoryRepository->findAll()[0];
+        $id = $category->getId();
 
         $this->client->disableReboot();
         $this->client->loginUser($user);
 
-        $this->client->request('GET', sprintf('%s%s/edit', $this->path, $product->getId()));
+        $this->client->request('GET', sprintf('%s%s/edit', $this->path, $id));
 
 //        Page new is accessible
         $this->assertResponseStatusCodeSame(200);
@@ -95,14 +99,14 @@ class CategoryControllerTest extends WebTestCase
         $name = $this->faker->name();
 
 //        Submit the 'new product form'
-        $this->client->submitForm('Modifier', [
+       $this->client->submitForm('Modifier', [
             'category[name]' => $name
         ]);
 
         $this->assertResponseStatusCodeSame(302);
         $this->assertResponseRedirects($this->path);
 
-        $category = $this->categoryRepository->findOneBy(['name' => $name]);
+        $category = $this->categoryRepository->findOneBy(['id' => $id]);
 
         $this->assertSame($name, $category->getName());
     }
