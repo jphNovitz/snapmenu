@@ -2,7 +2,10 @@
 
 namespace App\Tests\Admin;
 
+use App\DataFixtures\tests\ActiveCategoryFixtures;
+use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\ProductFixtures;
+use App\DataFixtures\tests\StoreFixtures;
 use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Product;
 use App\Entity\User;
@@ -55,8 +58,10 @@ class ProductControllerTest extends WebTestCase
     {
         $this->databaseTool->loadFixtures([
             UserFixtures::class,
+            StoreFixtures::class,
+            CategoryFixtures::class,
+            ActiveCategoryFixtures::class,
             ProductFixtures::class]);
-
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
         $product = $this->productRepository->findAll()[0];
 
@@ -79,7 +84,7 @@ class ProductControllerTest extends WebTestCase
         $this->databaseTool->loadFixtures([
             UserFixtures::class]);
 
-        $user = $this->userRepository->findOneBy(['email' => 'simple@exempl.es']);
+        $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
         $this->client->disableReboot();
         $this->client->loginUser($user);
 
@@ -108,6 +113,9 @@ class ProductControllerTest extends WebTestCase
     {
         $this->databaseTool->loadFixtures([
             UserFixtures::class,
+            StoreFixtures::class,
+            CategoryFixtures::class,
+            ActiveCategoryFixtures::class,
             ProductFixtures::class]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
@@ -161,6 +169,9 @@ class ProductControllerTest extends WebTestCase
     {
         $this->databaseTool->loadFixtures([
             UserFixtures::class,
+            StoreFixtures::class,
+            CategoryFixtures::class,
+            ActiveCategoryFixtures::class,
             ProductFixtures::class]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);

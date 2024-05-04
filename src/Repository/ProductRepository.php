@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\Store;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -24,18 +25,17 @@ class ProductRepository extends ServiceEntityRepository
     /**
      * @return Product[] Returns an array of Product objects
      */
-    public function findByStore($user): array
+    public function findByStore(Store $store): array
     {
-        $store = $user->getStore();
-
         return $this->createQueryBuilder('p')
             ->innerJoin('p.category', 'category')
+            ->select('p', 'category')
             ->andWhere('p.owner = :store')
-                ->setParameter('store', $store)
+            ->setParameter('store', $store)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+
     }
 
     //    /**

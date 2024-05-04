@@ -2,7 +2,11 @@
 
 namespace App\Tests\Repository;
 
+use App\DataFixtures\tests\ActiveCategoryFixtures;
+use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\ProductFixtures;
+use App\DataFixtures\tests\StoreFixtures;
+use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
@@ -25,7 +29,13 @@ class ProductRepositoryTest extends KernelTestCase
 
     public function test_product_repository(): void
     {
-        $this->databaseTool->loadFixtures([ProductFixtures::class]);
+        $this->databaseTool->loadFixtures([
+            UserFixtures::class,
+            StoreFixtures::class,
+            CategoryFixtures::class,
+            ActiveCategoryFixtures::class,
+            ProductFixtures::class]);
+
 
         $products = $this->entityManager
             ->getRepository(Product::class)
