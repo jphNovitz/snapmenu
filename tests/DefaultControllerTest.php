@@ -13,6 +13,6 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'welcome to boilerplate');
+        $this->assertSelectorTextContains('h1', 'Welcome to snapmen');
     }
 }
