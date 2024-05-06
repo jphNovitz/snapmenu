@@ -51,7 +51,7 @@ class LoginControllerTest extends WebTestCase
             "_password" => "password"
         ]);
 
-        $this->assertResponseRedirects('/admin/');
+        $this->assertResponseRedirects('/');
 
         $this->client->request('GET', '/admin/');
         $this->assertResponseIsSuccessful();
