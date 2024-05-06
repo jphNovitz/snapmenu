@@ -2,8 +2,15 @@
 
 namespace App\Tests\Menu;
 
+use App\DataFixtures\tests\ActiveCategoryFixtures;
+use App\DataFixtures\tests\CategoryFixtures;
+use App\DataFixtures\tests\ProductFixtures;
+use App\DataFixtures\tests\StoreFixtures;
+use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Product;
+use App\Entity\Store;
 use App\Repository\ProductRepository;
+use App\Repository\StoreRepository;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
@@ -20,19 +27,30 @@ class MenuControllerTest extends WebTestCase
     protected AbstractDatabaseTool $databaseTool;
     private KernelBrowser $client;
     private ProductRepository $productRepository;
+    private StoreRepository $storeRepository;
     private string $path = '/menu';
 
     protected function setUp(): void
     {
         $this->client = static::createClient();
         $this->productRepository = static::getContainer()->get('doctrine')->getRepository(Product::class);
+        $this->storeRepository = static::getContainer()->get('doctrine')->getRepository(Store::class);
         $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class)->get();
     }
 
     public function test_menu_is_accessible(): void
     {
-        $menu = $this->productRepository->findAll();
-        $crawler = $this->client->request('GET', $this->path);
+        $this->databaseTool->loadFixtures([
+            UserFixtures::class,
+            StoreFixtures::class,
+            CategoryFixtures::class,
+            ActiveCategoryFixtures::class,
+            ProductFixtures::class]);
+
+        $store = $this->storeRepository->findAll()[0];
+        $menu = $this->productRepository->findByStore($store);
+
+        $crawler = $this->client->request('GET',  $store->getSlug().$this->path);
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Menu');
