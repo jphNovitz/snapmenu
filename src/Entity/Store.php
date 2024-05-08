@@ -66,12 +66,19 @@ class Store
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
 
+    /**
+     * @var Collection<int, OpeningHours>
+     */
+    #[ORM\OneToMany(mappedBy: 'store', targetEntity: OpeningHours::class, orphanRemoval: true)]
+    private Collection $openingHours;
+
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->activeCategories = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->openingHours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -309,6 +316,36 @@ class Store
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OpeningHours>
+     */
+    public function getOpeningHours(): Collection
+    {
+        return $this->openingHours;
+    }
+
+    public function addOpeningHour(OpeningHours $openingHour): static
+    {
+        if (!$this->openingHours->contains($openingHour)) {
+            $this->openingHours->add($openingHour);
+            $openingHour->setStore($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpeningHour(OpeningHours $openingHour): static
+    {
+        if ($this->openingHours->removeElement($openingHour)) {
+            // set the owning side to null (unless already changed)
+            if ($openingHour->getStore() === $this) {
+                $openingHour->setStore(null);
+            }
+        }
 
         return $this;
     }

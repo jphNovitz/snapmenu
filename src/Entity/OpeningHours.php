@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OpeningHoursRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OpeningHoursRepository::class)]
@@ -16,22 +17,18 @@ class OpeningHours
     #[ORM\Column(type: "string", length: 255)]
     private string $dayOfWeek;
 
-    #[ORM\Column(type: "time")]
-    private \DateTimeInterface $openTime;
 
-    #[ORM\Column(type: "time")]
-    private \DateTimeInterface $closeTime;
+    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
+    private ?\DateTimeImmutable $openTime = null;
 
-    public function __construct(
-        string             $dayOfWeek,
-        \DateTimeInterface $openTime,
-        \DateTimeInterface $closeTime
-    )
-    {
-        $this->dayOfWeek = $dayOfWeek;
-        $this->openTime = $openTime;
-        $this->closeTime = $closeTime;
-    }
+    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
+    private ?\DateTimeImmutable $closeTime = null;
+
+    #[ORM\ManyToOne(inversedBy: 'openingHours')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Store $store = null;
+
+
 
     public function getId(): int
     {
@@ -49,25 +46,40 @@ class OpeningHours
         return $this;
     }
 
-    public function getOpenTime(): \DateTimeInterface
+
+    public function getOpenTime(): ?\DateTimeImmutable
     {
         return $this->openTime;
     }
 
-    public function setOpenTime(\DateTimeInterface $openTime): self
+    public function setOpenTime(\DateTimeImmutable $openTime): static
     {
         $this->openTime = $openTime;
+
         return $this;
     }
 
-    public function getCloseTime(): \DateTimeInterface
+    public function getCloseTime(): ?\DateTimeImmutable
     {
         return $this->closeTime;
     }
 
-    public function setCloseTime(\DateTimeInterface $closeTime): self
+    public function setCloseTime(\DateTimeImmutable $closeTime): static
     {
         $this->closeTime = $closeTime;
+
+        return $this;
+    }
+
+    public function getStore(): ?Store
+    {
+        return $this->store;
+    }
+
+    public function setStore(?Store $store): static
+    {
+        $this->store = $store;
+
         return $this;
     }
 }
