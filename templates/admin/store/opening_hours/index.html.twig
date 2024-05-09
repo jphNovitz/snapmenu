@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}title.opening_hours{% endtrans %}{% endblock %}
+
+{% block body %}
+    <twig:Title:H1>{% trans %}title.opening_hours {% endtrans %} </twig:Title:H1>
+
+    <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
+        <thead>
+        <tr>
+            <th>{% trans %}title.day_of_week{% endtrans %}</th>
+            <th class="text-center">{% trans %}form.opening_hours.open_time{% endtrans %}</th>
+            <th class="text-center">{% trans %}form.opening_hours.close_time{% endtrans %}</th>
+            <th>{% trans %}actions{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for opening_hour in opening_hours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
+            <tr class="even:bg-gray-200 py-4">
+                <td class="px-2 py-1">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</td>
+                <td class="text-center px-2 py-1">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i:s') : '' }}</td>
+                <td class="text-center px-2 py-1">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i:s') : '' }}</td>
+                <td>
+                    {#                    <a href="{{ path('app_admin_store_opening_hours_show', {'id': opening_hour.id}) }}">show</a> #}
+                    <a href="{{ path('admin_opening_edit', {'id': opening_hour.id}) }}">
+                        {% trans %}button.edit {% endtrans %}
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_opening_new') }}"  class="border border-gray-400 rounded-sm px-4 py-1">{% trans %}button.new {% endtrans %}</a>
+{% endblock %}
