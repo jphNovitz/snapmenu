@@ -1,0 +1,7 @@
+
+<form method="post" action="{{ path('admin_opening_delete', {'id': opening_hour.id}) }}"
+      onsubmit="return confirm('{% trans %}form.delete.confirm{% endtrans %}');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ opening_hour.id) }}">
+
+    <button class="border border-gray-400 rounded-sm px-4 py-1">{{ button_label|default('button.delete')|trans }}</button>
+</form>
