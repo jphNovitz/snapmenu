@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/opening')]
+#[Route('/admin/store/opening')]
 class OpeningHoursController extends AbstractController
 {
 
@@ -28,12 +28,12 @@ class OpeningHoursController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $openingHour = new OpeningHours();
-        $openingHour->setStore($this->getUser()->getStore());
 
         $form = $this->createForm(OpeningHoursType::class, $openingHour,);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $openingHour->setStore($this->getUser()->getStore());
             $entityManager->persist($openingHour);
             $entityManager->flush();
 
@@ -72,7 +72,7 @@ class OpeningHoursController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_store_opening_hours_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'admin_opening_delete', methods: ['POST'])]
     public function delete(Request $request, OpeningHours $openingHour, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$openingHour->getId(), $request->getPayload()->get('_token'))) {
@@ -80,6 +80,6 @@ class OpeningHoursController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_admin_store_opening_hours_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_opening_index', [], Response::HTTP_SEE_OTHER);
     }
 }
