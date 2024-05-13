@@ -28,7 +28,11 @@ class OpeningHours
     #[ORM\JoinColumn(nullable: false)]
     private ?Store $store = null;
 
-
+public function __construct()
+{
+    $this->openTime = $openTime ?? new \DateTimeImmutable('08:00:00');
+    $this->closeTime = $openTime ?? new \DateTimeImmutable('18:00:00');
+}
 
     public function getId(): int
     {
