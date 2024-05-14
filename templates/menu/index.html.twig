@@ -4,10 +4,12 @@
 
 {% block body %}
     {% block menu %}
-        <div class="flex justify-between items-center">
+        <div id="top"
+                class="flex justify-between items-center">
             <twig:Title:H1 class="capitalize">Menu</twig:Title:H1>
-            <a href="{{ path('app_contact', {slug: store.slug}) }}"
-            class="px-4 py-2 bg-blue-700 text-blue-50 rounded-md">
+            <a href="#contact"
+{#            <a href="{{ path('app_contact', {slug: store.slug}) }}"#}
+               class="px-4 py-2 bg-blue-700 text-blue-50 rounded-md">
                 Code QR
             </a>
         </div>
@@ -33,13 +35,13 @@
                                         Ingredients: {{ product.description ? product.ingredients : '' }}</div>
                                 </div>
                                 <div class="col-span-2 grid grid-rows-2">
-                                    <div class="bg-gray-300 flex flex-col items-center">
-                                        <span>home </span>
-                                        <span class="after:content-[' €']">{{ product.priceHome }}</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="text-basis">{% trans %} menu.price.home{% endtrans %} </span>
+                                        <span class="text-xl text-blue-600 font-black after:pl-2 after:content-['€']">{{ product.priceHome }}</span>
                                     </div>
-                                    <div class="bg-gray-400 flex flex-col items-center">
-                                        <span>away</span>
-                                        {{ product.priceAway }}
+                                    <div class="flex flex-col items-center">
+                                        <span class="text-basis">{% trans %} menu.price.away{% endtrans %}</span>
+                                        <span class="text-xl text-blue-700 font-black after:pl-2 after:content-['€']">{{ product.priceAway }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -50,10 +52,26 @@
             {% endfor %}
         </div>
     {% endblock %}
+
+    {% block opening %}
+        <div id="opening" class="min-h-screen flex flex-col justify-center items-center">
+            <twig:Title:H2>{% trans %} title.opening_hours{% endtrans %}</twig:Title:H2>
+            <div class="w-full p-8 grid grid-cols-3 gap-x-8 gap-y-8">
+                {% for opening_hour in store.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
+                    <h3 class="pb-4">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</h3>
+                    <div class="pb-4 text-center border-b border-gray-900 -ml-8">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i:s') : '' }}</div>
+                    <div class="pb-4 text-center">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i:s') : '' }}</div>
+                    {#                    <span class="w-3/4 aligncol-span-3 border-b border-gray-900 -ml-8"> </span> #}
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+
     {% block contact %}
-        <div class="w-full min-h-screen flex flex-col flex-none items-center justify-between  gap-8 border border-black p-8 mt-[20vh]">
+        <div id="contact" class="w-full min-h-screen flex flex-col flex-none items-center justify-between  gap-8 border border-black p-8 mt-[20vh]">
             <div class="w-full text-left">
-                <a href="{{ path('app_menu', {slug: store.slug}) }}" class="text-xl">
+                <a href="#top" class="text-xl">
+{#                <a href="{{ path('app_menu', {slug: store.slug}) }}" class="text-xl">#}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -66,7 +84,8 @@
             </div>
 
             <div>
-                CODE QR
+                {% set  uri = 'snapmenu.be'~path('app_menu', {slug: store.slug}) %}
+                <img src="{{ qr_code_url(uri) }}" alt="{{ store.name }} code QR"/>
             </div>
 
 
