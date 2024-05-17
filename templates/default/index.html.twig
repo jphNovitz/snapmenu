@@ -39,21 +39,17 @@
 
 
 
-    <div class="py-16">
-        <h1 class="text-3xl font-black">Welcome to snapmenu ✅</h1>
-        <div class="py-16">
-            <div class="w-3/4 h-80 flex flex-nowrap overflow-hidden">
-                <div class="flex flex-nowrap overflow-hidden">
-                    {% for store in stores %}
-                        <div class="{# min-w-[30%] #} flex flex-none justify-center items-center w-64 aspect-square border border-2 border-black mx-12">
-                            <a href="{{ path('app_menu', {slug: store.slug}) }}">{{ store.name }}</a>
-                        </div>
-                    {% else %}
-                        no store
+    <div class="p-16">
+        <h2 class="my-12 text-2xl font-bold leading-loose">✅ Ces restaurateurs Snappent !</h2>
+        <div class="w-full grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-x-4 gap-y-8 ">
 
-                    {% endfor %}
+            {% for store in stores %}
+                <div class="w-full aspect-square border border-2 border-black ">
+                    <a href="{{ path('app_menu', {slug: store.slug}) }}">{{ store.name }}</a>
                 </div>
-            </div>
+            {% else %}
+                {% trans %} text.store.no_store{% endtrans %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
