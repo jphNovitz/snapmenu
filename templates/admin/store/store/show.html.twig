@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ store.name }}{% endblock %}
+
+{% block body %}
+    <h1 class="font-bold text-xl mb-8">{{ store.name }}</h1>
+
+    <div class="grid grid-cols-1 gap-4">
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.vatNumber{% endtrans %}</span>
+            {{ store.vatNumber }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.phoneNumber {% endtrans %}</span>
+            {{ store.phoneNumber }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.description {% endtrans %}</span>
+            {{ store.description }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.logo{% endtrans %}</span>
+            {{ store.logo }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.streetName{% endtrans %}</span>
+            {{ store.streetName }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.houseNumber{% endtrans %}</span>
+            {{ store.houseNumber }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.postCode{% endtrans %}</span>
+            {{ store.postCode }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.city{% endtrans %}</span>
+            {{ store.city }}
+        </div>
+        <div>
+            <span class="font-semibold pr-4 capitalize">{% trans %} store.email {% endtrans %}</span>{{ store.email }}
+
+        </div>
+
+        <div class="flex space-x-8 my-8">
+            <a href="{{ path('admin_store_edit', {'id': store.id}) }}"
+               class="border border-gray-400 rounded-sm px-4 py-1">{% trans %} button.update {% endtrans %}</a>
+        </div>
+    </div>
+{% endblock %}
