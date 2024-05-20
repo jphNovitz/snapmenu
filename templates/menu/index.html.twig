@@ -6,23 +6,23 @@
     {% block menu %}
         <div id="top"
                 class="flex justify-between items-center">
-            <twig:Title:H1 class="capitalize">Menu</twig:Title:H1>
+            <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>
             <a href="#contact"
 {#            <a href="{{ path('app_contact', {slug: store.slug}) }}"#}
-               class="px-4 py-2 bg-blue-700 text-blue-50 rounded-md">
+               class="px-4 py-2 bg-secondary text-clear-light rounded-md">
                 Code QR
             </a>
         </div>
         <div>
             {% for activeCategory in menu %}
                 {% if activeCategory.category.products is not empty %}
-                    <twig:Title:H2 class="mt-12 border-b border-b-2 border-red-500">
+                    <twig:Title:H2 class="mt-12">
                         {{ activeCategory.category.name }}
                     </twig:Title:H2>
                     {% for product in activeCategory.category.products %}
                         <div class="my-4 first:mt-0 last:mb-8">
                             <div class="w-full grid grid-cols-12">
-                                <div class="col-span-10 p-4">
+                                <div class="col-span-10 py-1">
                                     <div class="flex justify-between items-start mr-4">
                                         <div class="uppercase"> {{ product.name }}</div>
                                         <div>
@@ -36,12 +36,12 @@
                                 </div>
                                 <div class="col-span-2 grid grid-rows-2">
                                     <div class="flex flex-col items-center">
-                                        <span class="text-basis">{% trans %} menu.price.home{% endtrans %} </span>
-                                        <span class="text-xl text-blue-600 font-black after:pl-2 after:content-['€']">{{ product.priceHome }}</span>
+                                        <span class="text-basis text-center">{% trans %} menu.price.home{% endtrans %} </span>
+                                        <span class="text-xl text-blue-600 font-black after:pl-2 after:content-['€'] text-center">{{ product.priceHome }}</span>
                                     </div>
                                     <div class="flex flex-col items-center">
-                                        <span class="text-basis">{% trans %} menu.price.away{% endtrans %}</span>
-                                        <span class="text-xl text-blue-700 font-black after:pl-2 after:content-['€']">{{ product.priceAway }}</span>
+                                        <span class="text-basis text-center">{% trans %} menu.price.away{% endtrans %}</span>
+                                        <span class="text-xl text-blue-700 font-black after:pl-2 after:content-['€'] text-center">{{ product.priceAway }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
     {% endblock %}
 
     {% block contact %}
-        <div id="contact" class="w-full min-h-screen flex flex-col flex-none items-center justify-between  gap-8 border border-black p-8 mt-[20vh]">
+        <div id="contact" class="w-full min-h-screen flex flex-col flex-none items-center justify-evenly  gap-8 p-8 mt-[20vh]">
             <div class="w-full text-left">
                 <a href="#top" class="text-xl">
 {#                <a href="{{ path('app_menu', {slug: store.slug}) }}" class="text-xl">#}
