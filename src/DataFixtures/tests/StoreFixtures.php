@@ -12,7 +12,7 @@ class StoreFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $user = $manager->getRepository(User::class)->findAll()[0];
+        $users = $manager->getRepository(User::class)->findAll();
 
         $store = new Store();
         $store->setName('Fake Store');
@@ -23,9 +23,21 @@ class StoreFixtures extends Fixture
         $store->setCity('City lipsum');
         $store->setPhoneNumber('123456');
         $store->setEmail('store@lipsum.com');
-        $store->setOwner($user);
-
+        $store->setOwner($users[0]);
         $manager->persist($store);
+
+//        $store = new Store();
+//        $store->setName('Fake Simple Store');
+//        $store->setDescription('Simple description');
+//        $store->setStreetName('street simple');
+//        $store->setHouseNumber('57');
+//        $store->setPostCode('5775');
+//        $store->setCity('City Simple');
+//        $store->setPhoneNumber('12345675');
+//        $store->setEmail('simple@exempl.es');
+//        $store->setOwner($users[1]);
+//
+//        $manager->persist($store);
 
         $manager->flush();
     }
