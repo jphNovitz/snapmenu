@@ -5,10 +5,10 @@
 {% block body %}
     {% block menu %}
         <div id="top"
-                class="flex justify-between items-center">
+             class="flex justify-between items-center">
             <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>
             <a href="#contact"
-{#            <a href="{{ path('app_contact', {slug: store.slug}) }}"#}
+                    {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
                class="px-4 py-2 bg-secondary text-clear-light rounded-md">
                 Code QR
             </a>
@@ -24,16 +24,21 @@
                             <div class="w-full grid grid-cols-12">
                                 <div class="col-span-10 py-1">
                                     <div class="flex justify-between items-start mr-4">
-                                        <div class="uppercase"> {{ product.name }}</div>
+                                        <div class="uppercase font-semibold"> {{ product.name }}</div>
                                         <div>
                                             {{ product.veggie ? 'Veggie' : '' }}
                                             {{ product.halal ? 'Halal' : '' }}
                                         </div>
                                     </div>
-                                    <div class="mt-4 mb-2"> {{ product.description ? product.description : '' }}</div>
-                                    <div class="text-sm italic">
-                                        Ingredients: {{ product.description ? product.ingredients : '' }}</div>
+                                    <div class="mt-4 mb-2 mr-2"> {{ product.description ? product.description : '' }}</div>
+
+                                    {% if product.ingredients is not empty %}
+                                        <div class="text-sm italic mr-2">
+                                            Ingredients: {{ product.ingredients }}
+                                        </div>
+                                    {% endif %}
                                 </div>
+
                                 <div class="col-span-2 grid grid-rows-2">
                                     <div class="flex flex-col items-center">
                                         <span class="text-basis text-center">{% trans %} menu.price.home{% endtrans %} </span>
@@ -68,16 +73,29 @@
     {% endblock %}
 
     {% block contact %}
-        <div id="contact" class="w-full min-h-screen flex flex-col flex-none items-center justify-evenly  gap-8 p-8 mt-[20vh]">
-            <div class="w-full text-left">
-                <a href="#top" class="text-xl">
-{#                <a href="{{ path('app_menu', {slug: store.slug}) }}" class="text-xl">#}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
-                    </svg>
-                </a>
+        <div id="contact"
+             class="w-full min-h-screen flex flex-col flex-none items-center justify-evenly  gap-8 p-8 mt-[20vh]">
+            <div class="w-full grid grid-cols-3">
+                <div class="text-left">
+                    <a href="{{ path('app_default') }}" class="text-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                             stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <a href="#top" class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                             stroke="currentColor" class="w-6 h-6 m-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="text-center">
+
+                </div>
             </div>
             <div>
                 <twig:Title:H1> {{ store.name }} </twig:Title:H1>
@@ -90,7 +108,7 @@
 
 
             <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
-                Mon url: <a
+                Mon url: <br/> <a
                         href="{{ path('app_menu', {slug: store.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: store.slug}) }} </a>
             </div>
 
@@ -103,7 +121,8 @@
                 </ul>
             </div>
 
-            <div class="text-center text-small"> (2024) snap menu</div>
+            <h6 class="text-center text-small"> (2024) <a href="https://pixelservices.be">PixelServices.be, création de
+                    sites internet pour les petits entrepreneurs, Services web.</a></h6>
         </div>
     {% endblock %}
 

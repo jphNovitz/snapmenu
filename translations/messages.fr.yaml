@@ -1,6 +1,10 @@
 title:
   register: "Inscription"
   login: "Connexion"
+  opening_hours: "Horaire"
+  opening_hours.new: "Horaire: nouveau jour"
+  opening_hours.edit: "Horaire: modifier"
+  day_of_week: "Jour de la semaine"
   product:
     index: "Liste des produits"
     create: "Ajouter un produit"
@@ -37,3 +41,31 @@ form:
   agree: "J'accepte les Conditions"
   password: "Mot de passe"
   email: "Email"
+  delete.confirm: "Etes-vous certain de vouloir supprimer cet élément ?"
+  opening_hours:
+    open_time: "Ouvre"
+    close_time: "Ferme"
+    day_of_week:
+      1: "Lundi"
+      2: "Mardi"
+      3: "Mercredi"
+      4: "Jeudi"
+      5: "Vendredi"
+      6: "Samedi"
+      7: "Dimanche"
+store:
+  vatNumber: "numéro de T.V.A"
+  phoneNumber: "numéro de téléphone"
+  description: "description"
+  logo: 'logo'
+  streetName: "Rue"
+  houseNumber: "N°"
+  postCode: "code postal"
+  city: "commune"
+  email: "email"
+menu:
+  price:
+    home: "Sur place"
+    away: "Emporté"
+text:
+  no_store: "Aucun restaurateur"
