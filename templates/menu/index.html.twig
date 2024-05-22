@@ -1,26 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig'  %}
 
 {% block title %}Menu{% endblock %}
 
 {% block body %}
     {% block menu %}
-        <div id="top"
-             class="flex justify-between items-center">
-            <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>
-            <a href="#contact"
-                    {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-               class="px-4 py-2 bg-secondary text-clear-light rounded-md">
-                Code QR
-            </a>
-        </div>
-        <div>
+{#        <div id="top"#}
+{#             class="flex justify-between items-center">#}
+{#            <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>#}
+{#            <a href="#contact"#}
+{#                    #}{#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
+{#               class="px-4 py-2 bg-secondary text-clear-light rounded-md">#}
+{#                Code QR#}
+{#            </a>#}
+{#        </div>#}
+        <span  id="menu">&nbsp;</span>
+        <div class="">
             {% for activeCategory in menu %}
                 {% if activeCategory.category.products is not empty %}
                     <twig:Title:H2 class="mt-12">
                         {{ activeCategory.category.name }}
                     </twig:Title:H2>
                     {% for product in activeCategory.category.products %}
-                        <div class="my-4 first:mt-0 last:mb-8">
+                        <div class="my-4 p-2 first:mt-0 last:mb-8 bg-clear-light dark:bg-primary ">
                             <div class="w-full grid grid-cols-12">
                                 <div class="col-span-10 py-1">
                                     <div class="flex justify-between items-start mr-4">
@@ -59,7 +60,8 @@
     {% endblock %}
 
     {% block opening %}
-        <div id="opening" class="min-h-screen flex flex-col justify-center items-center">
+        <div id="heures-d-ouverture"
+             class="min-h-screen flex flex-col justify-center items-center">
             <twig:Title:H2>{% trans %} title.opening_hours{% endtrans %}</twig:Title:H2>
             <div class="w-full p-8 grid grid-cols-3 gap-x-8 gap-y-8">
                 {% for opening_hour in store.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
@@ -86,7 +88,7 @@
                     </a>
                 </div>
                 <div class="text-center">
-                    <a href="#top" class="">
+                    <a href="{{ path('app_menu', { 'slug': store.slug }) }}#menu" class="">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                              stroke="currentColor" class="w-6 h-6 m-auto">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
