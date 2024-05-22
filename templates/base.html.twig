@@ -18,7 +18,14 @@
     {% endblock %}
 </head>
 <body class="w-screen overflow-x-hidden min-h-screen p-4 md:p-16 bg-clear dark:bg-primary-dark text-primary-dark dark:text-clear flex flex-col justify-center items-center ">
-<div class="h-auto w-full md:max-w-6xl lg:max-w-7xl scroll-smooth">
+<div class="h-auto w-full md:max-w-6xl lg:max-w-7xl scroll-smooth relative">
+    {% if store is defined %}
+        {% set showStore = 'true' %}
+        {% set name = store.name %}
+    {% else %}
+        {% set showStore = 'false' %}
+    {% endif %}
+    <twig:NavBar showStore="{{ showStore }}" name="{{ name is defined ? name : null }}"/>
     {% block body %}{% endblock %}
 </div>
 </body>
