@@ -21,8 +21,8 @@ export default class extends Controller {
         e.stopPropagation()
         e.preventDefault()
         this.linksTarget.classList.toggle('-ml-96')
-        // this.linksTarget.getElementsByTagName('a').addEventListener('click', (e)=>{
-        //     this.linksTarget.classList.add('-ml-96')
-        // })
+        this.linksTarget.addEventListener('click', (e)=>{
+            this.linksTarget.classList.toggle('-ml-96')
+        })
     }
 }
