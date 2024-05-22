@@ -41,7 +41,12 @@ module.exports = {
             //         dark: '#394A39',
             //     },
             // },
-            extend: {},
+            extend: {
+                transitionProperty: {
+                    'height': 'height',
+                    'spacing': 'margin, padding',
+                }
+            },
         },
         plugins: [],
 }

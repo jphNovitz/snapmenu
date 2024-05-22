@@ -24,6 +24,13 @@ title:
     create: "Ajouter une categorie"
     new: "Ajouter une categorie"
     edit: "Modifier une categorie"
+nav:
+  login: "Connexion"
+  logout: "Déconnexion"
+  contact: "Contact"
+  contact.snap: "Contacter"
+  menu: "Menu"
+  opening: "Horaire"
 button:
   login: "Connexion"
   logout: "Déconnexion"

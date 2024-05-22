@@ -25,7 +25,8 @@
     {% else %}
         {% set showStore = 'false' %}
     {% endif %}
-    <twig:NavBar showStore="{{ showStore }}" name="{{ name is defined ? name : null }}"/>
+{#    <twig:NavBar showStore="{{ showStore }}" name="{{ name is defined ? name : null }}"/>#}
+    {%  include '_partial/_header.html.twig' %}
     {% block body %}{% endblock %}
 </div>
 </body>
