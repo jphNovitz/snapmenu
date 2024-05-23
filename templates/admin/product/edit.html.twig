@@ -7,7 +7,7 @@
     {{ include('admin/product/_form.html.twig', {'button_label': 'button.update'}) }}
 
     <div class="flex space-x-8 my-8">
-        <a href="{{ path('admin_product_index') }}" class="border border-gray-400 rounded-sm px-4 py-1">{% trans %} button.back {% endtrans %}</a>
+       <a  href="{{ path('admin_product_index') }}" class="border border-gray-400 rounded-sm px-4 py-1">{% trans %} button.back {% endtrans %}</a>
 
         {{ include('admin/product/_delete_form.html.twig') }}
     </div>
