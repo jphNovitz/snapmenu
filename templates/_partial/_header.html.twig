@@ -78,7 +78,7 @@
         </div>
         {# end desktop -------------------------------------------------------------- -#}
     </header>
-    <nav class=" md:hidden absolute z-20 top-0 left-0 w-full h-screen p-16 bg-primary-dark text-clear -ml-96" {{ stimulus_target('nav', 'links') }}>
+    <nav class=" md:hidden absolute z-40 top-0 left-0 w-full h-screen p-16 bg-primary-dark text-clear -ml-96" {{ stimulus_target('nav', 'links') }}>
         <a  href="#" {{ stimulus_action('nav', 'trigger') }} class="absolute top-8 right-8">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor"
@@ -89,13 +89,13 @@
         <ul class="w-full h-screen flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">
             {% if store is defined %}
                 <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
+                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>
                 </li>
                 <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}">{% trans %}nav.opening {% endtrans %}</a>
+                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.opening {% endtrans %}</a>
                 </li>
                 <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}">{% trans %}nav.contact {% endtrans %}</a>
+                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.contact {% endtrans %}</a>
                 </li>
             {% else %}
                 <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>

@@ -14,7 +14,7 @@ class MenuController extends AbstractController
 {
     public function __construct(private ActiveCategoryRepository $activeCategoryRepository)
     {}
-    #[Route('/{slug}/menu', name: 'app_menu')]
+    #[Route('/page/{slug}', name: 'app_menu')]
     public function index(Store $store): Response
     {
         $menu = $this->activeCategoryRepository->findMenu($store);
