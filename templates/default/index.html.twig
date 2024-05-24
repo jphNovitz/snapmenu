@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Snapmenu:
+    Un QR code, tout le menu | snapmenu.be{% endblock %}
 
 {% block body %}
     {#    <div class="absolute -top-[45vw] top-0 left-1/2 -translate-x-1/2 clear-gradient #}{# dark-gradient #}{# #}{# bg-gradient-to-b from-secondary via-clear-light to-clear #}{# block w-[50vw] h-[50vw] #}{# opacity-7 #}{#  shadow-clear-dark shadow-2xl aspecct-square rounded-full"> #}
@@ -36,6 +37,42 @@
     </div>
     {#    </div> #}
 
+    <div class="my-12 md:my-16 lg:my-24 min-h-screen">
+        <h2 class="my-4 text-xl lg:text-2xl font-bold leading-loose">Encodez votre liste de produit</h2>
+        <h3 class="text-lg">Donnez-lui un nom, un prix sur place, un prix emporté.</h3>
+        <img src="{{ asset('images/screenshots/screenshot_list.png') }}"
+             alt="Encodez votre liste de produit"
+             class="border-clear-dark">
+
+    </div>
+    <div class="my-12 md:my-16 lg:my-24 min-h-screen">
+        <h2 class="my-4 text-xl lg:text-2xl font-bold leading-loose">Vous êtes prêts à être scannés</h2>
+        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-16">
+
+            <img src="{{ asset('images/screenshots/screenshot_contact.jpg') }}"
+                 alt="Encodez votre liste de produit"
+                 class="border-clear-dark">
+
+            <img src="{{ asset('images/screenshots/screenshot_menu.png') }}"
+                 alt="Encodez votre liste de produit"
+                 class="border-clear-dark">
+
+            <img src="{{ asset('images/screenshots/screenshot_opening.png') }}"
+                 alt="Encodez votre liste de produit"
+                 class="border-clear-dark">
+
+        </div>
+        <h2 class="my-4">Affichez le code QR dans votre établissement</h2>
+        <p>Les clients n'ont qu'à scanner ce code avec leur téléphone pour afficher :</p>
+        <ul>
+            <li>Votre menu</li>
+            <li>Vos heures d'ouverture</li>
+            <li>Vos informations de contact</li>
+        </ul>
+        <p>En cas de modification rendez-vous sur votre interface d'administration, le code ne change pas: inutile de réimprimer des menus. </p>
+        <p>Vos visiteurs deviennent des client et les clients deviennent des embassadeurs car il peuvent faire scanner le code pour le partager avec leurs amis.</p>
+
+    </div>
     <div class="my-12 md:my-16 lg:my-24 min-h-screen">
         <h2 class="my-24 text-xl lg:text-2xl font-bold leading-loose">✅ Ces restaurateurs Snappent !</h2>
         <div class="my-24 w-full grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-x-4 gap-y-8 ">
