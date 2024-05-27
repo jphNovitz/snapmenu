@@ -17,11 +17,10 @@ export default class extends Controller {
     }
 
     trigger(e){
-        console.log("oui")
         console.log(e)
         e.stopPropagation()
         // e.preventDefault()
-        this.linksTarget.classList.toggle('-ml-96')
+        this.linksTarget.classList.toggle('-ml-[100vw]')
 
     }
 }
