@@ -16,11 +16,15 @@ export default class extends Controller {
         console.log('The nav conroller is OK !')
     }
 
-    trigger(e){
-        console.log(e)
+    trigger(e) {
+        console.log(e.target.parentNode.id)
         e.stopPropagation()
-        // e.preventDefault()
-        this.linksTarget.classList.toggle('-ml-[100vw]')
+        if (e.target.parentNode.id == 'trigger-on') {
+            e.preventDefault()
+        }
+        this.linksTarget.classList.toggle('-mt-96')
+        // this.linksTarget.classList.toggle('top-[1000vh]')
+        // this.linksTarget.classList.toggle('-ml-[100vw]')
 
     }
 }

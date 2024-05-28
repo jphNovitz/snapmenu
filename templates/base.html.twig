@@ -17,12 +17,46 @@
         {% endblock %}
     {% endblock %}
 </head>
-<body class="w-screen overflow-x-hidden min-h-screen p-4 md:p-16 bg-clear dark:bg-primary-dark text-primary-dark dark:text-clear flex flex-col justify-center items-center ">
-<div class="h-auto w-full md:max-w-6xl lg:max-w-7xl scroll-smooth relative">
+<body class="w-screen overflow-x-hidden min-h-screen md:p-16 bg-clear dark:bg-primary-dark text-primary-dark dark:text-clear flex flex-col justify-center items-center relative ">
+<div class="h-auto w-full md:max-w-6xl lg:max-w-7xl scroll-smooth relative"  {{ stimulus_controller('nav') }}>
 
-{#    <twig:NavBar showStore="{{ showStore }}" name="{{ name is defined ? name : null }}"/>#}
-    {%  include '_partial/_header.html.twig' %}
-    {% block body %}{% endblock %}
+    {% include '_partial/_header.html.twig' %}
+    <div class="w-full p-2">
+        {% block body %}{% endblock %}
+    </div>
+{#    <nav class=" md:hidden absolute z-40 top-[1000vh] top-96 bottom-0 left-0 right-0 w-full   p-16 bg-primary-dark text-clear transition-[top] duration-800 ease-in-out#}{#-ml-[100vw]#}{#" {{ stimulus_target('nav', 'links') }}>#}
+{#        <a  href="#" {{ stimulus_action('nav', 'trigger') }} class="absolute top-8 right-8">#}
+{#            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"#}
+{#                 stroke="currentColor"#}
+{#                 class="h-8 w-8">#}
+{#                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>#}
+{#            </svg>#}
+{#        </a>#}
+{#        <ul class="w-full h-screen flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">#}
+{#            {% if store is defined %}#}
+{#                <li>#}
+{#                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.opening {% endtrans %}</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.contact {% endtrans %}</a>#}
+{#                </li>#}
+{#            {% else %}#}
+{#                <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>#}
+{#            {% endif %}#}
+
+{#            <li class="ml-4">#}
+{#                {% if app.user is null %}#}
+{#                    <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a>#}
+{#                {% else %}#}
+{#                    <a href="#">  {% trans %} nav.logout {% endtrans %}</a>#}
+{#                {% endif %}#}
+{#            </li>#}
+{#        </ul>#}
+{#    </nav>#}
+
 </div>
 </body>
 </html>
