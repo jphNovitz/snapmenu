@@ -64,6 +64,9 @@
              class="min-h-screen flex flex-col justify-center items-center">
             <twig:Title:H2>{% trans %} title.opening_hours{% endtrans %}</twig:Title:H2>
             <div class="w-full p-8 grid grid-cols-3 gap-x-8 gap-y-8">
+                <h3 class="pb-4 font-black">Jour</h3>
+                <div class="pb-4 font-black text-center -ml-8">Ouvre</div>
+                <div class="pb-4  font-black text-center">Ferme</div>
                 {% for opening_hour in store.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
                     <h3 class="pb-4">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</h3>
                     <div class="pb-4 text-center border-b border-gray-900 -ml-8">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i:s') : '' }}</div>

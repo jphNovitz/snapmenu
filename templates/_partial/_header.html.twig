@@ -1,9 +1,9 @@
-<div class=" sticky top-0" {{ stimulus_controller('nav') }}>
+<div class=" {% if app.request.get('_route') != 'app_default' %} sticky top-0" {% endif%}{# {{ stimulus_controller('nav') }}#}>
     <header class="w-full bg-clear-dark dark:bg-primary mb-4 p-4 sticky top-0 z-20 sticky top-0">
         {#   Mobile hidden on md screens =========================================== #}
         <div class="md:hidden w-full grid grid-cols-12">
             <div id="menu-trigger" class="col-span-1">
-                <a href="#" {{ stimulus_action('nav', 'trigger') }}>
+                <a href="#" id="trigger-on" {{ stimulus_action('nav', 'trigger') }}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -78,7 +78,7 @@
         </div>
         {# end desktop -------------------------------------------------------------- -#}
     </header>
-    <nav class=" md:hidden absolute z-40 top-0 left-0 w-full h-screen p-16 bg-primary-dark text-clear -ml-[100vw]" {{ stimulus_target('nav', 'links') }}>
+    <nav class=" md:hidden absolute {#z-40#}  top-0 bottom-0 left-0 right-0 w-full -mt-96 h-[100vw]  p-16 bg-primary-dark text-clear transition-[margin] duration-800 ease-in-out{#-ml-[100vw]#}" {{ stimulus_target('nav', 'links') }}>
         <a  href="#" {{ stimulus_action('nav', 'trigger') }} class="absolute top-8 right-8">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor"
@@ -101,7 +101,7 @@
                 <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
             {% endif %}
 
-            <li class="ml-4">
+            <li class="text-sm underline absolute bottom-8 right-8">
                 {% if app.user is null %}
                     <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a>
                 {% else %}
@@ -110,4 +110,37 @@
             </li>
         </ul>
     </nav>
+
+    {#    <nav class=" md:hidden absolute z-40 #}{#top-0#}{# bottom-0 left-0 w-full #}{#h-screen#}{#  p-16 bg-primary-dark text-clear -ml-[100vw]" {{ stimulus_target('nav', 'links') }}>#}
+{#        <a  href="#" {{ stimulus_action('nav', 'trigger') }} class="absolute top-8 right-8">#}
+{#            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"#}
+{#                 stroke="currentColor"#}
+{#                 class="h-8 w-8">#}
+{#                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>#}
+{#            </svg>#}
+{#        </a>#}
+{#        <ul class="w-full h-screen flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">#}
+{#            {% if store is defined %}#}
+{#                <li>#}
+{#                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.opening {% endtrans %}</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.contact {% endtrans %}</a>#}
+{#                </li>#}
+{#            {% else %}#}
+{#                <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>#}
+{#            {% endif %}#}
+
+{#            <li class="ml-4">#}
+{#                {% if app.user is null %}#}
+{#                    <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a>#}
+{#                {% else %}#}
+{#                    <a href="#">  {% trans %} nav.logout {% endtrans %}</a>#}
+{#                {% endif %}#}
+{#            </li>#}
+{#        </ul>#}
+{#    </nav>#}
 </div>
