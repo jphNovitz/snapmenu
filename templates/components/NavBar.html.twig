@@ -1,83 +1,85 @@
 <div {{ stimulus_controller('nav') }}>
-<header {{ attributes.defaults({ class: 'w-full bg-clear-dark dark:bg-primary mb-4 p-4 sticky top-0 z-20' }) }}
+    <header {{ attributes.defaults({ class: 'w-full bg-clear-dark dark:bg-primary mb-4 p-4 sticky top-0' }) }}
     >
 
-    {#   Mobile hidden on md screens =========================================== #}
-    <div class="md:hidden w-full grid grid-cols-12">
-        <div id="menu-trigger" class="col-span-1">
-            <a href="#" {{ stimulus_action('nav', 'trigger') }}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-                </svg>
-            </a>
-        </div>
-        <div id="brand" class="col-span-9  text-center ">
-            {% if name is defined %}
-                <twig:Title:H1 class="capitalize">{{ name }}</twig:Title:H1>
-            {% else %}
-                <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a>
-            {% endif %}
-
-        </div>
-    </div>
-    {#     end Mobile  =========================================================== #}
-    {#    desktop hidden on mobile=============================================== #}
-    <div class="hidden md:grid grid-cols-12">
-        <div id="brand" class="col-span-5  text-left flex !items-baseline space-x-4">
-            {% if name is defined %}
-                <twig:Title:H1 class="capitalize">{{ name }}</twig:Title:H1>{% endif %}
-            <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a>
-        </div>
-        <nav class="col-span-5 text-base overflow-hidden flex justify-start !items-baseline">
-            <ul class="flex  justify-start gap-x-4">
-                {% if showStore == 'true' %}
-                    <li><a href="#top">{% trans %}nav.menu {% endtrans %}</a></li>
-                    <li><a href="#opening">{% trans %}nav.opening {% endtrans %}</a></li>
-                    <li><a href="#contact">{% trans %}nav.contact {% endtrans %}</a></li>
+        {#   Mobile hidden on md screens =========================================== #}
+        <div class="md:hidden w-full grid grid-cols-12">
+            <div id="menu-trigger" class="col-span-1">
+                <a href="#" {{ stimulus_action('nav', 'trigger') }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                    </svg>
+                </a>
+            </div>
+            <div id="brand" class="col-span-9  text-center ">
+                {% if name is defined %}
+                    <twig:Title:H1 class="capitalize">{{ name }}</twig:Title:H1>
                 {% else %}
-                    <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
+                    <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a>
                 {% endif %}
 
-                <li class="ml-4">
-                    {% if app.user is null %}
-                        <a href="#"> {% trans %} nav.login{% endtrans %}</a>
-                    {% else %}
-                        <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
-                    {% endif %}
-                </li>
-            </ul>
-        </nav>
-        <div class="col-span-2 text-right">
-            {% if showStore == 'true' %}
-                <a href="#contact"
-                        {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-                   class="px-4 py-2 bg-secondary text-clear-light rounded-md">
-                    Code QR
-                </a>
-            {% endif %}
+            </div>
         </div>
-    </div>
-    {# end desktop -------------------------------------------------------------- -#}
-</header>
-<nav class="absolute z-10 top-0 left-0 w-full h-screen p-16 bg-primary-dark text-clear -ml-96" {{ stimulus_target('nav', 'links') }}>
-    <ul class="w-full h-screen flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">
-        {% if showStore == 'true' %}
-            <li><a href="#top">{% trans %}nav.menu {% endtrans %}</a></li>
-            <li><a href="#opening">{% trans %}nav.opening {% endtrans %}</a></li>
-            <li><a href="#contact">{% trans %}nav.contact {% endtrans %}</a></li>
-        {% else %}
-            <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
-        {% endif %}
+        {#     end Mobile  =========================================================== #}
+        {#    desktop hidden on mobile=============================================== #}
+        <div class="hidden md:grid grid-cols-12">
+            <div id="brand" class="col-span-5  text-left flex !items-baseline space-x-4">
+                {% if name is defined %}
+                    <twig:Title:H1 class="capitalize">{{ name }}</twig:Title:H1>{% endif %}
+                <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a>
+            </div>
+            <nav class="col-span-5 text-base overflow-hidden flex justify-start !items-baseline">
+                <ul class="flex  justify-start gap-x-4">
+                    {% if showStore == 'true' %}
+                        <li><a href="#top">{% trans %}nav.menu {% endtrans %}</a></li>
+                        <li><a href="#opening">{% trans %}nav.opening {% endtrans %}</a></li>
+                        <li><a href="#contact">{% trans %}nav.contact {% endtrans %}</a></li>
+                    {% else %}
+                        <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
+                    {% endif %}
 
-        <li class="ml-4">
-            {% if app.user is null %}
-                <a href="#"> {% trans %} nav.login{% endtrans %}</a>
+                    <li class="ml-4">
+                        {% if app.user is null %}
+                            <a href="#"> {% trans %} nav.login{% endtrans %}</a>
+                        {% else %}
+                            <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <div class="col-span-2 text-right">
+                {% if showStore == 'true' %}
+                    <a href="#contact"
+                            {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
+                       class="px-4 py-2 bg-secondary text-clear-light rounded-md">
+                        Code QR
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {# end desktop -------------------------------------------------------------- -#}
+    </header>
+    <nav class="md:hidden absolute z-20 top-0 left-0 w-full h-screen p-16 bg-primary-dark text-clear -ml-96 transition-spacing duration-700 ease-in-out" {{ stimulus_target('nav', 'links') }}>
+
+
+        <ul class="w-full h-screen flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">
+            {% if showStore == 'true' %}
+                <li><a href="#top">{% trans %}nav.menu {% endtrans %}</a></li>
+                <li><a href="#opening">{% trans %}nav.opening {% endtrans %}</a></li>
+                <li><a href="#contact">{% trans %}nav.contact {% endtrans %}</a></li>
             {% else %}
-                <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
+                <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
             {% endif %}
-        </li>
-    </ul>
-</nav>
+
+            <li class="ml-4">
+                {% if app.user is null %}
+                    <a href="#"> {% trans %} nav.login{% endtrans %}</a>
+                {% else %}
+                    <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
 </div>
