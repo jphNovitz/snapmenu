@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Store{% endblock %}
+
+{% block body %}
+    <h1>Edit Store</h1>
+
+    {{ include('admin/store/store/_form.html.twig', {'button_label': 'button.update'}) }}
+
+    <div class="flex space-x-8 my-8">
+        <a href="{{ path('admin_default') }}"
+           class="border border-clear-dark rounded-md px-4 py-1">
+            {% trans %} button.back {% endtrans %}
+        </a>
+    </div>
+
+
+{% endblock %}
