@@ -20,7 +20,8 @@
         </div>
         <div>
             <span class="font-semibold pr-4 capitalize">{% trans %} store.logo{% endtrans %}</span>
-            {{ store.logo }}
+
+            <img src="{{ asset('images/stores/'~store.logoName) }}" class="w-24 " alt="{{ store.name }}">
         </div>
         <div>
             <span class="font-semibold pr-4 capitalize">{% trans %} store.streetName{% endtrans %}</span>
