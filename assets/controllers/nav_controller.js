@@ -17,14 +17,10 @@ export default class extends Controller {
     }
 
     trigger(e) {
-        console.log(e.target.parentNode.id)
         e.stopPropagation()
-        if (e.target.parentNode.id == 'trigger-on') {
+        if (e.target.parentNode.id === 'trigger-on') {
             e.preventDefault()
         }
-        this.linksTarget.classList.toggle('-mt-96')
-        // this.linksTarget.classList.toggle('top-[1000vh]')
-        // this.linksTarget.classList.toggle('-ml-[100vw]')
-
+        this.linksTarget.classList.toggle('-mt-[101vw]')
     }
 }
