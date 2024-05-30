@@ -3,11 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Store;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 class StoreType extends AbstractType
 {
@@ -18,7 +18,9 @@ class StoreType extends AbstractType
             ->add('vatNumber')
             ->add('phoneNumber')
             ->add('description')
-            ->add('logo')
+            ->add('logoFile', VichImageType::class, [
+                'required' => false
+            ])
             ->add('streetName')
             ->add('houseNumber')
             ->add('postCode')
