@@ -87,7 +87,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
             </svg>
         </a>
-        <ul class="w-full h-fit h-screen flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">
+        <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">
             {% if store is defined %}
                 <li>
                     <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>

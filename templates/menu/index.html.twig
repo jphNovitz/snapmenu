@@ -23,14 +23,16 @@
                     {% for product in activeCategory.category.products %}
                         <div class="my-4 p-2 first:mt-0 last:mb-8 bg-clear-light dark:bg-primary ">
                             <div class="w-full grid grid-cols-12">
+                                <div class="col-span-12 py-1">
+                                    <h3 class="uppercase font-semibold"> {{ product.name }}</h3>
+                                </div>
                                 <div class="col-span-10 py-1">
-                                    <div class="flex justify-between items-start mr-4">
-                                        <div class="uppercase font-semibold"> {{ product.name }}</div>
-                                        <div>
+{#                                    <div class="flex justify-between items-end mr-4">#}
+                                        <div class="w-full text-right">
                                             {{ product.veggie ? 'Veggie' : '' }}
                                             {{ product.halal ? 'Halal' : '' }}
                                         </div>
-                                    </div>
+{#                                    </div>#}
                                     <div class="mt-4 mb-2 mr-2"> {{ product.description ? product.description : '' }}</div>
 
                                     {% if product.ingredients is not empty %}
