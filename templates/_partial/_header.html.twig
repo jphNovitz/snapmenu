@@ -41,8 +41,8 @@
                 {% endif %}
                 <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a>
             </div>
-            <nav class="col-span-5 text-base overflow-hidden flex justify-start !items-baseline">
-                <ul class="flex  justify-start gap-x-4">
+            <nav class="col-span-5 text-base overflow-hidden h-full flex justify-start !items-baseline">
+                <ul class="h-full flex  justify-start  items-center gap-x-4">
                     {% if store is defined %}
                         <li>
                             <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
@@ -70,7 +70,7 @@
                 {% if store is defined %}
                     <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}"
                             {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-                       class="px-4 py-2 bg-secondary text-clear-light rounded-md">
+                       class="px-4 py-2 bg-secondary text-clear-light rounded-md align-middle">
                         Code QR
                     </a>
                 {% endif %}
