@@ -28,7 +28,7 @@ class StoreRepository extends ServiceEntityRepository
         public function findList(): array
         {
             return $this->createQueryBuilder('s')
-                ->select('s.name, s.slug')
+                ->select('s.name, s.slug, s.logoName')
                 ->orderBy('s.slug', 'ASC')
                 ->getQuery()
                 ->getResult()
