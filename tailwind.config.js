@@ -6,24 +6,39 @@ module.exports = {
         "./templates/**/*.html.twig",
     ],
     theme: {
-            colors: {
-                'clear': {
-                    light: '#fafffa',
-                    DEFAULT: '#F0FFF0',
-                    dark: '#d5e9d5',
-                },
-                'primary': {
-                    light: '#646864',
-                    // light: '#1b4332',
-                    DEFAULT: '#333533',
-                    dark: '#050705',
-                },
-                'secondary': {
-                    light: '#5D765D',
-                    DEFAULT: '#4A5E4A',
-                    dark: '#394A39',
-                },
-            },
+        colors: {
+            "transparent": "transparent",
+            "light-text-base": "#3B413C",
+            "light-text-secondary": "#9DB5B2",
+            "light-text-highlight": "#94D1BE",
+            "dark-text-base": "#DAF0EE",
+            "dark-text-secondary": "#94D1BE",
+            "dark-text-highlight": "#94D1BE",
+            "light-primary": "#94D1BE",
+            "dark-primary": "#94D1BE",
+            "light-neutral": "#DAF0EE",
+            "light-neutral-light": "#efefef",
+            "dark-neutral": "#3B413C",
+            "dark-neutral-light":  "#9DB5B2",
+        },
+            // colors: {
+            //     'clear': {
+            //         light: '#fafffa',
+            //         DEFAULT: '#F0FFF0',
+            //         dark: '#d5e9d5',
+            //     },
+            //     'primary': {
+            //         light: '#646864',
+            //         // light: '#1b4332',
+            //         DEFAULT: '#333533',
+            //         dark: '#050705',
+            //     },
+            //     'secondary': {
+            //         light: '#5D765D',
+            //         DEFAULT: '#4A5E4A',
+            //         dark: '#394A39',
+            //     },
+            // },
             // colors: {
             //     'clear': {
             //         light: '#F5FFF5',
