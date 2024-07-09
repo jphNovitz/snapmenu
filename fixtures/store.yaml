@@ -10,3 +10,4 @@ App\Entity\Store:
     email: <email()>
     vat_number: <vat(false)>
     owner: '@user_<current()>'
+    logo_name: 'logoipsum-<current()>.svg'
