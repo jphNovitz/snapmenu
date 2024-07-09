@@ -120,8 +120,17 @@
         <div class="my-24 w-full grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-x-4 gap-y-8 ">
 
             {% for store in stores %}
-                <div class="w-full aspect-square border border-2 border-black ">
-                    <a href="{{ path('app_menu', {slug: store.slug}) }}">{{ store.name }}</a>
+                <div class="w-full flex flex-col justify-center items-center aspect-square dark:bg-clear-light">
+                    <a href="{{ path('app_menu', {slug: store.slug}) }}"
+                       class="w-2/3">
+                        <img src="{{ asset('images/stores/' ~ store.logoName) }}"
+                             class="w-full"
+                             alt="{{ store.name }} |Snapmenu.be">
+                    </a>
+                    <a href="{{ path('app_menu', {slug: store.slug}) }}"
+                       class="text-xl p-2 dark:text-primary-dark relative overflow-hidden after:w-full after:absolute after:bottom-0 after:-left-36 hover:after:left-0 after:content-[' '] after:border transition-positions">
+                        {{ store.name }}
+                    </a>
                 </div>
             {% else %}
                 {% trans %} text.store.no_store{% endtrans %}
