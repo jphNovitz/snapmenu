@@ -24,6 +24,9 @@
         <ul class="h-full flex  justify-start  items-center gap-x-4">
             {% if store is defined %}
                 <li>
+                    <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a>
+                </li>
+                <li>
                     <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
                 </li>
                 <li>

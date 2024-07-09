@@ -9,6 +9,9 @@
     <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
         {% if store is defined %}
             <li>
+                <a href="{{ path('app_default') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.home {% endtrans %}</a>
+            </li>
+            <li>
                 <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>
             </li>
             <li>
