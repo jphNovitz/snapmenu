@@ -1,6 +1,6 @@
 {#    desktop hidden on mobile=============================================== #}
 <div class="hidden lg:grid grid-cols-12">
-    <div id="brand" class="col-span-5  text-left flex !items-baseline space-x-4">
+    <div id="brand" class="col-span-3  text-left flex !items-baseline space-x-4">
         {% if store is defined %}
             {% if store.logoName is not null %}
                 <a href="{{ path('app_menu', {slug: store.slug}) }}"
@@ -20,8 +20,8 @@
                 {% endif %}
                 <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a> #}
     </div>
-    <nav class="col-span-5 text-base overflow-hidden h-full flex justify-start !items-baseline">
-        <ul class="h-full flex  justify-start  items-center gap-x-4">
+    <nav class="col-span-7 text-base overflow-hidden h-full flex justify-start !items-baseline">
+        <ul class="h-full flex  justify-start  items-center gap-x-4 m-auto">
             {% if store is defined %}
                 <li>
                     <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a>

@@ -1,6 +1,6 @@
 {#   Mobile hidden on lg screens =========================================== #}
 <div class="lg:hidden w-full grid grid-cols-12 z-50">
-    <div id="menu-trigger" class="col-span-1 text-left">
+    <div id="menu-trigger" class="col-span-2 text-left">
         <a href="#" id="trigger-on" {{ stimulus_action('nav', 'trigger') }}
            class="w-full h-full inline-flex justify-start items-center ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -27,11 +27,11 @@
         {% endif %}
 
     </div>
-    <div class="col-span-3 text-right pr-4">
+    <div class="col-span-2 w-full h-full inline-flex justify-start items-center ">
         {% if store is defined %}
             <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}"
                     {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-               class="w-fit inline-flex justify-center items-center px-8 py-4  text-light-text-base-light border border-dark-text-base dark:border-light-text-base rounded-md">
+               class="inline-flex justify-center items-center p-2  text-light-text-base-light border border-dark-text-base dark:border-light-text-base rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                      stroke="currentColor" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round"
