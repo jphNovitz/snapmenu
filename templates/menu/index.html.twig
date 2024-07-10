@@ -1,136 +1,142 @@
-{% extends 'base.html.twig'  %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Menu de {{ store.name }} à {{ store.postCode }}, {{ store.city }}{% endblock %}
 
 {% block body %}
-    {% block menu %}
-{#        <div id="top"#}
-{#             class="flex justify-between items-center">#}
-{#            <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>#}
-{#            <a href="#contact"#}
-{#                    #}{#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-{#               class="px-4 py-2 bg-secondary text-clear-light rounded-md">#}
-{#                Code QR#}
-{#            </a>#}
-{#        </div>#}
-        <span  id="menu">&nbsp;</span>
-        <div class="">
-            {% for activeCategory in menu %}
-                {% if activeCategory.category.products is not empty %}
-                    <twig:Title:H2 class="mt-12">
-                        {{ activeCategory.category.name }}
-                    </twig:Title:H2>
-                    {% for product in activeCategory.category.products %}
-                        <div class="my-4 p-2 first:mt-0 last:mb-8 bg-clear-light dark:bg-primary ">
-                            <div class="w-full grid grid-cols-12">
-                                <div class="col-span-12 py-1">
-                                    <h3 class="uppercase font-semibold"> {{ product.name }}</h3>
-                                </div>
-                                <div class="col-span-10 py-1">
-{#                                    <div class="flex justify-between items-end mr-4">#}
+    <div class="p-2 lg:p-4">
+        {% block menu %}
+
+            {#        <div id="top" #}
+            {#             class="flex justify-between items-center"> #}
+            {#            <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1> #}
+            {#            <a href="#contact" #}
+            {#                    #}{#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
+            {#               class="px-4 py-2 bg-secondary text-light-text-base-light rounded-md"> #}
+            {#                Code QR #}
+            {#            </a> #}
+            {#        </div> #}
+            <span id="menu">&nbsp;</span>
+            <div class="">
+                {% for activeCategory in menu %}
+                    {% if activeCategory.category.products is not empty %}
+                        <twig:Title:H2 class="mt-12">
+                            {{ activeCategory.category.name }}
+                        </twig:Title:H2>
+                        {% for product in activeCategory.category.products %}
+                            <div class="my-4 p-2 first:mt-0 last:mb-8 bg-clear-light dark:bg-primary ">
+                                <div class="w-full grid grid-cols-12">
+                                    <div class="col-span-12 py-1">
+                                        <h3 class="uppercase font-semibold"> {{ product.name }}</h3>
+                                    </div>
+                                    <div class="col-span-10 py-1">
+                                        {#                                    <div class="flex justify-between items-end mr-4"> #}
                                         <div class="w-full text-right">
                                             {{ product.veggie ? 'Veggie' : '' }}
                                             {{ product.halal ? 'Halal' : '' }}
                                         </div>
-{#                                    </div>#}
-                                    <div class="mt-4 mb-2 mr-2"> {{ product.description ? product.description : '' }}</div>
+                                        {#                                    </div> #}
+                                        <div class="mt-4 mb-2 mr-2"> {{ product.description ? product.description : '' }}</div>
 
-                                    {% if product.ingredients is not empty %}
-                                        <div class="text-sm italic mr-2">
-                                            Ingredients: {{ product.ingredients }}
-                                        </div>
-                                    {% endif %}
-                                </div>
-
-                                <div class="col-span-2 grid grid-rows-2">
-                                    <div class="flex flex-col items-center">
-                                        <span class="text-basis text-center">{% trans %} menu.price.home{% endtrans %} </span>
-                                        <span class="text-xl text-blue-600 font-black after:pl-2 after:content-['€'] text-center">{{ product.priceHome }}</span>
+                                        {% if product.ingredients is not empty %}
+                                            <div class="text-sm italic mr-2">
+                                                Ingredients: {{ product.ingredients }}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                    <div class="flex flex-col items-center">
-                                        <span class="text-basis text-center">{% trans %} menu.price.away{% endtrans %}</span>
-                                        <span class="text-xl text-blue-700 font-black after:pl-2 after:content-['€'] text-center">{{ product.priceAway }}</span>
+
+                                    <div class="col-span-2 grid grid-rows-2">
+                                        <div class="flex flex-col items-center">
+                                            <span class="text-basis text-center">{% trans %} menu.price.home{% endtrans %} </span>
+                                            <span class="text-xl text-blue-600 font-black after:pl-2 after:content-['€'] text-center">{{ product.priceHome }}</span>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <span class="text-basis text-center">{% trans %} menu.price.away{% endtrans %}</span>
+                                            <span class="text-xl text-blue-700 font-black after:pl-2 after:content-['€'] text-center">{{ product.priceAway }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-        </div>
-    {% endblock %}
-
-    {% block opening %}
-        <div id="heures-d-ouverture"
-             class="min-h-screen flex flex-col justify-center items-center">
-            <twig:Title:H2>{% trans %} title.opening_hours{% endtrans %}</twig:Title:H2>
-            <div class="w-full p-8 grid grid-cols-3 gap-x-8 gap-y-8">
-                <h3 class="pb-4 font-black">Jour</h3>
-                <div class="pb-4 font-black text-center -ml-8">Ouvre</div>
-                <div class="pb-4  font-black text-center">Ferme</div>
-                {% for opening_hour in store.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
-                    <h3 class="pb-4">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</h3>
-                    <div class="pb-4 text-center border-b border-gray-900 -ml-8">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i:s') : '' }}</div>
-                    <div class="pb-4 text-center">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i:s') : '' }}</div>
-                    {#                    <span class="w-3/4 aligncol-span-3 border-b border-gray-900 -ml-8"> </span> #}
+                        {% endfor %}
+                    {% endif %}
                 {% endfor %}
             </div>
-        </div>
-    {% endblock %}
+        {% endblock %}
 
-    {% block contact %}
-        <div id="contact"
-             class="w-full min-h-screen flex flex-col flex-none items-center justify-evenly  gap-8 p-8 mt-[20vh]">
-            <div class="w-full grid grid-cols-3">
-                <div class="text-left">
-                    <a href="{{ path('app_default') }}" class="text-xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                             stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="text-center">
-                    <a href="{{ path('app_menu', { 'slug': store.slug }) }}#menu" class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                             stroke="currentColor" class="w-6 h-6 m-auto">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="text-center">
-
+        {% block opening %}
+            <div id="heures-d-ouverture"
+                 class="min-h-screen flex flex-col justify-center items-center">
+                <twig:Title:H2>{% trans %} title.opening_hours{% endtrans %}</twig:Title:H2>
+                <div class="w-full p-8 grid grid-cols-3 gap-x-8 gap-y-8">
+                    <h3 class="pb-4 font-black">Jour</h3>
+                    <div class="pb-4 font-black text-center -ml-8">Ouvre</div>
+                    <div class="pb-4  font-black text-center">Ferme</div>
+                    {% for opening_hour in store.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
+                        <h3 class="pb-4">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</h3>
+                        <div class="pb-4 text-center border-b border-gray-900 -ml-8">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i:s') : '' }}</div>
+                        <div class="pb-4 text-center">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i:s') : '' }}</div>
+                        {#                    <span class="w-3/4 aligncol-span-3 border-b border-gray-900 -ml-8"> </span> #}
+                    {% else %}
+                        <p class="col-span-3">Contactez-nous pour pour connaître les heures d'ouverture</p>
+                    {% endfor %}
                 </div>
             </div>
-            <div>
-                <twig:Title:H1> {{ store.name }} </twig:Title:H1>
+        {% endblock %}
+
+        {% block contact %}
+            <div id="contact"
+                 class="scroll-mt-60 w-full min-h-screen flex flex-col flex-none items-center justify-evenly  gap-8 p-8 pt-52">
+                <div class="w-full grid grid-cols-3">
+                    <div class="text-left">
+                        <a href="{{ path('app_default') }}" class="text-xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                 stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ path('app_menu', { 'slug': store.slug }) }}#menu" class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                                 stroke="currentColor" class="w-6 h-6 m-auto">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="text-center">
+
+                    </div>
+                </div>
+                <div>
+                    <twig:Title:H1> {{ store.name }} </twig:Title:H1>
+                </div>
+
+                <div>
+                    {% set  uri = 'snapmenu.be'~path('app_menu', {slug: store.slug}) %}
+                    <img src="{{ qr_code_url(uri) }}" alt="{{ store.name }} code QR"/>
+                </div>
+
+
+                <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
+                    Mon url: <br/> <a
+                            href="{{ path('app_menu', {slug: store.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: store.slug}) }} </a>
+                </div>
+
+                <div>
+                    <ul class="text-center capitalize">
+                        <li class="text-lg font-black">{{ store.name }}</li>
+                        <li class="semibold">{{ store.streetName }} {{ store.houseNumber }} </li>
+                        <li class="semibold">{{ store.postCode }}&nbsp;&nbsp;&nbsp;&nbsp; {{ store.city }} </li>
+                        <li class="semibold">{{ store.phoneNumber }} </li>
+                    </ul>
+                </div>
+
+                <h6 class="text-center text-small"> (2024) <a href="https://pixelservices.be">PixelServices.be, création
+                        de
+                        sites internet pour les petits entrepreneurs, Services web.</a></h6>
             </div>
 
-            <div>
-                {% set  uri = 'snapmenu.be'~path('app_menu', {slug: store.slug}) %}
-                <img src="{{ qr_code_url(uri) }}" alt="{{ store.name }} code QR"/>
-            </div>
-
-
-            <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
-                Mon url: <br/> <a
-                        href="{{ path('app_menu', {slug: store.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: store.slug}) }} </a>
-            </div>
-
-            <div>
-                <ul class="text-center capitalize">
-                    <li class="text-lg font-black">{{ store.name }}</li>
-                    <li class="semibold">{{ store.streetName }} {{ store.houseNumber }} </li>
-                    <li class="semibold">{{ store.postCode }}&nbsp;&nbsp;&nbsp;&nbsp; {{ store.city }} </li>
-                    <li class="semibold">{{ store.phoneNumber }} </li>
-                </ul>
-            </div>
-
-            <h6 class="text-center text-small"> (2024) <a href="https://pixelservices.be">PixelServices.be, création de
-                    sites internet pour les petits entrepreneurs, Services web.</a></h6>
-        </div>
-    {% endblock %}
-
+        {% endblock %}
+    </div>
 {% endblock %}
