@@ -18,124 +18,143 @@
         {#        Scannez et régalez-vous #}
         {#        Un QR code, tout le menu #}
 
-        <div class="p-6 md:p-12 bg-clear dark:bg-primary-dark relative after:absolute after:content-[' '] after:-z-10 {# after:w-11/12 #} after:inset-x-[1rem] {# after:h-11/12 #} after:inset-y-[1rem]  after:shadow-secondary dark:after:shadow-clear-dark after:shadow-xl after:rounded-xl">
-            <h1 class="text-3xl lg:text-5xl font-black leading-relaxed capitalize">Snapmenu:<br/> Un QR code, tout le
-                menu</h1>
-            <h2 class="my-12 text-xl lg:text-2xl font-bold leading-relaxed">Dites adieu aux menus papier. Scannez le
-                code QR pour
-                découvrir le
-                menu
-                complet et commandez directement depuis un téléphone.</h2>
+        <div class="p-6 md:p-12 bg-light-neutral dark:bg-dark-neutral relative after:absolute after:content-[' '] after:-z-10 {# after:w-11/12 #} after:inset-x-[1rem] {# after:h-11/12 #} after:inset-y-[1rem]  after:shadow-dark-neutral dark:after:shadow-light-neutral after:shadow-xl after:rounded-xl">
+            <h1 class="text-3xl lg:text-5xl  font-black leading-relaxed capitalize"><i
+                        class="text-light-text-highlight dark:text-dark-text-highlight">
+                    Snapmenu:</i><br/> Un QR code, tout le menu
+            </h1>
+            <h2 class="my-12 text-xl lg:text-2xl font-bold leading-relaxed">
+                Dites adieu aux menus papier. Scannez le code QR pour découvrir le menu complet et commandez directement
+                depuis un téléphone.
+            </h2>
 
-            <div class="flex flex-col md:flex-row space-y-8  md:space-x-8 md:space-y-0 md:justify-center">
+            <div class="flex flex-col md:flex-row space-y-8 md:space-x-8 md:space-y-0 md:justify-center">
                 <a href="{{ path('app_login') }}"
-                   class="w-full md:w-auto px-4 py-2 text-xl font-semibold text-clear  bg-secondary border border-secondary-dark rounded-lg text-center z-100">
+                   class="w-full md:w-auto px-4 py-2 text-xl font-semibold text-light-text-base  bg-secondary border border-secondary-dark rounded-lg text-center z-100">
                     Je rejoins Snapmenu
                 </a>
                 <a href="{{ path('app_default', {'_fragment': 'list'}) }}"
-                   class="w-full md:w-auto px-4 py-2  text-xl font-semibold border text-secondary-dark dark:text-clear border-secondary-dark  dark:border-clear  rounded-lg text-center">
+                   class="w-full md:w-auto px-4 py-2  text-xl font-semibold border text-secondary-dark dark:text-light-text-base border-secondary-dark  dark:border-clear  rounded-lg text-center">
                     Voir les Restaurants
                 </a>
             </div>
         </div>
     </div>
     {#    </div> #}
+    <section class="w-full min-h-screen my-16 space-y-8 lg:space-y-20 px-2 py-4 md:px-4 py-8">
+        {#        Illustration images Mobile - Desktop #}
+        <article class="hidden lg:block my-12 md:my-16 lg:my-24">
+            <img src="{{ asset('images/screenshots/snapmenu_mcbook_01.webp') }}" alt="Image Snapmenu sur macBook"
+                 class="m-auto">
+        </article>
 
-    <div class="min-h-screen flex flex-col justify-evenly ">
-        <div>
-            <h2 class="text-xl md:text-2xl font-bold leading-loose">
-                Encodez votre liste de produit
+        <article class="block lg:hidden my-12 md:my-16 lg:my-24">
+            <img src="{{ asset('images/screenshots/snapmenu_iphone_01.webp') }}" alt="Image Snapmenu sur iphone"
+                 class="m-auto">
+        </article>
+
+        {#    /    Illustration images Mobile - Desktop #}
+        <article class="my-12 md:my-16 lg:my-24" id="list">
+            <h2 class="text-xl lg:text-2xl font-bold leading-loose">✅ Ces restaurateurs Snappent !</h2>
+            <div class="w-full grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-1 ">
+
+                {% for store in stores %}
+                    <div class="w-2/3 md:w-full m-auto flex flex-col justify-center items-center aspect-square dark:bg-clear-light">
+                        <a href="{{ path('app_menu', {slug: store.slug}) }}"
+                           class="w-2/3">
+                            <img src="{{ asset('images/stores/' ~ store.logoName) }}"
+                                 class="w-full dark:bg-light-neutral/20"
+                                 alt="{{ store.name }} | Snapmenu.be">
+                        </a>
+                        <a href="{{ path('app_menu', {slug: store.slug}) }}"
+                           class="text-xl p-2 text-light-text-base dark:text-dark-text-base relative overflow-hidden after:w-full after:absolute after:bottom-0 after:-left-96 delay-150 hover:after:left-0 after:content-[' '] after:border after:border-light-text-base after:dark:border-dark-text-base transition-positions ease-in-out delay-200 duration-1000">
+                            {{ store.name }}
+                        </a>
+                    </div>
+                {% else %}
+                    {% trans %} text.store.no_store{% endtrans %}
+                {% endfor %}
+            </div>
+        </article>
+
+        <article class="w-full h-dvh flex flex-col lg:flex-row space-y-8 lg:space-8 justify-center lg:justify-start ">
+            <div class="w-full lg:w-2/5 lg:h-full lg:flex lg:flex-col lg:justify-center">
+                <h2 class="text-xl md:text-2xl font-bold leading-loose">
+                    Encodez votre liste de produit
+                </h2>
+                <h3 class="">
+                    Donnez-lui un nom, un prix sur place, un prix emporté.
+                </h3>
+            </div>
+            <div class="w-full lg:w-3/5 lg:h-full lg:flex lg:flex-col lg:justify-center">
+                <img src="{{ asset('images/screenshots/screenshot_list.png') }}"
+                     alt="Encodez votre liste de produit"
+                     class="w-full aspect-video rounded-md">
+            </div>
+        </article>
+
+        <article class="w-full h-16 block">
+            <h2 class="text-xl lg:text-3xl text-light-text-highlight dark:text-dark-text-highlight font-bold leading-loose">
+                Vous êtes prêts à être scannés
             </h2>
-            <h3 class="my-4 text-lg">
-                Donnez-lui un nom, un prix sur place, un prix emporté.
-            </h3>
-        </div>
-        <img src="{{ asset('images/screenshots/screenshot_list.png') }}"
-             alt="Encodez votre liste de produit"
-             class="border-clear-dark aspect-video">
-    </div>
-    <div class="w-full min-h-screen flex flex-col justify-evenly">
+        </article>
 
-        <h2 class="text-xl md:text-2xl font-bold leading-loose">Affichez le code QR dans votre établissement</h2>
+        <article
+                class="w-full h-dvh flex flex-col lg:flex-row lg:space-x-8 justify-start lg:items-start lg:justify-between space-y-4">
+            <div class="w-full flex flex-row items-center justify-center lg:w-2/5 lg:h-full lg:flex-col lg:items-start lg:justify-around">
+                <img src="{{ asset('images/screenshots/screenshot_contact.jpg') }}"
+                     alt="Encodez votre liste de produit"
+                     class="border border-4 border-clear-dark aspect-square">
+                <img src="{{ asset('images/screenshots/screenshot_menu.png') }}"
+                     alt="Encodez votre liste de produit"
+                     class="hidden lg:block border border-4 border-clear-dark aspect-square">
+                {#                <img src="{{ asset('images/screenshots/screenshot_opening.webp') }}" #}
+                {#                     alt="Encodez votre liste de produit" #}
+                {#                     class="hidden lg:block border border-4 border-clear-dark aspect-square"> #}
 
-        <h3 class="my-4 text-lg">Les clients n'ont qu'à scanner ce code avec leur téléphone pour afficher :</h3>
+            </div>
+            <div class="w-full lg:w-2/5 h-full flex flex-col justify-center">
+                <h2 class="text-xl lg:text-3xl text-light-text-highlight dark:text-dark-text-highlight font-bold leading-loose">Affichez le code QR dans votre
+                    établissement</h2>
+                <h3 class="my-4 text-lg">Les clients n'ont qu'à scanner ce code avec leur téléphone pour afficher :</h3>
 
-        <ul class="ml-24 space-y-12 font-semibold flex flex-col">
-            <li class="inline-flex">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
-                </svg> &nbsp;
-                Votre menu
-            </li>
-            <li class="inline-flex">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
-                </svg> &nbsp;
-                Vos heures d'ouverture
-            </li>
-            <li class="inline-flex">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
-                </svg> &nbsp;
-                Vos informations de contact
-            </li>
-        </ul>
-        <div class="leading-loose">
-            <p>En cas de modification rendez-vous sur votre interface d'administration, le code ne change pas:
-                inutile de
-                réimprimer des menus. </p>
-            <p>Vos visiteurs deviennent des client et les clients deviennent des embassadeurs car il peuvent faire
-                scanner
-                le code pour le partager avec leurs amis.</p>
+                <ul class="pl-16 my-12 space-y-12 font-semibold flex flex-col">
+                    <li class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                        </svg> &nbsp;
+                        Votre menu
+                    </li>
+                    <li class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                        </svg> &nbsp;
+                        Vos heures d'ouverture
+                    </li>
+                    <li class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                        </svg> &nbsp;
+                        Vos informations de contact
+                    </li>
+                </ul>
+                <div class="leading-loose">
+                    <p>En cas de modification rendez-vous sur votre interface d'administration, le code ne change pas:
+                        inutile de
+                        réimprimer des menus. </p>
+                    <p>Vos visiteurs deviennent des client et les clients deviennent des embassadeurs car il peuvent
+                        faire
+                        scanner
+                        le code pour le partager avec leurs amis.</p>
 
-        </div>
-    </div>
-
-    <div class=" my-8 grid grid-cols-2 md:grid-cols-3 relative">
-        <div>
-            <img src="{{ asset('images/screenshots/screenshot_contact.jpg') }}"
-                 alt="Encodez votre liste de produit"
-                 class="border border-4 border-clear-dark aspect-square">
-        </div>
-        <div>
-            <img src="{{ asset('images/screenshots/screenshot_menu.png') }}"
-                 alt="Encodez votre liste de produit"
-                 class="border border-4 border-clear-dark aspect-square">
-        </div>
-        <div class="col-span-2 md:col-span-1 text-center">
-            <img src="{{ asset('images/screenshots/screenshot_opening.png') }}"
-                 alt="Encodez votre liste de produit"
-                 class="border border-4 border-clear-dark aspect-square">
-        </div>
-        <h2 class="my-4 p-4 text-xl lg:text-2xl font-bold leading-loose absolute bg-clear-light/80 text-primary-dark left-1/2 top-1/2 -translate-x-1/2  -translate-y-3/4 ">
-            Vous êtes prêts à être scannés</h2>
-    </div>
-
-
-    <div class="my-12 md:my-16 lg:my-24 min-h-screen" id="list">
-        <h2 class="my-24 text-xl lg:text-2xl font-bold leading-loose">✅ Ces restaurateurs Snappent !</h2>
-        <div class="my-24 w-full grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-x-4 gap-y-8 ">
-
-            {% for store in stores %}
-                <div class="w-full flex flex-col justify-center items-center aspect-square dark:bg-clear-light">
-                    <a href="{{ path('app_menu', {slug: store.slug}) }}"
-                       class="w-2/3">
-                        <img src="{{ asset('images/stores/' ~ store.logoName) }}"
-                             class="w-full"
-                             alt="{{ store.name }} |Snapmenu.be">
-                    </a>
-                    <a href="{{ path('app_menu', {slug: store.slug}) }}"
-                       class="text-xl p-2 dark:text-primary-dark relative overflow-hidden after:w-full after:absolute after:bottom-0 after:-left-36 hover:after:left-0 after:content-[' '] after:border transition-positions">
-                        {{ store.name }}
-                    </a>
                 </div>
-            {% else %}
-                {% trans %} text.store.no_store{% endtrans %}
-            {% endfor %}
-        </div>
-    </div>
+            </div>
+        </article>
+
+
+    </section>
 {% endblock %}
 

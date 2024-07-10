@@ -48,11 +48,11 @@
             </li>
         </ul>
     </nav>
-    <div class="col-span-2 text-right">
+    <div class="col-span-2 p-1 text-right">
         {% if store is defined %}
             <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}"
                     {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-               class="w-fit inline-flex justify-center items-center px-8 py-4  text-light-text-base-light border border-light-text-base dark:border-dark-text-base rounded-md">
+               class="w-fit inline-flex justify-center items-center px-8 py-4  text-light-text-base-light border border-dark-text-base dark:border-light-text-base rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                      stroke="currentColor" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round"
