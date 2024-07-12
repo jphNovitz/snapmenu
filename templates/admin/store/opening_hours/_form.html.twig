@@ -2,22 +2,26 @@
    {{ form_widget(form._token) }}
 <div class="flex flex-col space-y-12 my-4">
     <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.dayOfWeek) }}
-        {{ form_label(form.dayOfWeek, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.dayOfWeek, {'attr': {'class': 'px-2 py-1'}}) }}
+        <twig:Form:Select :widget="form.dayOfWeek"/>
+{#        {{ form_errors(form.dayOfWeek) }}#}
+{#        {{ form_label(form.dayOfWeek, null , {#}
+{#            'label_attr': {'class': ''}}) }}#}
+{#        <twig:Form:Text value="{{ form_widget(form.dayOfWeek)}}"/>#}
+{#        {{ form_widget(form.dayOfWeek, {'attr': {'class': 'px-2 py-1'}}) }}#}
     </div>
     <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.openTime) }}
-        {{ form_label(form.openTime, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.openTime, {'attr': {'class': 'px-2 py-1'}}) }}
+        <twig:Form:Time :widget="form.openTime"/>
+{#        {{ form_errors(form.openTime) }}#}
+{#        {{ form_label(form.openTime, null , {#}
+{#            'label_attr': {'class': ''}}) }}#}
+{#        {{ form_widget(form.openTime, {'attr': {'class': 'px-2 py-1'}}) }}#}
     </div>
     <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.closeTime) }}
-        {{ form_label(form.closeTime, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.closeTime, {'attr': {'class': 'px-2 py-1'}}) }}
+        <twig:Form:Time :widget="form.closeTime"/>
+{#        {{ form_errors(form.closeTime) }}#}
+{#        {{ form_label(form.closeTime, null , {#}
+{#            'label_attr': {'class': ''}}) }}#}
+{#        {{ form_widget(form.closeTime, {'attr': {'class': 'px-2 py-1'}}) }}#}
     </div>
     <div class="my-8">
         <button class="border border-gray-400 rounded-sm px-4 py-1">{{ button_label|default('Save')|trans }}</button>
