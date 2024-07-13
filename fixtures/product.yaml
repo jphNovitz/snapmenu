@@ -1,8 +1,9 @@
 App\Entity\Product:
   product_{1..100}:
-    name: <word(3, true)>
+    name: <foodName()>
+#    name: <word(3, true)>
     description: <sentence()>
-    ingredients: <words(10, true)>
+    ingredients: <ingredients()>
     price_home: <numberBetween(1, 6)>
     price_away: <numberBetween(4, 11)>
     halal: <boolean()>
