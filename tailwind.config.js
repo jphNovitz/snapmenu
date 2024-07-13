@@ -12,6 +12,7 @@ module.exports = {
             "light-text-secondary": "#9DB5B2",
             // "light-text-highlight": "#D64550",
             // "light-text-highlight": "#F9A03F",
+            // "light-text-highlight": "#5B9279",
             "light-text-highlight": "#5B9279",
             "dark-text-base": "#DAF0EE",
             "dark-text-secondary": "#94D1BE",
