@@ -3,7 +3,7 @@
 namespace App\Faker\Provider;
 
 use App\Entity\User;
-use ContainerAPQKsV4\getSecurity_PasswordHasherFactoryService;
+//use ContainerAPQKsV4\getSecurity_PasswordHasherFactoryService;
 use Faker\Generator;
 use Faker\Provider\Base;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
