@@ -3,42 +3,73 @@
 {% block title %}{% trans %}title.product.index {% endtrans %}{% endblock %}
 
 {% block body %}
-    <twig:Title:H1>{% trans %}title.product.index {% endtrans %} </twig:Title:H1>
+    <div class="w-full p-2">
+        <twig:Title:H1>{% trans %}title.product.index {% endtrans %} </twig:Title:H1>
 
-    <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
-        <thead>
-        <tr>
-            <th>{% trans %}title.product.name{%  endtrans %}</th>
-            <th class="hidden xl:table-cell">{%  trans %}title.product.description{%  endtrans %}</th>
-            <th class="text-center">{%  trans %}title.product.price_home{%  endtrans %}</th>
-            <th class="text-center">{%  trans %}title.product.price_away{%  endtrans %}</th>
-            <th class="text-center">{%  trans %}title.product.veggie{%  endtrans %}</th>
-            <th class="text-center">{%  trans %}title.product.halal{%  endtrans %}</th>
-            <th>{%  trans %}actions{%  endtrans %}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr class="even:bg-gray-200 py-4">
-                <td class="px-2 py-1">{{ product.name }}</td>
-                <td class="hidden xl:table-cell px-2 py-1">{{ product.Description }}</td>
-                <td class="text-center px-2 py-1">{{ product.priceHome }}</td>
-                <td class="text-center px-2 py-1">{{ product.priceAway }}</td>
-                <td class="text-center px-2 py-1">{{ product.veggie ? 'Yes' : 'No' }}</td>
-                <td class="text-center px-2 py-1">{{ product.halal ? 'Yes' : 'No' }}</td>
-                <td class="px-2 py-1">
-                    <a href="{{ path('admin_product_edit', {'id': product.id}) }}">
-                        {% trans %}button.edit {% endtrans %}
-                    </a>
-                </td>
-            </tr>
-        {% else %}
+        <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
+            <thead class="">
             <tr>
-                <td colspan="9">no records found</td>
+                <th class="hidden lg:table-cell">{% trans %}title.product.name{% endtrans %}</th>
+                <th class="hidden xl:table-cell">{% trans %}title.product.description{% endtrans %}</th>
+                <th class="hidden lg:table-cell text-center">{% trans %}title.product.price_home{% endtrans %}</th>
+                <th class="hidden lg:table-cell text-center">{% trans %}title.product.price_away{% endtrans %}</th>
+                <th class="hidden lg:table-cell text-center">{% trans %}title.product.veggie{% endtrans %}</th>
+                <th class="hidden lg:table-cell text-center">{% trans %}title.product.halal{% endtrans %}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr class="flex flex-col lg:table-row even:bg-dark-neutral/10 dark:even:bg-light-neutral/10 py-4">
+                    <td class="p-2 before:content-['Nom:'] lg:before:content-[''] relative">
+                       <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">
+                            {{ product.name }}
+                        </span>
+                    </td>
+                    {#                    <td class="hidden xl:table-cell px-2 py-1">{{ product.Description }}</td> #}
+                    <td class="text-left lg:text-center p-2 before:content-['Prix_sur_place:'] lg:before:content-[''] relative">
+                        <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">
+                            {{ product.priceHome }}
+                        </span>
+                    </td>
+                    <td class="text-left lg:text-center p-2 before:content-['Prix_emporté:'] lg:before:content-[''] relative">
+                         <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">{{ product.priceAway }}
+                        </span>
+                    </td>
+                    <td class="text-left lg:text-center p-2 before:content-['Veggie:'] lg:before:content-[''] relative">
+                        <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">
+                            {% if  product.veggie %}
+                                {% trans%} text.yes {% endtrans %}
+                            {% else %}
+                                {% trans%} text.no {% endtrans %}
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td class="text-left lg:text-center p-2 before:content-['Halal:'] lg:before:content-[''] relative">
+                        <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">
 
-    <a href="{{ path('admin_product_new') }}"  class="border border-gray-400 rounded-sm px-4 py-1">{% trans %}button.new {% endtrans %}</a>
+                            {% if  product.halal %}
+                                {% trans%} text.yes {% endtrans %}
+                            {% else %}
+                                {% trans%} text.no {% endtrans %}
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td class="w-full md:w-fit bg-light-primary dark:bg-dark-primary text-light-text-base font-semibold border border-light-text-base dark:border-dark-text-base rounded-md px-4 py-2 text-center">
+                        <a href="{{ path('admin_product_edit', {'id': product.id}) }}">
+                            {% trans %}button.edit {% endtrans %}
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('admin_product_new') }}"
+           class="border border-light-text-base dark:border-dark-text-base rounded-md px-4 py-2">{% trans %}button.new {% endtrans %}</a>
+    </div>
 {% endblock %}
