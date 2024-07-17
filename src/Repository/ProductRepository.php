@@ -32,7 +32,7 @@ class ProductRepository extends ServiceEntityRepository
             ->select('p', 'category')
             ->andWhere('p.owner = :store')
             ->setParameter('store', $store)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.name', 'ASC')
             ->getQuery()
             ->getResult();
 
