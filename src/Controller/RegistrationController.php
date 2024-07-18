@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Service\EmailNotifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,11 +20,10 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(private EmailVerifier $emailVerifier,
+                                private EmailNotifier $emailNotifier)
     {
-        $this->emailVerifier = $emailVerifier;
     }
 
     #[Route('/register', name: 'app_register')]
@@ -48,12 +48,19 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('mailer@exempl.es', 'Exemple Bot Change Me'))
+                    ->from(new Address('webmaster@snapmenu.be', 'Jeanphi de Snapmenu'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
+            $this->emailNotifier->notifyAdmin($user,
+            (new TemplatedEmail())
+                ->from(new Address('bot@snapmenu.be', 'Snapmenu Bot'))
+                ->to($this->getParameter('admin_email'))
+                ->subject('Un nouveau snack veut snapper')
+                ->htmlTemplate('registration/notification_email.html.twig')
+            );
 
             return $this->redirectToRoute('app_login');
         }
@@ -92,4 +99,6 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_default');
     }
+
+
 }
