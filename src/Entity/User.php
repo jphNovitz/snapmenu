@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -21,7 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private array $roles = [];
+    private array $roles = ['ROLE_SNACK', 'ROLE_USER'];
 
     /**
      * @var string The hashed password
@@ -34,6 +36,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'owner', cascade: ['persist', 'remove'])]
     private ?Store $store = null;
+
+    #[ORM\Column]
+    private ?bool $is_active = false;
+
+    #[Gedmo\Timestampable(on: 'create')]
+    #[ORM\Column(name: 'created', type: Types::DATE_MUTABLE)]
+    private ?\DateTime $created;
+
+    #[ORM\Column(name: 'updated', type: Types::DATETIME_MUTABLE)]
+    #[Gedmo\Timestampable]
+    private ?\DateTime $updated;
 
     public function getId(): ?int
     {
@@ -147,6 +160,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->is_active;
+    }
+
+    public function setActive(bool $is_active): static
+    {
+        $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeImmutable
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeImmutable $created): static
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?\DateTimeImmutable
+    {
+        return $this->updated;
+    }
+
+    public function setUpdated(\DateTimeImmutable $updated): static
+    {
+        $this->updated = $updated;
 
         return $this;
     }
