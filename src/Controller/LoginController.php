@@ -23,4 +23,17 @@ class LoginController extends AbstractController
             'error' => $error,
         ]);
     }
+
+    #[Route('/redirect-after-login', name: 'app_redirect_after_login')]
+    public function redirectAfterLogin(): Response
+    {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('god_user_index');
+        } elseif ($this->isGranted('ROLE_SNACK')) {
+            return $this->redirectToRoute('admin_product_index');
+        }
+
+        // Redirection par défaut
+        return $this->redirectToRoute('app_default');
+    }
 }
