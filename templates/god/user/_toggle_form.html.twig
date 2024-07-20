@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('god_user_toggleactivate', {'id': user.id}) }}" {#onsubmit="return confirm('Are you sure you want to activate this user ?');"#}>
+    <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ user.id) }}">
+    <button class="py-1 px-2 border rounded-full w-full">{{ user.isActive ? 'Yes' : 'No' }}</button>
+</form>
