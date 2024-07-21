@@ -3,7 +3,7 @@ App\Entity\Product:
     name: <foodName()>
 #    name: <word(3, true)>
     description: <sentence()>
-    ingredients: <ingredients()>
+    ingredients: <ingredients(6)>
     price_home: <numberBetween(1, 6)>
     price_away: <numberBetween(4, 11)>
     halal: <boolean()>

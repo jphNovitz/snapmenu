@@ -40,25 +40,34 @@ final class RestaurantProvider extends BaseProvider
     {
         return $this->restaurant->beverageName();
     }
-public function vegetableName(){
+
+    public function vegetableName()
+    {
         return $this->restaurant->vegetableName();
-}
-public  function fruitName(){
+    }
+
+    public function fruitName()
+    {
         return $this->restaurant->fruitName();
-}
-public function meatName(){
+    }
+
+    public function meatName()
+    {
         return $this->restaurant->meatName();
-}
-public function sauceName(){
+    }
+
+    public function sauceName()
+    {
         return $this->restaurant->sauceName();
-}
-    public function ingredients()
+    }
+
+    public function ingredients($n)
     {
         $ingredients = '';
-        for ($i=0; $i<5; $i++) {
-            $ingredients.= ', '.$this->restaurant->vegetableName();
+        for ($i = 0; $i < $n; $i++) {
+            $ingredients .= ', ' . $this->restaurant->vegetableName();
         }
 
-        return $this->meatName().', '.$this->sauceName().', '.$ingredients;
+        return $this->meatName() . ', ' . $this->sauceName() . ' ' . $ingredients;
     }
 }
