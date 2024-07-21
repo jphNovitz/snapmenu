@@ -41,12 +41,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $is_active = false;
 
     #[Gedmo\Timestampable(on: 'create')]
-    #[ORM\Column(name: 'created', type: Types::DATE_MUTABLE)]
-    private ?\DateTime $created;
+    #[ORM\Column(name: 'created', type: Types::DATETIME_IMMUTABLE)]
+    private ?\DateTimeImmutable $created;
 
-    #[ORM\Column(name: 'updated', type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(name: 'updated', type: Types::DATETIME_IMMUTABLE)]
     #[Gedmo\Timestampable]
-    private ?\DateTime $updated;
+    private ?\DateTimeImmutable $updated;
 
     public function getId(): ?int
     {
