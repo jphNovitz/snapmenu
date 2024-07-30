@@ -6,7 +6,8 @@ title:
   opening_hours.edit: "Horaire: modifier"
   day_of_week: "Jour de la semaine"
   product:
-    index: "Liste des produits"
+    index: "Les produits de mon menu"
+#    index: "Liste des produits"
     create: "Ajouter un produit"
     new: "Ajouter un produit"
     edit: "Modifier un produit"
@@ -25,12 +26,16 @@ title:
     new: "Ajouter une categorie"
     edit: "Modifier une categorie"
 nav:
+  store: "Ma boutique"
+  home: "Accueil"
   login: "Connexion"
   logout: "Déconnexion"
   contact: "Contact"
   contact.snap: "Contacter"
   menu: "Menu"
   opening: "Horaire"
+  products: "Produits"
+  categories: "Categories"
 button:
   login: "Connexion"
   logout: "Déconnexion"
@@ -45,7 +50,8 @@ button:
   activate: "Activer"
   deactivate: "Desactiver"
 form:
-  agree: "J'accepte les Conditions"
+  agree: "Un email indiquant le tarif proposé vous sera envoyé. En l'absence de réponse ou en cas de refus dans les 10 jours, votre compte sera supprimé."
+#  agree: "J'accepte les Conditions"
   password: "Mot de passe"
   email: "Email"
   delete.confirm: "Etes-vous certain de vouloir supprimer cet élément ?"
@@ -75,4 +81,6 @@ menu:
     home: "Sur place"
     away: "Emporté"
 text:
+  yes: "oui"
+  no: "non"
   no_store: "Aucun restaurateur"

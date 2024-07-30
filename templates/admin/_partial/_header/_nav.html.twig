@@ -7,22 +7,22 @@
         </svg>
     </a>
     <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
-        {% if store is defined %}
+{#        {% if store is defined %}#}
             <li>
                 <a href="{{ path('app_default') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.home {% endtrans %}</a>
             </li>
             <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>
+                <a href="{{ path('admin_store_show') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.store {% endtrans %}</a>
             </li>
             <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.opening {% endtrans %}</a>
+                <a href="{{ path('admin_product_index') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.products {% endtrans %}</a>
             </li>
             <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.contact {% endtrans %}</a>
+                <a href="{{ path('admin_category_index') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.categories {% endtrans %}</a>
             </li>
-        {% else %}
+{#        {% else %}#}
             <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
-        {% endif %}
+{#        {% endif %}#}
 
         <li class="text-sm underline absolute bottom-8 right-8">
             {% if app.user is null %}

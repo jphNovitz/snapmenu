@@ -22,29 +22,26 @@
     </div>
     <nav class="col-span-7 text-base overflow-hidden h-full flex justify-start !items-baseline">
         <ul class="h-full flex  justify-start  items-center gap-x-4 m-auto">
-            {% if store is defined %}
+            {% if app.user.store is defined %}
                 <li>
                     <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a>
                 </li>
+
                 <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
+                    <a href="{{ path('admin_store_show') }}">{% trans %}nav.store {% endtrans %}</a>
                 </li>
                 <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}">{% trans %}nav.opening {% endtrans %}</a>
+                    <a href="{{ path('admin_product_index') }}">{% trans %}nav.products {% endtrans %}</a>
                 </li>
                 <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}">{% trans %}nav.contact {% endtrans %}</a>
+                    <a href="{{ path('admin_category_index') }}">{% trans %}nav.categories {% endtrans %}</a>
                 </li>
-            {% else %}
-                <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
+
             {% endif %}
 
             <li class="ml-4">
-                {% if app.user is null %}
-                    <a href="#"> {% trans %} nav.login{% endtrans %}</a>
-                {% else %}
                     <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
-                {% endif %}
+
             </li>
         </ul>
     </nav>
