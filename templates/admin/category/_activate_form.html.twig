@@ -1,12 +1,15 @@
-<div class="w-32 border border-gray-400 rounded-md p-0 flex items-center {% if button_label == 'button.activate' %} justify-start {% else %}justify-end {% endif %}">
+<div class="{#w-32 border border-gray-400 rounded-md p-0 flex items-center {% if button_label == 'button.activate' %} justify-start {% else %}justify-end {% endif %}#}">
     <form method="post" action="{{ path('admin_category_activate', {'id': category.id}) }}">
         <input type="hidden" name="_token" value="{{ csrf_token('activate' ~ category.id) }}">
-        <button {% if button_label == "button.activate" %}
-            class="w-28 border bg-gray-200 border-gray-400  text-gray-400 rounded-md px-4 py-1 m-0"
+        {% if status == "inactive" %}
+            <button title="Categorie inactive">{{ ux_icon('mdi:toggle-switch-off-outline', {class: 'w-12 h-12 opacity-80'}) }}</button>
+{#            class="w-28 border bg-gray-200 border-gray-400  text-gray-400 rounded-md px-4 py-1 m-0"#}
         {% else %}
-            class="w-28 border bg-green-600 text-green-50 rounded-md px-4 py-1 m-0"
-                {% endif %}>
-            {{ button_label|default('button.activate')|trans }}
-        </button>
+            <button title="Categorie Active">{{ ux_icon('mdi:toggle-switch-outline', {class: 'w-11 h-11'}) }}</button>
+
+{#            class="w-28 border bg-green-600 text-green-50 rounded-md px-4 py-1 m-0"#}
+                {% endif %}
+{#            {{ button_label|default('button.activate')|trans }}#}
+
     </form>
 </div>
