@@ -1,0 +1,8 @@
+<a {{ attributes.defaults({
+    class: 'flex items-center justify-center gap-x-4
+            w-full md:w-fit px-4 py-2 font-semibold cursor-pointer
+            bg-light-primary dark:bg-dark-primary text-light-text-base dark:text-light-text-base rounded-md
+            outline outline-2 outline-light-primary dark:outline-dark-primary'
+}) }}>
+    {% block content %} {% endblock %}
+</a>
