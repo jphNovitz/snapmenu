@@ -7,9 +7,9 @@
     {{ include('admin/category/_form.html.twig', {'button_label': 'button.update'}) }}
 
     {% if form.rowOrder is defined %}
-        {% include 'admin/category/_activate_form.html.twig' with {'button_label': 'button.deactivate'} %}
+        {% include 'admin/category/_activate_form.html.twig' with {'status': 'active'} %}
     {% else %}
-        {% include 'admin/category/_activate_form.html.twig' with {'button_label': 'button.activate'} %}
+        {% include 'admin/category/_activate_form.html.twig' with {'status': 'inactive'} %}
     {% endif %}
     <div class="flex space-x-8 my-8">
         <a href="{{ path('admin_category_index') }}"

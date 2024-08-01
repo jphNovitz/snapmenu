@@ -3,84 +3,89 @@
 {% block title %}{% trans %} title.category.index {% endtrans %}{% endblock %}
 
 {% block body %}
-    <div class="w-full p-4 space-y-8">
+    <div class="w-full p-4 space-y-12">
         <twig:Title:H1>{% trans %} title.category.index {% endtrans %} </twig:Title:H1>
-        <div>
-            <twig:Title:H2> {% trans %} title.category.default_index {% endtrans %} </twig:Title:H2>
-            <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
-                <thead class="">
-                <tr>
-                    <th class="hidden lg:table-cell">{% trans %}title.category.name{% endtrans %}</th>
-                    <th class="hidden lg:table-cell">{% trans %}title.status{% endtrans %}</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for category in category_defaults %}
-                    <tr class="flex flex-col lg:table-row even:bg-dark-neutral/10 dark:even:bg-light-neutral/10 py-4">
-                        <td class="p-2 before:content-['Nom:'] lg:before:content-[''] relative">
-                       <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">
-                            {{ category.name }}
-                        </span>
-                        </td>
-                        {#                    <td class="hidden xl:table-cell px-2 py-1">{{ product.Description }}</td> #}
-                        <td class="text-left lg:text-center p-2 before:content-['Active:'] lg:before:content-[''] relative py-4">
-                        <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static py-4">
-                           {% if category.id in active_ids %}
-                               {% include 'admin/category/_activate_form.html.twig' with {'status': 'active'} %}
-                           {% else %}
-                               {% include 'admin/category/_activate_form.html.twig' with {'status': 'inactive'} %}
-                           {% endif %}
-                        </span>
-                        </td>
 
-                        <td class="w-full md:w-fit bg-light-primary dark:bg-dark-primary text-light-text-base font-semibold border border-light-text-base dark:border-dark-text-base rounded-md p-4 text-center">
-                            <a href="{{ path('admin_category_edit', {'id': category.id}) }}">
-                                {% trans %}button.edit {% endtrans %}
-                            </a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="9">{% trans %} text.n_a {% endtrans %}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
         <div>
             <twig:Title:H2> {% trans %} title.category.custom_index {% endtrans %} </twig:Title:H2>
-            <table class="w-full table-auto text-left border-separate border-spacing-y-8 ">
+            <table class="w-full table-fixed text-left border-separate border-spacing-y-8 ">
                 <thead class="">
                 <tr>
-                    <th class="hidden lg:table-cell">{% trans %}title.category.name{% endtrans %}</th>
-                    <th class="hidden lg:table-cell">{% trans %}title.status{% endtrans %}</th>
-                    <th></th>
+                    <th class="hidden lg:table-cell w-9/12">{% trans %}title.name{% endtrans %}</th>
+                    <th class="hidden lg:table-cell w-1/12">{% trans %}title.status{% endtrans %}</th>
+                    <th class="w-2/12"></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for category in category_customs %}
                     <tr class="flex flex-col lg:table-row even:bg-dark-neutral/10 dark:even:bg-light-neutral/10 py-4">
-                        <td class="p-2 before:content-['Nom:'] lg:before:content-[''] relative">
-                       <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">
+                        <td class="px-2 py-5 lg:p-0 before:content-['Nom:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
                             {{ category.name }}
-                        </span>
                         </td>
                         {#                    <td class="hidden xl:table-cell px-2 py-1">{{ product.Description }}</td> #}
-                        <td class="text-left lg:text-center p-2 before:content-['Active:'] lg:before:content-[''] relative">
-                        <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static">
-                         {% if category.id in active_ids %}
-                             {% include 'admin/category/_activate_form.html.twig' with {'status': 'active'} %}
-                         {% else %}
-                             {% include 'admin/category/_activate_form.html.twig' with {'status': 'inactive'} %}
-                         {% endif %}
-                        </span>
+                        <td class="px-2 py-5 lg:py-0 before:content-['Active:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] relative">
+                            {#                                                    <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static"> #}
+                            {% if category.id in active_ids %}
+                                {% include 'admin/category/_activate_form.html.twig' with {'status': 'active'} %}
+                            {% else %}
+                                {% include 'admin/category/_activate_form.html.twig' with {'status': 'inactive'} %}
+                            {% endif %}
+                            {#                                                    </span> #}
                         </td>
 
-                        <td class="w-full md:w-fit bg-light-primary dark:bg-dark-primary text-light-text-base font-semibold border border-light-text-base dark:border-dark-text-base rounded-md px-4 py-2 text-center">
-                            <a href="{{ path('admin_category_edit', {'id': category.id}) }}">
+                        <td class="text-left lg:text-center">
+                            <twig:Button:Primary href="{{ path('admin_category_edit', {'id': category.id}) }}" class="mx-auto">
                                 {% trans %}button.edit {% endtrans %}
-                            </a>
+                            </twig:Button:Primary>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">{% trans %} text.n_a {% endtrans %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('admin_category_custom_new') }}"
+               class="border border-light-text-base dark:border-dark-text-base rounded-md px-4 py-2">{% trans %}button.new {% endtrans %}</a>
+        </div>
+        <div>
+            <p class="pt-8 pb-4">
+                {% trans %} text.category_default_intro {% endtrans %}
+            </p>
+            <twig:Title:H2> {% trans %} title.category.default_index {% endtrans %} </twig:Title:H2>
+            <table class="w-full table-fixed text-left border-separate border-spacing-y-8 ">
+                <thead class="">
+                <tr>
+                    <th class="hidden lg:table-cell w-9/12">{% trans %}title.name{% endtrans %}</th>
+                    <th class="hidden lg:table-cell w-1/12">{% trans %}title.status{% endtrans %}</th>
+                    <th class="w-2/12"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in category_defaults %}
+                    <tr class="flex flex-col lg:table-row even:bg-dark-neutral/10 dark:even:bg-light-neutral/10 py-4">
+                        <td class="px-2 py-5 lg:p-0 before:content-['Nom:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
+                            {#                       <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static"> #}
+                            {{ category.name }}
+                            {#                        </span> #}
+                        </td>
+                        {#                    <td class="hidden xl:table-cell px-2 py-1">{{ product.Description }}</td> #}
+                        <td class="px-2 py-5 lg:py-0 before:content-['Active:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] relative">
+                            {#                                                    <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static py-4"> #}
+                            {% if category.id in active_ids %}
+                                {% include 'admin/category/_activate_form.html.twig' with {'status': 'active'} %}
+                            {% else %}
+                                {% include 'admin/category/_activate_form.html.twig' with {'status': 'inactive'} %}
+                            {% endif %}
+                            {#                                                    </span> #}
+                        </td>
+
+                        <td class="text-left lg:text-center">
+                            <twig:Button:Primary
+                                    href="{{ path('admin_category_edit', {'id': category.id}) }}" class="mx-auto">
+                                {% trans %}button.edit {% endtrans %}
+                            </twig:Button:Primary>
                         </td>
                     </tr>
                 {% else %}
@@ -91,8 +96,6 @@
                 </tbody>
             </table>
         </div>
-
-                <a href="{{ path('admin_category_custom_new') }}"
-                   class="border border-light-text-base dark:border-dark-text-base rounded-md px-4 py-2">{% trans %}button.new {% endtrans %}</a>
     </div>
+
 {% endblock %}
