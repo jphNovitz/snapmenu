@@ -51,9 +51,11 @@ class StoreController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'admin_store_show', methods: ['GET'])]
-    public function show(Store $store): Response
+    #[Route('', name: 'admin_store_show', methods: ['GET'])]
+    public function show(): Response
     {
+        $store = $this->getUser()->getStore();
+
         return $this->render('admin/store/store/show.html.twig', [
             'store' => $store,
         ]);
