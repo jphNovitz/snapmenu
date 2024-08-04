@@ -1,7 +1,25 @@
-<div>
-    {{ form_errors(form.name) }}
-    {{ form_label(form.label, null , {
-        'label_attr': {'class': ''}}) }}
-    {{ form_widget(form.name, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
+<div {{ attributes.defaults({ class: 'flex flex-col space-y-4' }) }}>
+    {{ form_label(row,null, {
+        'label': label,
+        'label_attr': {
+            'class': 'font-semibold'
+        } }) }}
+    {{ form_widget(row, { 'attr':
+        {
+            'class': 'w-full bg-light-neutral-light dark:bg-light-neutral/80 text-light-text-base dark:text-light-text-base  rounded-md px-1 py-2 outline-none focus:outline-none border-stone-300 focus:ring focus:border-stone-950',
+            'placeholder': placeholder ?? ''
+        }
+    }) }}
+
+    {{ form_errors(row) }}
 
 </div>
+
+
+{#{{ form_errors(datas) }}#}
+{#        {{ form_label(datas, null , {#}
+{#            'label_attr': {'class': ''}}) }}#}
+{#{{ form_widget(datas, {'attr': {'class': 'px-2 py-1'}}) }}#}
+
+{# <input type="text"  {{ attributes.defaults({ class: '' }) }} /> #}
+
