@@ -1,0 +1,16 @@
+<div {{ attributes.defaults({ class: 'flex flex-col space-y-4' }) }}>
+    {{ form_label(row,null, {
+        'label': label,
+        'label_attr': {
+            'class': 'font-semibold'
+        } }) }}
+    {{ form_widget(row, { 'attr':
+        {
+            'class': 'w-12 bg-light-neutral-light dark:bg-light-neutral/80 text-light-text-base dark:text-light-text-base  rounded-md p-1 outline-none focus:outline-none border-stone-300 focus:ring focus:border-stone-950',
+            'placeholder': placeholder ?? ''
+        }
+    }) }}
+
+    {{ form_errors(row) }}
+
+</div>
