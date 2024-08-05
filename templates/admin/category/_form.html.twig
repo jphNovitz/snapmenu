@@ -1,24 +1,19 @@
 {{ form_start(form) }}
 <div class="flex space-x-4 my-4">
     <div class="flex flex-col w-1/2 space-y-4">
-        {% if form.name is defined %}
-            {{ form_errors(form.name) }}
-            {{ form_label(form.name, null , {
-                'label_attr': {'class': ''}}) }}
-            {{ form_widget(form.name, {'attr': {'class': 'px-2 py-1'}}) }}
-        {% endif %}
-        {% if form.rowOrder is defined %}
-            <div class="grid grid-cols-3">
-                {{ form_label(form.rowOrder, null , {
-                    'label_attr': {'class': 'col-span-2'}}) }}
-                {{ form_widget(form.rowOrder, {'attr': {'class': 'px-2 py-1'}}) }}
-            </div>
-        {% endif %}
+        <twig:Form:Text :row="form.name" label="form.name"/>
+        <div class="w-full flex justify-between">
+            {% if form.rowOrder is defined %}
+                <twig:Form:Number :row="form.rowOrder" label="form.rowOrder"/>
+            {% endif %}
+            <twig:Form:Boolean :row="form.isActive" label="form.isActive"/>
+        </div>
     </div>
 </div>
 {% if form.name is defined %}
     <div class="my-8">
-        <button class="border border-gray-400 rounded-sm px-4 py-1">{{ button_label|default('Save')|trans }}</button>
+        <twig:Button:Submit> {{ button_label|default('Save')|trans }} </twig:Button:Submit>
+{#        <button class="border border-gray-400 rounded-sm px-4 py-1">{{ button_label|default('Save')|trans }}</button>#}
     </div>
 {% endif %}
 {{ form_end(form) }}

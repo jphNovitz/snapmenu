@@ -69,6 +69,8 @@ form:
       6: "Samedi"
       7: "Dimanche"
   name: "Nom"
+  isActive: "Active ?"
+  rowOrder: "Priorité"
 store:
   vatNumber: "numéro de T.V.A"
   phoneNumber: "numéro de téléphone"

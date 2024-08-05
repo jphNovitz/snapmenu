@@ -6,6 +6,7 @@ use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +27,7 @@ class CategoryType extends AbstractType
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {
             $form = $event->getForm();;
-
+            $form->add('isActive', CheckboxType::class, ['mapped' => false, 'required' => false]);
             if (($event->getData()->getType() === 'custom') || (in_array('ROLE_SUPERADMIN', $this->security->getUser()->getRoles()))) {
                 $form->add('name', TextType::class);
             } else {
