@@ -27,7 +27,11 @@ class CategoryType extends AbstractType
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {
             $form = $event->getForm();;
-            $form->add('isActive', CheckboxType::class, ['mapped' => false, 'required' => false]);
+            $form->add('isActive', CheckboxType::class, [
+                'mapped' => false,
+                'required' => false,
+                'data' => $options['is_active'],
+            ]);
             if (($event->getData()->getType() === 'custom') || (in_array('ROLE_SUPERADMIN', $this->security->getUser()->getRoles()))) {
                 $form->add('name', TextType::class);
             } else {
@@ -58,7 +62,8 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class,
-            'row_order_initial_value' => null
+            'row_order_initial_value' => null,
+            'is_active' => null
         ]);
     }
 

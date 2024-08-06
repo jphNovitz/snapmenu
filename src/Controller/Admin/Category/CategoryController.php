@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use function PHPUnit\Framework\isInstanceOf;
 
 #[Route('/admin/category')]
 class CategoryController extends AbstractController
@@ -45,24 +44,32 @@ class CategoryController extends AbstractController
     #[Route('/{id}/edit', name: 'admin_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
-        $active = $entityManager
-            ->getRepository(ActiveCategory::class)
-            ->findOneBy([
-                'store' => $this->getUser()->getStore(),
-                'category' => $category
-            ]);
+        $active = $this->getActiveCategory($entityManager, $category);
+        $isActive = (bool)$active;
 
-        if ($active)
-            $initialRow = $active->getRowOrder();
-        else $initialRow = 5;
+        $initialRow = $active ? $active->getRowOrder() : 5;
 
-        $form = $this->createForm(CategoryType::class, $category,
-            ['row_order_initial_value' => $initialRow]);
+        $form = $this->createForm(CategoryType::class, $category, [
+            'row_order_initial_value' => $initialRow,
+            'is_active' => $isActive
+        ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-                $active->setRowOrder($form->get('rowOrder')->getData());
+            $isActive = $form->get('isActive')->getData();
+            $rowOrder = $form->get('rowOrder')->getData();
+
+            if ($active) {
+                if ($isActive) {
+                    $active->setRowOrder($rowOrder);
+                } else {
+                    $entityManager->remove($active);
+                }
+            } else if ($isActive) {
+                $this->createActiveCategory($category, $rowOrder, $entityManager);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
@@ -71,7 +78,6 @@ class CategoryController extends AbstractController
         return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
-
         ]);
     }
 
@@ -104,8 +110,30 @@ class CategoryController extends AbstractController
             }
             $entityManager->flush();
         }
-          return $this->redirect($referer);
+        return $this->redirect($referer);
 //        return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
+    }
+
+
+
+    private function getActiveCategory(EntityManagerInterface $entityManager, Category $category): ?ActiveCategory
+    {
+        return $entityManager
+            ->getRepository(ActiveCategory::class)
+            ->findOneBy([
+                'store' => $this->getUser()->getStore(),
+                'category' => $category
+            ]);
+    }
+
+    private function createActiveCategory(Category $category, int $rowOrder, EntityManagerInterface $entityManager): void
+    {
+        $activeCategory = new ActiveCategory();
+        $activeCategory->setStore($this->getUser()->getStore());
+        $activeCategory->setCategory($category);
+        $activeCategory->setRowOrder($rowOrder);
+
+        $entityManager->persist($activeCategory);
     }
 
 }

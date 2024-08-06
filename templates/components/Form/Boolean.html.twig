@@ -1,9 +1,10 @@
+
 <label class="inline-flex flex-col-reverse items-center justify-between cursor-pointer font-semibold">
     <input type="checkbox"
            name="{{ field_name(row) }}"
-           value="{{ field_value(row) }}"
-           class="sr-only peer" />
-    <span class="relative w-12 h-6 bg-dark-neutral/10 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-dark-neutral dark:peer-focus:ring-light-neutral rounded-full peer dark:bg-light-neutral/10 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-dark-neutral/80  dark:after:bg-light-neutral/80 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-dark-neutral peer-checked:after:bg-light-neutral/80 dark:peer-checked:bg-light-neutral dark:peer-checked:after:bg-dark-neutral/80"></span>
+            {% if row.vars.data %} checked="checked" {% endif %}
+           class="sr-only peer"/>
+    <span class="relative w-12 h-6 bg-dark-neutral/10 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-dark-neutral dark:peer-focus:ring-light-neutral rounded-full peer dark:bg-light-neutral/10 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-dark-neutral/80  dark:after:bg-light-neutral/80 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-dark-neutral peer-checked:after:bg-light-neutral/80 dark:peer-checked:bg-light-neutral dark:peer-checked:after:bg-dark-neutral/80       checked:bg-dark-neutral checked:after:bg-light-neutral/80 dark:checked:bg-light-neutral dark:checked:after:bg-dark-neutral/80"></span>
     <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                    {{ form_label(row,null, {
                        'label': label,
