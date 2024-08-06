@@ -3,32 +3,32 @@
 
 
 {% block body %}
-    <div class="my-16 p-16 space-y-8 m-auto w-ful md:max-w-96 bg-gray-200 border border-blue-900">
-        <h1>{% trans %}title.login{% endtrans %}</h1>
+    <div class="my-16 p-8 space-y-16 m-auto w-ful md:max-w-96 bg-light-neutral-light  dark:bg-dark-neutral-light  border border-light-text-base dark:border-dark-text-base">
+        <twig:Title:H1>{% trans %}title.login{% endtrans %}</twig:Title:H1>
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
         <form action="{{ path('app_login') }}" method="post" class="flex flex-col  space-y-8">
 
-            {#            <div class="w-full flex justify-between"> #}
-            <label for="email">{% trans %}form.email{% endtrans %}:</label>
-            <input type="text" id="email" name="_username" value="{{ email }}" class="p-2 bg-clear text-primary-dark">
-            {#            </div> #}
+            <div class="w-full flex flex-col space-y-4">
+                <label for="email" class="text-light-text-base">{% trans %}form.email{% endtrans %}:</label>
+                <input type="text" id="email" name="_username" value="{{ email }}" class="p-2 text-light-text-base">
+            </div>
 
-            <label for="password">{% trans %}form.password{% endtrans %}:</label>
-            <input type="password" id="password" name="_password" class="p-2 bg-clear text-primary-dark">
-
+            <div class="w-full flex flex-col space-y-4">
+                <label for="password" class="text-light-text-base">{% trans %}form.password{% endtrans %}:</label>
+                <input type="password" id="password" name="_password" class="p-2 text-light-text-base">
+            </div>
             {# If you want to control the URL the user is redirected to on success
         <input type="hidden" name="_target_path" value="/account"> #}
 
-            <button type="submit" class="bg-primary text-light-text-base dark:bg-clear-dark dark:text-primary py-2 my-4 font-semibold rounded-md">
-                {% trans %}button.login{% endtrans %}
-            </button>
+            <div class="w-full flex space-x-4">
+                <twig:Button:Submit> {% trans %}button.login{% endtrans %} </twig:Button:Submit>
+                <twig:Button:Secondary
+                        href="{{ path('app_register') }}"> {% trans %}button.register{% endtrans %} </twig:Button:Secondary>
+            </div>
         </form>
 
-        <a href="{{ path('app_register') }}" class="text-blue-600 underline">
-            {% trans %}button.register{% endtrans %}
-        </a>
     </div>
 {% endblock %}
