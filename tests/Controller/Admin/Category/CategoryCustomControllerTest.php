@@ -1,12 +1,10 @@
 <?php
 
-namespace Admin\Category;
+namespace App\Tests\Controller\Admin\Category;
 
-use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Category;
 use App\Entity\User;
-use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker;

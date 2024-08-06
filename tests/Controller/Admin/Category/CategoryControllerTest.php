@@ -1,6 +1,6 @@
 <?php
 
-namespace Admin\Category;
+namespace App\Tests\Controller\Admin\Category;
 
 use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
@@ -13,7 +13,6 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
-use JetBrains\PhpStorm\NoReturn;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
