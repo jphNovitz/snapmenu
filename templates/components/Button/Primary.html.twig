@@ -1,9 +1,15 @@
+{% props dark = false, light = false %}
+
+{% if (dark) %}
+    {% set colors =  'bg-dark-neutral text-dark-text-base outline-dark-neutral' %}
+{% elseif light %}
+    {% set colors =  '!bg-light-primary text-light-text-base  outline-light-primary ' %}
+{% else %}
+    {% set colors =  'bg-light-primary dark:bg-dark-neutral text-light-text-base dark:text-dark-text-base outline-light-primary dark:outline-dark-neutral' %}
+{% endif %}
 <a {{ attributes.defaults({
     class: 'flex items-center justify-center gap-x-4
-            w-full md:w-fit px-4 py-2 font-semibold cursor-pointer
-            bg-light-primary dark:bg-dark-neutral text-light-text-base dark:text-dark-text-base rounded-md
-            outline outline-2 outline-light-primary dark:outline-dark-neutral'
-}) }}>
+            w-full md:w-fit px-4 py-2 font-semibold cursor-pointer rounded-md outline outline-2 '~colors}) }}>
     {% block content %} {% endblock %}
 </a>
 
