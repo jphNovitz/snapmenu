@@ -1,6 +1,6 @@
 <div {{ attributes.defaults({ class: 'flex flex-col space-y-4' }) }}>
     {{ form_label(row,null, {
-        'label': label,
+        'label': label ?? row,
         'label_attr': {
             'class': 'font-semibold'
         } }) }}
@@ -14,12 +14,3 @@
     {{ form_errors(row) }}
 
 </div>
-
-
-{#{{ form_errors(datas) }}#}
-{#        {{ form_label(datas, null , {#}
-{#            'label_attr': {'class': ''}}) }}#}
-{#{{ form_widget(datas, {'attr': {'class': 'px-2 py-1'}}) }}#}
-
-{# <input type="text"  {{ attributes.defaults({ class: '' }) }} /> #}
-
