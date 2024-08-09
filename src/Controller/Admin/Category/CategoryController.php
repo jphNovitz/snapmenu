@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Category;
 use App\Entity\ActiveCategory;
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Service\ManageActiveCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/category')]
 class CategoryController extends AbstractController
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager, private ManageActiveCategory $manageActiveCategory)
     {
     }
 
@@ -67,7 +68,7 @@ class CategoryController extends AbstractController
                     $entityManager->remove($active);
                 }
             } else if ($isActive) {
-                $this->createActiveCategory($category, $rowOrder, $entityManager);
+                $this->manageActiveCategory->createActiveCategory($category, $rowOrder);
             }
 
             $entityManager->flush();
@@ -113,9 +114,6 @@ class CategoryController extends AbstractController
         return $this->redirect($referer);
 //        return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
     }
-
-
-
     private function getActiveCategory(EntityManagerInterface $entityManager, Category $category): ?ActiveCategory
     {
         return $entityManager
@@ -124,16 +122,6 @@ class CategoryController extends AbstractController
                 'store' => $this->getUser()->getStore(),
                 'category' => $category
             ]);
-    }
-
-    private function createActiveCategory(Category $category, int $rowOrder, EntityManagerInterface $entityManager): void
-    {
-        $activeCategory = new ActiveCategory();
-        $activeCategory->setStore($this->getUser()->getStore());
-        $activeCategory->setCategory($category);
-        $activeCategory->setRowOrder($rowOrder);
-
-        $entityManager->persist($activeCategory);
     }
 
 }
