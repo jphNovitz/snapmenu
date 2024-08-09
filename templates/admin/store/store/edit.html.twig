@@ -1,17 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Edit Store{% endblock %}
 
 {% block body %}
-    <h1>Edit Store</h1>
+    <div class="px-4 py-8">
+    
+    <twig:Title:H1> {%trans%} title.store.edit {%endtrans%} </twig:Title:H1>
 
     {{ include('admin/store/store/_form.html.twig', {'button_label': 'button.update'}) }}
 
-    <div class="flex space-x-8 my-8">
-        <a href="{{ path('admin_default') }}"
-           class="border border-clear-dark rounded-md px-4 py-1">
-            {% trans %} button.back {% endtrans %}
-        </a>
+
+        <div class="flex space-x my-8">
+            <twig:Button:Secondary href="{{ path('admin_default') }}">
+                {% trans %} button.back {% endtrans %}
+            </twig:Button:Secondary>
+        </div>
     </div>
 
 

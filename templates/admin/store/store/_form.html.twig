@@ -1,69 +1,35 @@
 {{ form_start(form) }}
    {{ form_widget(form._token) }}
-<div class="flex flex-col space-y-8 my-4">
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.name) }}
-        {{ form_label(form.name, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.name, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
+<div class="w-full flex flex-col space-y-12 my-4">
+    <twig:Form:Text :row="form.name" class="w-full"/>
+    <twig:Form:Text :row="form.description" class="w-full"/>
+
+    <div class="w-full flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-4">
+        <div class="w-full lg:w-7/12 flex space-x-4">
+            <twig:Form:Text :row="form.streetName" class="w-10/12"/>
+            <twig:Form:Text :row="form.houseNumber" class="w-2/12"/>
+        </div>
+        <div class="w-full lg:w-7/12 flex space-x-4">
+            <twig:Form:Text :row="form.postCode" class="w-5/12"/>
+            <twig:Form:Text :row="form.city" class="w-7/12"/>
+        </div>
     </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.streetName) }}
-        {{ form_label(form.streetName, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.streetName, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
+    <div class="w-full flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-4">
+        <twig:Form:Text :row="form.email" class="w-full lg:w-6/12"/>
+        <twig:Form:Text :row="form.phoneNumber" class="w-full lg:w-3/12"/>
+        <twig:Form:Text :row="form.vatNumber" class="w-full lg:w-3/12"/>
     </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.houseNumber) }}
-        {{ form_label(form.houseNumber, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.houseNumber, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
-    </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.postCode) }}
-        {{ form_label(form.postCode, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.postCode, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
-    </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.city) }}
-        {{ form_label(form.city, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.city, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
-    </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.description) }}
-        {{ form_label(form.description, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.description, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
-    </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.email) }}
-        {{ form_label(form.email, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.email, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
-    </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.phoneNumber) }}
-        {{ form_label(form.phoneNumber, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.phoneNumber, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
-    </div>
-    <div class="flex flex-col w-1/2 space-y-4">
-        {{ form_errors(form.vatNumber) }}
-        {{ form_label(form.vatNumber, null , {
-            'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.vatNumber, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
-    </div>
-    <div class="flex flex-col w-1/2 space-y-4">
+    <div class="w-full">
         {{ form_errors(form.logoFile) }}
         {{ form_label(form.logoFile, null , {
             'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.logoFile, {'attr': {'class': 'text-primary-dark px-2 py-1'}}) }}
+        {{ form_widget(form.logoFile, {'attr': {'class': ''}}) }}
     </div>
 
     <div class="my-8">
-        <button class="border bg-primary-light border-primary text-light-text-base dark:bg-clear-dark dark:text-primary-dark  rounded-md px-4 py-1">{{ button_label|default('Save')|trans }}</button>
+        <twig:Button:Submit>
+            {{ button_label|default('Save')|trans }}
+        </twig:Button:Submit>
     </div>
 </div>
 {{ form_end(form) }}
