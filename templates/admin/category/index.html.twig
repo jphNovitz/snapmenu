@@ -34,9 +34,10 @@
                         </td>
 
                         <td class="text-left lg:text-center">
-                            <twig:Button:Primary href="{{ path('admin_category_edit', {'id': category.id}) }}" class="mx-auto">
+                            <twig:Button:Secondary href="{{ path('admin_category_edit', {'id': category.id}) }}"
+                                                 class="mx-auto">
                                 {% trans %}button.edit {% endtrans %}
-                            </twig:Button:Primary>
+                            </twig:Button:Secondary>
                         </td>
                     </tr>
                 {% else %}
@@ -46,8 +47,9 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('admin_category_custom_new') }}"
-               class="border border-light-text-base dark:border-dark-text-base rounded-md px-4 py-2">{% trans %}button.new {% endtrans %}</a>
+            <twig:Button:Primary href="{{ path('admin_category_custom_new') }}" light="true">
+                {% trans %}button.new {% endtrans %}
+            </twig:Button:Primary>
         </div>
         <div>
             <p class="pt-8 pb-4">
@@ -65,7 +67,7 @@
                 <tbody>
                 {% for category in category_defaults %}
                     <tr class="flex flex-col lg:table-row even:bg-dark-neutral/10 dark:even:bg-light-neutral/10 py-4">
-                        <td class="px-2 py-5 lg:p-0 before:content-['Nom:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
+                        <td class="px-2 py-5 before:content-['Nom:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
                             {#                       <span class="absolute top-1/2 -translate-y-1/2 left-36 lg:static"> #}
                             {{ category.name }}
                             {#                        </span> #}
@@ -82,10 +84,12 @@
                         </td>
 
                         <td class="text-left lg:text-center">
-                            <twig:Button:Primary
+                            {#                            {% if "ROLE_ADMIN" in app.user.roles %} #}
+                            <twig:Button:Secondary
                                     href="{{ path('admin_category_edit', {'id': category.id}) }}" class="mx-auto">
                                 {% trans %}button.edit {% endtrans %}
-                            </twig:Button:Primary>
+                            </twig:Button:Secondary>
+                            {#                            {% endif %} #}
                         </td>
                     </tr>
                 {% else %}

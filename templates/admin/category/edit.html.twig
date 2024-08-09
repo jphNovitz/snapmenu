@@ -3,7 +3,7 @@
 {% block title %}{% trans %}title.category.edit {% endtrans %}{% endblock %}
 
 {% block body %}
-    <div class="pt-8">
+    <div class="bg-light-neutral-light dark:bg-dark-neutral-light  px-4 py-8">
         <twig:Title:H1>{% trans %}title.category.edit {% endtrans %}</twig:Title:H1>
 
         {{ include('admin/category/_form.html.twig', {'button_label': 'button.update'}) }}
