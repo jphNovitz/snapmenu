@@ -1,6 +1,6 @@
 <div {{ attributes.defaults({ class: 'flex flex-col space-y-4' }) }}>
     {{ form_label(row,null, {
-        'label': label,
+        'label': label ?? row.vars.label,
         'label_attr': {
             'class': 'font-semibold'
         } }) }}

@@ -9,6 +9,6 @@ final class Text
 {
 
     public mixed $row;
-    public string $label = "";
+    public string $label ;
     public string $placeholder = "";
 }

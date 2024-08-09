@@ -7,7 +7,7 @@
     <span class="relative w-12 md:w-16 h-6 md:h-5 bg-dark-neutral/10 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-dark-neutral dark:peer-focus:ring-light-neutral rounded-full peer dark:bg-light-neutral/10 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-dark-neutral/80  dark:after:bg-light-neutral/80 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 md:after:h-4 md:after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-dark-neutral peer-checked:after:bg-light-neutral/80 dark:peer-checked:bg-light-neutral dark:peer-checked:after:bg-dark-neutral/80       checked:bg-dark-neutral checked:after:bg-light-neutral/80 dark:checked:bg-light-neutral dark:checked:after:bg-dark-neutral/80"></span>
     <span class="w-full text-center text-sm font-medium text-gray-900 dark:text-gray-300">
                    {{ form_label(row,null, {
-                       'label': label,
+                       'label': label ?? row.vars.label,
                        'label_attr': {
                            'class': 'font-semibold'
                        } }) }}
