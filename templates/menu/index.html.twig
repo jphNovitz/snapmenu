@@ -5,69 +5,9 @@
 {% block body %}
     <div class="p-2 lg:p-4">
         {% block menu %}
-
-            {#        <div id="top" #}
-            {#             class="flex justify-between items-center"> #}
-            {#            <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1> #}
-            {#            <a href="#contact" #}
-            {#                    #}{#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-            {#               class="px-4 py-2 bg-secondary text-light-text-base-light rounded-md"> #}
-            {#                Code QR #}
-            {#            </a> #}
-            {#        </div> #}
             <span id="menu">&nbsp;</span>
             <div class="">
-                {% for activeCategory in menu %}
-                    {% if activeCategory.category.products is not empty %}
-                        <twig:Title:H2 class="mt-12">
-                            {{ activeCategory.category.name }}
-                        </twig:Title:H2>
-                        {% for product in activeCategory.category.products %}
-                            <div class="my-4 px-1 py-2 first:mt-0 last:mb-8 bg-clear-light dark:bg-primary ">
-                                <div class="w-full flex flex-col ">
-                                    <div class="w-full flex flex-wrap justify-start items-center gap-5 py-1 ">
-                                        <h3 class="uppercase font-semibold py-1"> {{ product.name }}</h3>
-                                        <div class="flex gap-4 font-black text-light-text-highlight text-dark-text-highlight">
-                                            {% if  product.veggie %} {{ ux_icon('lucide:vegan', { class: 'w-5 h-5' }) }} {% endif %}
-                                            {% if  product.halal %} {{ ux_icon('mdi:food-halal', { class: 'w-5 h-5' }) }}{% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="w-full flex ">
-                                        <div class="grow py-1">
-                                            {#                                        <div class="mt-4 mb-2 mr-2"> {{ product.description ? product.description : '' }}</div> #}
-
-                                            {% if product.ingredients is not empty %}
-                                                <div class="text-sm italic mr-2">
-                                                    <span class="font-bold">Ingredients: </span>{{ product.ingredients }}
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                        <div class="w-28 grid grid-rows-2">
-                                            <div class="flex justify-between items-center">
-                                                {#                                            <span class="text-basis text-center">{% trans %} menu.price.home{% endtrans %} </span> #}
-                                                {{ ux_icon('fluent-emoji-high-contrast:fork-and-knife-with-plate', {class: 'w-5 h-5'}) }}
-                                                <div class="text-xl text-blue-600 font-black  after:content-['€'] after:text-sm text-right relative">
-                                                    {#                                                {{ ux_icon('fluent-emoji-high-contrast:fork-and-knife-with-plate') }} #}
-                                                    {{ product.priceHome }}
-                                                </div>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                {#                                            <div class="text-basis text-center">{% trans %} menu.price.away{% endtrans %}</div> #}
-                                                {{ ux_icon('solar:bag-4-linear', {class: 'w-5 h-5'}) }}
-                                                {#                                            {{ ux_icon('solar:bag-4-linear', {class: 'absolute top-1/2 -translate-y-1/2 left-0'}) }} #}
-                                                <div class="text-xl text-blue-600 font-black  after:content-['€'] after:text-sm text-right  relative">
-                                                    {{ product.priceAway }}
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
+                {% include 'menu/_menu.html.twig' with { 'menu': menu } only %}
             </div>
         {% endblock %}
 
@@ -140,9 +80,10 @@
                     </ul>
                 </div>
 
-                <h6 class="text-center text-small"> (2024) <a href="https://pixelservices.be">PixelServices.be, création
-                        de
-                        sites internet pour les petits entrepreneurs, Services web.</a></h6>
+                <h6 class="text-center text-small">
+                    (2024) <a href="https://pixelservices.be">PixelServices.be, création de sites internet pour les
+                        petits entrepreneurs, Services web.</a>
+                </h6>
             </div>
 
         {% endblock %}

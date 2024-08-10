@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+
+    <div class="px-4 py-8">
+        <twig:Title:H1>{% trans %} title.connected_as{% endtrans %} {{ app.user.store.name }}</twig:Title:H1>
+
+        {% include 'menu/_menu.html.twig' with { 'menu': menu } only %}
+    </div>
+
+{% endblock %}

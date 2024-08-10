@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\ActiveCategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     #[Route('/admin/', name: 'admin_default')]
-    public function index(): Response
+    public function index(ActiveCategoryRepository $activeCategoryRepository): Response
     {
-        return $this->render('admin/default/index.html.twig', [
-            'controller_name' => 'DefaultController',
+        $menu = $activeCategoryRepository->findMenu($this->getUser()->getStore());
+        return $this->render('admin/home/index.html.twig', [
+            'menu' => $menu,
         ]);
     }
 }

@@ -7,6 +7,7 @@ title:
   day_of_week: "Jour de la semaine"
   status: "Active ?"
   name: "Nom"
+  connected_as: "Connecté en tant que"
   product:
     index: "Les produits de mon menu"
 #    index: "Liste des produits"
@@ -27,6 +28,8 @@ title:
     create: "Ajouter une categorie"
     new: "Ajouter une categorie"
     edit: "Modifier une categorie"
+  store:
+    edit: "Modification infos boutique"
 nav:
   store: "Ma boutique"
   home: "Accueil"
@@ -72,15 +75,18 @@ form:
   isActive: "Active ?"
   rowOrder: "Priorité"
 store:
-  vatNumber: "numéro de T.V.A"
-  phoneNumber: "numéro de téléphone"
-  description: "description"
-  logo: 'logo'
+  name: "Nom"
+  vatNumber: "N° de T.V.A"
+  phoneNumber: "Téléphone"
+  description: "Description"
+  logo: 'Logo'
   streetName: "Rue"
   houseNumber: "N°"
-  postCode: "code postal"
-  city: "commune"
-  email: "email"
+  postCode: "Code Postal"
+  code:  "Code"
+  pc: "CP"
+  city: "Commune"
+  email: "Email"
 menu:
   price:
     home: "Sur place"
