@@ -20,13 +20,9 @@
                 {% endif %}
                 <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a> #}
     </div>
-    <nav class="col-span-7 text-base overflow-hidden h-full flex justify-start !items-baseline">
+    <nav class="col-span-9 text-base overflow-hidden h-full flex justify-start !items-baseline">
         <ul class="h-full flex  justify-start  items-center gap-x-4 m-auto">
             {% if app.user.store is defined %}
-                <li>
-                    <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a>
-                </li>
-
                 <li>
                     <a href="{{ path('admin_store_show') }}">{% trans %}nav.store {% endtrans %}</a>
                 </li>
@@ -39,12 +35,12 @@
 
             {% endif %}
 
-            <li class="ml-4">
-                    <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
-
-            </li>
+        </ul>
+        <ul class="h-full flex  justify-end  items-center gap-x-4 m-auto">
+            <li><a href="{{ path('app_menu', {'slug': app.user.store.slug}) }}">  {% trans %} nav.seeAs {% endtrans %}</a></li>
+            <li><a href="/logout">  {% trans %} nav.logout {% endtrans %}</a></li>
         </ul>
     </nav>
-    <div class="col-span-2 p-1 text-right"> </div>
+
 </div>
 {# end desktop -------------------------------------------------------------- -#}

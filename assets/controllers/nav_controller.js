@@ -21,6 +21,6 @@ export default class extends Controller {
         if (e.target.parentNode.id === 'trigger-on') {
             e.preventDefault()
         }
-        this.linksTarget.classList.toggle('-mt-[100vh]')
+        this.linksTarget.classList.toggle('-mt-[200vh]')
     }
 }

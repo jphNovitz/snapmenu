@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}{{ app.user.store.name }} &#128512; {% trans %} title.welcome_admin {% endtrans %}{% endblock %}
 
 {% block body %}
 

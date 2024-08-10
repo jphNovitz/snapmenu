@@ -14,7 +14,7 @@
         {% if store is defined %}
             {% if store.logoName is not null %}
                 <a href="{{ path('app_menu', {slug: store.slug}) }}"
-                   class="w-24 aspect-video">
+                   class="">
                     <img src="{{ asset('images/stores/' ~ store.logoName) }}"
                          class="w-full"
                          alt="{{ store.name }} |Snapmenu.be">

@@ -38,14 +38,16 @@
             {% else %}
                 <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
             {% endif %}
-
-            <li class="ml-4">
+        </ul>
+        <ul class="h-full flex  justify-end  items-center gap-x-4 m-auto">
                 {% if app.user is null %}
-                    <a href="#"> {% trans %} nav.login{% endtrans %}</a>
+                    <li class=""> <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a> </li>
                 {% else %}
-                    <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
+                    <li>  <a href="{{ path('admin_default') }}">  {% trans %} nav.admin {% endtrans %}</a></li>
+                    <li>  <a href="/logout">  {% trans %} nav.logout {% endtrans %}</a></li>
+
                 {% endif %}
-            </li>
+
         </ul>
     </nav>
     <div class="col-span-2 p-1 text-right">

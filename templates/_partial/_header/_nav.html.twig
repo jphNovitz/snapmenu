@@ -1,4 +1,4 @@
-<nav class=" lg:hidden fixed inset-0 z-40 top-0 bottom-0 left-0 right-0 w-full -mt-[100vh] h-fit  p-16 bg-dark-neutral dark:bg-light-neutral text-dark-text-base dark:text-light-text-base transition-[margin] duration-800 ease-in-out{#- ml-[100vw] #}" {{ stimulus_target('nav', 'links') }}>
+<nav class=" lg:hidden fixed inset-0 z-40 top-0 bottom-0 left-0 right-0 w-full -mt-[200vh] h-fit  p-16 bg-dark-neutral dark:bg-light-neutral text-dark-text-base dark:text-light-text-base transition-[margin] duration-800 ease-in-out{#- ml-[100vw] #}" {{ stimulus_target('nav', 'links') }}>
     <a href="#" {{ stimulus_action('nav', 'trigger') }} class="absolute top-8 right-8">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
              stroke="currentColor"
@@ -23,13 +23,13 @@
         {% else %}
             <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
         {% endif %}
-
-        <li class="text-sm underline absolute bottom-8 right-8">
+    </ul>
+    <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
             {% if app.user is null %}
-                <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a>
+                <li class="text-sm underline"> <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a> </li>
             {% else %}
-                <a href="#">  {% trans %} nav.logout {% endtrans %}</a>
+                <li><a href="{{ path('admin_default') }}">  {% trans %} nav.admin {% endtrans %}</a></li>
+                <li class="text-sm underline"><a href="/logout">  {% trans %} nav.logout {% endtrans %}</a> </li>
             {% endif %}
-        </li>
     </ul>
 </nav>

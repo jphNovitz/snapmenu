@@ -8,6 +8,7 @@ title:
   status: "Active ?"
   name: "Nom"
   connected_as: "Connecté en tant que"
+  welcome_admin: "Bienvenue dans votre admin"
   product:
     index: "Les produits de mon menu"
 #    index: "Liste des produits"
@@ -41,6 +42,8 @@ nav:
   opening: "Horaire"
   products: "Produits"
   categories: "Categories"
+  admin: "Admin"
+  seeAs: "Voir en tant que client"
 button:
   login: "Connexion"
   logout: "Déconnexion"
