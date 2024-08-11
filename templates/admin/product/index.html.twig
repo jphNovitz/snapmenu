@@ -1,12 +1,10 @@
 {% extends 'admin/layout/page.html.twig' %}
 
-{# {% block title %}{% trans %}title.product.index {% endtrans %}{% endblock %} #}
+{% block title %}{% trans %} title.product.index {% endtrans %}{% endblock %}
 
-{# {% block body %} #}
-    {#    <div class="w-full p-2"> #}
-{#    {% block h1 %} title.product.index{% endblock %} #}
 {% block page_header %}
-    <twig:Button:Primary href="{{ path('admin_product_new') }}" :light="true"> {% trans %}button.new {% endtrans %} </twig:Button:Primary>
+    <twig:Button:Primary href="{{ path('admin_product_new') }}"
+                         :light="true"> {% trans %}button.new {% endtrans %} </twig:Button:Primary>
 
 {% endblock %}
     {% block page_body %}
