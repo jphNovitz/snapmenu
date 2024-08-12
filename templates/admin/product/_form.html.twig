@@ -18,13 +18,23 @@
             <twig:Form:Select :row="form.category"/>
         </div>
         {% block choice_widget_expanded %}
-            <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 space-y-4">
-                {% for child in form.allergens %}
-                    <div class="inline-flex items-center space-x-4">
-                        {{- form_widget(child) -}}
-                        {{- form_label(child) -}}
-                    </div>
-                {% endfor %}
+            <div class="space-y-4" {{ stimulus_controller('list_toggle') }}>
+                    <a href="#" class="flex justify-between items-center decoration-none"
+                            {{ stimulus_action('list_toggle', 'click') }}>
+                        {{ form_label(form.allergens) }}
+                        <span {{ stimulus_target('list_toggle', 'chevron') }}>
+                            <twig:ux:icon name="mdi:chevron-right"  class="w-7 h-7" />
+                        </span>
+                    </a>
+                <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 space-y-4 h-0 overflow-hidden transition-height ease-in-out duration-800"
+                        {{ stimulus_target('list_toggle', 'container') }}>
+                    {% for child in form.allergens %}
+                        <div class="inline-flex items-center space-x-4">
+                            {{- form_widget(child) -}}
+                            {{- form_label(child) -}}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         {% endblock %}
     </div>

@@ -22,6 +22,7 @@ title:
     price_away: "Emporté"
     veggie: "Veggie"
     halal: "Halal"
+    allergens: "Ce plat peut-il provoquer des allergies ?"
   category:
     index: "Liste des categories"
     default_index: "Categories par defaut"

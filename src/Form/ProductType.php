@@ -55,6 +55,7 @@ class ProductType extends AbstractType
                 ])
             ->add('allergens', EntityType::class,
                 [
+                    'label'=>'title.product.allergens',
                     'class' => Allergen::class,
                     'multiple' => true,
                     'expanded' => true,
