@@ -2,6 +2,8 @@
 /.idea
 .idea
 .composer.lock
+.env
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -9,6 +11,7 @@
 /public/bundles/
 /var/
 /vendor/
+/migrations
 ###< symfony/framework-bundle ###
 symfony.lock
 ###> symfony/webpack-encore-bundle ###

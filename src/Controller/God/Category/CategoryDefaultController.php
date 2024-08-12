@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\Category;
+namespace App\Controller\God\Category;
 
 use App\Entity\Category;
 use App\Entity\CategoryInStore;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/category')]
+#[Route('/god/category')]
 class CategoryDefaultController extends AbstractController
 {
     #[Route('/default/new', name: 'admin_category_default_new', methods: ['GET', 'POST'])]
