@@ -1,7 +1,6 @@
 App\Entity\Product:
   product_{1..100}:
     name: <foodName()>
-#    name: <word(3, true)>
     description: <sentence()>
     ingredients: <ingredients(6)>
     price_home: <numberBetween(1, 6)>
@@ -10,3 +9,4 @@ App\Entity\Product:
     veggie: <boolean()>
     category: '@category_*'
     owner: '@store_*'
+    allergens: '[@allergen_*]'

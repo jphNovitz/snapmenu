@@ -1,0 +1,48 @@
+App\Entity\Allergen:
+  allergen_1:
+    name: 'peanuts'
+    description: 'peanuts'
+
+  allergen_2:
+    name: 'treenuts'
+    description: 'treenuts'
+
+  allergen_3:
+    name: 'milk'
+    description: 'milk'
+
+  allergen_4:
+    name: 'eggs'
+    description: 'eggs'
+
+  allergen_5:
+    name: 'fish'
+    description: 'fish'
+
+  allergen_6:
+    name: 'shellfish'
+    description: 'shellfish'
+
+  allergen_7:
+    name: 'wheat'
+    description: 'wheat'
+
+  allergen_8:
+    name: 'soy'
+    description: 'soy'
+
+  allergen_9:
+    name: 'sesame'
+    description: 'sesame'
+
+  allergen_10:
+    name: 'mustard'
+    description: 'mustard'
+
+  allergen_11:
+    name: 'lupin'
+    description: 'lupin'
+
+  allergen_12:
+    name: 'sulphites'
+    description: 'sulphites'

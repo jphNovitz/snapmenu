@@ -5,23 +5,33 @@
         <div class="w-full flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
             <twig:Form:Text :row="form.name" class="w-full lg:w-9/12"/>
             <div class="flex flex-row w-full lg:w-3/12 space-x-4">
-                <twig:Form:Text :row="form.priceHome" />
-                <twig:Form:Text :row="form.priceAway" />
+                <twig:Form:Text :row="form.priceHome"/>
+                <twig:Form:Text :row="form.priceAway"/>
             </div>
         </div>
         <twig:Form:Text :row="form.ingredients"/>
         <div class="w-full flex justify-around  my-4">
-            <twig:Form:Boolean :row="form.veggie" />
-            <twig:Form:Boolean :row="form.halal" />
+            <twig:Form:Boolean :row="form.veggie"/>
+            <twig:Form:Boolean :row="form.halal"/>
         </div>
         <div class="w-full">
-            <twig:Form:Select :row="form.category" />
+            <twig:Form:Select :row="form.category"/>
         </div>
+        {% block choice_widget_expanded %}
+            <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 space-y-4">
+                {% for child in form.allergens %}
+                    <div class="inline-flex items-center space-x-4">
+                        {{- form_widget(child) -}}
+                        {{- form_label(child) -}}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endblock %}
     </div>
 
     <div class="flex flex-col w-1/2 space-y-4">
     </div>
 
 </div>
-<twig:Button:Submit > {{ button_label|default('Save')|trans }} </twig:Button:Submit>
+<twig:Button:Submit> {{ button_label|default('Save')|trans }} </twig:Button:Submit>
 {{ form_end(form) }}
