@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Store;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -14,18 +15,19 @@ class StoreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('vatNumber')
-            ->add('phoneNumber')
-            ->add('description')
+            ->add('name', TextType::class, ['label' => 'store.name'])
+            ->add('vatNumber', TextType::class, ['label' => 'store.vatNumber'])
+            ->add('phoneNumber', TextType::class, ['label' => 'store.phoneNumber'])
+            ->add('description', TextType::class, ['label' => 'store.description'])
             ->add('logoFile', VichImageType::class, [
-                'required' => false
+                'required' => false,
+                'label' => 'store.logo'
             ])
-            ->add('streetName')
-            ->add('houseNumber')
-            ->add('postCode')
-            ->add('city')
-            ->add('email')
+            ->add('streetName', TextType::class, ['label' => 'store.streetName'])
+            ->add('houseNumber', TextType::class, ['label' => 'store.houseNumber'])
+            ->add('postCode', TextType::class, ['label' => 'store.pc'])
+            ->add('city', TextType::class, ['label' => 'store.city'])
+            ->add('email', TextType::class, ['label' => 'store.email'])
         ;
     }
 
