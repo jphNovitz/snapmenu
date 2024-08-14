@@ -8,7 +8,7 @@ security:
         in_memory:
             memory:
                 users:
-                    admin: { password: 'hashed_password_here', roles: [ 'ROLE_ADMIN' ] }
+                    '%app.admin_email%': { password: '%app.admin_password_hash%', roles: [ 'ROLE_ADMIN' ] }
         app_user_provider:
             entity:
                 class: App\Entity\User
@@ -37,12 +37,14 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+#            entry_point: App\Security\AuthenticationEntryPoint
+            access_denied_handler: App\Security\AccessDeniedHandler
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: [ROLE_MEMBER] }
-         - { path: ^/god, roles: ROLE_ADMIN }
+         - { path: ^/god, roles: [ROLE_ADMIN] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
