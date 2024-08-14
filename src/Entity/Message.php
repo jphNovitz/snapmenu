@@ -38,6 +38,9 @@ class Message
     #[ORM\Column(length: 100)]
     private ?string $subject = null;
 
+    #[ORM\Column]
+    private ?bool $status = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +126,18 @@ class Message
     public function setSubject(string $subject): static
     {
         $this->subject = $subject;
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
