@@ -65,12 +65,6 @@
                     <img src="{{ qr_code_url(uri) }}" alt="{{ store.name }} code QR"/>
                 </div>
 
-
-                <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
-                    Mon url: <br/> <a
-                            href="{{ path('app_menu', {slug: store.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: store.slug}) }} </a>
-                </div>
-
                 <div>
                     <ul class="text-center capitalize">
                         <li class="text-lg font-black">{{ store.name }}</li>
@@ -79,6 +73,21 @@
                         <li class="semibold">{{ store.phoneNumber }} </li>
                     </ul>
                 </div>
+                <div class="flex flex-col space-x-0 space-y-8 md:flex-row md:justify-center md:space-x-8 md:space-y-0 my-16">
+                    <twig:Button:Primary href="{{ path('app_message_send', {'slug': store.slug}) }}">
+                        {% trans %}button.message{% endtrans %}
+                    </twig:Button:Primary>
+                    {% if store.phoneNumber is defined %}
+                        <twig:Button:Secondary href="phone:{{ store.phoneNumber }}">
+                            {% trans %}button.phone{% endtrans %}
+                        </twig:Button:Secondary>
+                    {% endif %}
+                </div>
+                <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
+                    Mon url: <br/> <a
+                            href="{{ path('app_menu', {slug: store.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: store.slug}) }} </a>
+                </div>
+
 
                 <h6 class="text-center text-small">
                     (2024) <a href="https://pixelservices.be">PixelServices.be, création de sites internet pour les

@@ -9,9 +9,10 @@ title:
   name: "Nom"
   connected_as: "Connecté en tant que"
   welcome_admin: "Bienvenue dans votre admin"
+  send_message: Envoyer un message
   product:
     index: "Les produits de mon menu"
-#    index: "Liste des produits"
+    #    index: "Liste des produits"
     create: "Ajouter un produit"
     new: "Ajouter un produit"
     edit: "Modifier un produit"
@@ -38,7 +39,8 @@ nav:
   login: "Connexion"
   logout: "Déconnexion"
   contact: "Contact"
-  contact.snap: "Contacter"
+  contact.snap: "Nous contacter"
+  contact_infos: "Contact et Infos"
   menu: "Menu"
   opening: "Horaire"
   products: "Produits"
@@ -58,11 +60,15 @@ button:
   delete: "Supprimer"
   activate: "Activer"
   deactivate: "Desactiver"
+  message: "Envoyer un message"
+  phone: "Téléphoner"
 form:
   agree: "Un email indiquant le tarif proposé vous sera envoyé. En l'absence de réponse ou en cas de refus dans les 10 jours, votre compte sera supprimé."
-#  agree: "J'accepte les Conditions"
+  #  agree: "J'accepte les Conditions"
   password: "Mot de passe"
   email: "Email"
+  subject: "Objet"
+  message: "Votre message"
   delete.confirm: "Etes-vous certain de vouloir supprimer cet élément ?"
   opening_hours:
     open_time: "Ouvre"
@@ -87,7 +93,7 @@ store:
   streetName: "Rue"
   houseNumber: "N°"
   postCode: "Code Postal"
-  code:  "Code"
+  code: "Code"
   pc: "CP"
   city: "Commune"
   email: "Email"
@@ -126,3 +132,14 @@ allergen:
     mustard: "Allergie aux graines de moutarde, pouvant causer des réactions respiratoires et cutanées."
     lupin: "Allergie aux graines de lupin, parfois utilisées dans la farine et d'autres produits."
     sulphites: "Sensibilité aux sulfites, pouvant causer des symptômes respiratoires, en particulier chez les asthmatiques."
+message:
+  list: "Liste des Messages"
+  name: "Nom"
+  email: "Email"
+  subject: "Objet"
+  read: "Lu"
+  date: "Date"
+  empty: "Aucun message"
+
+
+
