@@ -7,7 +7,6 @@
         </svg>
     </a>
     <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
-        {#        {% if store is defined %} #}
         <li>
             <a href="{{ path('app_default') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.home {% endtrans %}</a>
         </li>
@@ -20,9 +19,11 @@
         <li>
             <a href="{{ path('admin_category_index') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.categories {% endtrans %}</a>
         </li>
-        {#        {% else %} #}
-        <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
-        {#        {% endif %} #}
+        <li>
+            <a href="{{ path('app_message_index') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.messages {% endtrans %}</a>
+        </li>
+
+        <li><a href="#">{% trans %}nav.contact_webmaster {% endtrans %}</a></li>
     </ul>
     <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
         <li><a href="{{ path('app_menu', {'slug': app.user.store.slug}) }}">  {% trans %} nav.seeAs {% endtrans %}</a></li>

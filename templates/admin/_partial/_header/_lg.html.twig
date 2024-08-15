@@ -22,7 +22,6 @@
     </div>
     <nav class="col-span-9 text-base overflow-hidden h-full flex justify-start !items-baseline">
         <ul class="h-full flex  justify-start  items-center gap-x-4 m-auto">
-            {% if app.user.store is defined %}
                 <li>
                     <a href="{{ path('admin_store_show') }}">{% trans %}nav.store {% endtrans %}</a>
                 </li>
@@ -32,9 +31,9 @@
                 <li>
                     <a href="{{ path('admin_category_index') }}">{% trans %}nav.categories {% endtrans %}</a>
                 </li>
-
-            {% endif %}
-
+                <li>
+                    <a href="{{ path('app_message_index') }}">{% trans %}nav.messages {% endtrans %}</a>
+                </li>
         </ul>
         <ul class="h-full flex  justify-end  items-center gap-x-4 m-auto">
             <li><a href="{{ path('app_menu', {'slug': app.user.store.slug}) }}">  {% trans %} nav.seeAs {% endtrans %}</a></li>
