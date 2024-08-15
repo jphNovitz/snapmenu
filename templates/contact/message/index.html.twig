@@ -1,0 +1,49 @@
+{% extends template_to_extends %}
+
+{% block title %}Message index{% endblock %}
+
+{% block body %}
+    <div class="px-4 py-8 space-y-16">
+        <twig:Title:H1>{% trans %}message.list {% endtrans %}</twig:Title:H1>
+
+        <table class="w-full table-fixed text-left border-separate border-spacing-y-8">
+            <thead>
+            <tr>
+                <th class="hidden lg:table-cell w-2/12">{% trans %}message.name {% endtrans %}</th>
+                <th class="hidden lg:table-cell w-2/12">{% trans %}message.email {% endtrans %}</th>
+                <th class="hidden lg:table-cell w-3/12">{% trans %}message.subject {% endtrans %}</th>
+                <th class="hidden lg:table-cell w-2/12">{% trans %}message.date {% endtrans %}</th>
+                <th class="hidden lg:table-cell w-2/12">{% trans %}message.read {% endtrans %}</th>
+                <th class="hidden lg:table-cell w-1/12">{% trans %} {% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for message in messages %}
+                <tr class="flex flex-col lg:table-row even:bg-dark-neutral/10 dark:even:bg-light-neutral/10 py-4">
+                    <td class="px-2 py-5 lg:p-0 before:content-['Nom:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
+                        {{ message.name }}
+                    </td>
+                    <td class="px-2 py-5 lg:p-0 before:content-['Email:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
+                        {{ message.email }}
+                    </td>
+                    <td class="px-2 py-5 lg:p-0 before:content-['Objet:'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
+                        <a href="{{ path('app_message_show', {'id': message.id}) }}" class="hover:underline">
+                            {{ message.subject }}
+                        </a>
+                    </td>
+                    <td class="px-2 py-5 lg:p-0 before:content-['Date :'] before:absolute before:top-0 before:left-2 lg:before:content-[''] before:font-normal before:text-base font-semibold text-lg relative">
+                        {{ message.created ? message.created|date('Y-m-d H:i:s') : '' }}
+                    </td>
+                    <td>
+                        {{ include('contact/message/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">{% trans %} message.empty {% endtrans %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
