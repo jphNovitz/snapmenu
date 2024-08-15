@@ -1,0 +1,15 @@
+{% extends template_to_extends %}
+
+{% block title %}New Message{% endblock %}
+
+{% block body %}
+    <div class="px-4 py-8">
+        <twig:Title:H1> {% trans %} title.send_message {% endtrans %}</twig:Title:H1>
+
+        <div class="w-full my-8 md:w-1/2 m-auto">
+            {{ include('contact/message/_form.html.twig') }}
+            <twig:Button:Secondary> {% trans%} button.back {% endtrans %}</twig:Button:Secondary>
+        </div>
+
+    </div>
+{% endblock %}

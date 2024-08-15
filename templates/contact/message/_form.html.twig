@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+{#    {{ form_widget(form) }} #}
+<div class="flex flex-col space-y-8 my-8">
+    <twig:Form:Text :row="form.name"/>
+    <twig:Form:Text :row="form.email"/>
+    <twig:Form:Text :row="form.subject"/>
+    <div class="flex flex-col space-y-4">
+        {{ form_label(form.message) }}
+        {{ form_widget(form.message, { 'attr':
+            {
+                'rows': 12,
+                'class': 'w-full bg-light-neutral-light dark:bg-light-neutral/80 text-light-text-base dark:text-light-text-base  rounded-md px-1 py-2 outline-none focus:outline-none border-stone-300 focus:ring focus:border-stone-950',
+                'placeholder': 'Ecrivez votre message ou posez une question'
+            }
+        }) }}
+    </div>
+    <twig:Button:Submit>{{ button_label|default('Save') }}</twig:Button:Submit>
+</div>
+
+{{ form_end(form) }}

@@ -1,0 +1,27 @@
+{% extends template_to_extends %}
+
+{% block title %}Message{% endblock %}
+
+{% block body %}
+    <div class="px-4 py-8 my-16">
+        <twig:Title:H1>Message</twig:Title:H1>
+
+        <div class="min-h-[80dvh] flex flex-col space-y-8 my-8">
+            <twig:Title:H2> {{ message.subject }} </twig:Title:H2>
+            <div class="flex flex-col space-y-1">
+                <i class="font-bold oblique">{{ message.name }} < {{ message.email }} ></i>
+                <span class="text-sm ">{{ message.created ? message.created|date('Y-m-d H:i:s') : '' }}</span>
+            </div>
+            <p class="leading-relaxed">
+                {{ message.message }}
+            </p>
+        </div>
+        <div class="flex space-x-8">
+            <twig:Button:Primary
+                    href="{{ path('app_message_index') }}">
+                {% trans %} button.back {% endtrans %}
+            </twig:Button:Primary>
+                {{ include('contact/message/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
