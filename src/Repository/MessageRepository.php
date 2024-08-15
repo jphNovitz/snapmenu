@@ -16,6 +16,20 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
+    /**
+     * @return Message[] Returns an array of Message objects
+     */
+    public function findOrderedMessages($store = null): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.owner = :val')
+            ->setParameter('val', $store)
+            ->orderBy('m.created', 'DESC')
+//                ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Message[] Returns an array of Message objects
     //     */
