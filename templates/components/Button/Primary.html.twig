@@ -5,7 +5,7 @@
 {% elseif light %}
     {% set colors =  '!bg-light-primary text-light-text-base  outline-light-primary ' %}
 {% else %}
-    {% set colors =  'bg-light-primary dark:bg-dark-neutral text-light-text-base dark:text-dark-text-base outline-light-primary dark:outline-dark-neutral' %}
+    {% set colors =  'bg-light-primary dark:bg-dark-primary text-light-text-base dark:text-light-text-base outline-light-primary dark:outline-dark-neutral' %}
 {% endif %}
 <a {{ attributes.defaults({
     class: 'flex items-center justify-center gap-x-4
