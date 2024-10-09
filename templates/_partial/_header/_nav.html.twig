@@ -1,4 +1,4 @@
-<nav class=" lg:hidden fixed inset-0 z-40 top-0 bottom-0 left-0 right-0 w-full -mt-[200vh] h-fit  p-16 bg-dark-neutral dark:bg-light-neutral text-dark-text-base dark:text-light-text-base transition-[margin] duration-800 ease-in-out{#- ml-[100vw] #}" {{ stimulus_target('nav', 'links') }}>
+<nav class=" lg:hidden fixed inset-0 z-40 top-0 bottom-0 left-0 right-0 w-full -mt-[200vh] h-fit  p-16 bg-surface-light dark:bg-surface-dark text-content-primary-light dark:text-content-primary-dark/80 transition-[margin] duration-800 ease-in-out{#- ml-[100vw] #}" {{ stimulus_target('nav', 'links') }}>
     <a href="#" {{ stimulus_action('nav', 'trigger') }} class="absolute top-8 right-8">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
              stroke="currentColor"
@@ -6,7 +6,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
         </svg>
     </a>
-    <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
+    <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-content-primary-light dark:text-content-primary-dark/80 text-lg font-semibold ">
         {% if store is defined %}
             <li>
                 <a href="{{ path('app_default') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.home {% endtrans %}</a>
@@ -27,7 +27,7 @@
             <li><a href="{{ path('app_message_send') }}">{% trans %}nav.contact {% endtrans %}</a></li>
         {% endif %}
     </ul>
-    <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
+    <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-content-primary-light dark:text-content-primary-dark/80 text-lg font-semibold ">
             {% if app.user is null %}
                 <li class="text-sm underline"> <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a> </li>
             {% else %}
