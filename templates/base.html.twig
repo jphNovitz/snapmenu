@@ -17,11 +17,12 @@
         {% endblock %}
     {% endblock %}
 </head>
-<body class="w-screen overflow-x-hidden min-h-screen lg:px-16 bg-light-neutral dark:bg-dark-neutral text-light-text-base dark:text-dark-text-base flex flex-col justify-start items-center relative">
+<body class="w-screen overflow-x-hidden min-h-screen bg-base-light dark:bg-base-dark text-content-primary-light dark:text-content-primary-dark flex flex-col justify-start items-center relative">
+{% include '_partial/_header/_header.html.twig' %}
 <div class="h-auto w-full lg:max-w-7xl scroll-smooth relative" {{ stimulus_controller('nav') }}>
-        {% include '_partial/_header/_header.html.twig' %}
 
-    <div class="w-full">
+
+    <div class="w-full p-2">
         {% block body %}{% endblock %}
     </div>
 </div>
