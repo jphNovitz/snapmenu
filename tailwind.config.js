@@ -16,7 +16,7 @@ module.exports = {
             "light-text-highlight": "#5B9279",
             "dark-text-base": "#DAF0EE",
             "dark-text-secondary": "#94D1BE",
-            // "dark-text-highlight": "#94D1BE",
+            "dark-text-highlight": "#94D1BE",
             // "dark-text-highlight": "#F4D35E",
             "dark-text-highlight": "#95D7AE",
             "light-primary": "#94D1BE",
@@ -25,6 +25,26 @@ module.exports = {
             "light-neutral-light": "#efefef",
             "dark-neutral": "#3B413C",
             "dark-neutral-light":  "#9DB5B2",
+            "base": {
+                "light": "#94D1BE",
+                "dark": "#0b0d0c",
+            },
+            "surface": {
+                "light": "#e1f7e4",
+                "dark": "#2b322f",
+                "secondary": "#d54122"
+            },
+            "content": {
+                "primary": {
+                    "light": "#0b0d0c",
+                    "dark": "#e1f7e4",
+                },
+                "secondary": "#d54122",
+            },
+            // "accent": {
+            //     "light": "#d54122",
+            //     "dark": "#d54122",
+            // },
         },
             // colors: {
             //     'clear': {
