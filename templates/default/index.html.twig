@@ -18,9 +18,9 @@
         {#        Scannez et régalez-vous #}
         {#        Un QR code, tout le menu #}
 
-        <div class="p-6 md:p-12 bg-light-neutral dark:bg-dark-neutral relative after:absolute after:content-[' '] after:-z-10 {# after:w-11/12 #} after:inset-x-[1rem] {# after:h-11/12 #} after:inset-y-[1rem]  after:shadow-dark-neutral dark:after:shadow-light-neutral after:shadow-xl after:rounded-xl">
+        <div class="p-6 md:p-12 bg-surface-light dark:bg-surface-dark relative after:absolute after:content-[' '] after:-z-10 {# after:w-11/12 #} after:inset-x-[1rem] {# after:h-11/12 #} after:inset-y-[1rem]  after:shadow-surface-dark dark:after:shadow-surface-light after:shadow-xl after:rounded-xl">
             <h1 class="text-3xl lg:text-5xl  font-black leading-relaxed capitalize"><i
-                        class="text-light-text-highlight dark:text-dark-text-highlight">
+                        class="text-surface-secondary dark:text-surface-secondary/70">
                     Snapmenu:</i><br/> Un QR code, tout le menu
             </h1>
             <h2 class="my-12 text-xl lg:text-2xl font-bold leading-relaxed">
@@ -29,13 +29,15 @@
             </h2>
 
             <div class="flex flex-col md:flex-row space-y-8 md:space-x-8 md:space-y-0 md:justify-center">
-                <a href="{{ path('app_login') }}"
-                   class="w-full md:w-auto px-4 py-2 text-xl font-semibold text-light-text-base dark:text-dark-text-base bg-light-text-highlight/60 border border-secondary-dark rounded-lg text-center z-100">
-                    Je rejoins Snapmenu
+                <a href="{{ path('app_register') }}"
+                   id="cta-primary"
+                   class="w-full md:w-auto px-4 py-2 text-xl font-semibold text-surface-light dark:text-surface-light/80 bg-surface-secondary dark:bg-surface-secondary/60 border border-surface-secondary/70 dark:border-surface-secondary/80 rounded-lg text-center z-100">
+                    {% trans %} cta.primary{% endtrans %}
                 </a>
                 <a href="{{ path('app_default', {'_fragment': 'list'}) }}"
-                   class="w-full md:w-auto px-4 py-2  text-xl font-semibold border text-secondary-dark dark:text-dark-text-base border-text-dark-text-base  dark:border-clear  rounded-lg text-center">
-                    Voir les Restaurants
+                   id="cta-secondary"
+                   class="w-full md:w-auto px-4 py-2  text-xl font-semibold border text-content-secondary dark:text-secondary/80 border-surface-secondary dark:border-surface-secondary/80 dark:border-clear  rounded-lg text-center">
+                    {% trans %} cta.secondary{% endtrans %}
                 </a>
             </div>
         </div>
@@ -62,12 +64,14 @@
                     <div class="w-2/3 md:w-full m-auto flex flex-col justify-center items-center aspect-square dark:bg-clear-light">
                         <a href="{{ path('app_menu', {slug: store.slug}) }}"
                            class="w-2/3">
+                            {% if attribute(store, 'logoName') is defined and store.logoName %}
                             <img src="{{ asset('images/stores/' ~ store.logoName) }}"
                                  class="w-full dark:bg-light-neutral/20"
                                  alt="{{ store.name }} | Snapmenu.be">
+                            {% endif %}
                         </a>
                         <a href="{{ path('app_menu', {slug: store.slug}) }}"
-                           class="text-xl p-2 text-light-text-base dark:text-dark-text-base relative overflow-hidden after:w-full after:absolute after:bottom-0 after:-left-96 delay-150 hover:after:left-0 after:content-[' '] after:border after:border-light-text-base after:dark:border-dark-text-base transition-positions ease-in-out delay-200 duration-1000">
+                           class="text-xl p-2 text-content-primary-light dark:text-content-dark/80 relative overflow-hidden after:w-full after:absolute after:bottom-0 after:-left-96 delay-150 hover:after:left-0 after:content-[' '] after:border after:border-light-text-base after:dark:border-content-dark transition-positions ease-in-out delay-200 duration-1000">
                             {{ store.name }}
                         </a>
                     </div>
@@ -94,7 +98,7 @@
         </article>
 
         <article class="w-full h-16 block">
-            <h2 class="text-xl lg:text-3xl text-light-text-highlight dark:text-dark-text-highlight font-bold leading-loose">
+            <h2 class="text-xl lg:text-3xl text-content-primary-light dark:text-content-primary-dark/80 font-bold leading-loose">
                 Vous êtes prêts à être scannés
             </h2>
         </article>
@@ -114,7 +118,7 @@
 
             </div>
             <div class="w-full lg:w-2/5 h-full flex flex-col justify-center">
-                <h2 class="text-xl lg:text-3xl text-light-text-highlight dark:text-dark-text-highlight font-bold leading-loose">Affichez le code QR dans votre
+                <h2 class="text-xl lg:text-3xl text-content-primary-light dark:text-content-primary-dark/80 font-bold leading-loose">Affichez le code QR dans votre
                     établissement</h2>
                 <h3 class="my-4 text-lg">Les clients n'ont qu'à scanner ce code avec leur téléphone pour afficher :</h3>
 
