@@ -3,34 +3,34 @@
 {% block title %}{% trans %}title.register{% endtrans %}{% endblock %}
 
 {% block body %}
-    <div class="my-16 p-16 m-auto w-ful md:max-w-96 bg-gray-200 border border-blue-900">
+    <div class="my-2 md:my-4 p-2 md:p-4 m-auto w-full md:max-w-96">
         {% for flash_error in app.flashes('verify_email_error') %}
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
         {% endfor %}
 
-        <h1>{% trans %}title.register{% endtrans %}</h1>
+        <twig:Title:H1>{% trans %}title.register{% endtrans %}</twig:Title:H1>
+        <section class="my-8">
+            {{ form_errors(registrationForm) }}
 
-        {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm, { 'attr': {'class': 'flex flex-col space-y-8'} }) }}
+            <div class="w-full flex flex-col space-y-2">
+                <twig:Form:Text :row="registrationForm.email" label="form.email"
+                                placeholder="Indiquez votre adresse email"/>
+            </div>
+            <div class="w-full flex flex-col space-y-2">
+                <twig:Form:Text :row="registrationForm.plainPassword" label="form.password"
+                                placeholder="Choisissez un mot de passe"/>
+            </div>
+            <div class="w-full flex items-center justify-start space-x-4">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms) }}
+            </div>
+                <twig:Button:Submit class="!mb-8">{% trans %}button.register{% endtrans %}</twig:Button:Submit>
+                {{ form_end(registrationForm) }}
 
-        {{ form_start(registrationForm, { 'attr': {'class': 'flex flex-col space-y-8'} }) }}
-        <div class="w-full flex flex-col space-y-2">
-            {{ form_label(registrationForm.email) }}
-            {{ form_widget(registrationForm.email) }}
-        </div>
-        <div class="w-full flex flex-col space-y-2">
-            {{ form_label(registrationForm.plainPassword) }}{{ form_widget(registrationForm.plainPassword) }}
-        </div>
-        <div class="w-full flex items-end justify-start space-x-4">
-            {{ form_label(registrationForm.agreeTerms) }}
-            {{ form_widget(registrationForm.agreeTerms) }}
-        </div>
-        <button type="submit" class="bg-blue-600 text-blue-50 py-2 my-4">{% trans %}button.register{% endtrans %}</button>
-        {{ form_end(registrationForm) }}
-
-
-        <a href="{{ path('app_login') }}" class="text-blue-600 underline">
-            {% trans %}button.login{% endtrans %}
-        </a>
-
+            <a href="{{ path('app_login') }}" class="text-blue-600 underline">
+                {% trans %}button.login{% endtrans %}
+            </a>
+        </section>
     </div>
 {% endblock %}
