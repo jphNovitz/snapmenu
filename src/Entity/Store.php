@@ -42,6 +42,9 @@ class Store implements \Serializable
     private ?int $logoSize = null;
 
     #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
 
@@ -418,6 +421,17 @@ class Store implements \Serializable
     {
         // TODO: Implement __unserialize() method.
     }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
