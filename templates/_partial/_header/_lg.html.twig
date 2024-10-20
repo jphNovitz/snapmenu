@@ -1,5 +1,5 @@
 {#    desktop hidden on mobile=============================================== #}
-<div class="hidden lg:grid grid-cols-12 ">
+<div class="hidden max-w-7xl m-auto lg:grid grid-cols-12 ">
     <div id="brand" class="col-span-3  text-left flex !items-baseline space-x-4 text-content-secondary/70">
         {% if store is defined %}
             {% if store.logoName is not null %}
@@ -22,20 +22,27 @@
     </div>
     <nav class="col-span-7 text-base overflow-hidden h-full flex justify-start !items-baseline">
         <ul class="h-full flex  justify-start  items-center gap-x-4 m-auto">
-            {% if store is defined %}
-                <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}">{% trans %}nav.opening {% endtrans %}</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}">{% trans %}nav.contact_infos {% endtrans %}</a>
-                </li>
-            {% else %}
-                <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a>
-                <li><a href="#">{% trans %}nav.contact {% endtrans %}</a></li>
-            {% endif %}
+            <li>
+                <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a></li>
+            <li>
+                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
+            </li>
+            <li>
+                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}">{% trans %}nav.opening {% endtrans %}</a>
+            </li>
+            <li>
+                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}">{% trans %}nav.contact_infos {% endtrans %}</a>
+            </li>
+
+            <li class="ml-4 opacity-80">
+                {% if app.user is null %}
+                    <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a>
+                {% else %}
+                    <a href="{{ path('admin_default') }}">  {% trans %} nav.admin {% endtrans %}</a>
+                    <a href="/logout">  {% trans %} nav.logout {% endtrans %}</a>µ
+                {% endif %}
+            </li>
+
         </ul>
 
     </nav>
@@ -53,16 +60,6 @@
                 </svg>
             </a>
         {% endif %}
-        <ul class="h-full flex justify-end items-center gap-x-4 m-auto">
-            {% if app.user is null %}
-                <li class=""> <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a> </li>
-            {% else %}
-                <li>  <a href="{{ path('admin_default') }}">  {% trans %} nav.admin {% endtrans %}</a></li>
-                <li>  <a href="/logout">  {% trans %} nav.logout {% endtrans %}</a></li>
-
-            {% endif %}
-
-        </ul>
     </div>
 </div>
 {# end desktop -------------------------------------------------------------- -#}
