@@ -1,12 +1,12 @@
 <div class="flex flex-col space-y-8"> {# categories #}
-    {% for activeCategory in menu %}
-        {% if activeCategory.category.products is not empty %}
+    {% for category in menu %}
+        {% if category.products is not empty %}
             <div class=""></div>
             <twig:Title:H2 class="mt-12">
-                {{ activeCategory.category.name }}
+                {{ category.name }}
             </twig:Title:H2>
             <div class="flex flex-col space-y-4">
-            {% for product in activeCategory.category.products %}
+            {% for product in category.products %}
                 <div class="w-full p-2 first:mt-0 last:mb-8 {# bg-light-neutral-light dark:bg-dark-neutral-light #} ">
                     <div class="w-full flex flex-col ">
                         <div class="w-full flex flex-wrap justify-start items-center gap-5 py-1 ">

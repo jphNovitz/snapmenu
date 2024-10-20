@@ -39,6 +39,18 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findMenu(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.products', 'products')
+            ->select('c, products')
+            ->andWhere('c.isActive = :isActive')
+            ->setParameter('isActive', true)
+            ->orderBy('c.rowOrder', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 //
 //    public function findAvailableCategories(User $user = null): array
 //    {

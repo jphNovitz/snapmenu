@@ -2,26 +2,24 @@
 
 namespace App\Controller\Menu;
 
-use App\Entity\Store;
-use App\Repository\ActiveCategoryRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\ProductRepository;
+use App\Repository\StoreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MenuController extends AbstractController
 {
-    public function __construct(private ActiveCategoryRepository $activeCategoryRepository)
+    public function __construct(private CategoryRepository $categoryRepository, private StoreRepository $storeRepository)
     {}
-    #[Route('/page/{slug}', name: 'app_menu')]
-    public function index(Store $store): Response
+    #[Route('/menu', name: 'app_menu')]
+    public function index(): Response
     {
-        $menu = $this->activeCategoryRepository->findMenu($store);
+        $menu = $this->categoryRepository->findMenu();
 
         return $this->render('menu/index.html.twig', [
-            'store' => $store,
             'menu' => $menu,
+            'store' => $this->storeRepository->findAll()[0]
         ]);
     }
 }
