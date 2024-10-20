@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Store;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -22,17 +23,16 @@ class StoreRepository extends ServiceEntityRepository
     }
 
 
-        /**
-         * @return Store[] Returns an array of Store objects
-         */
-        public function findList(): array
+    /**
+     * @return Store[] Returns an array of Store objects
+     *
+     */
+        public function myStore(): Store
         {
             return $this->createQueryBuilder('s')
-                ->select('s.name, s.slug, s.logoName')
-                ->orderBy('s.slug', 'ASC')
                 ->getQuery()
-                ->getResult()
-            ;
+                ->getOneOrNullResult();
+
         }
 
 

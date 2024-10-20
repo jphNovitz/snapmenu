@@ -32,9 +32,6 @@ class StoreMapper
         }
 
 
-        foreach ($store->getCategories() as $category) {
-            $storeDto->addCategory($category);
-        }
 
         foreach ($store->getProducts() as $product) {
             $storeDto->addProduct($product);
@@ -87,10 +84,6 @@ class StoreMapper
         $store->setPostCode($storeDto->getPostCode());
         $store->setCity($storeDto->getCity());
         $store->setSlug($storeDto->getSlug());
-
-        foreach ($storeDto->getCategories() as $category) {
-            $store->addCategory($category);
-        }
 
         foreach ($storeDto->getProducts() as $product) {
             $store->addProduct($product);

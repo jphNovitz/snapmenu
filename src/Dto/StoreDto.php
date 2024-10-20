@@ -2,7 +2,6 @@
 
 namespace App\Dto;
 
-use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\OpeningHours;
 use DateTimeImmutable;
@@ -16,10 +15,6 @@ class StoreDto
     #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'logoName', size: 'logoSize')]
     private ?File $logoFile = null;
 
-    // Collections avec typage strict
-    /** @var array<int, Category> */
-    private array $categories = [];
-    /** @var array<int, Product> */
     private array $products = [];
     /** @var array<int, OpeningHours> */
     private array $openingHours = [];
@@ -211,24 +206,6 @@ class StoreDto
     }
 
 
-    public
-    function addCategory(Category $category): self
-    {
-        $this->categories[] = $category;
-        return $this;
-    }
-
-    public
-    function getCategories(): array
-    {
-        return $this->categories;
-    }
-
-    public
-    function setCategories(array $categories): void
-    {
-        $this->categories = $categories;
-    }
 
 
     public

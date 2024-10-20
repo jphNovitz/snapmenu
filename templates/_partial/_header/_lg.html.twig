@@ -1,22 +1,22 @@
 {#    desktop hidden on mobile=============================================== #}
 <div class="hidden max-w-7xl m-auto lg:grid grid-cols-12 ">
     <div id="brand" class="col-span-3  text-left flex !items-baseline space-x-4 text-content-secondary/70">
-        {% if store is defined %}
-            {% if store.logoName is not null %}
-                <a href="{{ path('app_menu', {slug: store.slug}) }}"
+        {% if globalStore is defined %}
+            {% if globalStore.logoName is not null %}
+                <a href="{{ path('app_menu', {slug: globalStore.slug}) }}"
                    class="w-24 aspect-video">
-                    <img src="{{ asset('images/stores/' ~ store.logoName) }}"
+                    <img src="{{ asset('images/stores/' ~ globalStore.logoName) }}"
                          class="w-full"
-                         alt="{{ store.name }} |Snapmenu.be">
+                         alt="{{ globalStore.name }} |Snapmenu.be">
                 </a>
             {% else %}
-                <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>
+                <twig:Title:H1 class="capitalize">{{ globalStore.name }}</twig:Title:H1>
             {% endif %}
         {% else %}
             <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a>
         {% endif %}
-        {# {% if store.name is defined %}
-                    <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>
+        {# {% if globalStore.name is defined %}
+                    <twig:Title:H1 class="capitalize">{{ globalStore.name }}</twig:Title:H1>
                 {% endif %}
                 <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a> #}
     </div>
@@ -25,13 +25,13 @@
             <li>
                 <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a></li>
             <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
+                <a href="{{ path('app_menu', {'slug': globalStore.slug, '_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
             </li>
             <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}">{% trans %}nav.opening {% endtrans %}</a>
+                <a href="{{ path('app_menu', {'slug': globalStore.slug, '_fragment': 'heures-d-ouverture'}) }}">{% trans %}nav.opening {% endtrans %}</a>
             </li>
             <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}">{% trans %}nav.contact_infos {% endtrans %}</a>
+                <a href="{{ path('app_menu', {'slug': globalStore.slug, '_fragment': 'contact'}) }}">{% trans %}nav.contact_infos {% endtrans %}</a>
             </li>
 
             <li class="ml-4 opacity-80">
@@ -47,9 +47,9 @@
 
     </nav>
     <div class="col-span-2 p-1 text-right text-base">
-        {% if store is defined %}
-            <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}"
-                    {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
+        {% if globalStore is defined %}
+            <a href="{{ path('app_menu', {'slug': globalStore.slug, '_fragment': 'contact'}) }}"
+                    {#            <a href="{{ path('app_contact', {slug: globalStore.slug}) }}" #}
                class="w-fit inline-flex justify-center items-center px-8 py-4  text-content-primary-light border border-dark-content-text-dark dark:border-content-text-light/70 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                      stroke="currentColor" class="w-8 h-8">
