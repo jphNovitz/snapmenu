@@ -5,11 +5,7 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\DiscriminatorColumn;
-use Doctrine\ORM\Mapping\DiscriminatorMap;
-use Doctrine\ORM\Mapping\InheritanceType;
 
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -27,20 +23,16 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
 
-    #[ORM\Column(length: 10)]
-    private ?string $type = null;
 
-    #[ORM\ManyToOne(inversedBy: 'categories')]
-    private ?Store $owner = null;
+    #[ORM\Column]
+    private ?bool $isActive ;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: ActiveCategory::class)]
-    private Collection $activeCategories;
-
+    #[ORM\Column]
+    private ?int $rowOrder = 2;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
-        $this->activeCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,56 +82,27 @@ class Category
         return $this;
     }
 
-    public function getType(): ?string
+
+    public function isActive(): ?bool
     {
-        return $this->type;
+        return $this->isActive;
     }
 
-    public function setType(string $type): static
+    public function setisActive(bool $isActive): static
     {
-        $this->type = $type;
+        $this->isActive = $isActive;
 
         return $this;
     }
 
-    public function getOwner(): ?Store
+    public function getRowOrder(): ?int
     {
-        return $this->owner;
+        return $this->rowOrder;
     }
 
-    public function setOwner(?Store $owner): static
+    public function setRowOrder(int $rowOrder): static
     {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ActiveCategory>
-     */
-    public function getActiveCategories(): Collection
-    {
-        return $this->activeCategories;
-    }
-
-    public function addActiveCategory(ActiveCategory $activeCategory): static
-    {
-        if (!$this->activeCategories->contains($activeCategory)) {
-            $this->activeCategories->add($activeCategory);
-            $activeCategory->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeActiveCategory(ActiveCategory $activeCategory): static
-    {
-        if ($this->activeCategories->removeElement($activeCategory)) {
-            // set the owning side to null (unless already changed)
-            if ($activeCategory->getCategory() === $this) {
-                $activeCategory->setCategory(null);
-            }
-        }
+        $this->rowOrder = $rowOrder;
 
         return $this;
     }
