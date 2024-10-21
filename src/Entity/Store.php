@@ -65,8 +65,6 @@ class Store implements \Serializable
     private ?string $email = null;
     #[ORM\OneToOne(inversedBy: 'store', cascade: ['persist', 'remove'])]
     private ?User $owner = null;
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Product::class)]
-    private Collection $products;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
@@ -91,8 +89,6 @@ class Store implements \Serializable
 
     public function __construct()
     {
-        $this->activeCategories = new ArrayCollection();
-        $this->products = new ArrayCollection();
         $this->openingHours = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
@@ -222,42 +218,6 @@ class Store implements \Serializable
         return $this;
     }
 
-    /**
-     * @return Collection<int, ActiveCategory>
-     */
-    public function getActiveCategories(): Collection
-    {
-        return $this->activeCategories;
-    }
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->setOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getOwner() === $this) {
-                $product->setOwner(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {

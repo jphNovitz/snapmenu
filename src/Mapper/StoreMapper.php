@@ -31,12 +31,6 @@ class StoreMapper
             $storeDto->setSlug($store->getSlug());
         }
 
-
-
-        foreach ($store->getProducts() as $product) {
-            $storeDto->addProduct($product);
-        }
-
         foreach ($store->getOpeningHours() as $openingHour) {
             $storeDto->addOpeningHour($openingHour);
         }
@@ -84,10 +78,6 @@ class StoreMapper
         $store->setPostCode($storeDto->getPostCode());
         $store->setCity($storeDto->getCity());
         $store->setSlug($storeDto->getSlug());
-
-        foreach ($storeDto->getProducts() as $product) {
-            $store->addProduct($product);
-        }
 
         foreach ($storeDto->getOpeningHours() as $openingHour) {
             $store->addOpeningHour($openingHour);

@@ -39,8 +39,6 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $category = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
-    private ?Store $owner = null;
 
     /**
      * @var Collection<int, Allergen>
@@ -151,18 +149,6 @@ class Product
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    public function getOwner(): ?Store
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?Store $owner): static
-    {
-        $this->owner = $owner;
 
         return $this;
     }

@@ -15,7 +15,6 @@ class StoreDto
     #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'logoName', size: 'logoSize')]
     private ?File $logoFile = null;
 
-    private array $products = [];
     /** @var array<int, OpeningHours> */
     private array $openingHours = [];
 
@@ -204,29 +203,6 @@ class StoreDto
     {
         $this->slug = $slug;
     }
-
-
-
-
-    public
-    function addProduct(Product $product): self
-    {
-        $this->products[] = $product;
-        return $this;
-    }
-
-    public
-    function getProducts(): array
-    {
-        return $this->products;
-    }
-
-    public
-    function setProducts(array $products): void
-    {
-        $this->products = $products;
-    }
-
 
     public
     function addOpeningHour(OpeningHours $openingHour): self
