@@ -1,5 +1,5 @@
 App\Entity\Product:
-  product_{1..100}:
+  product_{1..18}:
     name: <foodName()>
     description: <sentence()>
     ingredients: <ingredients(6)>
@@ -8,5 +8,4 @@ App\Entity\Product:
     halal: <boolean()>
     veggie: <boolean()>
     category: '@category_*'
-    owner: '@store_*'
     allergens: '[@allergen_*]'
