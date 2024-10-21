@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Menu de {{ store.name }} à {{ store.postCode }}, {{ store.city }}{% endblock %}
+{% block title %}Menu de {{ globalStore.name }} à {{ globalStore.postCode }}, {{ globalStore.city }}{% endblock %}
 
 {% block body %}
     <div class="p-2 lg:p-4">
@@ -19,7 +19,7 @@
                     <h3 class="pb-4 font-black">Jour</h3>
                     <div class="pb-4 font-black text-center -ml-8">Ouvre</div>
                     <div class="pb-4  font-black text-center">Ferme</div>
-                    {% for opening_hour in store.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
+                    {% for opening_hour in globalStore.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
                         <h3 class="pb-4">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</h3>
                         <div class="pb-4 text-center border-b border-gray-900 -ml-8">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i') : '' }}</div>
                         <div class="pb-4 text-center">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i') : '' }}</div>
@@ -45,7 +45,7 @@
                         </a>
                     </div>
                     <div class="text-center">
-                        <a href="{{ path('app_menu', { 'slug': store.slug }) }}#menu" class="">
+                        <a href="{{ path('app_menu', { 'slug': globalStore.slug }) }}#menu" class="">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                                  stroke="currentColor" class="w-6 h-6 m-auto">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
@@ -57,35 +57,35 @@
                     </div>
                 </div>
                 <div>
-                    <twig:Title:H1> {{ store.name }} </twig:Title:H1>
+                    <twig:Title:H1> {{ globalStore.name }} </twig:Title:H1>
                 </div>
 
                 <div>
-                    {% set  uri = 'snapmenu.be'~path('app_menu', {slug: store.slug}) %}
-                    <img src="{{ qr_code_url(uri) }}" alt="{{ store.name }} code QR"/>
+                    {% set  uri = 'snapmenu.be'~path('app_menu', {slug: globalStore.slug}) %}
+                    <img src="{{ qr_code_url(uri) }}" alt="{{ globalStore.name }} code QR"/>
                 </div>
 
                 <div>
                     <ul class="text-center capitalize">
-                        <li class="text-lg font-black">{{ store.name }}</li>
-                        <li class="semibold">{{ store.streetName }} {{ store.houseNumber }} </li>
-                        <li class="semibold">{{ store.postCode }}&nbsp;&nbsp;&nbsp;&nbsp; {{ store.city }} </li>
-                        <li class="semibold">{{ store.phoneNumber }} </li>
+                        <li class="text-lg font-black">{{ globalStore.name }}</li>
+                        <li class="semibold">{{ globalStore.streetName }} {{ globalStore.houseNumber }} </li>
+                        <li class="semibold">{{ globalStore.postCode }}&nbsp;&nbsp;&nbsp;&nbsp; {{ globalStore.city }} </li>
+                        <li class="semibold">{{ globalStore.phoneNumber }} </li>
                     </ul>
                 </div>
                 <div class="flex flex-col space-x-0 space-y-8 md:flex-row md:justify-center md:space-x-8 md:space-y-0 my-16">
-                    <twig:Button:Primary href="{{ path('app_message_send', {'slug': store.slug}) }}">
+                    <twig:Button:Primary href="{{ path('app_message_send', {'slug': globalStore.slug}) }}">
                         {% trans %}button.message{% endtrans %}
                     </twig:Button:Primary>
-                    {% if store.phoneNumber is defined %}
-                        <twig:Button:Secondary href="phone:{{ store.phoneNumber }}">
+                    {% if globalStore.phoneNumber is defined %}
+                        <twig:Button:Secondary href="phone:{{ globalStore.phoneNumber }}">
                             {% trans %}button.phone{% endtrans %}
                         </twig:Button:Secondary>
                     {% endif %}
                 </div>
                 <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
                     Mon url: <br/> <a
-                            href="{{ path('app_menu', {slug: store.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: store.slug}) }} </a>
+                            href="{{ path('app_menu', {slug: globalStore.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: globalStore.slug}) }} </a>
                 </div>
 
 

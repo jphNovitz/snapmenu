@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MenuController extends AbstractController
 {
-    public function __construct(private CategoryRepository $categoryRepository)
+    public function __construct(private readonly CategoryRepository $categoryRepository)
     {
     }
 
