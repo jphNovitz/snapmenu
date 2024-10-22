@@ -14,12 +14,8 @@ class DefaultController extends AbstractController
     {
     }
     #[Route('/', name: 'app_default')]
-    public function index(StoreRepository $storeRepository): Response
+    public function index(): Response
     {
-        $stores = $storeRepository->findList();
-
-        return $this->render('default/index.html.twig', [
-            'stores' => $this->storeMapper->toDtoList($stores),
-        ]);
+        return $this->render('default/index.html.twig');
     }
 }
