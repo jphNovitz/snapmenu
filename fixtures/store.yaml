@@ -11,3 +11,4 @@ App\Entity\Store:
     vat_number: <vat(false)>
     owner: '@user_1'
     logo_name: 'logoipsum-1.svg'
+    imageName: 'landing.jpg'
