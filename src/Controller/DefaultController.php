@@ -10,7 +10,7 @@ use App\Mapper\StoreMapper;
 
 class DefaultController extends AbstractController
 {
-    public function __construct(private StoreMapper $storeMapper)
+    public function __construct()
     {
     }
     #[Route('/', name: 'app_default')]
