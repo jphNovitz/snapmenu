@@ -107,5 +107,12 @@ class Category
         return $this;
     }
 
+    public function setActive(bool $isActive): static
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
 
 }

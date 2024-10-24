@@ -31,7 +31,7 @@ class Store implements \Serializable
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'logoName', size: 'logoSize')]
+    #[Vich\UploadableField(mapping: 'logo', fileNameProperty: 'logoName', size: 'logoSize')]
     private ?File $logoFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -40,6 +40,16 @@ class Store implements \Serializable
 
     #[ORM\Column(nullable: true)]
     private ?int $logoSize = null;
+
+    #[Vich\UploadableField(mapping: 'image', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
@@ -372,4 +382,39 @@ class Store implements \Serializable
 
         return $this;
     }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): static
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageSize(?int $imageSize): static
+    {
+        $this->imageSize = $imageSize;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
 }

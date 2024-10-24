@@ -35,9 +35,6 @@ class Message
     #[ORM\ManyToOne(inversedBy: 'messages')]
     private ?Store $owner = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $subject = null;
-
     #[ORM\Column]
     private ?bool $status = false;
 

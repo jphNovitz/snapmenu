@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ globalStore.name}} {% endblock %}
+{% block title %} {{ globalStore.name }} {% endblock %}
 
 {% block body %}
     <section class="text-content-primary-light/70 dark:text-content-primary-dark/70 body-font">
@@ -11,24 +11,73 @@
                 </h1>
                 <p class="mb-8 leading-relaxed">{{ globalStore.description }}</p>
                 <div class="flex justify-center">
-                    <twig:Button:Primary> {% trans %} cta.primary{% endtrans%} </twig:Button:Primary>
-{#                    <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>#}
-{#                    <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>#}
+                    <twig:Button:Primary id="cta-primary" href="{{ path('app_menu') }}"> {% trans %} cta.primary{% endtrans %} </twig:Button:Primary>
+                    {#                    <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> #}
+                    {#                    <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button> #}
                 </div>
             </div>
             <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                <img class="object-cover object-center rounded" alt="hero" src="{{ asset('images/stores/'~globalStore.imageName) }}">
+                <img class="object-cover object-center rounded" alt="hero"
+                     src="{{ asset('images/stores/'~globalStore.imageName) }}">
             </div>
         </div>
     </section>
 
-    <section class="text-gray-600 body-font min-h-dvh">
+    <section class="text-content-primary-light/60 dark:text-content-primary-dark/60 body-font min-h-dvh">
         <div class="container px-5 py-24 mx-auto">
             <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
-                <h2 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">
-                    Slow-carb next level shoindxgoitch ethical authentic, scenester sriracha forage.
-                </h2>
-                <img src="" alt="">
+                <div class="px-8">
+                    <h2 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-content-primary-light dark:text-content-primary-dark/90">
+                        Pendant votre visite, accédez rapidement à notre menu en scannant le code QR affiché.
+                    </h2>
+                    <p class="my-8">Vous pouvez également partager le menu avec vos amis ou proches en leur faisant
+                        scanner le même
+                        code.</p>
+                </div>
+                <div>
+                    {% set  uri = url('app_menu', {'_fragment': 'menu'}) %}
+                    <img src="{{ qr_code_url(uri) }}" alt="{{ globalStore.name }} code QR"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-content-primary-light/60 dark:text-content-primary-dark/60 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+                <h2 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-content-primary-light dark:text-content-primary-dark/90 ">{% trans %}title.opening_hours{% endtrans %}</h2>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{% trans %}text.opening_hours.header{% endtrans %}</p>
+            </div>
+            <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+                <table class="table-auto w-full text-left whitespace-no-wrap">
+                    <thead>
+                    <tr>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-content-primary-light/90 dark:text-content-primary-dark/90  text-sm bg-surface-dark/10 dark:bg-surface-light/10 rounded-tl rounded-bl">{% trans %}form.opening_hours.day{% endtrans %}</th>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-content-primary-light/90 dark:text-content-primary-dark/90  text-sm bg-surface-dark/10 dark:bg-surface-light/10">{% trans %}form.opening_hours.open_time{% endtrans %}</th>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-content-primary-light/90 dark:text-content-primary-dark/90  text-sm bg-surface-dark/10 dark:bg-surface-light/10">{% trans %}form.opening_hours.close_time{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for opening_hour in globalStore.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
+                    <tr>
+                        <td class="px-4 py-3">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</td>
+                        <td class="px-4 py-3">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i') : '' }}</td>
+                        <td class="px-4 py-3">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i') : '' }}</td>
+                    </tr>
+                    {% else %}
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+                <a href="{{ path('app_message_send') }}"
+                   class="text-content-primary-light dark:text-content-primary-dark inline-flex items-center md:mb-2 lg:mb-0">
+                    {% trans %} cta.contact{% endtrans %}
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>

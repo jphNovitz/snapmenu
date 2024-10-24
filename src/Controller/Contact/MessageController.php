@@ -26,27 +26,21 @@ class MessageController extends AbstractController
 //        ]);
 //    }
 
-    #[Route('/envoyer/{slug?}', name: 'app_message_send', methods: ['GET', 'POST'])]
-    public function new(Store $store = null, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/envoyer/', name: 'app_message_send', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($store) $message->setOwner($store);
             $entityManager->persist($message);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_redirect_after_login', [], Response::HTTP_FOUND);
         }
 
-        if ($this->getUser()) $templateToExtends = 'admin/base.html.twig';
-        else $templateToExtends = 'base.html.twig';
-
         return $this->render('contact/message/new.html.twig', [
-            'template_to_extends' => $templateToExtends,
-            'store' => $store,
             'message' => $message,
             'form' => $form,
         ]);
