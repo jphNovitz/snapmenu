@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div>
-                    <twig:Title:H1> {{ globalStore.name }} </twig:Title:H1>
+                    <twig:Title:H2> {{ globalStore.name }} </twig:Title:H2>
                 </div>
 
                 <div>
@@ -85,9 +85,8 @@
                 </div>
                 <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
                     Mon url: <br/> <a
-                            href="{{ path('app_menu', {slug: globalStore.slug}) }}">https://snapmenu.be{{ path('app_menu', {slug: globalStore.slug}) }} </a>
+                            href="{{ absolute_url(path('app_menu')) }}">{{ absolute_url(path('app_menu')) }} </a>
                 </div>
-
 
                 <h6 class="text-center text-small">
                     (2024) <a href="https://pixelservices.be">PixelServices.be, création de sites internet pour les
