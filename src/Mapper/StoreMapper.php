@@ -15,6 +15,7 @@ class StoreMapper
         if (null !== $store->getName()) {
             $storeDto->setName($store->getName());
             $storeDto->setEmail($store->getEmail());
+            $storeDto->setPhoneNumber($store->getPhoneNumber());
             $storeDto->setSlug($store->getSlug());
             $storeDto->setCreatedAt($store->getCreatedAt());
             $storeDto->setUpdatedAt($store->getUpdatedAt());
@@ -23,6 +24,8 @@ class StoreMapper
             $storeDto->setDescription($store->getDescription());
             $storeDto->setLogoName($store->getLogoName());
             $storeDto->setLogoSize($store->getLogoSize());
+            $storeDto->setImageName($store->getImageName());
+            $storeDto->setImageSize($store->getImageSize());
             $storeDto->setUpdatedAt($store->getUpdatedAt());
             $storeDto->setStreetName($store->getStreetName());
             $storeDto->setHouseNumber($store->getHouseNumber());
@@ -34,18 +37,10 @@ class StoreMapper
         foreach ($store->getOpeningHours() as $openingHour) {
             $storeDto->addOpeningHour($openingHour);
         }
-
+        
         return $storeDto;
     }
 
-    public function toDtoList(array $stores): array
-    {
-        $storeDtos = [];
-        foreach ($stores as $store) {
-            $storeDtos[] = $this->toDto($store);
-        }
-        return $storeDtos;
-    }
 
     public function toEntity(StoreDto $storeDto)
     {
@@ -72,6 +67,8 @@ class StoreMapper
         $store->setDescription($storeDto->getDescription());
         $store->setLogoName($storeDto->getLogoName());
         $store->setLogoSize($storeDto->getLogoSize());
+        $store->setImageName($store->getImageName());
+        $store->setImageSize($store->getImageSize());
         $store->setUpdatedAt($storeDto->getUpdatedAt());
         $store->setStreetName($storeDto->getStreetName());
         $store->setHouseNumber($storeDto->getHouseNumber());

@@ -11,9 +11,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 class StoreDto
 {
-
     #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'logoName', size: 'logoSize')]
     private ?File $logoFile = null;
+    #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
 
     /** @var array<int, OpeningHours> */
     private array $openingHours = [];
@@ -25,9 +26,9 @@ class StoreDto
         private ?string            $phoneNumber = null,
         private ?string            $description = null,
         private ?string            $logoName = null,
-
-
         private ?int               $logoSize = null,
+        private ?string            $imageName = null,
+        private ?int               $imageSize = null,
         private ?DateTimeImmutable $createdAt = null,
         private ?DateTimeImmutable $updatedAt = null,
         private ?string            $streetName = null,
@@ -41,6 +42,16 @@ class StoreDto
     {
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 
 // Validation method
@@ -230,26 +241,42 @@ class StoreDto
         return $this->logoFile;
     }
 
-    public
-    function setLogoName(?string $logoName): void
+    public function setLogoName(?string $logoName): void
     {
         $this->logoName = $logoName;
     }
 
-    public
-    function getLogoName(): ?string
+    public function getLogoName(): ?string
     {
         return $this->logoName;
     }
 
-    public
-    function setLogoSize(?int $logoSize): void
+    public function setLogoSize(?int $logoSize): void
     {
         $this->logoSize = $logoSize;
     }
 
-    public
-    function getLogoSize(): ?int
+    public function getLogoSize(): ?int
+    {
+        return $this->logoSize;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->logoSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
     {
         return $this->logoSize;
     }
