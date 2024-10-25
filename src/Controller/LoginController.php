@@ -27,13 +27,6 @@ class LoginController extends AbstractController
     #[Route('/redirect-after-login', name: 'app_redirect_after_login')]
     public function redirectAfterLogin(): Response
     {
-        if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('god_user_index');
-        } elseif ($this->isGranted('ROLE_MEMBER')) {
-            return $this->redirectToRoute('admin_default');
-        }
-
-        // Redirection par défaut
-        return $this->redirectToRoute('app_default');
+        return $this->redirectToRoute('admin_default');
     }
 }

@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+.clear-gradient{
+    background-size: 100% 100%;
+    background-position: 0px 0px;
+    background-image: radial-gradient(75% 75% at 50% 50%, #FFFFFF 0%, #F0FFF0 100%);
+}
+.dark-gradient{
+    background: rgb(93,118,93);
+    background: radial-gradient(circle, rgba(93,118,93,1) 51%, rgba(2,26,2,1) 100%);
+}
+.custom-gradient{
+    background: rgb(93,118,93);
+    background: radial-gradient(circle, rgba(93,118,93,1) 0%, rgba(2,26,2,1) 0%, rgba(93,118,93,1) 91%);
+}

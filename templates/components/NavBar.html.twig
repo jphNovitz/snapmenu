@@ -53,7 +53,7 @@
                 {% if showStore == 'true' %}
                     <a href="#contact"
                             {#            <a href="{{ path('app_contact', {slug: store.slug}) }}" #}
-                       class="px-4 py-2 bg-secondary text-clear-light rounded-md">
+                       class="px-4 py-2 bg-secondary text-light-text-base-light rounded-md">
                         Code QR
                     </a>
                 {% endif %}
@@ -61,10 +61,10 @@
         </div>
         {# end desktop -------------------------------------------------------------- -#}
     </header>
-    <nav class="md:hidden absolute z-20 top-0 left-0 w-full h-screen p-16 bg-primary-dark text-clear -ml-96 transition-spacing duration-700 ease-in-out" {{ stimulus_target('nav', 'links') }}>
+    <nav class="md:hidden absolute z-20 top-0 left-0 w-full h-screen p-16 bg-primary-dark text-light-text-base -ml-96 transition-spacing duration-700 ease-in-out" {{ stimulus_target('nav', 'links') }}>
 
 
-        <ul class="w-full h-screen flex flex-col justify-start items-center py-16 space-y-8 text-clear text-lg font-semibold ">
+        <ul class="w-full h-screen flex flex-col justify-start items-center py-16 space-y-8 text-light-text-base text-lg font-semibold ">
             {% if showStore == 'true' %}
                 <li><a href="#top">{% trans %}nav.menu {% endtrans %}</a></li>
                 <li><a href="#opening">{% trans %}nav.opening {% endtrans %}</a></li>

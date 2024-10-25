@@ -41,6 +41,7 @@ module.exports = {
                 },
                 "secondary": "#d54122",
             },
+            "black": "#000",
             // "accent": {
             //     "light": "#d54122",
             //     "dark": "#d54122",

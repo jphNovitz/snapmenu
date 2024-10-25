@@ -4,16 +4,18 @@
         {% if store is defined %}
             {% if store.logoName is not null %}
                 <a href="{{ path('app_menu', {slug: store.slug}) }}"
-                   class="">
+                   class="text-content-secondary">
                     <img src="{{ asset('images/stores/' ~ store.logoName) }}"
                          class="w-full"
                          alt="{{ store.name }} |Snapmenu.be">
                 </a>
             {% else %}
-                <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>
+                <twig:Title:H1 class="capitalize !text-content-secondary">njkhjk{{ store.name }}</twig:Title:H1>
             {% endif %}
         {% else %}
-            <a href="{{ path('app_default') }}"> Snap<strong>Menu</strong> </a>
+            <a href="{{ path('app_default') }}" class="text-content-secondary">
+                Snap<strong>Menu</strong>
+            </a>
         {% endif %}
         {# {% if store.name is defined %}
                     <twig:Title:H1 class="capitalize">{{ store.name }}</twig:Title:H1>
