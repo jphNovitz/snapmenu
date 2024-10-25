@@ -23,7 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private array $roles = ['ROLE_SNACK', 'ROLE_USER'];
+    private array $roles = ['ROLE_ADMIN'];
 
     /**
      * @var string The hashed password
@@ -31,14 +31,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
-
     #[ORM\OneToOne(mappedBy: 'owner', cascade: ['persist', 'remove'])]
     private ?Store $store = null;
-
-    #[ORM\Column]
-    private ?bool $is_active = false;
 
     #[Gedmo\Timestampable(on: 'create')]
     #[ORM\Column(name: 'created', type: Types::DATETIME_IMMUTABLE)]
@@ -118,23 +112,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): static
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function isIsVerified(): ?bool
-    {
-        return $this->isVerified;
-    }
-
     public function getStore(): ?Store
     {
         return $this->store;
@@ -157,24 +134,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function setVerified(bool $isVerified): static
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function isActive(): ?bool
-    {
-        return $this->is_active;
-    }
-
-    public function setActive(bool $is_active): static
-    {
-        $this->is_active = $is_active;
-
-        return $this;
-    }
 
     public function getCreated(): ?\DateTimeImmutable
     {

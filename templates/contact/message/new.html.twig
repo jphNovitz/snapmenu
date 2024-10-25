@@ -1,15 +1,32 @@
-{% extends template_to_extends %}
+{% extends 'base.html.twig' %}
 
-{% block title %}New Message{% endblock %}
+{% block title %} {% trans %} title.send_message {% endtrans %} {% endblock %}
 
 {% block body %}
-    <div class="px-4 py-8">
-        <twig:Title:H1> {% trans %} title.send_message {% endtrans %}</twig:Title:H1>
+    <section class="text-gray-600 body-font relative">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">{% trans %} title.send_message {% endtrans %}</h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base"> {% trans %} text.contact.intro {% endtrans %} </p>
+            </div>
+            <div class="lg:w-1/2 md:w-2/3 mx-auto">
 
-        <div class="w-full my-8 md:w-1/2 m-auto">
-            {{ include('contact/message/_form.html.twig') }}
-            <twig:Button:Secondary> {% trans%} button.back {% endtrans %}</twig:Button:Secondary>
+                <div class="flex flex-wrap space-y-8 -m-2">
+                    {{ include('contact/message/_form.html.twig',  {'button_label': 'button.send'}) }}
+                    <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
+                        <a class="text-indigo-500" href="mailto:{{ globalStore.email }}">{{ globalStore.email }}</a>
+                        <a class="text-indigo-500"
+                           href="phone:{{ globalStore.phoneNumber }}"><br />{{ globalStore.phoneNumber }}</a>
+                        <p class="leading-normal my-5">{{ globalStore.streetName }}, {{ globalStore.houseNumber }}
+                            <br>{{ globalStore.postCode }} {{ globalStore.city }}
+                        </p>
+                        <span class="inline-flex">
+          </span>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </section>
 
-    </div>
 {% endblock %}

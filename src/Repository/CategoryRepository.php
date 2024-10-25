@@ -26,16 +26,17 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * @return Category[] Returns an array of Category objects
      */
-    public function findCategories(User $user = null, string $type = "default"): array
+
+
+    public function findMenu(): array
     {
-//        dd($user);
         return $this->createQueryBuilder('c')
-            ->innerJoin('c.owner', 'owner')
-            ->andWhere('c.type = :type')
-            ->andwhere('owner = :storeId')
-            ->setParameter('type', $type)
-            ->setParameter('storeId', $user->getStore()->getId())
-            ->orderBy('c.name', 'ASC')
+            ->innerJoin('c.products', 'products')
+            ->innerJoin('products.allergens', 'allergens')
+            ->select('c, products, allergens')
+            ->andWhere('c.isActive = :isActive')
+            ->setParameter('isActive', true)
+            ->orderBy('c.rowOrder', 'ASC')
             ->getQuery()
             ->getResult();
     }

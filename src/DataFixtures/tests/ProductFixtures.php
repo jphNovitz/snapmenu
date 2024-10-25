@@ -18,7 +18,6 @@ class ProductFixtures extends Fixture
         for ($loop = 1; $loop <= 3; $loop++) {
             $product = new Product();
             $product->setCategory($category);
-            $product->setOwner($store);
             $product->setName('Lorem ' . $loop);
             $product->setDescription('Lorem ' . $loop . ' Description');
             $product->setIngredients('ingredient_1, ingredient_2');

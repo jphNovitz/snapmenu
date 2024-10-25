@@ -1,8 +1,5 @@
 App\Entity\Category:
   category_{1..10}:
     name: <words(3, true)>
-    type: 'default'
-  category_{7..10}:
-    name: <words(4, true)>
-    type: 'custom'
-    owner: '@store_*'
+    isActive: true
+    rowOrder: <numberBetween(1,10)>

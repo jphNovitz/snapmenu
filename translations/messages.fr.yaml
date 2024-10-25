@@ -1,6 +1,7 @@
 cta:
-  primary: "Je suis restaurateur"
+  primary: "Voir le menu"
   secondary: "Voir les restaurants"
+  contact: "Nous contacter"
 title:
   register: "Inscription"
   login: "Connexion"
@@ -63,6 +64,7 @@ button:
   delete: "Supprimer"
   activate: "Activer"
   deactivate: "Desactiver"
+  send: "Envoyer"
   message: "Envoyer un message"
   phone: "Téléphoner"
 form:
@@ -74,6 +76,7 @@ form:
   message: "Votre message"
   delete.confirm: "Etes-vous certain de vouloir supprimer cet élément ?"
   opening_hours:
+    day: "Jour de la semaine"
     open_time: "Ouvre"
     close_time: "Ferme"
     day_of_week:
@@ -109,6 +112,10 @@ text:
   no: "non"
   no_store: "Aucun restaurateur"
   category_default_intro: "En manque d'inspiration pour nommer une catégorie ? Nous avons prédéfini quelques categories par défault.  Pour les utiliser vous n'avez qu'à les activer."
+  opening_hours:
+    header: "N'hésitez pas à nous rendre visite durant nos heures d'ouverture"
+  contact:
+    intro: "Nous sommes à votre écoute ! Remplissez ce formulaire et nous vous répondrons dans les plus brefs délais"
 allergen:
   peanuts: "Arachides"
   treenuts: "Fruits à coque"

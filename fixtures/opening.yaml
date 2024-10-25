@@ -1,8 +1,6 @@
 App\Entity\OpeningHours:
-  opening_{1..25}:
+  opening_{1..5}:
     store: '@store_*'
     day_of_week: <numberBetween(1,7)>
-    open_time: <(new \DateTimeImmutable())>
-#    open_time: <date_create_from_format ( 'H:i:s' , '14:00:00')>
-#    close_time: <date_create_from_format ( 'H:i:s' , '14:00:00')>
-    close_time: <(new \DateTimeImmutable())>
+    open_time: '<(new \DateTimeImmutable(sprintf("%d:%s:00", rand(6,14), rand(0,1) ? "00" : "30")))>'
+    close_time: '<(new \DateTimeImmutable(sprintf("%d:%s:00", rand(18,23), rand(0,1) ? "00" : "30")))>'

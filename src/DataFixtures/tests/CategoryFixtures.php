@@ -15,13 +15,12 @@ class CategoryFixtures extends Fixture
 
         $category = new Category();
         $category->setName('Lorem Default');
-        $category->setType('default');
+        $category->setisActive(true);
         $manager->persist($category);
 
         $category = new Category();
         $category->setName('Lorem Custom');
-        $category->setType('custom');
-        $category->setOwner($user->getStore());
+        $category->setisActive(true);
         $manager->persist($category);
 
         $manager->flush();

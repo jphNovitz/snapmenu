@@ -31,7 +31,7 @@ class Store implements \Serializable
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'logoName', size: 'logoSize')]
+    #[Vich\UploadableField(mapping: 'logo', fileNameProperty: 'logoName', size: 'logoSize')]
     private ?File $logoFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -40,6 +40,19 @@ class Store implements \Serializable
 
     #[ORM\Column(nullable: true)]
     private ?int $logoSize = null;
+
+    #[Vich\UploadableField(mapping: 'image', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -60,18 +73,8 @@ class Store implements \Serializable
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
-
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Category::class)]
-    private Collection $categories;
-
     #[ORM\OneToOne(inversedBy: 'store', cascade: ['persist', 'remove'])]
     private ?User $owner = null;
-
-    #[ORM\OneToMany(mappedBy: 'store', targetEntity: ActiveCategory::class)]
-    private Collection $activeCategories;
-
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Product::class)]
-    private Collection $products;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
@@ -96,9 +99,6 @@ class Store implements \Serializable
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
-        $this->activeCategories = new ArrayCollection();
-        $this->products = new ArrayCollection();
         $this->openingHours = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
@@ -216,36 +216,6 @@ class Store implements \Serializable
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): static
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->setOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): static
-    {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getOwner() === $this) {
-                $category->setOwner(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getOwner(): ?User
     {
         return $this->owner;
@@ -258,65 +228,6 @@ class Store implements \Serializable
         return $this;
     }
 
-    /**
-     * @return Collection<int, ActiveCategory>
-     */
-    public function getActiveCategories(): Collection
-    {
-        return $this->activeCategories;
-    }
-
-    public function addActiveCategory(ActiveCategory $activeCategory): static
-    {
-        if (!$this->activeCategories->contains($activeCategory)) {
-            $this->activeCategories->add($activeCategory);
-            $activeCategory->setStore($this);
-        }
-
-        return $this;
-    }
-
-    public function removeActiveCategory(ActiveCategory $activeCategory): static
-    {
-        if ($this->activeCategories->removeElement($activeCategory)) {
-            // set the owning side to null (unless already changed)
-            if ($activeCategory->getStore() === $this) {
-                $activeCategory->setStore(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->setOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getOwner() === $this) {
-                $product->setOwner(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {
@@ -419,6 +330,17 @@ class Store implements \Serializable
         // TODO: Implement __unserialize() method.
     }
 
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
@@ -460,4 +382,39 @@ class Store implements \Serializable
 
         return $this;
     }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): static
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageSize(?int $imageSize): static
+    {
+        $this->imageSize = $imageSize;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
 }

@@ -23,7 +23,6 @@ class StoreFixtures extends Fixture
         $store->setCity('City lipsum');
         $store->setPhoneNumber('123456');
         $store->setEmail('store@lipsum.com');
-        $store->setOwner($users[0]);
         $manager->persist($store);
 
 //        $store = new Store();

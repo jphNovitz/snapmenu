@@ -2,50 +2,59 @@
 
 namespace App\Dto;
 
-    use App\Entity\Category;
-    use App\Entity\Product;
-    use App\Entity\OpeningHours;
-    use DateTimeImmutable;
-    use InvalidArgumentException;
+use App\Entity\Product;
+use App\Entity\OpeningHours;
+use DateTimeImmutable;
+use InvalidArgumentException;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 class StoreDto
 {
-    private ?int $id = null;
-    private ?string $name = null;
-    private ?string $vatNumber = null;
-    private ?string $phoneNumber = null;
-    private ?string $description = null;
-    private ?string $logoName = null;
-    private ?int $logoSize = null;
-    private ?DateTimeImmutable $updatedAt = null;
-    private ?string $streetName = null;
-    private ?string $houseNumber = null;
-    private ?string $postCode = null;
-    private ?string $city = null;
-    private ?string $email = null;
-    private ?string $slug = null;
+    #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'logoName', size: 'logoSize')]
+    private ?File $logoFile = null;
+    #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
 
-    // Collections avec typage strict
-    /** @var array<int, Category> */
-    private array $categories = [];
-    /** @var array<int, Product> */
-    private array $products = [];
     /** @var array<int, OpeningHours> */
     private array $openingHours = [];
 
     public function __construct(
-        ?string $name = null,
-        ?string $email = null,
-        ?string $phoneNumber = null
+        private ?int               $id = null,
+        private ?string            $name = null,
+        private ?string            $vatNumber = null,
+        private ?string            $phoneNumber = null,
+        private ?string            $description = null,
+        private ?string            $logoName = null,
+        private ?int               $logoSize = null,
+        private ?string            $imageName = null,
+        private ?int               $imageSize = null,
+        private ?DateTimeImmutable $createdAt = null,
+        private ?DateTimeImmutable $updatedAt = null,
+        private ?string            $streetName = null,
+        private ?string            $houseNumber = null,
+        private ?string            $postCode = null,
+        private ?string            $city = null,
+        private ?string            $email = null,
+        private ?string            $slug = null
+
     )
     {
-        $this->name = $name;
-        $this->email = $email;
-        $this->phoneNumber = $phoneNumber;
+        $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
     }
 
-    // Validation method
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
+// Validation method
     public function validate(): bool
     {
         if (empty($this->name)) {
@@ -63,7 +72,7 @@ class StoreDto
         return true;
     }
 
-    // Getters et setters avec chaînage
+// Getters et setters avec chaînage
     public function getId(): ?int
     {
         return $this->id;
@@ -86,26 +95,195 @@ class StoreDto
         return $this;
     }
 
-
-    public function addCategory(Category $category): self
+    public function getVatNumber(): ?string
     {
-        $this->categories[] = $category;
-        return $this;
+        return $this->vatNumber;
     }
 
-    public function addProduct(Product $product): self
+    public function setVatNumber(?string $vatNumber): void
     {
-        $this->products[] = $product;
-        return $this;
+        $this->vatNumber = $vatNumber;
     }
 
-    public function addOpeningHour(OpeningHour $openingHour): self
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): void
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getcreatedAt(): ?DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt(): ?DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?DateTimeImmutable $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    public function getStreetName(): ?string
+    {
+        return $this->streetName;
+    }
+
+    public function setStreetName(?string $streetName): void
+    {
+        $this->streetName = $streetName;
+    }
+
+    public
+    function getHouseNumber(): ?string
+    {
+        return $this->houseNumber;
+    }
+
+    public
+    function setHouseNumber(?string $houseNumber): void
+    {
+        $this->houseNumber = $houseNumber;
+    }
+
+    public
+    function getPostCode(): ?string
+    {
+        return $this->postCode;
+    }
+
+    public
+    function setPostCode(?string $postCode): void
+    {
+        $this->postCode = $postCode;
+    }
+
+    public
+    function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public
+    function setCity(?string $city): void
+    {
+        $this->city = $city;
+    }
+
+    public
+    function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public
+    function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public
+    function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public
+    function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    public
+    function addOpeningHour(OpeningHours $openingHour): self
     {
         $this->openingHours[] = $openingHour;
         return $this;
     }
 
-    public static function fromArray(array $data): self
+    public
+    function getOpeningHours(): array
+    {
+        return $this->openingHours;
+    }
+
+    public
+    function setOpeningHours(array $openingHours): void
+    {
+        $this->openingHours = $openingHours;
+    }
+
+
+    public
+    function getLogoFile(): ?File
+    {
+        return $this->logoFile;
+    }
+
+    public function setLogoName(?string $logoName): void
+    {
+        $this->logoName = $logoName;
+    }
+
+    public function getLogoName(): ?string
+    {
+        return $this->logoName;
+    }
+
+    public function setLogoSize(?int $logoSize): void
+    {
+        $this->logoSize = $logoSize;
+    }
+
+    public function getLogoSize(): ?int
+    {
+        return $this->logoSize;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->logoSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->logoSize;
+    }
+
+
+    public
+    static function fromArray(array $data): self
     {
         $dto = new self();
 
@@ -119,7 +297,8 @@ class StoreDto
         return $dto;
     }
 
-    public function toArray(): array
+    public
+    function toArray(): array
     {
         return [
             'id' => $this->id,

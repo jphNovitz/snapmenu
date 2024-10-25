@@ -6,14 +6,16 @@ use App\Repository\StoreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Mapper\StoreMapper;
 
 class DefaultController extends AbstractController
 {
-    #[Route('/', name: 'app_default')]
-    public function index(StoreRepository $storeRepository): Response
+    public function __construct()
     {
-        return $this->render('default/index.html.twig', [
-            'stores' => $storeRepository->findList(),
-        ]);
+    }
+    #[Route('/', name: 'app_default')]
+    public function index(): Response
+    {
+        return $this->render('default/index.html.twig');
     }
 }

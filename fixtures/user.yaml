@@ -4,15 +4,15 @@ App\Entity\User:
     email: "admin@exempl.es"
     roles: [ 'ROLE_ADMIN', 'ROLE_MEMBER' ]
     password: <symfonyPassword("password", "salt")>
-    is_verified: true
+
 #  user_simple:
-  user_2:
-    email: "simple@exempl.es"
-    roles: [ 'ROLE_MEMBER' ]
-    password: <symfonyPassword("password", "salt")>
+#  user_2:
+#    email: "simple@exempl.es"
+#    roles: [ 'ROLE_MEMBER' ]
+#    password: <symfonyPassword("password", "salt")>
 #    is_verified: true
-  user_{3..5}:
-    email: <email()>
-    roles: [ 'ROLE_MEMBER' ]
-    password: <symfonyPassword("password", "salt")>
+#  user_{3..5}:
+#    email: <email()>
+#    roles: [ 'ROLE_MEMBER' ]
+#    password: <symfonyPassword("password", "salt")>
 #    is_verified: true

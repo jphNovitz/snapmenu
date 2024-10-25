@@ -7,32 +7,25 @@
         </svg>
     </a>
     <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-content-primary-light dark:text-content-primary-dark/80 text-lg font-semibold ">
-        {% if store is defined %}
-            <li>
-                <a href="{{ path('app_default') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.home {% endtrans %}</a>
-            </li>
-            <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>
-            </li>
-            <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'heures-d-ouverture'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.opening {% endtrans %}</a>
-            </li>
-            <li>
-                <a href="{{ path('app_menu', {'slug': store.slug, '_fragment': 'contact'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.contact_infos {% endtrans %}</a>
-            </li>
-        {% else %}
-            <li>
-                <a href="{{ path('app_default') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.home {% endtrans %}</a>
-            </li>
-            <li><a href="{{ path('app_message_send') }}">{% trans %}nav.contact {% endtrans %}</a></li>
-        {% endif %}
-    </ul>
-    <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-content-primary-light dark:text-content-primary-dark/80 text-lg font-semibold ">
+        <li>
+            <a href="{{ path('app_default') }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.home {% endtrans %}</a>
+        </li>
+        <li>
+            <a href="{{ path('app_menu', {'_fragment': 'menu'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.menu {% endtrans %}</a>
+        </li>
+        <li>
+            <a href="{{ path('app_menu', {'_fragment': 'heures-d-ouverture'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.opening {% endtrans %}</a>
+        </li>
+        <li>
+            <a href="{{ path('app_menu', {'_fragment': 'contact'}) }}" {{ stimulus_action('nav', 'trigger') }} >{% trans %}nav.contact_infos {% endtrans %}</a>
+        </li>
+        <li class="text-sm underline pt-4 opacity-70">
             {% if app.user is null %}
-                <li class="text-sm underline"> <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a> </li>
+                <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a>
             {% else %}
-                <li><a href="{{ path('admin_default') }}">  {% trans %} nav.admin {% endtrans %}</a></li>
-                <li class="text-sm underline"><a href="/logout">  {% trans %} nav.logout {% endtrans %}</a> </li>
+                <a href="{{ path('admin_default') }}">  {% trans %} nav.admin {% endtrans %}</a>
+                <a href="/logout">  {% trans %} nav.logout {% endtrans %}</a>
             {% endif %}
+        </li>
     </ul>
 </nav>
