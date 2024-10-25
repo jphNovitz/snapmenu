@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Menu;
+namespace App\Tests\Controller\Menu;
 
 use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
@@ -44,16 +44,16 @@ class MenuControllerTest extends WebTestCase
             UserFixtures::class,
             StoreFixtures::class,
             CategoryFixtures::class,
-            ActiveCategoryFixtures::class,
-            ProductFixtures::class]);
+            ProductFixtures::class,]);
 
         $store = $this->storeRepository->findAll()[0];
         $menu = $this->productRepository->findByStore($store);
 
-        $crawler = $this->client->request('GET',  $store->getSlug().$this->path);
+        $crawler = $this->client->request('GET',  $this->path);
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Menu');
+
+        $this->assertSelectorTextContains('h1', $store->getName());
         $this->assertStringContainsString($menu[0]->getName(), $crawler->text());
         $this->assertStringContainsString($menu[1]->getPriceHome(), $crawler->text());
     }

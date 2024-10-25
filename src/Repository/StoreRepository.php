@@ -34,7 +34,6 @@ class StoreRepository extends ServiceEntityRepository
             ->select('s, openingHours')
             ->getQuery()
             ->getOneOrNullResult();
-
     }
 
 

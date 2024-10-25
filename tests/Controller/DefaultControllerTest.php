@@ -55,10 +55,9 @@ class DefaultControllerTest extends WebTestCase
 
        $link = $crawler->filter('a#cta-primary')->link();
        $crawler = $this->client->click($link);
-//dd($link->text());
+
        self::assertResponseStatusCodeSame(200);
        self::assertPageTitleContains('Menu');
-//       dd($crawler);
        self::assertStringContainsString('Menu', $crawler->filter('h1')->text());
    }
 
