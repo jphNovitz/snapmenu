@@ -1,0 +1,22 @@
+{% extends '_layout/partial-width-transparent.html.twig' %}
+
+{% block content %}
+<section class="text-content-primary-light/60 dark:text-content-primary-dark/60 body-font min-h-dvh">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
+            <div class="px-8">
+                <h2 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-content-primary-light dark:text-content-primary-dark/90">
+                    Pendant votre visite, accédez rapidement à notre menu en scannant le code QR affiché.
+                </h2>
+                <p class="my-8">Vous pouvez également partager le menu avec vos amis ou proches en leur faisant
+                    scanner le même
+                    code.</p>
+            </div>
+            <div>
+                {% set  uri = url('app_menu', {'_fragment': 'menu'}) %}
+                <img src="{{ qr_code_url(uri) }}" alt="{{ globalStore.name }} code QR"/>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
