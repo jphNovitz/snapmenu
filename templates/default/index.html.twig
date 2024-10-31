@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
+    {% block title %} {{ globalStore.name }} {% endblock %}
 
-{% block title %} {{ globalStore.name }} {% endblock %}
-
-{% block body %}
-    {% include 'default/_section/_hero.html.twig' %}
-    {% include 'default/_section/_qr-description.html.twig' %}
-    {% include 'default/_section/opening-hours.html.twig' %}
-{% endblock %}
+    {% block body %}
+        {% include 'default/_section/_hero.html.twig' %}
+        {% include 'default/_section/_qr-description.html.twig' %}
+        {% include 'default/_section/opening-hours.html.twig' %}
+    {% endblock %}
 

@@ -18,4 +18,9 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/index.html.twig');
     }
+    #[Route('/maintenance', name: 'app_fallback')]
+    public function fallback(): Response
+    {
+        return $this->render('default/fallback.html.twig');
+    }
 }

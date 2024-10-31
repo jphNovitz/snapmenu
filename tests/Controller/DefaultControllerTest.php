@@ -47,19 +47,39 @@ class DefaultControllerTest extends WebTestCase
         self::assertStringContainsString("Horaire", $crawler->text());
     }
 
-   public function test_public_index_cta_primary(): void
-   {
-       $crawler = $this->client->request('GET', sprintf('%s', $this->path));
-       self::assertResponseStatusCodeSame(200);
-       self::assertStringContainsString("Voir le menu", $crawler->filter('a#cta-primary')->text());
+    public function test_public_index_message_if_no_store(): void
+    {
+        $this->databaseTool->loadFixtures([
+            UserFixtures::class,
+        ]);
 
-       $link = $crawler->filter('a#cta-primary')->link();
-       $crawler = $this->client->click($link);
+        $this->client->followRedirects();
+        $crawler = $this->client->request('GET', sprintf('%s', $this->path));
+//        self::assertResponseRedirects('/maintenance');
+        self::assertResponseStatusCodeSame(200);
+        self::assertStringContainsString('Maintenance en cours', $crawler->filter('title')->text());
+    }
 
-       self::assertResponseStatusCodeSame(200);
-       self::assertPageTitleContains('Menu');
-       self::assertStringContainsString('Menu', $crawler->filter('h1')->text());
-   }
+    public function test_public_index_cta_primary(): void
+    {
+        $this->databaseTool->loadFixtures([
+            UserFixtures::class,
+            StoreFixtures::class,
+            OpeningsHoursFixtures::class,
+            CategoryFixtures::class,
+            ProductFixtures::class]);
+
+        $crawler = $this->client->request('GET', sprintf('%s', $this->path));
+        self::assertResponseStatusCodeSame(200);
+        self::assertStringContainsString("Voir le menu", $crawler->filter('a#cta-primary')->text());
+
+        $link = $crawler->filter('a#cta-primary')->link();
+        $crawler = $this->client->click($link);
+
+        self::assertResponseStatusCodeSame(200);
+        self::assertPageTitleContains('Menu');
+        self::assertStringContainsString('Menu', $crawler->filter('h1')->text());
+    }
 
 
 }
