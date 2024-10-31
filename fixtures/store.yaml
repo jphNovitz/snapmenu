@@ -8,7 +8,7 @@ App\Entity\Store:
     city: <city()>
     phone_number: <phoneNumber()>
     email: <email()>
-    vat_number: <vat(false)>
+    vat_number: <randomNumber(9, true)>
     owner: '@user_1'
     logo_name: 'logoipsum-1.svg'
     imageName: 'landing.jpg'
