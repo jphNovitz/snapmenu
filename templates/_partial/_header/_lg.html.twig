@@ -21,13 +21,13 @@
             <li>
                 <a href="{{ path('app_default') }}">{% trans %}nav.home {% endtrans %}</a></li>
             <li>
-                <a href="{{ path('app_menu', {'_fragment': 'menu'}) }}">{% trans %}nav.menu {% endtrans %}</a>
+                <a href="{{ path('app_menu') }}">{% trans %}nav.menu {% endtrans %}</a>
             </li>
             <li>
-                <a href="{{ path('app_menu', {'_fragment': 'heures-d-ouverture'}) }}">{% trans %}nav.opening {% endtrans %}</a>
+                <a href="{{ path('app_opening_hours') }}">{% trans %}nav.opening {% endtrans %}</a>
             </li>
             <li>
-                <a href="{{ path('app_menu', {'_fragment': 'contact'}) }}">{% trans %}nav.contact_infos {% endtrans %}</a>
+                <a href="{{ path('app_infos_contact', {'_fragment': 'contact'}) }}">{% trans %}nav.contact_infos {% endtrans %}</a>
             </li>
 
             <li class="ml-4 opacity-80">
