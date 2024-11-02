@@ -5,7 +5,7 @@ cta:
 title:
   register: "Inscription"
   login: "Connexion"
-  opening_hours: "Horaire"
+  opening_hours: "Nos heures d'ouverture"
   opening_hours.new: "Horaire: nouveau jour"
   opening_hours.edit: "Horaire: modifier"
   day_of_week: "Jour de la semaine"
@@ -14,6 +14,7 @@ title:
   connected_as: "Connecté en tant que"
   welcome_admin: "Bienvenue dans votre admin"
   send_message: Envoyer un message
+  menu: "Le menu de"
   product:
     index: "Les produits de mon menu"
     #    index: "Liste des produits"
@@ -37,6 +38,17 @@ title:
     edit: "Modifier une categorie"
   store:
     edit: "Modification infos boutique"
+    name: "Nom de la boutique"
+    vatNumber: "N° de T.V.A"
+    phoneNumber: "Téléphone"
+    description: "Description"
+  contact_infos:
+    h1: "Contact et Accès au Menu en Ligne"
+    qr:
+       h2: "Accédez au Menu en un Scan"
+    contact:
+      h2: "Nous contacter"
+
 nav:
   store: "Ma boutique"
   home: "Accueil"
@@ -116,6 +128,10 @@ text:
     header: "N'hésitez pas à nous rendre visite durant nos heures d'ouverture"
   contact:
     intro: "Nous sommes à votre écoute ! Remplissez ce formulaire et nous vous répondrons dans les plus brefs délais"
+  contact_infos:
+    qr:
+      description: "Scannez le code QR ci-dessus avec votre téléphone pour découvrir notre menu complet, incluant tous les détails de nos plats et boissons. Partagez facilement le menu avec vos amis ou consultez-le à tout moment depuis votre appareil."
+    
 allergen:
   peanuts: "Arachides"
   treenuts: "Fruits à coque"
@@ -150,6 +166,10 @@ message:
   read: "Lu"
   date: "Date"
   empty: "Aucun message"
+
+opening_hours:
+  title: "Les heures d'ouverture de"
+  header: "Quand sommes nous ouverts, voici un tableau récapitulatif de nos heures d'ouverture.  Rendez-nous une visite !"
 
 
 
