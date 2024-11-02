@@ -3,97 +3,26 @@
 {% block title %}Menu de {{ globalStore.name }} à {{ globalStore.postCode }}, {{ globalStore.city }}{% endblock %}
 
 {% block body %}
-    <div class="p-2 lg:p-4">
+    <div class="w-full p-2 lg:p-4">
+        <twig:Title:H1>{% trans %} title.menu{% endtrans %} {{ globalStore.name }}</twig:Title:H1>
+
         {% block menu %}
             <span id="menu">&nbsp;</span>
-            <div class="">
-                {% include 'menu/_menu.html.twig' with { 'menu': menu } only %}
-            </div>
+            {#            <div class=""> #}
+            {% include 'menu/_menu.html.twig' with { 'menu': menu } only %}
+            {#            </div> #}
         {% endblock %}
 
-        {% block opening %}
-            <div id="heures-d-ouverture"
-                 class="min-h-screen flex flex-col justify-center items-center">
-                <twig:Title:H2>{% trans %} title.opening_hours{% endtrans %}</twig:Title:H2>
-                <div class="w-full p-8 grid grid-cols-3 gap-x-8 gap-y-8">
-                    <h3 class="pb-4 font-black">Jour</h3>
-                    <div class="pb-4 font-black text-center -ml-8">Ouvre</div>
-                    <div class="pb-4  font-black text-center">Ferme</div>
-                    {% for opening_hour in globalStore.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
-                        <h3 class="pb-4">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</h3>
-                        <div class="pb-4 text-center border-b border-gray-900 -ml-8">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i') : '' }}</div>
-                        <div class="pb-4 text-center">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i') : '' }}</div>
-                        {#                    <span class="w-3/4 aligncol-span-3 border-b border-gray-900 -ml-8"> </span> #}
-                    {% else %}
-                        <p class="col-span-3">Contactez-nous pour pour connaître les heures d'ouverture</p>
-                    {% endfor %}
-                </div>
-            </div>
-        {% endblock %}
+{#        {% block opening %}#}
+{#            <div id="heures-d-ouverture">#}
+{#                #}{#           {% include 'menu/_opening_hours.html.twig' %} #}
+{#                {% include 'default/_section/_opening-hours.html.twig' %}#}
+{#            </div>#}
+{#        {% endblock %}#}
 
-        {% block contact %}
-            <div id="contact"
-                 class="scroll-mt-60 w-full min-h-screen flex flex-col flex-none items-center justify-evenly  gap-8 p-8 pt-52">
-                <div class="w-full grid grid-cols-3">
-                    <div class="text-left">
-                        <a href="{{ path('app_default') }}" class="text-xl">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                 stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="text-center">
-                        <a href="{{ path('app_menu', { 'slug': globalStore.slug }) }}#menu" class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                                 stroke="currentColor" class="w-6 h-6 m-auto">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="text-center">
+{#        {% block contact %}#}
+{#           {% include 'menu/_contact.html.twig' %}#}
 
-                    </div>
-                </div>
-                <div>
-                    <twig:Title:H2> {{ globalStore.name }} </twig:Title:H2>
-                </div>
-
-                <div>
-                    {% set  uri = 'snapmenu.be'~path('app_menu', {slug: globalStore.slug}) %}
-                    <img src="{{ qr_code_url(uri) }}" alt="{{ globalStore.name }} code QR"/>
-                </div>
-
-                <div>
-                    <ul class="text-center capitalize">
-                        <li class="text-lg font-black">{{ globalStore.name }}</li>
-                        <li class="semibold">{{ globalStore.streetName }} {{ globalStore.houseNumber }} </li>
-                        <li class="semibold">{{ globalStore.postCode }}&nbsp;&nbsp;&nbsp;&nbsp; {{ globalStore.city }} </li>
-                        <li class="semibold">{{ globalStore.phoneNumber }} </li>
-                    </ul>
-                </div>
-                <div class="flex flex-col space-x-0 space-y-8 md:flex-row md:justify-center md:space-x-8 md:space-y-0 my-16">
-                    <twig:Button:Primary href="{{ path('app_message_send', {'slug': globalStore.slug}) }}">
-                        {% trans %}button.message{% endtrans %}
-                    </twig:Button:Primary>
-                    {% if globalStore.phoneNumber is defined %}
-                        <twig:Button:Secondary href="phone:{{ globalStore.phoneNumber }}">
-                            {% trans %}button.phone{% endtrans %}
-                        </twig:Button:Secondary>
-                    {% endif %}
-                </div>
-                <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
-                    Mon url: <br/> <a
-                            href="{{ absolute_url(path('app_menu')) }}">{{ absolute_url(path('app_menu')) }} </a>
-                </div>
-
-                <h6 class="text-center text-small">
-                    (2024) <a href="https://pixelservices.be">PixelServices.be, création de sites internet pour les
-                        petits entrepreneurs, Services web.</a>
-                </h6>
-            </div>
-
-        {% endblock %}
+{#        {% endblock %}#}
     </div>
 {% endblock %}
