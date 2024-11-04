@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
@@ -28,8 +28,6 @@ class LoginController extends AbstractController
     public function redirectAfterLogin(): Response
     {
         if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('god_user_index');
-        } elseif ($this->isGranted('ROLE_MEMBER')) {
             return $this->redirectToRoute('admin_default');
         }
 

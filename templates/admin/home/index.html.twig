@@ -3,11 +3,12 @@
 {% block title %}{{ app.user.store.name }} &#128512; {% trans %} title.welcome_admin {% endtrans %}{% endblock %}
 
 {% block body %}
+    <twig:Title:H1>{% trans %} title.connected_as{% endtrans %} {{ app.user.store.name }}</twig:Title:H1>
 
-    <div class="px-4 py-8">
-        <twig:Title:H1>{% trans %} title.connected_as{% endtrans %} {{ app.user.store.name }}</twig:Title:H1>
-
-        {% include 'menu/_menu.html.twig' with { 'menu': menu } only %}
-    </div>
-
+    {% embed '_layout/full-width-color.html.twig' %}
+        {% block content %}
+            <twig:Title:H1>{% trans %} title.menu{% endtrans %} {{ globalStore.name }}</twig:Title:H1>
+            {% include 'menu/_menu.html.twig' with { 'menu': menu } only %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
