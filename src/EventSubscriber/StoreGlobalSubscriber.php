@@ -64,11 +64,10 @@ class StoreGlobalSubscriber implements EventSubscriberInterface
 //        }
 
 
-        if ($event->getRequest()->attributes->get('_route') == 'app_fallback'){
-            return;
-        }
+        $route = $event->getRequest()->attributes->get('_route');
 
-//die;
+        if ($route !== 'app_fallback' || !str_contains($route, 'admin_')) {
+
             $store = $this->storeRepository->myStore();
 
             if (null === $store) {
@@ -83,4 +82,5 @@ class StoreGlobalSubscriber implements EventSubscriberInterface
 
             $this->twig->addGlobal('globalStore', $storeDto);
         }
+    }
 }
