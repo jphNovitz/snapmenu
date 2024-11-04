@@ -1,72 +1,89 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{ store.name }}{% endblock %}
 
 {% block body %}
-    <div class="px-4 py-8">
-        <twig:Title:H1> {{ store.name }} </twig:Title:H1>
+    {#    <div class="px-4 py-8"> #}
+    <twig:Title:H1> {{ store.name }} </twig:Title:H1>
+    {% embed '_layout/full-width-color.html.twig' %}
+        {% block content %}
+            <div class="w-full flex flex-col lg:flex-row space-x-8">
+                <div class="w-full lg:w-1/2 grid grid-cols-2 gap-x-4 gap-y-8 my-8">
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.name{% endtrans %}</span>
+                    </div>
+                    <div class="text-left">
+                        {{ store.name }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.streetName{% endtrans %}</span>
+                    </div>
+                    <div class="text-left">
+                        {{ store.streetName }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.houseNumber{% endtrans %}</span>
+                    </div>
+                    <div>
+                        {{ store.houseNumber }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.postCode{% endtrans %}</span>
+                    </div>
+                    <div>
+                        {{ store.postCode }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.city{% endtrans %}</span>
+                    </div>
+                    <div class="text-left">
+                        {{ store.city }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.email {% endtrans %}</span>
+                    </div>
+                    <div class="text-left">
+                        {{ store.email }}
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 grid grid-cols-2 gap-x-4 gap-y-8 my-8 border-l border-l-2 border-l-surface-dark dark:border-l-surface-light/80 ">
 
-        <div class="grid grid-cols-2 gap-x-4 gap-y-8 my-8">
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.vatNumber{% endtrans %}</span>
-            </div>
-            <div>
-                {{ store.vatNumber }}
-            </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.phoneNumber {% endtrans %}</span>
-            </div>
-            <div class="text-left">
-                {{ store.phoneNumber }}
-            </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.description {% endtrans %}</span>
-            </div>
-            <div class="text-left">
-                {{ store.description }}
-            </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.logo{% endtrans %}</span>
-            </div>
-            <div class="text-left">
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.vatNumber{% endtrans %}</span>
+                    </div>
+                    <div>
+                        {{ store.vatNumber }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.phoneNumber {% endtrans %}</span>
+                    </div>
+                    <div class="text-left">
+                        {{ store.phoneNumber }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.description {% endtrans %}</span>
+                    </div>
+                    <div class="text-left">
+                        {{ store.description }}
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold pr-4 capitalize">{% trans %} store.logo{% endtrans %}</span>
+                    </div>
+                    <div class="text-left">
 
-                <img src="{{ asset('images/stores/'~store.logoName) }}" class="w-24 " alt="{{ store.name }}">
+                        <img src="{{ asset('images/stores/'~store.logoName) }}" class="w-24 " alt="{{ store.name }}">
+                    </div>
+
+
+                </div>
             </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.streetName{% endtrans %}</span>
+            <div class="w-full flex justify-center my-8">
+                <twig:Button:Primary href="{{ path('admin_store_edit', {'id': store.id}) }}">
+                    {% trans %} button.update {% endtrans %}
+                </twig:Button:Primary>
             </div>
-            <div class="text-left">
-                {{ store.streetName }}
-            </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.houseNumber{% endtrans %}</span>
-            </div>
-            <div>
-                {{ store.houseNumber }}
-            </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.postCode{% endtrans %}</span>
-            </div>
-            <div>
-                {{ store.postCode }}
-            </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.city{% endtrans %}</span>
-            </div>
-            <div class="text-left">
-                {{ store.city }}
-            </div>
-            <div class="text-right">
-                <span class="font-semibold pr-4 capitalize">{% trans %} store.email {% endtrans %}</span>
-            </div>
-            <div class="text-left">
-                {{ store.email }}
-            </div>
-        </div>
-        <div class="w-full flex justify-center my-8">
-            <twig:Button:Secondary href="{{ path('admin_store_edit', {'id': store.id}) }}">
-                {% trans %} button.update {% endtrans %}
-            </twig:Button:Secondary>
-        </div>
-    </div>
+        {% endblock %}
+    {% endembed %}
+
+    {#    </div> #}
 {% endblock %}
