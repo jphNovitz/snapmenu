@@ -10,5 +10,7 @@ final class Text
 
     public mixed $row;
     public string $label ;
+    public string $labelclass = "";
+    public string $inputclass = "";
     public string $placeholder = "";
 }

@@ -2,11 +2,11 @@
     {{ form_label(row,null, {
         'label': label ?? row.vars.label,
         'label_attr': {
-            'class': 'block mb-2 text-sm font-medium text-content-primary-light dark:text-content-primary-dark'
+            'class': 'block mb-2 text-sm font-medium dark:font-semibold text-content-primary-light dark:text-content-primary-dark/70 '~(labelclass ?? '')
         } }) }}
     {{ form_widget(row, { 'attr':
         {
-            'class': 'bg-white border border-dark-neutral/50 text-content-primary-light text-sm rounded-lg focus:ring-dark-neutral focus:border-dark-neutral focus-visible:ring-dark-neutral block w-full p-2.5 dark:bg-surface-light/60 dark:border-surface-light/40 dark:placeholder-content-primary-light/70 dark:text-content-primary-light dark:focus:ring-surface-light/40 dark:focus-visible:ring-surface-light/40 dark:focus:border-surface-light/40',
+            'class': 'bg-white border border-dark-neutral/50 text-content-primary-light font-semibold text-sm rounded-lg focus:ring-dark-neutral focus:border-dark-neutral focus-visible:ring-dark-neutral block w-full p-2.5 dark:bg-surface-light/60 dark:border-surface-light/40 dark:placeholder-content-primary-light/70 dark:text-content-primary-light dark:focus:ring-surface-light/40 dark:focus-visible:ring-surface-light/40 dark:focus:border-surface-light/40 '~(inputclass ?? ''),
             'placeholder': placeholder ?? ''
         }
     }) }}
@@ -14,10 +14,3 @@
     {{ form_errors(row) }}
 
 </div>
-{#
-
-<label for="email"
-       class="block mb-2 text-sm font-medium text-content-primary-light dark:text-content-primary-dark"> {% trans %}form.email{% endtrans %} </label>
-<input type="text" id="email" name="_username" value="{{ email }}"
-       class="bg-white border border-dark-neutral/50 text-content-primary-light text-sm rounded-lg focus:ring-dark-neutral focus:border-dark-neutral focus-visible:ring-dark-neutral block w-full p-2.5 dark:bg-surface-light/70 dark:border-surface-light/40 dark:placeholder-gray-400 dark:text-content-primary-light dark:focus:ring-surface-light/40 dark:focus-visible:ring-surface-light/40 dark:focus:border-surface-light/40"
-       required/>#}
