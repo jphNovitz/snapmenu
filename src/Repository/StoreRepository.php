@@ -27,7 +27,7 @@ class StoreRepository extends ServiceEntityRepository
      * @return Store[] Returns an array of Store objects
      *
      */
-    public function myStore(): Store
+    public function myStore(): ?Store
     {
         return $this->createQueryBuilder('s')
             ->innerJoin('s.openingHours', 'openingHours')
