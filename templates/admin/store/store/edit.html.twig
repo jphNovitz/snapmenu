@@ -1,21 +1,14 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Edit Store{% endblock %}
+{% block title %}{% trans %} title.store.edit{% endtrans %}{% endblock %}
 
 {% block body %}
-    <div class="px-4 py-8">
-    
-    <twig:Title:H1> {%trans%} title.store.edit {%endtrans%} </twig:Title:H1>
 
-    {{ include('admin/store/store/_form.html.twig', {'button_label': 'button.update'}) }}
+    <twig:Title:H1> {% trans %} title.store.edit {% endtrans %} </twig:Title:H1>
 
-
-        <div class="flex space-x my-8">
-            <twig:Button:Secondary href="{{ path('admin_default') }}">
-                {% trans %} button.back {% endtrans %}
-            </twig:Button:Secondary>
-        </div>
-    </div>
-
-
+    {% embed '_layout/full-width-color.html.twig' %}
+        {% block content %}
+            {{ include('admin/store/store/_form.html.twig', {'button_label': 'button.update'}) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

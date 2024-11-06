@@ -9,11 +9,12 @@ use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 class StoreDto
 {
-    #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'logoName', size: 'logoSize')]
+    #[Vich\UploadableField(mapping: 'logo', fileNameProperty: 'logoName', size: 'logoSize')]
     private ?File $logoFile = null;
-    #[Vich\UploadableField(mapping: 'stores', fileNameProperty: 'imageName', size: 'imageSize')]
+    #[Vich\UploadableField(mapping: 'image', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
     /** @var array<int, OpeningHours> */

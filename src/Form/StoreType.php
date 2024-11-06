@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Dto\StoreDto;
 use App\Entity\Store;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,7 +35,7 @@ class StoreType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Store::class,
+            'data_class' => StoreDto::class,
         ]);
     }
 }

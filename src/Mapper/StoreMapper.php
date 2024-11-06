@@ -23,6 +23,7 @@ class StoreMapper
             $storeDto->setVatNumber($store->getVatNumber());
             $storeDto->setDescription($store->getDescription());
             $storeDto->setLogoName($store->getLogoName());
+            $storeDto->setLogoName($store->getLogoName());
             $storeDto->setLogoSize($store->getLogoSize());
             $storeDto->setImageName($store->getImageName());
             $storeDto->setImageSize($store->getImageSize());
@@ -65,6 +66,7 @@ class StoreMapper
         $store->setUpdatedAt($storeDto->getUpdatedAt());
         $store->setVatNumber($storeDto->getVatNumber());
         $store->setDescription($storeDto->getDescription());
+        $store->setLogoName($storeDto->getLogoName());
         $store->setLogoName($storeDto->getLogoName());
         $store->setLogoSize($storeDto->getLogoSize());
         $store->setImageName($store->getImageName());

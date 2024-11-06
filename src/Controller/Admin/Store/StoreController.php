@@ -52,18 +52,21 @@ class StoreController extends AbstractController
     #[Route('', name: 'admin_store_show', methods: ['GET'])]
     public function show(): Response
     {
-        $store = $this->storeMapper->toDto($this->storeRepository->myStore());
+        $storeDto = $this->storeMapper->toDto($this->storeRepository->myStore());
         return $this->render('admin/store/store/show.html.twig',
-            ['store' => $store]);
+            ['store' => $storeDto]);
     }
 
     #[Route('/{id}/edit', name: 'admin_store_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Store $store, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(StoreType::class, $store);
+        $storeDto = $this->storeMapper->toDto($store);
+
+        $form = $this->createForm(StoreType::class, $storeDto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $store = $this->storeMapper->updateEntity($store, $storeDto);
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_store_show', ['id' => $store->getId()], Response::HTTP_FOUND);

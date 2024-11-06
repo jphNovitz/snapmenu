@@ -1,6 +1,6 @@
 {{ form_start(form) }}
    {{ form_widget(form._token) }}
-<div class="w-full flex flex-col space-y-12 my-4">
+<div class="w-full lg:w-2/3 flex flex-col space-y-12 p-4 mx-auto my-4">
     <twig:Form:Text :row="form.name" class="w-full"/>
     <twig:Form:Text :row="form.description" class="w-full"/>
 
@@ -26,10 +26,13 @@
         {{ form_widget(form.logoFile, {'attr': {'class': ''}}) }}
     </div>
 
-    <div class="my-8">
+    <div class="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
         <twig:Button:Submit>
             {{ button_label|default('Save')|trans }}
         </twig:Button:Submit>
+        <twig:Button:Secondary href="{{ path('admin_default') }}">
+            {% trans %} button.back {% endtrans %}
+        </twig:Button:Secondary>
     </div>
 </div>
 {{ form_end(form) }}
