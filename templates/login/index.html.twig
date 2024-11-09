@@ -27,8 +27,10 @@
                 </div>
                 <div class="w-full flex flex-col md:flex-row md:justify-center space-y-4 space-x-0 md:space-y-0 md:space-x-4 pt-8">
                     <twig:Button:Submit> {% trans %}button.login{% endtrans %} </twig:Button:Submit>
-                    <twig:Button:Secondary
+                    {#
+                            <twig:Button:Secondary
                             href="{{ path('app_register') }}"> {% trans %}button.register{% endtrans %} </twig:Button:Secondary>
+                 #}
                 </div>
             </div>
         </form>
