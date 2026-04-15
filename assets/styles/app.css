@@ -1,3 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+    /* ─── Reset les couleurs par défaut de Tailwind ─── */
+    --color-*: initial;
+
+    /* ─── Couleurs plates ─── */
+    --color-transparent:            transparent;
+    --color-light-text-base:        #3B413C;
+    --color-light-text-secondary:   #9DB5B2;
+    --color-light-text-highlight:   #5B9279;
+    --color-dark-text-base:         #DAF0EE;
+    --color-dark-text-secondary:    #94D1BE;
+    --color-dark-text-highlight:    #94D1BE;
+    --color-light-primary:          #94D1BE;
+    --color-dark-primary:           #94D1BE;
+    --color-light-neutral:          #DAF0EE;
+    --color-light-neutral-light:    #efefef;
+    --color-dark-neutral:           #3B413C;
+    --color-dark-neutral-light:     #9DB5B2;
+
+    /* ─── base ─── */
+    --color-base-light:             #94D1BE;
+    --color-base-dark:              #0b0d0c;
+
+    /* ─── surface ─── */
+    --color-surface-light:          #e1f7e4;
+    --color-surface-dark:           #2b322f;
+    --color-surface-secondary:      #d54122;
+
+    /* ─── content ─── */
+    --color-content-primary-light:  #0b0d0c;
+    --color-content-primary-dark:   #e1f7e4;
+    --color-content-secondary:      #d54122;
+
+    /* ─── Transition properties (extend) ─── */
+    --transition-property-position: positions;
+    --transition-property-height:   height;
+    --transition-property-spacing:  margin, padding;
+}
