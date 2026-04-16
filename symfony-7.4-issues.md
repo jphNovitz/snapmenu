@@ -1,6 +1,6 @@
 # Issues Symfony 7.4 LTS
 
-## Issue 1
+## Issue 2
 
 **Titre:** Aligner l'entite `Category` avec son usage reel dans les controleurs et formulaires
 
@@ -33,7 +33,7 @@
 
 **Priorite:** Haute
 
-## Issue 2
+## Issue 3
 
 **Titre:** Supprimer `\Serializable` de l'entite `Store` et nettoyer la serialisation legacy
 
@@ -64,7 +64,7 @@
 
 **Priorite:** Haute
 
-## Issue 3
+## Issue 4
 
 **Titre:** Corriger le constructeur invalide de `OpeningHours`
 
@@ -94,7 +94,7 @@
 
 **Priorite:** Haute
 
-## Issue 4
+## Issue 5
 
 **Titre:** Refactorer `StoreGlobalSubscriber` pour retirer la logique de redirection globale fragile
 
@@ -128,7 +128,7 @@
 
 **Priorite:** Haute
 
-## Issue 5
+## Issue 6
 
 **Titre:** Sortir la logique metier des controleurs CRUD
 
@@ -163,7 +163,7 @@
 
 **Priorite:** Haute
 
-## Issue 6
+## Issue 7
 
 **Titre:** Simplifier la configuration securite et supprimer le provider `chain` avec utilisateur `in_memory`
 
@@ -195,7 +195,7 @@
 
 **Priorite:** Moyenne-haute
 
-## Issue 7
+## Issue 8
 
 **Titre:** Reactiver et clarifier la strategie CSRF globale
 
@@ -224,7 +224,7 @@
 
 **Priorite:** Moyenne
 
-## Issue 8
+## Issue 9
 
 **Titre:** Epurer les `FormType` qui embarquent de la logique metier et du contexte utilisateur
 
@@ -256,7 +256,7 @@
 
 **Priorite:** Moyenne-haute
 
-## Issue 9
+## Issue 10
 
 **Titre:** Nettoyer `composer.json` pour preparer la montee vers Symfony 7.4 LTS
 
@@ -288,7 +288,7 @@
 
 **Priorite:** Haute
 
-## Issue 10
+## Issue 11
 
 **Titre:** Moderniser la configuration de tests et remonter les deprecations
 
