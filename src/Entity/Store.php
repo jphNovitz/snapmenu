@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: StoreRepository::class)]
 #[Vich\Uploadable]
-class Store implements \Serializable
+class Store
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -310,25 +310,6 @@ class Store implements \Serializable
         return $this->logoSize;
     }
 
-    public function serialize()
-    {
-        return [];
-    }
-
-    public function unserialize(string $data)
-    {
-        return [];
-    }
-
-    public function __serialize(): array
-    {
-        return [];
-    }
-
-    public function __unserialize(array $data): void
-    {
-        // TODO: Implement __unserialize() method.
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
