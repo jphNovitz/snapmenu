@@ -3,9 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -40,60 +38,24 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-//
-//    public function findAvailableCategories(User $user = null): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.type = :default')
-//            ->setParameter('default', 'default')
-//            ->orWhere('c.type = :custom')
-//            ->setParameter('custom', 'custom')
-//            ->andWhere('c.owner = :user')
-//            ->setParameter('user', $user)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult();
-//
-//
-//    }
 
-//
-//    /**
-//     * @return Category[] Returns an array of Category objects
-//     */
-//    public function findWithProducts(): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->leftJoin('c.products', 'products')
-//            ->orderBy('c.id', 'ASC')
-//            ->getQuery()
-//            ->getResult();
-//    }
 
-//
-//    /**
-//         * @return Category[] Returns an array of Category objects
-//         */
-//        public function findByExampleField($value): array
-//        {
-//            return $this->createQueryBuilder('c')
-//                ->andWhere('c.exampleField = :val')
-//                ->setParameter('val', $value)
-//                ->orderBy('c.id', 'ASC')
-//                ->setMaxResults(10)
-//                ->getQuery()
-//                ->getResult()
-//            ;
-//        }
 
-    //    public function findOneBySomeField($value): ?Category
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+
+    public function save(Category $category, bool $flush = false): void
+    {
+        
+      $this->_em->persist($category);
+      if ($flush)
+        $this->_em->flush();    
+    }
+
+    public function remove(Category $category, bool $flush = false): void
+    {
+      $this->_em->remove($category);
+      if ($flush) 
+        $this->_em->flush();
+    
+    }
 }
+

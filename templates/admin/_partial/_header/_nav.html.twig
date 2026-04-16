@@ -25,8 +25,11 @@
 
         <li><a href="#">{% trans %}nav.contact_webmaster {% endtrans %}</a></li>
     </ul>
+    {% if app.user is defined and app.user is not null %}
+
     <ul class="w-full h-fit flex flex-col justify-start items-center py-16 space-y-8 text-dark-text-base dark:text-light-text-base text-lg font-semibold ">
         <li><a href="{{ path('app_menu', {'slug': app.user.store.slug}) }}">  {% trans %} nav.seeAs {% endtrans %}</a></li>
         <li class="text-sm underline"><a href="/logout">  {% trans %} nav.logout {% endtrans %}</a> </li>
     </ul>
+    {% endif %}
 </nav>

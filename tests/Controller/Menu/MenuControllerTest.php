@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller\Menu;
 
-use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\ProductFixtures;
 use App\DataFixtures\tests\StoreFixtures;

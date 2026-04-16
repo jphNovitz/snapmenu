@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Repository\ActiveCategoryRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

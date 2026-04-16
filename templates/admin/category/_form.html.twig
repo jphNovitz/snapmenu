@@ -3,9 +3,7 @@
     <div class="flex flex-col w-1/2 space-y-4">
         <twig:Form:Text :row="form.name" label="form.name"/>
         <div class="w-full flex justify-between">
-            {% if form.rowOrder is defined %}
-                <twig:Form:Number :row="form.rowOrder" label="form.rowOrder"/>
-            {% endif %}
+            <twig:Form:Number :row="form.rowOrder" label="form.rowOrder"/>
             <twig:Form:Boolean :row="form.isActive" label="form.isActive"/>
         </div>
     </div>

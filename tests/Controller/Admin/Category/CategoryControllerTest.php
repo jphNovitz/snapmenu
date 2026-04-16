@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller\Admin\Category;
 
-use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\StoreFixtures;
 use App\DataFixtures\tests\UserFixtures;
@@ -60,7 +59,7 @@ class CategoryControllerTest extends WebTestCase
             CategoryFixtures::class]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
-        $category = $this->categoryRepository->findOneBy(['name' => 'Lorem Custom']);
+        $category = $this->categoryRepository->findOneBy(['name' => 'Lorem Ipsum']);
 
         $this->client->loginUser($user);
         $crawler = $this->client->request('GET', $this->path);
@@ -79,7 +78,7 @@ class CategoryControllerTest extends WebTestCase
             UserFixtures::class,
             StoreFixtures::class,
             CategoryFixtures::class,
-            ActiveCategoryFixtures::class]);
+            ]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
         $category = $this->categoryRepository->findAll()[0];
@@ -119,7 +118,7 @@ class CategoryControllerTest extends WebTestCase
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
 
 
-        $categories = $this->categoryRepository->findBy(['name' => 'Lorem Custom']);
+        $categories = $this->categoryRepository->findBy(['name' => 'Lorem Ipsum']);
         $total = count($categories);
 
         $this->client->disableReboot();
@@ -133,7 +132,7 @@ class CategoryControllerTest extends WebTestCase
 
         $this->client->submitForm('Supprimer');
         $this->assertResponseRedirects($this->path, 302);
-        $this->assertCount($total - 1, $this->categoryRepository->findBy(['name' => 'Lorem Custom']));
+        $this->assertCount($total - 1, $this->categoryRepository->findBy(['name' => 'Lorem Ipsum']));
 
     }
 

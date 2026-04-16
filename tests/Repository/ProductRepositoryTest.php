@@ -2,7 +2,6 @@
 
 namespace App\Tests\Repository;
 
-use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\ProductFixtures;
 use App\DataFixtures\tests\StoreFixtures;
@@ -33,7 +32,6 @@ class ProductRepositoryTest extends KernelTestCase
             UserFixtures::class,
             StoreFixtures::class,
             CategoryFixtures::class,
-            ActiveCategoryFixtures::class,
             ProductFixtures::class]);
 
 

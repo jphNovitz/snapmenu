@@ -58,6 +58,7 @@ class DefaultControllerTest extends WebTestCase
 //        self::assertResponseRedirects('/maintenance');
         self::assertResponseStatusCodeSame(200);
         self::assertStringContainsString('Maintenance en cours', $crawler->filter('title')->text());
+
     }
 
     public function test_public_index_cta_primary(): void

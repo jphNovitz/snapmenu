@@ -19,7 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProductType extends AbstractType
 {
 
-    public function __construct(private Security $security, private TranslatorInterface $translator,)
+    public function __construct(private Security $security, private TranslatorInterface $translator)
     {
     }
 
@@ -44,28 +44,23 @@ class ProductType extends AbstractType
                     'class' => Category::class,
                     'query_builder' => function (EntityRepository $er): QueryBuilder {
                         return $er->createQueryBuilder('c')
-//                            ->innerJoin('c.activeCategories', 'active_categories')
-                            ->select('c') // Include category_in_store
-                            ->where('c.type = :default OR (c.owner = :store)') // Filter by store ID
-                            ->setParameter('default', 'default')
-                            ->setParameter('store', $this->security->getUser()->getStore())
                             ->orderBy('c.id', 'ASC');
                     },
                     'choice_label' => 'name',
                 ])
             ->add('allergens', EntityType::class,
                 [
-                    'label'=>'title.product.allergens',
+                    'label' => 'title.product.allergens',
                     'class' => Allergen::class,
                     'multiple' => true,
                     'expanded' => true,
-                    'choice_attr' => function($choice, $key, $value) {
+                    'choice_attr' => function ($choice, $key, $value) {
                         return ['class' => 'custom-checkbox-class'];
                     },
                     'choice_label' => function ($choice, $key, $value) {
-                    return $this->translator->trans('allergen.' . $choice->getName());
-                },
-                    ]);
+                        return $this->translator->trans('allergen.' . $choice->getName());
+                    },
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

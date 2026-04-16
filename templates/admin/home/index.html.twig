@@ -1,13 +1,12 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}{{ app.user.store.name }} &#128512; {% trans %} title.welcome_admin {% endtrans %}{% endblock %}
+{% block title %}{% trans %} title.welcome_admin {% endtrans %}{% endblock %}
 
 {% block body %}
-    <twig:Title:H1>{% trans %} title.connected_as{% endtrans %} {{ app.user.store.name }}</twig:Title:H1>
 
     {% embed '_layout/full-width-color.html.twig' %}
         {% block content %}
-            <twig:Title:H1>{% trans %} title.menu{% endtrans %} {{ globalStore.name }}</twig:Title:H1>
+            <h1>admin index {% trans %} title.menu{% endtrans %} {{ globalStore.name }}</h1>
             {% include 'menu/_menu.html.twig' with { 'menu': menu } only %}
         {% endblock %}
     {% endembed %}

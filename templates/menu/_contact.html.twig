@@ -1,0 +1,35 @@
+<section id="contact"
+         class="scroll-mt-72 w-full flex flex-col px-4 py-64">
+        <twig:Title:H2 class="mt-4 mb-8"> Un code QR pour voir et partager le menu de {{ globalStore.name }} </twig:Title:H2>
+
+    <div class="flex flex-col items-center space-y-8 py-4">
+        {% set  uri = 'snapmenu.be'~path('app_menu', {slug: globalStore.slug}) %}
+        <img src="{{ qr_code_url(uri) }}" alt="{{ globalStore.name }} code QR"/>
+
+        <ul class="text-left capitalize">
+            <li class="text-lg font-black">{{ globalStore.name }}</li>
+            <li class="semibold">{{ globalStore.streetName }} {{ globalStore.houseNumber }} </li>
+            <li class="semibold">{{ globalStore.postCode }}
+                &nbsp;&nbsp;&nbsp;&nbsp; {{ globalStore.city }} </li>
+            <li class="semibold">{{ globalStore.phoneNumber }} </li>
+        </ul>
+    </div>
+
+    <div
+
+    </div>
+    <div class="flex flex-col space-x-0 space-y-8 md:flex-row md:justify-center md:space-x-8 md:space-y-0 my-16">
+        <twig:Button:Primary href="{{ path('app_message_send', {'slug': globalStore.slug}) }}">
+            {% trans %}button.message{% endtrans %}
+        </twig:Button:Primary>
+        {% if globalStore.phoneNumber is defined %}
+            <twig:Button:Secondary href="phone:{{ globalStore.phoneNumber }}">
+                {% trans %}button.phone{% endtrans %}
+            </twig:Button:Secondary>
+        {% endif %}
+    </div>
+    <div class="w-full py-8 border border-y border-y-2 border-y-gray-400 text-center">
+        Mon url: <br/> <a
+                href="{{ absolute_url(path('app_menu')) }}">{{ absolute_url(path('app_menu')) }} </a>
+    </div>
+</section>

@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller\Admin;
 
-use App\DataFixtures\tests\ActiveCategoryFixtures;
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\ProductFixtures;
 use App\DataFixtures\tests\StoreFixtures;
@@ -60,7 +59,6 @@ class ProductControllerTest extends WebTestCase
             UserFixtures::class,
             StoreFixtures::class,
             CategoryFixtures::class,
-            ActiveCategoryFixtures::class,
             ProductFixtures::class]);
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
         $product = $this->productRepository->findAll()[0];
@@ -115,7 +113,6 @@ class ProductControllerTest extends WebTestCase
             UserFixtures::class,
             StoreFixtures::class,
             CategoryFixtures::class,
-            ActiveCategoryFixtures::class,
             ProductFixtures::class]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);
@@ -171,7 +168,6 @@ class ProductControllerTest extends WebTestCase
             UserFixtures::class,
             StoreFixtures::class,
             CategoryFixtures::class,
-            ActiveCategoryFixtures::class,
             ProductFixtures::class]);
 
         $user = $this->userRepository->findOneBy(['email' => 'admin@exempl.es']);

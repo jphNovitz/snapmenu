@@ -25,7 +25,7 @@ class Category
 
 
     #[ORM\Column]
-    private ?bool $isActive ;
+    private ?bool $isActive = true ;
 
     #[ORM\Column]
     private ?int $rowOrder = 2;
@@ -88,7 +88,7 @@ class Category
         return $this->isActive;
     }
 
-    public function setisActive(bool $isActive): static
+    public function setIsActive(bool $isActive): static
     {
         $this->isActive = $isActive;
 
@@ -103,13 +103,6 @@ class Category
     public function setRowOrder(int $rowOrder): static
     {
         $this->rowOrder = $rowOrder;
-
-        return $this;
-    }
-
-    public function setActive(bool $isActive): static
-    {
-        $this->isActive = $isActive;
 
         return $this;
     }

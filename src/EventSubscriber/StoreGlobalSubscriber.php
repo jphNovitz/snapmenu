@@ -5,13 +5,9 @@ namespace App\EventSubscriber;
 use App\Mapper\StoreMapper;
 use App\Repository\StoreRepository;
 use App\Dto\StoreDto;
-
-use http\Client\Response;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 class StoreGlobalSubscriber implements EventSubscriberInterface
@@ -20,7 +16,6 @@ class StoreGlobalSubscriber implements EventSubscriberInterface
         private readonly StoreRepository $storeRepository,
         private readonly StoreMapper     $storeMapper,
         private readonly Environment     $twig,
-        private RouterInterface          $router,
         private string                   $environment
     )
     {
@@ -71,10 +66,6 @@ class StoreGlobalSubscriber implements EventSubscriberInterface
             $store = $this->storeRepository->myStore();
 
             if (null === $store) {
-                $event->stopPropagation();
-                $event->setController(function () {
-                    return new RedirectResponse($this->router->generate('app_fallback'));
-                });
                 return;
             }
             $storeDto = new StoreDto();

@@ -2,12 +2,13 @@
 
 namespace App\Tests\Repository;
 
-use App\DataFixtures\tests\ActiveCategoryFixtures;
+use App\Entity\Allergen;
 use App\DataFixtures\tests\CategoryFixtures;
 use App\DataFixtures\tests\ProductFixtures;
 use App\DataFixtures\tests\StoreFixtures;
 use App\DataFixtures\tests\UserFixtures;
 use App\Entity\Category;
+use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -16,7 +17,7 @@ class CategoryRepositoryTest extends KernelTestCase
 {
 
     private EntityManagerInterface $entityManager;
-    private DatabaseToolCollection $databaseTools;
+    private object $databaseTool;
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -32,26 +33,37 @@ class CategoryRepositoryTest extends KernelTestCase
         $this->databaseTool->loadFixtures([
                 UserFixtures::class,
                 StoreFixtures::class,
-                CategoryFixtures::class]);
+                CategoryFixtures::class,
+                ProductFixtures::class]);
 
-
-        $defaults = $this->entityManager
+        $categories = $this->entityManager
             ->getRepository(Category::class)
-            ->findBy(['name'=> 'Lorem Default']);
+            ->findBy(['name'=> 'Lorem Ipsum']);
 
-        foreach ($defaults as $category) {
-            $this->assertInstanceOf(Category::class, $category);
-            $this->assertEquals('default', $category->getType());
-        }
+        $this->assertNotEmpty($categories);
+        $this->assertInstanceOf(Category::class, $categories[0]);
+        $this->assertEquals('Lorem Ipsum', $categories[0]->getName());
+        $this->assertTrue($categories[0]->isActive());
+        $this->assertIsInt($categories[0]->getRowOrder());
 
-        $customs = $this->entityManager
+        $product = $this->entityManager
+            ->getRepository(Product::class)
+            ->findOneBy(['name' => 'Lorem 1']);
+
+        $allergen = new Allergen();
+        $allergen->setName('gluten');
+        $this->entityManager->persist($allergen);
+
+        $product->addAllergen($allergen);
+        $this->entityManager->flush();
+
+        $menu = $this->entityManager
             ->getRepository(Category::class)
-            ->findBy(['name'=> 'Lorem Custom']);
+            ->findMenu();
 
-        foreach ($customs as $category) {
-            $this->assertInstanceOf(Category::class, $category);
-            $this->assertEquals('custom', $category->getType());
-        }
+        $this->assertNotEmpty($menu);
+        $this->assertContainsOnlyInstancesOf(Category::class, $menu);
+        $this->assertTrue($menu[0]->isActive());
     }
 
     protected function tearDown(): void
