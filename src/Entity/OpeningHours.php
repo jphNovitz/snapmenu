@@ -11,11 +11,11 @@ class OpeningHours
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: "integer")]
-    private int $id;
+    #[ORM\Column]
+    private ?int $id = null;
 
-    #[ORM\Column(type: "string", length: 255)]
-    private string $dayOfWeek;
+    #[ORM\Column(length: 10)]
+    private ?string $dayOfWeek = null;
 
 
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
@@ -28,23 +28,23 @@ class OpeningHours
     #[ORM\JoinColumn(nullable: false)]
     private ?Store $store = null;
 
-public function __construct()
-{
-    $this->openTime = $openTime ?? new \DateTimeImmutable('08:00:00');
-    $this->closeTime = $openTime ?? new \DateTimeImmutable('18:00:00');
-}
+    public function __construct()
+    {
+        $this->openTime = new \DateTimeImmutable('08:00:00');
+        $this->closeTime = new \DateTimeImmutable('18:00:00');
+    }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDayOfWeek(): string
+    public function getDayOfWeek(): ?string
     {
         return $this->dayOfWeek;
     }
 
-    public function setDayOfWeek(string $dayOfWeek): self
+    public function setDayOfWeek(string $dayOfWeek): static
     {
         $this->dayOfWeek = $dayOfWeek;
         return $this;
