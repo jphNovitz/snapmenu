@@ -31,10 +31,7 @@ services:
         public: true
         tags: [ 'hautelook_alice.faker.provider' ]
 
-    App\EventSubscriber\StoreGlobalSubscriber:
-        tags: [ 'kernel.event_subscriber' ]
-        arguments:
-            $environment: '%kernel.environment%'
+#
 #    App\Faker\Provider\RestaurantProvider\:
 #        resource: '%kernel.project_dir%/src/Faker/Provider/RestaurantProvider'
 #        tags: [ 'hautelook_alice.faker.provider' ]
