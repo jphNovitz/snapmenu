@@ -62,4 +62,18 @@ class ProductRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function save(Product $product, bool $flush = false): void
+    {
+        $this->_em->persist($product);
+        if ($flush)
+            $this->_em->flush();
+    }
+
+    public function remove(Product $product, bool $flush = false): void
+    {
+        $this->_em->remove($product);
+        if ($flush)
+            $this->_em->flush();
+    }
 }

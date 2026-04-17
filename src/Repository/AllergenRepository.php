@@ -40,4 +40,18 @@ class AllergenRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function save(Allergen $allergen, bool $flush = false): void
+    {
+        $this->_em->persist($allergen);
+        if ($flush)
+            $this->_em->flush();
+    }
+
+    public function remove(Allergen $allergen, bool $flush = false): void
+    {
+        $this->_em->remove($allergen);
+        if ($flush)
+            $this->_em->flush();
+    }
 }

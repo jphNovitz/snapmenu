@@ -61,4 +61,18 @@ class StoreRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function save(Store $store, bool $flush = false): void
+    {
+        $this->_em->persist($store);
+        if ($flush)
+            $this->_em->flush();
+    }
+
+    public function remove(Store $store, bool $flush = false): void
+    {
+        $this->_em->remove($store);
+        if ($flush)
+            $this->_em->flush();
+    }
 }

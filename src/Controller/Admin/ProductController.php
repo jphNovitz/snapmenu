@@ -2,12 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Contract\ProductManagerInterface;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,27 +14,27 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/product')]
 class ProductController extends AbstractController
 {
-    public function __construct(){}
+    public function __construct(private ProductRepository $productRepository,
+                                private ProductManagerInterface $productManager){}
 
     #[Route('/', name: 'admin_product_index', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    public function index(): Response
     {
         return $this->render('admin/product/index.html.twig', [
-            'products' => $productRepository->findByStore($this->getUser()->getStore()),
+            'products' => $this->productRepository
+                ->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'admin_product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $this->productManager->create($product);
 
             return $this->redirectToRoute('admin_product_index', [], Response::HTTP_FOUND);
         }
@@ -47,13 +46,13 @@ class ProductController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'admin_product_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Product $product): Response
     {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->productManager->update($product);
 
             return $this->redirectToRoute('admin_product_index', [], Response::HTTP_FOUND);
         }
@@ -65,11 +64,10 @@ class ProductController extends AbstractController
     }
 
     #[Route('/{id}', name: 'admin_product_delete', methods: ['POST'])]
-    public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Product $product): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($product);
-            $entityManager->flush();
+            $this->productManager->delete($product);
         }
 
         return $this->redirectToRoute('admin_product_index', [], Response::HTTP_FOUND);

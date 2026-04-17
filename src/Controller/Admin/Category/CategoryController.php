@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Category;
 
+use App\Contract\CategoryManagerInterface;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/category')]
 class CategoryController extends AbstractController
 {
-    public function __construct(private readonly CategoryRepository $categoryRepository)
+    public function __construct(private readonly CategoryRepository $categoryRepository, private readonly CategoryManagerInterface $categoryManager)
     {}
 
     #[Route('/', name: 'admin_category_index', methods: ['GET'])]
@@ -33,7 +34,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->categoryRepository->save($category, true);
+            $this->categoryManager->create($category);
 
             return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
         }
@@ -62,8 +63,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->categoryRepository->save($category, true);
-
+            $this->categoryManager->update($category);
             return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
         }
 
@@ -73,12 +73,11 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/activate', name: 'admin_category_activate', methods: ['POST'])]
-    public function activate(Request $request, Category $category): Response
+    #[Route('/{id}/toggle-active', name: 'admin_category_toggle_active', methods: ['POST'])]
+    public function toggleActive(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('activate' . $category->getId(), $request->request->get('_token'))) {
-            $category->setIsActive(!$category->isActive());
-            $this->categoryRepository->save($category, true);
+        if ($this->isCsrfTokenValid('toggle_activate' . $category->getId(), $request->request->get('_token'))) {
+           $this->categoryManager->toggleActive($category);
         }
 
         return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);
@@ -88,7 +87,7 @@ class CategoryController extends AbstractController
     public function delete(Request $request, Category $category): Response
     {
         if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
-            $this->categoryRepository->remove($category, true);
+            $this->categoryManager->delete($category);
         }
 
         return $this->redirectToRoute('admin_category_index', [], Response::HTTP_FOUND);

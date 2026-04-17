@@ -40,4 +40,20 @@ class OpeningHoursRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function save(OpeningHours $openingHours, bool $flush = false): void
+    {
+        $this->_em->persist($openingHours);
+        if ($flush) {
+            $this->_em->flush();
+        }
+    }
+
+    public function remove(OpeningHours $openingHours, bool $flush = false): void
+    {
+        $this->_em->remove($openingHours);
+        if ($flush) {
+            $this->_em->flush();
+        }
+    }
 }

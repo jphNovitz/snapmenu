@@ -39,8 +39,8 @@
                 <td>{{ store.email }}</td>
                 <td>{{ store.slug }}</td>
                 <td>
-                    <a href="{{ path('app_admin_store_store_show', {'id': store.id}) }}">show</a>
-                    <a href="{{ path('app_admin_store_store_edit', {'id': store.id}) }}">edit</a>
+                    <a href="{{ path('admin_store_store_show')}}">show</a>
+                    <a href="{{ path('admin_store_store_edit', {'id': store.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

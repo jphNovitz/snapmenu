@@ -54,4 +54,18 @@ class MessageRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function save(Message $message, bool $flush = false): void
+    {
+        $this->_em->persist($message);
+        if ($flush)
+            $this->_em->flush();
+    }
+
+    public function remove(Message $message, bool $flush = false): void
+    {
+        $this->_em->remove($message);
+        if ($flush)
+            $this->_em->flush();
+    }
 }
