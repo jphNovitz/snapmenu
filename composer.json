@@ -10,7 +10,7 @@
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.17",
-        "endroid/qr-code-bundle": "^6.0.*",
+        "endroid/qr-code-bundle": "6.0.*",
         "fakerphp/faker": "^1.23",
         "jzonta/faker-restaurant": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.12",
@@ -33,7 +33,7 @@
         "symfony/process": "7.4.*",
         "symfony/property-access": "7.4.*",
         "symfony/property-info": "7.4.*",
-        "symfony/runtime": "^7.4.*",
+        "symfony/runtime": "7.4.*",
         "symfony/security-bundle": "7.4.*",
         "symfony/serializer": "7.4.*",
         "symfony/stimulus-bundle": "^2.13",
@@ -114,7 +114,7 @@
         "symfony/css-selector": "7.4.*",
         "symfony/debug-bundle": "7.4.*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^7.4.*",
+        "symfony/phpunit-bridge": "7.4.*",
         "symfony/stopwatch": "7.4.*",
         "symfony/web-profiler-bundle": "7.4.*"
     }
