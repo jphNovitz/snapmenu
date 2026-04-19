@@ -27,22 +27,27 @@ class StoreCrudController extends AbstractCrudController
                 ->setColumns(12),
             TextEditorField::new('description')
                 ->setLabel('fields.store.description')
-                ->setColumns(12),
+                ->setColumns(12)
+                ->hideOnIndex(),
             ImageField::new('logoName')
                 ->setBasePath('images/store')
                 ->onlyOnIndex(),
             TextField::new('logoFile')
                 ->setFormType(VichImageType::class)
-                ->onlyOnForms(),
+                ->onlyOnForms()
+                ->hideOnIndex(),
             TextField::new('streetName')
                 ->setLabel('fields.store.street')
-                ->setColumns(10),
+                ->setColumns(10)
+                ->hideOnIndex(),
             TextField::new('houseNumber')
                 ->setLabel('fields.store.nr')
-                ->setColumns(2),
+                ->setColumns(2)
+                ->hideOnIndex(),
             TextField::new('postCode')
                 ->setLabel('fields.store.postal_code')
-                ->setColumns(4),
+                ->setColumns(4)
+                ->hideOnIndex(),
             TextField::new('city')
                 ->setLabel('fields.store.city')
                 ->setColumns(8),
