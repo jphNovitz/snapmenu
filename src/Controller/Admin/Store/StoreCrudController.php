@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Store;
 
 use App\Entity\Store;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -30,7 +28,7 @@ class StoreCrudController extends AbstractCrudController
                 ->setColumns(12)
                 ->hideOnIndex(),
             ImageField::new('logoName')
-                ->setBasePath('images/store')
+                ->setBasePath('/images/store')
                 ->onlyOnIndex(),
             TextField::new('logoFile')
                 ->setFormType(VichImageType::class)
