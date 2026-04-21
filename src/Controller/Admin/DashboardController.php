@@ -2,9 +2,11 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\ProductController;
-use App\Controller\Admin\StoreCrudController;
-use App\Controller\Admin\UserCrudController;
+use App\Controller\Admin\Product\AllergenCrudController;
+use App\Controller\Admin\Product\CategoryCrudController;
+use App\Controller\Admin\Product\ProductCrudController;
+use App\Controller\Admin\Store\OpeningHoursCrudController;
+use App\Controller\Admin\Store\StoreCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -20,7 +22,7 @@ class DashboardController extends AbstractDashboardController
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
-         return $this->redirectToRoute('admin_store_index');
+        return $this->redirectToRoute('admin_store_index');
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -44,7 +46,18 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkTo(UserCrudController::class, 'Users', 'fas fa-users');
-        yield MenuItem::linkTo(StoreCrudController::class, 'Stores', 'fas fa-store');
-        yield MenuItem::linkTo(ProductController::class,'Products', 'fas fa-box')->setAction('index');
+        yield MenuItem::subMenu('fields.store', 'fa fa-store')->setSubItems([
+            MenuItem::linkTo(StoreCrudController::class, 'fields.store', 'fas fa-store'),
+            MenuItem::linkTo(OpeningHoursCrudController::class, 'fields.opening_hours', 'fas fa-clock'),
+
+        ]);
+        yield MenuItem::subMenu('fields.products', 'fa fa-article')->setSubItems([
+            MenuItem::linkTo(ProductCrudController::class, 'fields.products', 'fas fa-box')
+                ->setAction('index'),
+            MenuItem::linkTo(CategoryCrudController::class, 'fields.categories', 'fas fa-box')
+                ->setAction('index'),
+            MenuItem::linkTo(AllergenCrudController::class, 'fields.allergens', 'fas fa-box')
+                ->setAction('index'),
+        ]);
     }
 }
