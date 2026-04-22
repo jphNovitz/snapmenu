@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Enum\DayOfWeek;
 use App\Entity\OpeningHours;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -15,15 +16,9 @@ class OpeningHoursType extends AbstractType
     {
         $builder
             ->add('dayOfWeek', ChoiceType::class, [
-                'choices' => [
-                    'form.opening_hours.day_of_week.1' => '1',
-                    'form.opening_hours.day_of_week.2' => '2',
-                    'form.opening_hours.day_of_week.3' => '3',
-                    'form.opening_hours.day_of_week.4' => '4',
-                    'form.opening_hours.day_of_week.5' => '5',
-                    'form.opening_hours.day_of_week.6' => '6',
-                    'form.opening_hours.day_of_week.7' => '7',
-                ],
+                'choices' => DayOfWeek::cases(),
+                'choice_value' => static fn (?DayOfWeek $dayOfWeek): ?string => $dayOfWeek?->value,
+                'choice_label' => static fn (DayOfWeek $dayOfWeek): string => $dayOfWeek->translationKey(),
                 'translation_domain' => 'messages',
                 'label' => 'title.day_of_week'
             ])
