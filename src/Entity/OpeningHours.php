@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\DayOfWeek;
 use App\Repository\OpeningHoursRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,8 +15,8 @@ class OpeningHours
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $dayOfWeek = null;
+    #[ORM\Column(enumType: DayOfWeek::class)]
+    private ?DayOfWeek $dayOfWeek = null;
 
 
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
@@ -39,12 +40,12 @@ class OpeningHours
         return $this->id;
     }
 
-    public function getDayOfWeek(): ?string
+    public function getDayOfWeek(): ?DayOfWeek
     {
         return $this->dayOfWeek;
     }
 
-    public function setDayOfWeek(string $dayOfWeek): static
+    public function setDayOfWeek(DayOfWeek $dayOfWeek): static
     {
         $this->dayOfWeek = $dayOfWeek;
         return $this;
