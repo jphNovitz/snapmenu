@@ -1,40 +1,70 @@
 @import "tailwindcss";
 
-@theme {
-    /* ─── Reset les couleurs par défaut de Tailwind ─── */
-    --color-*: initial;
+@import "tailwindcss";
+@plugin "../vendor/daisyui/daisyui.index.js";
 
-    /* ─── Couleurs plates ─── */
-    --color-transparent:            transparent;
-    --color-light-text-base:        #3B413C;
-    --color-light-text-secondary:   #9DB5B2;
-    --color-light-text-highlight:   #5B9279;
-    --color-dark-text-base:         #DAF0EE;
-    --color-dark-text-secondary:    #94D1BE;
-    --color-dark-text-highlight:    #94D1BE;
-    --color-light-primary:          #94D1BE;
-    --color-dark-primary:           #94D1BE;
-    --color-light-neutral:          #DAF0EE;
-    --color-light-neutral-light:    #efefef;
-    --color-dark-neutral:           #3B413C;
-    --color-dark-neutral-light:     #9DB5B2;
+@theme court-minimal {
+--color-scheme: light;
 
-    /* ─── base ─── */
-    --color-base-light:             #94D1BE;
-    --color-base-dark:              #0b0d0c;
+  --color-primary: #141210;
+  --color-primary-content: #FBF8F2;
+  --color-secondary: #867f74;
+  --color-secondary-content: #FBF8F2;
+  --color-accent: #3d3935;
+  --color-accent-content: #FBF8F2;
+  --color-neutral: #141210;
+  --color-neutral-content: #F7F3EC;
+  --color-base-100: #FBF8F2;
+  --color-base-200: #F7F3EC;
+  --color-base-300: #EDE7DB;
+  --color-base-content: #141210;
+  --color-info: #4A6B8A;
+  --color-success: #5C7A4F;
+  --color-warning: #C9A24C;
+  --color-error: #B8433A;
 
-    /* ─── surface ─── */
-    --color-surface-light:          #e1f7e4;
-    --color-surface-dark:           #2b322f;
-    --color-surface-secondary:      #d54122;
-
-    /* ─── content ─── */
-    --color-content-primary-light:  #0b0d0c;
-    --color-content-primary-dark:   #e1f7e4;
-    --color-content-secondary:      #d54122;
-
-    /* ─── Transition properties (extend) ─── */
-    --transition-property-position: positions;
-    --transition-property-height:   height;
-    --transition-property-spacing:  margin, padding;
+  --radius-box: 0.25rem;
+  --radius-btn: 0.125rem;
+  --radius-badge: 0.25rem;
+  --border-btn: 1px;
+  --radius-tab: 0.25rem;
 }
+
+/* @theme { */
+/*     /* ─── Reset les couleurs par défaut de Tailwind ─── */ */
+/*     --color-*: initial; */
+/**/
+/*     /* ─── Couleurs plates ─── */ */
+/*     --color-transparent:            transparent; */
+/*     --color-light-text-base:        #3B413C; */
+/*     --color-light-text-secondary:   #9DB5B2; */
+/*     --color-light-text-highlight:   #5B9279; */
+/*     --color-dark-text-base:         #DAF0EE; */
+/*     --color-dark-text-secondary:    #94D1BE; */
+/*     --color-dark-text-highlight:    #94D1BE; */
+/*     --color-light-primary:          #94D1BE; */
+/*     --color-dark-primary:           #94D1BE; */
+/*     --color-light-neutral:          #DAF0EE; */
+/*     --color-light-neutral-light:    #efefef; */
+/*     --color-dark-neutral:           #3B413C; */
+/*     --color-dark-neutral-light:     #9DB5B2; */
+/**/
+/*     /* ─── base ─── */ */
+/*     --color-base-light:             #94D1BE; */
+/*     --color-base-dark:              #0b0d0c; */
+/**/
+/*     /* ─── surface ─── */ */
+/*     --color-surface-light:          #e1f7e4; */
+/*     --color-surface-dark:           #2b322f; */
+/*     --color-surface-secondary:      #d54122; */
+/**/
+/*     /* ─── content ─── */ */
+/*     --color-content-primary-light:  #0b0d0c; */
+/*     --color-content-primary-dark:   #e1f7e4; */
+/*     --color-content-secondary:      #d54122; */
+/**/
+/*     /* ─── Transition properties (extend) ─── */ */
+/*     --transition-property-position: positions; */
+/*     --transition-property-height:   height; */
+/*     --transition-property-spacing:  margin, padding; */
+/* } */
