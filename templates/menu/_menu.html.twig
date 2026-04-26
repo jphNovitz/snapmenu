@@ -20,12 +20,12 @@
                             <div class="grow py-1">
                                 {% if product.ingredients is not empty %}
                                     <div class="text-sm italic mr-2">
-                                        <span class="font-bold">Ingredients: </span>{{ product.ingredients }}
+                                        <span class="font-bold">{% trans %}fields.ingredients{% endtrans %}: </span>{{ product.ingredients }}
                                     </div>
                                 {% endif %}
                                 {% if product.allergens is not empty %}
                                     <div class="text-sm italic mr-2">
-                                        <span class="font-bold">Allergenes: </span>
+                                        <span class="font-bold">{% trans %}fields.allergens{% endtrans %}: </span>
                                         {% for allergen in product.allergens %}
                                             {{ ('allergen.' ~ allergen.name)|trans|raw }}
                                         {% endfor %}
