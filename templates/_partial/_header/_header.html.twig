@@ -15,7 +15,7 @@
             {% if globalStore is defined %}
                 {% if globalStore.logoName is not null %}
                     <a href="{{ path('app_menu', {slug: globalStore.slug}) }}">
-                        <img src="{{ asset('images/stores/' ~ globalStore.logoName) }}"
+                        <img src="{{ asset('images/store/' ~ globalStore.logoName) }}"
                              class="h-10"
                              alt="{{ globalStore.name }}">
                     </a>
