@@ -4,6 +4,7 @@ namespace App\Tests\Controller\Admin\Store;
 
 use App\DataFixtures\tests\StoreFixtures;
 use App\DataFixtures\tests\UserFixtures;
+use App\Enum\DayOfWeek;
 use App\Entity\OpeningHours;
 use App\Entity\Store;
 use App\Entity\User;
@@ -102,7 +103,7 @@ class OpeningHoursControllerTest extends WebTestCase
         $this->client->loginUser($user);
 
         $fixture = new OpeningHours();
-        $fixture->setDayOfWeek('1');
+        $fixture->setDayOfWeek(DayOfWeek::MONDAY);
         $fixture->setOpenTime(new DateTimeImmutable());
         $fixture->setCloseTime(new DateTimeImmutable());
         $fixture->setStore($store);
@@ -124,7 +125,7 @@ class OpeningHoursControllerTest extends WebTestCase
 
         $fixture = $this->openingHoursRepository->findAll();
 
-        self::assertSame('2', $fixture[0]->getDayOfWeek());
+        self::assertSame('2', $fixture[0]->getDayOfWeek()->value);
         self::assertSame($formattedDate, $fixture[0]->getOpenTime()->format('H:i'));
         self::assertSame($formattedDate, $fixture[0]->getCloseTime()->format('H:i'));
     }
@@ -143,7 +144,7 @@ class OpeningHoursControllerTest extends WebTestCase
         $this->client->loginUser($user);
 
         $fixture = new OpeningHours();
-        $fixture->setDayOfWeek('1');
+        $fixture->setDayOfWeek(DayOfWeek::MONDAY);
         $fixture->setOpenTime(new DateTimeImmutable());
         $fixture->setCloseTime(new DateTimeImmutable());
         $fixture->setStore($store);
