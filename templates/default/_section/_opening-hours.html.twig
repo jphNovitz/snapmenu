@@ -16,9 +16,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for opening_hour in globalStore.openingHours | sort((a, b) => a.dayOfWeek <=> b.dayOfWeek) %}
+                    {% for opening_hour in globalStore.openingHours | sort((a, b) => a.dayOfWeek.value <=> b.dayOfWeek.value) %}
                         <tr>
-                            <td class="px-4 py-3">{{ ('form.opening_hours.day_of_week.' ~ opening_hour.dayOfWeek) | trans }}</td>
+                            <td class="px-4 py-3">{{ opening_hour.dayOfWeek.translationKey|trans }}</td>
                             <td class="px-4 py-3">{{ opening_hour.openTime ? opening_hour.openTime|date('H:i') : '' }}</td>
                             <td class="px-4 py-3">{{ opening_hour.closeTime ? opening_hour.closeTime|date('H:i') : '' }}</td>
                         </tr>
