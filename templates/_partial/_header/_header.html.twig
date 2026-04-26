@@ -1,8 +1,52 @@
-<header class="sticky top-0 w-full text-2xl bg-surface-light border-b-2 border-content-primary-light/30 dark:border-content-primary-dark/30  text-content-primary-light  dark:bg-surface-dark bg-opacity-90 dark:text-content-primary-light/70 mb-4 p-4 z-50 absolute top-0 left-0 rounded-b-md lg:rounded-md"
-        {{ stimulus_controller('nav') }}>
-    <div class="w-full lg:max-w-7xl m-auto">
-        {% include '_partial/_header/_mobile.html.twig' %}
-        {% include '_partial/_header/_lg.html.twig' %}
-        {% include '_partial/_header/_nav.html.twig' %}
+{# stimulus_controller('nav') was here #}
+<div>
+
+    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-50">
+
+        <div class="navbar-start">
+            <a href="{{ path('app_infos_contact', {'_fragment': 'qr'}) }}"
+               class="btn btn-ghost btn-square"
+               title="Code QR">
+                {{ ux_icon('lucide:qr-code', {class: 'w-6 h-6'}) }}
+            </a>
+        </div>
+
+        <div class="navbar-center">
+            {% if globalStore is defined %}
+                {% if globalStore.logoName is not null %}
+                    <a href="{{ path('app_menu', {slug: globalStore.slug}) }}">
+                        <img src="{{ asset('images/stores/' ~ globalStore.logoName) }}"
+                             class="h-10"
+                             alt="{{ globalStore.name }}">
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_menu') }}" class="text-xl font-bold capitalize">
+                        {{ globalStore.name }}
+                    </a>
+                {% endif %}
+            {% else %}
+                <a href="{{ path('app_default') }}" class="text-xl font-bold">
+                    Snap<strong>Menu</strong>
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="navbar-end">
+            {% if globalStore is defined and globalStore.phoneNumber is not null %}
+                <a href="tel:{{ globalStore.phoneNumber }}"
+                   class="btn btn-ghost btn-square"
+                   title="{{ globalStore.phoneNumber }}">
+                    {{ ux_icon('lucide:phone', {class: 'w-6 h-6'}) }}
+                </a>
+            {% else %}
+                <span class="btn btn-ghost btn-square opacity-30 cursor-default">
+                    {{ ux_icon('lucide:phone', {class: 'w-6 h-6'}) }}
+                </span>
+            {% endif %}
+        </div>
+
     </div>
-</header>
+
+    {% include '_partial/_header/_nav.html.twig' %}
+
+</div>
