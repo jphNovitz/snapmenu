@@ -19,10 +19,9 @@
     {% endblock %}
   </head>
   <body class="w-screen overflow-x-hidden min-h-screen bg-base-300 text-base">
-    {% include '_partial/_header/_header.html.twig' %}
-
-    <main class="w-full md:max-w-7xl bg-base-200 p-4"> 
-      {% block body %}{% endblock %}
+    <main class="w-full md:max-w-7xl mx-auto bg-base-200">
+      {% include '_partial/_header/_header.html.twig' %}
+      <div class="p-4">{% block body %}{% endblock %}</div>
 
       <footer class="w-full text-content-primary-light/80 dark:text-content-primary-dark/60 body-font">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
