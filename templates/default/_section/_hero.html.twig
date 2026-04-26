@@ -2,7 +2,7 @@
     <div class="hero-content flex-col lg:flex-row-reverse gap-12">
 
         {% if globalStore.imageName is not null %}
-            <img src="{{ asset('images/stores/' ~ globalStore.imageName) }}"
+            <img src="{{ asset('images/store/' ~ globalStore.imageName) }}"
                  class="max-w-sm w-full rounded-lg shadow-lg object-cover"
                  alt="{{ globalStore.name }}">
         {% endif %}
