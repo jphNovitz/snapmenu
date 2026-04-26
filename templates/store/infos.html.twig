@@ -3,7 +3,7 @@
 {% block description %}{% trans %}opening_hours.header{% endtrans %}{% endblock %}
 {% block body %}
 
-    {% set uri = 'snapmenu.be' ~ path('app_menu', {slug: globalStore.slug}) %}
+    {% set uri = 'snapmenu.be' ~ path('app_menu') %}
     {% set menuUrl = absolute_url(path('app_menu', {slug: globalStore.slug})) %}
 
     <div class="min-h-screen flex flex-col items-center justify-center gap-8 px-4 py-12">
