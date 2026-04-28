@@ -1,17 +1,23 @@
-{# stimulus_controller('nav') was here #}
 <div>
 
-    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-50">
+    <header class="bg-white border-b-[2.5px] border-base-content sticky top-0 z-50
+                   grid grid-cols-[1fr_auto_1fr] items-center px-3.5 py-3 gap-2.5">
 
-        <div class="navbar-start">
-            <a href="{{ path('app_infos_contact') }}"
-               class="btn btn-ghost btn-square"
-               title="Code QR">
-                {{ ux_icon('lucide:qr-code', {class: 'w-6 h-6'}) }}
-            </a>
-        </div>
+        {# ── Bouton QR Code ── #}
+        <button id="qrBtn"
+                class="justify-self-start btn btn-sm rounded-full
+                       border-[2.5px] border-base-content bg-white text-base-content
+                       shadow-[3px_3px_0_0_var(--color-base-content)]
+                       font-extrabold text-xs uppercase tracking-wide
+                       hover:shadow-[4px_4px_0_0_var(--color-base-content)] hover:-translate-x-px hover:-translate-y-px
+                       active:shadow-[1px_1px_0_0_var(--color-base-content)] active:translate-x-0.5 active:translate-y-0.5
+                       transition-all duration-100"
+                aria-label="Afficher le QR code et les contacts">
+            {{ ux_icon('lucide:qr-code', {class: 'w-3.5 h-3.5'}) }} QR Code
+        </button>
 
-        <div class="navbar-center">
+        {# ── Logo centré ── #}
+        <div class="justify-self-center">
             {% if globalStore is defined %}
                 {% if globalStore.logoName is not null %}
                     <a href="{{ path('app_menu', {slug: globalStore.slug}) }}">
@@ -20,32 +26,46 @@
                              alt="{{ globalStore.name }}">
                     </a>
                 {% else %}
-                    <a href="{{ path('app_menu') }}" class="text-xl font-bold capitalize">
-                        {{ globalStore.name }}
+                    <a href="{{ path('app_menu', {slug: globalStore.slug}) }}"
+                       class="inline-flex items-center gap-1.5 font-black tracking-tight leading-none no-underline">
+                        <span class="bg-base-content text-primary-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg">snap!</span>
+                        <span class="bg-white text-base-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg -rotate-3 shadow-[2px_2px_0_0_var(--color-base-content)]">{{ globalStore.name }}</span>
                     </a>
                 {% endif %}
             {% else %}
-                <a href="{{ path('app_default') }}" class="text-xl font-bold">
-                    Snap<strong>Menu</strong>
+                <a href="{{ path('app_default') }}"
+                   class="inline-flex items-center gap-1.5 font-black tracking-tight leading-none no-underline">
+                    <span class="bg-base-content text-primary-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg">snap!</span>
+                    <span class="bg-white text-base-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg -rotate-3 shadow-[2px_2px_0_0_var(--color-base-content)]">menu</span>
                 </a>
             {% endif %}
         </div>
 
-        <div class="navbar-end">
+        {# ── Bouton Appeler ── #}
+        <div class="justify-self-end">
             {% if globalStore is defined and globalStore.phoneNumber is not null %}
                 <a href="tel:{{ globalStore.phoneNumber }}"
-                   class="btn btn-ghost btn-square"
+                   class="btn btn-sm rounded-full
+                          border-[2.5px] border-base-content bg-base-100 text-base-content
+                          shadow-[3px_3px_0_0_var(--color-base-content)]
+                          font-extrabold text-xs uppercase tracking-wide
+                          hover:shadow-[4px_4px_0_0_var(--color-base-content)] hover:-translate-x-px hover:-translate-y-px
+                          active:shadow-[1px_1px_0_0_var(--color-base-content)] active:translate-x-0.5 active:translate-y-0.5
+                          transition-all duration-100"
                    title="{{ globalStore.phoneNumber }}">
-                    {{ ux_icon('lucide:phone', {class: 'w-6 h-6'}) }}
+                    {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }} Appeler
                 </a>
             {% else %}
-                <span class="btn btn-ghost btn-square opacity-30 cursor-default">
-                    {{ ux_icon('lucide:phone', {class: 'w-6 h-6'}) }}
+                <span class="btn btn-sm rounded-full
+                             border-[2.5px] border-base-content bg-base-100 text-base-content
+                             font-extrabold text-xs uppercase tracking-wide
+                             opacity-30 cursor-default">
+                    {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }} Appeler
                 </span>
             {% endif %}
         </div>
 
-    </div>
+    </header>
 
     {% include '_partial/_header/_nav.html.twig' %}
 
