@@ -1,34 +1,86 @@
 @import "tailwindcss";
-
-@import "tailwindcss";
-@plugin "../vendor/daisyui/daisyui.index.js";
-
-@theme court-minimal {
---color-scheme: light;
-
-  --color-primary: #141210;
-  --color-primary-content: #FBF8F2;
-  --color-secondary: #867f74;
-  --color-secondary-content: #FBF8F2;
-  --color-accent: #3d3935;
-  --color-accent-content: #FBF8F2;
-  --color-neutral: #141210;
-  --color-neutral-content: #F7F3EC;
-  --color-base-100: #FBF8F2;
-  --color-base-200: #F7F3EC;
-  --color-base-300: #EDE7DB;
-  --color-base-content: #141210;
-  --color-info: #4A6B8A;
-  --color-success: #5C7A4F;
-  --color-warning: #C9A24C;
-  --color-error: #B8433A;
-
-  --radius-box: 0.25rem;
-  --radius-btn: 0.125rem;
-  --radius-badge: 0.25rem;
-  --border-btn: 1px;
-  --radius-tab: 0.25rem;
+@plugin "../vendor/daisyui/daisyui.index.js" {
+  themes: false;
 }
+
+:root {
+  color-scheme: light;
+
+  --color-base-100: oklch(94% 0.18 122);
+  --color-base-200: oklch(90% 0.16 122);
+  --color-base-300: oklch(86% 0.14 122);
+  --color-base-content: oklch(15% 0.01 110);
+
+  --color-primary: oklch(15% 0.01 110);
+  --color-primary-content: oklch(94% 0.18 122);
+
+  --color-secondary: oklch(68% 0.27 345);
+  --color-secondary-content: oklch(15% 0.01 110);
+
+  --color-accent: oklch(58% 0.24 265);
+  --color-accent-content: oklch(98% 0 0);
+
+  --color-neutral: oklch(20% 0.01 110);
+  --color-neutral-content: oklch(98% 0 0);
+
+  --color-info: oklch(58% 0.24 265);
+  --color-info-content: oklch(98% 0 0);
+
+  --color-success: oklch(85% 0.22 130);
+  --color-success-content: oklch(15% 0.01 110);
+
+  --color-warning: oklch(80% 0.18 60);
+  --color-warning-content: oklch(15% 0.01 110);
+
+  --color-error: oklch(63% 0.23 30);
+  --color-error-content: oklch(98% 0 0);
+
+  --radius-selector: 9999px;
+  --radius-field: 9999px;
+  --radius-box: 1.25rem;
+
+  --size-selector: 0.28125rem;
+  --size-field: 0.28125rem;
+
+  --border: 2.5px;
+
+  --depth: 1;
+  --noise: 0;
+
+  --font-sans: "Archivo", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+
+
+
+
+/* @theme court-minimal { */
+/* --color-scheme: light; */
+/**/
+/*   --color-primary: #141210; */
+/*   --color-primary-content: #FBF8F2; */
+/*   --color-secondary: #867f74; */
+/*   --color-secondary-content: #FBF8F2; */
+/*   --color-accent: #3d3935; */
+/*   --color-accent-content: #FBF8F2; */
+/*   --color-neutral: #141210; */
+/*   --color-neutral-content: #F7F3EC; */
+/*   --color-base-100: #FBF8F2; */
+/*   --color-base-200: #F7F3EC; */
+/*   --color-base-300: #EDE7DB; */
+/*   --color-base-content: #141210; */
+/*   --color-info: #4A6B8A; */
+/*   --color-success: #5C7A4F; */
+/*   --color-warning: #C9A24C; */
+/*   --color-error: #B8433A; */
+/**/
+/*   --radius-box: 0.25rem; */
+/*   --radius-btn: 0.125rem; */
+/*   --radius-badge: 0.25rem; */
+/*   --border-btn: 1px; */
+/*   --radius-tab: 0.25rem; */
+/* } */
 
 /* @theme { */
 /*     /* ─── Reset les couleurs par défaut de Tailwind ─── */ */
