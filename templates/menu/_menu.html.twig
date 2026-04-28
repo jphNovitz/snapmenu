@@ -1,56 +1,169 @@
-<div class="flex flex-col space-y-8"> {# categories #}
+<style>
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .cat-chip.is-active {
+    background: var(--color-base-content);
+    color: var(--color-primary-content);
+    box-shadow: 3px 3px 0 0 var(--color-secondary);
+  }
+</style>
+
+{# ── Nav catégories sticky ── #}
+<nav id="category-nav"
+     class="sticky top-[61px] z-20 bg-white border-b-[2px] border-base-content
+            -mx-4 px-3.5 py-2.5
+            flex gap-2 overflow-x-auto scrollbar-hide">
     {% for category in menu %}
         {% if category.products is not empty %}
-            <div class=""></div>
-            <twig:Title:H3 class="mt-12">
+            <button class="cat-chip flex-shrink-0 btn btn-sm rounded-full
+                           border-[2.5px] border-base-content bg-white text-base-content
+                           font-extrabold text-[13px] uppercase tracking-wide
+                           whitespace-nowrap transition-all duration-100"
+                    data-target="sec-{{ loop.index0 }}">
                 {{ category.name }}
-            </twig:Title:H3>
-            <div class="flex flex-col space-y-4">
-            {% for product in category.products %}
-                <div class="w-full p-2 first:mt-0 last:mb-8 ">
-                    <div class="w-full flex flex-col ">
-                        <div class="w-full flex flex-wrap justify-start items-center gap-5 py-1 ">
-                            <twig:Title:H4 class="uppercase font-semibold py-1"> {{ product.name }}</twig:Title:H4>
-                            <div class="flex gap-4 font-black text-light-text-highlight text-dark-text-highlight">
-                                {% if  product.veggie %} {{ ux_icon('lucide:vegan', { class: 'w-5 h-5' }) }} {% endif %}
-                                {% if  product.halal %} {{ ux_icon('mdi:food-halal', { class: 'w-5 h-5' }) }}{% endif %}
-                            </div>
-                        </div>
-                        <div class="w-full flex ">
-                            <div class="grow py-1">
-                                {% if product.ingredients is not empty %}
-                                    <div class="text-sm italic mr-2">
-                                        <span class="font-bold">{% trans %}fields.ingredients{% endtrans %}: </span>{{ product.ingredients }}
-                                    </div>
-                                {% endif %}
-                                {% if product.allergens is not empty %}
-                                    <div class="text-sm italic mr-2">
-                                        <span class="font-bold">{% trans %}fields.allergens{% endtrans %}: </span>
-                                        {% for allergen in product.allergens %}
-                                            {{ ('allergen.' ~ allergen.name)|trans|raw }}
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="w-28 grid grid-rows-2">
-                                <div class="flex justify-between items-center">
-                                    {{ ux_icon('fluent-emoji-high-contrast:fork-and-knife-with-plate', {class: 'w-5 h-5'}) }}
-                                    <div class="text-xl text-blue-600 font-black  after:content-['€'] after:text-sm text-right relative">
-                                        {{ product.priceHome }}
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    {{ ux_icon('solar:bag-4-linear', {class: 'w-5 h-5'}) }}
-                                    <div class="text-xl text-blue-600 font-black  after:content-['€'] after:text-sm text-right  relative">
-                                        {{ product.priceAway }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            </button>
+        {% endif %}
+    {% endfor %}
+</nav>
+
+{# ── Sections menu ── #}
+{% set sStyles = [
+    { bg: 'bg-white',        shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-primary-content shadow-[3px_3px_0_0_white]',                      sticker: 'bg-secondary text-base-content rotate-[8deg]',     label: '🔥 best'       },
+    { bg: 'bg-base-100',     shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-primary-content shadow-[3px_3px_0_0_white]',                      sticker: 'bg-accent text-accent-content -rotate-[6deg]',     label: '🌿 fresh'      },
+    { bg: 'bg-warning/30',   shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-warning shadow-[3px_3px_0_0_white]',                              sticker: 'bg-white text-base-content rotate-[5deg]',         label: '⚡ à partager' },
+    { bg: 'bg-white',        shadow: 'shadow-[6px_6px_0_0_var(--color-accent)]',       head: 'bg-accent text-accent-content shadow-[3px_3px_0_0_var(--color-base-content)]',         sticker: 'bg-secondary text-base-content -rotate-[5deg]',    label: '🧊 froid'      },
+    { bg: 'bg-secondary/20', shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-secondary shadow-[3px_3px_0_0_white]',                            sticker: 'bg-base-100 text-base-content rotate-[7deg]',      label: '🍬 maison'     }
+] %}
+
+<div class="-mx-4 px-3.5 py-3.5 md:py-5 bg-base-100 flex flex-col gap-5">
+    {% for category in menu %}
+        {% if category.products is not empty %}
+            {% set s = sStyles[loop.index0 % 5] %}
+
+            <section id="sec-{{ loop.index0 }}"
+                     class="menu-section relative rounded-[var(--radius-box)] border-[3px] border-base-content
+                            {{ s.bg }} {{ s.shadow }}
+                            px-4 pt-7 pb-3.5
+                            scroll-mt-[120px]">
+
+                {# Sticker flottant #}
+                <span class="absolute -top-3 right-3.5
+                             badge h-auto rounded-full border-[2.5px] border-base-content
+                             {{ s.sticker }}
+                             font-black text-[10px] uppercase tracking-[0.04em]
+                             shadow-[2px_2px_0_0_var(--color-base-content)] px-2.5 py-1">
+                    {{ s.label }}
+                </span>
+
+                {# En-tête de section #}
+                <div class="inline-flex items-center gap-2 mb-3.5
+                            rounded-full border-[2.5px] border-base-content px-4 py-1.5
+                            -rotate-[1.5deg] {{ s.head }}">
+                    <span class="font-mono text-xs opacity-75 leading-none">0{{ loop.index }}</span>
+                    <h2 class="text-[22px] font-black lowercase tracking-[-0.03em] leading-none m-0">
+                        {{ category.name }}
+                    </h2>
                 </div>
-            {% endfor %}
-            </div>{# products #}
+
+                {# Produits #}
+                {% for product in category.products %}
+                    <article class="grid grid-cols-[1fr_auto] gap-3.5 items-start py-3
+                                    {% if not loop.last %}border-b-2 border-dashed border-base-content/25{% endif %}">
+
+                        <div>
+                            <div class="text-[17px] font-extrabold tracking-[-0.02em] leading-[1.15] mb-0.5">
+                                {{ product.name }}
+                            </div>
+
+                            {% if product.ingredients is not empty %}
+                                <div class="text-sm opacity-70 leading-snug mb-1.5">
+                                    {{ product.ingredients }}
+                                </div>
+                            {% endif %}
+
+                            {% if product.allergens is not empty %}
+                                <div class="text-xs opacity-50 italic mb-1.5">
+                                    {% trans %}fields.allergens{% endtrans %} :
+                                    {% for allergen in product.allergens %}
+                                        {{ ('allergen.' ~ allergen.name)|trans|raw }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            <div class="flex flex-wrap gap-1">
+                                {% if product.veggie %}
+                                    <span class="badge badge-sm h-auto rounded-full border-2 border-base-content
+                                                 bg-base-100 text-base-content
+                                                 font-extrabold text-[10px] uppercase tracking-[0.04em]
+                                                 shadow-[1.5px_1.5px_0_0_var(--color-base-content)]
+                                                 rotate-[2deg] px-2 py-0.5">vegan</span>
+                                {% endif %}
+                                {% if product.halal %}
+                                    <span class="badge badge-sm h-auto rounded-full border-2 border-base-content
+                                                 bg-warning text-base-content
+                                                 font-extrabold text-[10px] uppercase tracking-[0.04em]
+                                                 shadow-[1.5px_1.5px_0_0_var(--color-base-content)]
+                                                 -rotate-[1deg] px-2 py-0.5">halal</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {# Prix #}
+                        <div class="flex flex-col items-end gap-1 self-start">
+                            <span class="badge h-auto rounded-full
+                                         bg-base-content text-primary-content border-[2.5px] border-base-content
+                                         font-black text-base px-3 py-1.5 whitespace-nowrap leading-none">
+                                {{ product.priceHome }}€
+                            </span>
+                            {% if product.priceAway is defined and product.priceAway is not null
+                                and product.priceAway != product.priceHome %}
+                                <span class="font-mono text-[10px] text-base-content/50 whitespace-nowrap">
+                                    {{ product.priceAway }}€ 🛍
+                                </span>
+                            {% endif %}
+                        </div>
+
+                    </article>
+                {% endfor %}
+
+            </section>
         {% endif %}
     {% endfor %}
 </div>
+
+<script>
+(function () {
+    const nav = document.getElementById('category-nav');
+    if (!nav) return;
+    const chips = [...nav.querySelectorAll('[data-target]')];
+    const sections = [...document.querySelectorAll('.menu-section[id]')];
+    if (!chips.length || !sections.length) return;
+
+    const setActive = (id) => {
+        chips.forEach(c => {
+            c.classList.toggle('is-active', c.dataset.target === id);
+            if (c.dataset.target === id) {
+                c.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        });
+    };
+
+    chips.forEach(c => {
+        c.addEventListener('click', () => {
+            document.getElementById(c.dataset.target)
+                ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        const offset = 130;
+        let activeId = sections[0]?.id;
+        sections.forEach(s => {
+            if (s.getBoundingClientRect().top <= offset) activeId = s.id;
+        });
+        setActive(activeId);
+    }, { passive: true });
+
+    setActive(sections[0]?.id);
+})();
+</script>

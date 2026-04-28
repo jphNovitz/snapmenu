@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
-    {% block title %} {{ globalStore.name }} {% endblock %}
+{% block title %} {{ globalStore.name }} {% endblock %}
 
-    {% block body %}
-        {% include 'default/_section/_hero.html.twig' %}
-        {% include 'default/_section/_qr-description.html.twig' %}
-        {% include 'default/_section/_opening-hours.html.twig' %}
-    {% endblock %}
+{% block body %}
+    {% include 'default/_section/_hero.html.twig' %}
 
+    {# Le menu est passé par le controller (MenuController ou DefaultController) #}
+    {% if menu is defined %}
+        {% include 'menu/_menu.html.twig' %}
+    {% endif %}
+{% endblock %}
