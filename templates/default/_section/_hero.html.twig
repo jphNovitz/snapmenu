@@ -1,25 +1,36 @@
-<div class="hero min-h-[60vh]">
-    <div class="hero-content flex-col lg:flex-row-reverse gap-12">
+<section class="bg-base-100 border-b-[2.5px] border-base-content px-4 py-6 md:px-7 md:py-9">
 
-        {% if globalStore.imageName is not null %}
-            <img src="{{ asset('images/store/' ~ globalStore.imageName) }}"
-                 class="max-w-sm w-full rounded-lg shadow-lg object-cover"
-                 alt="{{ globalStore.name }}">
+    <h1 class="text-[44px] md:text-[72px] font-black lowercase tracking-[-0.045em] leading-[0.92] mb-1.5">
+        {{ globalStore.name }}<span class="text-secondary">!</span>
+    </h1>
+
+    {% if globalStore.description is not null %}
+        <p class="text-sm md:text-base font-medium leading-relaxed max-w-[460px]">
+            {{ globalStore.description }}
+        </p>
+    {% endif %}
+
+    <div class="inline-flex flex-wrap gap-1.5 mt-3">
+        <span class="badge h-auto rounded-full bg-white border-2 border-base-content font-mono text-[11px] font-semibold shadow-[2px_2px_0_0_var(--color-base-content)] px-2.5 py-1">
+            <span class="text-success mr-1">●</span>ouvert
+        </span>
+        {% if globalStore.streetName is not null %}
+            <span class="badge h-auto rounded-full bg-white border-2 border-base-content font-mono text-[11px] font-semibold shadow-[2px_2px_0_0_var(--color-base-content)] px-2.5 py-1">
+                {{ globalStore.streetName }} {{ globalStore.houseNumber }} · {{ globalStore.postCode }}
+            </span>
         {% endif %}
-
-        <div>
-            <h1 class="text-4xl lg:text-5xl font-bold capitalize">
-                {{ globalStore.name }}
-            </h1>
-            {% if globalStore.description is not null %}
-                <p class="py-6 text-base-content/70 max-w-md">
-                    {{ globalStore.description }}
-                </p>
-            {% endif %}
-            <a href="{{ path('app_menu') }}" class="btn btn-primary">
-                {% trans %}cta.primary{% endtrans %}
-            </a>
-        </div>
-
     </div>
-</div>
+
+    <div class="mt-5">
+        <a href="{{ path('app_menu') }}"
+           class="btn rounded-full border-[2.5px] border-base-content bg-base-content text-primary-content
+                  font-extrabold text-sm uppercase tracking-wide
+                  shadow-[4px_4px_0_0_var(--color-secondary)]
+                  hover:shadow-[5px_5px_0_0_var(--color-secondary)] hover:-translate-x-px hover:-translate-y-px
+                  active:shadow-[1px_1px_0_0_var(--color-secondary)] active:translate-x-0.5 active:translate-y-0.5
+                  transition-all duration-100">
+            {% trans %}cta.primary{% endtrans %} →
+        </a>
+    </div>
+
+</section>
