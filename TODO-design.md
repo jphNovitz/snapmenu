@@ -26,11 +26,11 @@
 - [ ] Description produit : `text-sm opacity-70`
 
 ### Footer (`templates/base.html.twig`)
-- [ ] `bg-neutral text-neutral-content` DaisyUI sur le footer
-- [ ] Grid : `grid grid-cols-2 md:grid-cols-4 gap-6`
-- [ ] Labels : `font-mono text-xs uppercase tracking-widest opacity-55`
-- [ ] Typo massive "à bientôt. snap." : `text-5xl font-black lowercase tracking-tight` + span avec `bg-primary text-primary-content rotate-[-2deg] px-2 rounded-md inline-block`
-- [ ] Remplacer les liens sociaux jphiweb par ceux du store (depuis `globalStore`)
+- [x] `bg-neutral text-neutral-content` DaisyUI sur le footer
+- [x] Grid : `grid grid-cols-2 md:grid-cols-4 gap-6`
+- [x] Labels : `font-mono text-xs uppercase tracking-widest opacity-55`
+- [x] Typo massive "à bientôt. snap." : `text-5xl font-black lowercase tracking-tight` + span avec `bg-primary text-primary-content rotate-[-2deg] px-2 rounded-md inline-block`
+- [x] Remplacer les liens sociaux jphiweb par infos du store (nom, tél, email, adresse) — StoreDto n'a pas de champs réseaux sociaux
 
 ---
 
