@@ -84,13 +84,20 @@
         </div>
 
         <div class="border-t border-neutral-content/15">
-          <div class="container mx-auto px-5 py-3 flex items-center justify-between">
+          <div class="container mx-auto px-5 py-3 flex flex-wrap items-center justify-between gap-3">
+
             <p class="font-mono text-xs opacity-55">
               © {{ 'now'|date('Y') }} {% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}Snapmenu{% endif %}
+              <span class="mx-1.5 opacity-40">—</span>
+              <a href="https://jphiweb.be" class="hover:opacity-100 transition-opacity" target="_blank" rel="noopener noreferrer">propulsé par jphiweb.be</a>
             </p>
-            <a href="https://jphiweb.be"
-               class="font-mono text-xs opacity-55 hover:opacity-100 transition-opacity"
-               target="_blank" rel="noopener noreferrer">propulsé par jphiweb.be</a>
+
+            <nav class="flex items-center gap-4">
+              <a href="#" class="font-mono text-xs opacity-55 hover:opacity-100 transition-opacity">Mentions légales</a>
+              <a href="#" class="font-mono text-xs opacity-55 hover:opacity-100 transition-opacity">CGV</a>
+              <a href="#" class="font-mono text-xs opacity-55 hover:opacity-100 transition-opacity">Cookies</a>
+            </nav>
+
           </div>
         </div>
 
