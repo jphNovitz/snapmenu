@@ -1,15 +1,16 @@
 {% set sStyles = [
-    { bg: 'bg-white',        shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-primary-content shadow-[3px_3px_0_0_white]',                      sticker: 'bg-secondary text-base-content rotate-[8deg]',     label: '🔥 best'       },
-    { bg: 'bg-base-100',     shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-primary-content shadow-[3px_3px_0_0_white]',                      sticker: 'bg-accent text-accent-content -rotate-[6deg]',     label: '🌿 fresh'      },
-    { bg: 'bg-warning/30',   shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-warning shadow-[3px_3px_0_0_white]',                              sticker: 'bg-white text-base-content rotate-[5deg]',         label: '⚡ à partager' },
-    { bg: 'bg-white',        shadow: 'shadow-[6px_6px_0_0_var(--color-accent)]',       head: 'bg-accent text-accent-content shadow-[3px_3px_0_0_var(--color-base-content)]',         sticker: 'bg-secondary text-base-content -rotate-[5deg]',    label: '🧊 froid'      },
-    { bg: 'bg-secondary/20', shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-secondary shadow-[3px_3px_0_0_white]',                            sticker: 'bg-base-100 text-base-content rotate-[7deg]',      label: '🍬 maison'     }
+    { shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-primary-content shadow-[3px_3px_0_0_white]',                      sticker: 'bg-secondary text-base-content rotate-[8deg]',     label: '🔥 best'       },
+    { shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-primary-content shadow-[3px_3px_0_0_white]',                      sticker: 'bg-accent text-accent-content -rotate-[6deg]',     label: '🌿 fresh'      },
+    { shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-warning shadow-[3px_3px_0_0_white]',                              sticker: 'bg-warning text-base-content rotate-[5deg]',       label: '⚡ à partager' },
+    { shadow: 'shadow-[6px_6px_0_0_var(--color-accent)]',       head: 'bg-accent text-accent-content shadow-[3px_3px_0_0_var(--color-base-content)]',         sticker: 'bg-secondary text-base-content -rotate-[5deg]',    label: '🧊 froid'      },
+    { shadow: 'shadow-[6px_6px_0_0_var(--color-base-content)]', head: 'bg-base-content text-secondary shadow-[3px_3px_0_0_white]',                            sticker: 'bg-base-100 text-base-content rotate-[7deg]',      label: '🍬 maison'     }
 ] %}
 {% set s = sStyles[index % 5] %}
 
 <section id="sec-{{ index }}"
          class="menu-section relative rounded-[var(--radius-box)] border-[3px] border-base-content
-                {{ s.bg }} {{ s.shadow }}
+                bg-white md:hover:bg-base-100/20 transition-colors duration-150
+                {{ s.shadow }}
                 px-4 pt-7 pb-3.5
                 scroll-mt-[120px]">
 
