@@ -27,14 +27,14 @@
       <div class="p-4">{% block body %}{% endblock %}</div>
 
       <footer class="bg-neutral text-neutral-content w-full">
-        <div class="container mx-auto px-5 pt-10 pb-8">
+        <div class="container mx-auto px-5 pt-10 pb-6">
 
           <p class="text-5xl font-black lowercase tracking-tight mb-8">
             à bientôt.
             <span class="bg-primary text-primary-content rotate-[-2deg] px-2 rounded-md inline-block">snap.</span>
           </p>
 
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
 
             <div>
               <p class="font-mono text-xs uppercase tracking-widest opacity-55 mb-2">Restaurant</p>
@@ -66,14 +66,34 @@
             </div>
 
             <div>
-              <p class="font-mono text-xs uppercase tracking-widest opacity-55 mb-2">Propulsé par</p>
-              <a href="https://jphiweb.be" class="font-bold hover:underline" target="_blank" rel="noopener noreferrer">jphiweb.be</a>
-              <p class="text-xs opacity-55 mt-2">© {{ 'now'|date('Y') }}</p>
+              <p class="font-mono text-xs uppercase tracking-widest opacity-55 mb-2">Suivre</p>
+              <div class="flex flex-col gap-2">
+                <a href="#" class="inline-flex items-center gap-2 hover:underline">
+                  {{ ux_icon('lucide:facebook', {class: 'w-4 h-4'}) }}
+                  <span>Facebook</span>
+                </a>
+                <a href="#" class="inline-flex items-center gap-2 hover:underline">
+                  {{ ux_icon('lucide:instagram', {class: 'w-4 h-4'}) }}
+                  <span>Instagram</span>
+                </a>
+              </div>
             </div>
 
           </div>
 
         </div>
+
+        <div class="border-t border-neutral-content/15">
+          <div class="container mx-auto px-5 py-3 flex items-center justify-between">
+            <p class="font-mono text-xs opacity-55">
+              © {{ 'now'|date('Y') }} {% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}Snapmenu{% endif %}
+            </p>
+            <a href="https://jphiweb.be"
+               class="font-mono text-xs opacity-55 hover:opacity-100 transition-opacity"
+               target="_blank" rel="noopener noreferrer">propulsé par jphiweb.be</a>
+          </div>
+        </div>
+
       </footer>
     </main>
 
