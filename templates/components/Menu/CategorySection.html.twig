@@ -77,16 +77,34 @@
             </div>
 
             {# Prix #}
-            <div class="flex flex-col items-end gap-1 self-start">
-                <span class="badge h-auto rounded-full
-                             bg-base-content text-primary-content border-[2.5px] border-base-content
-                             font-black text-base px-3 py-1.5 whitespace-nowrap leading-none">
-                    {{ product.priceHome }}€
-                </span>
+            <div class="flex flex-col items-end gap-2 self-start">
                 {% if product.priceAway is defined and product.priceAway is not null
                     and product.priceAway != product.priceHome %}
-                    <span class="font-mono text-[10px] text-base-content/50 whitespace-nowrap">
-                        {{ product.priceAway }}€ 🛍
+
+                    <div class="flex flex-col items-end gap-0.5">
+                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-55">sur place</span>
+                        <span class="badge h-auto rounded-full
+                                     bg-base-content text-primary-content border-[2.5px] border-base-content
+                                     font-black text-base px-3 py-1.5 whitespace-nowrap leading-none">
+                            {{ product.priceHome }}€
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col items-end gap-0.5">
+                        <span class="font-mono text-[9px] uppercase tracking-widest opacity-55">emporté</span>
+                        <span class="badge h-auto rounded-full
+                                     bg-white text-base-content border-[2.5px] border-base-content
+                                     font-black text-base px-3 py-1.5 whitespace-nowrap leading-none
+                                     shadow-[2px_2px_0_0_var(--color-base-content)]">
+                            {{ product.priceAway }}€
+                        </span>
+                    </div>
+
+                {% else %}
+                    <span class="badge h-auto rounded-full
+                                 bg-base-content text-primary-content border-[2.5px] border-base-content
+                                 font-black text-base px-3 py-1.5 whitespace-nowrap leading-none">
+                        {{ product.priceHome }}€
                     </span>
                 {% endif %}
             </div>
