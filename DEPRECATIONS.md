@@ -4,7 +4,7 @@
 
 **Deprecation :** `symfony/framework-bundle 7.3` — la valeur par défaut changera en 8.0.
 
-- [ ] Ajouter dans `config/packages/framework.yaml` :
+- [*] Ajouter dans `config/packages/framework.yaml` :
   ```yaml
   framework:
       property_info:
@@ -20,14 +20,14 @@
 **Deprecation :** `doctrine/doctrine-bundle` — l'auto-mapping des entités dans les
 paramètres de controller est déprécié. Remplacement : Symfony Mapped Route Parameters.
 
-- [ ] Ajouter dans `config/packages/doctrine.yaml` sous `orm:` :
+- [x] Ajouter dans `config/packages/doctrine.yaml` sous `orm:` :
   ```yaml
   doctrine:
       orm:
           controller_resolver:
               auto_mapping: false
   ```
-- [ ] Vérifier si des controllers utilisent l'injection automatique d'entité via
+- [x] Vérifier si des controllers utilisent l'injection automatique d'entité via
   paramètre de route (ex: `public function show(Store $store)` sans `#[MapEntity]`).
   Si oui, ajouter explicitement `#[MapEntity]` de `Symfony\Bridge\Doctrine\Attribute\MapEntity`.
 

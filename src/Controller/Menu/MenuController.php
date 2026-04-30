@@ -2,9 +2,7 @@
 
 namespace App\Controller\Menu;
 
-use App\Mapper\StoreMapper;
 use App\Repository\CategoryRepository;
-use App\Repository\StoreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

@@ -26,7 +26,7 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->messageManager->create($message);
 
-            return $this->redirectToRoute('app_redirect_after_login', [], Response::HTTP_FOUND);
+            return $this->redirectToRoute('app_default', [], Response::HTTP_FOUND);
         }
 
         return $this->render('contact/message/new.html.twig', [
