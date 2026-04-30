@@ -76,10 +76,6 @@ class Store
     #[ORM\OneToOne(inversedBy: 'store', cascade: ['persist', 'remove'])]
     private ?User $owner = null;
 
-    /**
-     * @ORM\Column(type="string", length=100, unique=true)
-     * @Gedmo\Slug(fields={"name"})
-     */
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
