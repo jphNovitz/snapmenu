@@ -1,15 +1,16 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['panel']
+  static targets = ['panel', 'copy']
 
-    toggle(e) {
-        e.stopPropagation()
-        this.panelTarget.classList.toggle('hidden')
-    }
+  toggle(e) {
+    e.stopPropagation()
+    this.panelTarget.classList.toggle('hidden')
+  }
 
-    close(e) {
-        e.stopPropagation()
-        this.panelTarget.classList.add('hidden')
-    }
+  close(e) {
+    e.stopPropagation()
+    this.panelTarget.classList.add('hidden')
+  }
 }
+
