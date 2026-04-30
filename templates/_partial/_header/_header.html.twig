@@ -1,10 +1,11 @@
-<div>
+<div data-controller="qr">
 
     <header class="bg-white border-b-[2.5px] border-base-content sticky top-0 z-50
                    grid grid-cols-[1fr_auto_1fr] items-center px-3.5 py-3 gap-2.5">
 
         {# ── Bouton QR Code ── #}
         <button id="qrBtn"
+                data-action="click->qr#toggle"
                 class="justify-self-start btn btn-sm rounded-full
                        border-[2.5px] border-base-content bg-white text-base-content
                        shadow-[3px_3px_0_0_var(--color-base-content)]
@@ -66,6 +67,101 @@
         </div>
 
     </header>
+
+    {# ── Overlay QR Code — carte sticker ── #}
+    {% if globalStore is defined %}
+        {% set uri = 'snapmenu.be' ~ path('app_menu', {slug: globalStore.slug}) %}
+        <div data-qr-target="panel"
+             data-action="click->qr#close"
+             class="hidden fixed inset-0 z-40 flex items-center justify-center bg-black/50 px-5">
+
+            <div data-action="click->qr#close:stop"
+                 class="relative w-full max-w-xs
+                        bg-base-100 border-[3px] border-secondary
+                        rounded-[var(--radius-box)] shadow-[5px_5px_0_0_var(--color-base-content)]
+                        rotate-1 p-4 flex flex-col gap-3">
+
+                {# Sticker haut-droite #}
+                <div class="absolute -top-4 -right-3
+                            bg-secondary text-secondary-content
+                            rounded-full border-[2px] border-base-content
+                            shadow-[2px_2px_0_0_var(--color-base-content)]
+                            px-3 py-1 rotate-[12deg]
+                            font-black text-[10px] uppercase tracking-wide whitespace-nowrap">
+                    SCAN &amp; MANGE !
+                </div>
+
+                {# En-tête : nom + bouton ✕ #}
+                <div class="flex items-center justify-between">
+                    <span class="font-black text-lg leading-none">{{ globalStore.name }}</span>
+                    <button data-action="click->qr#close"
+                            class="w-7 h-7 flex items-center justify-center shrink-0
+                                   rounded-full bg-base-content text-primary-content"
+                            aria-label="Fermer">
+                        {{ ux_icon('lucide:x', {class: 'w-3.5 h-3.5'}) }}
+                    </button>
+                </div>
+
+                {# Box blanche : QR + URL #}
+                <div class="bg-white border-2 border-base-content rounded-xl p-4 flex flex-col items-center gap-2">
+                    <img src="{{ qr_code_url(uri) }}"
+                         class="w-44 h-44"
+                         alt="{{ globalStore.name }} — QR code menu">
+                    <span class="font-mono text-[10px] text-base-content/50">{{ uri }}</span>
+                </div>
+
+                {# Lignes contact #}
+                <ul class="flex flex-col divide-y divide-dashed divide-base-content/25">
+                    {% if globalStore.phoneNumber %}
+                        <li class="flex items-center gap-3 py-2">
+                            <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
+                                {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }}
+                            </div>
+                            <div class="flex flex-col leading-none gap-0.5">
+                                <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Téléphone</span>
+                                <span class="font-black text-sm">{{ globalStore.phoneNumber }}</span>
+                            </div>
+                        </li>
+                    {% endif %}
+                    {% if globalStore.streetName %}
+                        <li class="flex items-center gap-3 py-2">
+                            <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
+                                {{ ux_icon('lucide:map-pin', {class: 'w-3.5 h-3.5'}) }}
+                            </div>
+                            <div class="flex flex-col leading-none gap-0.5">
+                                <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Adresse</span>
+                                <span class="font-black text-sm">{{ globalStore.streetName }} {{ globalStore.houseNumber }} · {{ globalStore.postCode }} {{ globalStore.city }}</span>
+                            </div>
+                        </li>
+                    {% endif %}
+                    <li class="flex items-center gap-3 py-2">
+                        <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
+                            {{ ux_icon('lucide:globe', {class: 'w-3.5 h-3.5'}) }}
+                        </div>
+                        <div class="flex flex-col leading-none gap-0.5 min-w-0">
+                            <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Site web</span>
+                            <span class="font-black text-sm truncate">{{ uri }}</span>
+                        </div>
+                    </li>
+                </ul>
+
+                {# Boutons #}
+                <div class="flex gap-2">
+                    <button class="flex-1 bg-base-content text-primary-content
+                                   rounded-full border-[2px] border-base-content
+                                   font-black text-[10px] uppercase tracking-wide py-2.5">
+                        Copier le lien
+                    </button>
+                    <button class="flex-1 bg-white text-base-content
+                                   rounded-full border-[2px] border-base-content
+                                   font-black text-[10px] uppercase tracking-wide py-2.5">
+                        Partager
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
 
     {% include '_partial/_header/_nav.html.twig' %}
 
