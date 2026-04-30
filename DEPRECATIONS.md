@@ -4,7 +4,7 @@
 
 **Deprecation :** `symfony/framework-bundle 7.3` — la valeur par défaut changera en 8.0.
 
-- [*] Ajouter dans `config/packages/framework.yaml` :
+- [x] Ajouter dans `config/packages/framework.yaml` :
   ```yaml
   framework:
       property_info:
@@ -38,12 +38,11 @@ paramètres de controller est déprécié. Remplacement : Symfony Mapped Route P
 **Deprecation :** `vich/uploader-bundle 2.9` — le namespace `Annotation` est déprécié,
 utiliser `Attribute` à la place.
 
-- [x] Dans `src/Entity/Store.php`, remplacer :
-  ```php
-  use Vich\UploaderBundle\Mapping\Annotation as Vich;
-  ```
-  par :
-  ```php
-  use Vich\UploaderBundle\Mapping\Attribute as Vich;
-  ```
-  > Les attributs PHP `#[Vich\Uploadable]` et `#[Vich\UploadableField(...)]` restent identiques.
+- [x] Déjà réglé : `Store.php` utilise `Vich\UploaderBundle\Mapping\Attribute as Vich`
+  et les attributs `#[Vich\Uploadable]` / `#[Vich\UploadableField(...)]`.
+- [x] Doublon nettoyé : l'ancienne annotation DocBlock `@Gedmo\Slug` coexistait avec
+  `#[Gedmo\Slug]` sur le champ `slug` — le DocBlock a été supprimé.
+
+> **Note Gedmo :** `gedmo/doctrine-extensions` v3.x n'a pas de namespace `Attribute`
+> séparé. L'import `Gedmo\Mapping\Annotation as Gedmo` est correct et compatible avec
+> la syntaxe PHP 8 `#[Gedmo\...]`.
