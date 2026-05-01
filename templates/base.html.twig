@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr_BE" class="scroll-smooth" data-theme="court-minimal" >
   <head>
+    <!-- Encodage -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <meta name="description" content="{% block description %}Welcome!{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO de base -->
+    <title>{% block title %}Menu digital horeca — QR moi ça ! | SnapMenu {% endblock %}</title>
+    <meta name="description" content="{% block meta_description %} Mettez votre carte dans la poche de chaque client grâce au QR code. Mise à jour instantanée, partage ultra facile. Prêt en 5 minutes {% endblock %}">
+
+    <!-- Canonical (évite le duplicate content) -->
+    <link rel="canonical" href="{% block canonical %}{{ app.request.uri }}{% endblock %}">
     <link rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+    <meta property="og:title" content="{% block og_title %}Menu digital horeca — QR moi ça ! | SnapMenu {% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Mettez votre carte dans la poche de chaque client grâce au QR code. Mise à jour instantanée, partage ultra facile. Prêt en 5 minutes.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('images/store/landing.jpg')) }}{% endblock %}">
+    <meta property="og:locale" content="fr_BE">
+    <meta property="og:site_name" content="SnapMenu">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Menu digital horeca — QR moi ça ! | SnapMenu">
+    <meta name="twitter:description" content="Mettez votre carte dans la poche de chaque client grâce au QR code. Mise à jour instantanée, partage ultra facile. Prêt en 5 minutes.">
+    <meta name="twitter:image" content="https://snapmenu.jphiweb.be/images/og-snapmenu.jpg">
+
     {% block stylesheets %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
