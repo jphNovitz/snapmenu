@@ -1,168 +1,178 @@
 <div {{stimulus_controller('qr')}}>
 
-    <header class="bg-white border-b-[2.5px] border-base-content sticky top-0 z-50
-                   grid grid-cols-[1fr_auto_1fr] items-center px-3.5 py-3 gap-2.5">
+  <header class="bg-white border-b-[2.5px] border-base-content sticky top-0 z-50
+    grid grid-cols-[1fr_auto_1fr] items-center px-3.5 py-3 gap-2.5">
 
-        {# ── Bouton QR Code ── #}
-        <button id="qrBtn"
-                data-action="click->qr#toggle"
-                class="justify-self-start btn btn-sm rounded-full
-                       border-[2.5px] border-base-content bg-white text-base-content
-                       shadow-[3px_3px_0_0_var(--color-base-content)]
-                       font-extrabold text-xs uppercase tracking-wide
-                       hover:shadow-[4px_4px_0_0_var(--color-base-content)] hover:-translate-x-px hover:-translate-y-px
-                       active:shadow-[1px_1px_0_0_var(--color-base-content)] active:translate-x-0.5 active:translate-y-0.5
-                       transition-all duration-100"
-                aria-label="Afficher le QR code et les contacts">
-            {{ ux_icon('lucide:qr-code', {class: 'w-3.5 h-3.5'}) }} QR Code
-        </button>
+    {# ── Bouton QR Code ── #}
+    <button id="qrBtn"
+      {{ stimulus_action('qr', 'toggle', 'click') }}
+      class="justify-self-start btn btn-sm rounded-full
+      border-[2.5px] border-base-content bg-white text-base-content
+      shadow-[3px_3px_0_0_var(--color-base-content)]
+      font-extrabold text-xs uppercase tracking-wide
+      hover:shadow-[4px_4px_0_0_var(--color-base-content)] hover:-translate-x-px hover:-translate-y-px
+      active:shadow-[1px_1px_0_0_var(--color-base-content)] active:translate-x-0.5 active:translate-y-0.5
+      transition-all duration-100"
+      aria-label="Afficher le QR code et les contacts">
+      {{ ux_icon('lucide:qr-code', {class: 'w-3.5 h-3.5'}) }} QR Code
+    </button>
 
-        {# ── Logo centré ── #}
-        <div class="justify-self-center">
-            {% if globalStore is defined %}
-                {% if globalStore.logoName is not null %}
-                    <a href="{{ path('app_menu', {slug: globalStore.slug}) }}">
-                        <img src="{{ asset('images/store/' ~ globalStore.logoName) }}"
-                             class="h-10"
-                             alt="{{ globalStore.name }}">
-                    </a>
-                {% else %}
-                    <a href="{{ path('app_menu', {slug: globalStore.slug}) }}"
-                       class="inline-flex items-center gap-1.5 font-black tracking-tight leading-none no-underline">
-                        <span class="bg-base-content text-primary-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg">snap!</span>
-                        <span class="bg-white text-base-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg -rotate-3 shadow-[2px_2px_0_0_var(--color-base-content)]">{{ globalStore.name }}</span>
-                    </a>
-                {% endif %}
-            {% else %}
-                <a href="{{ path('app_default') }}"
-                   class="inline-flex items-center gap-1.5 font-black tracking-tight leading-none no-underline">
-                    <span class="bg-base-content text-primary-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg">snap!</span>
-                    <span class="bg-white text-base-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg -rotate-3 shadow-[2px_2px_0_0_var(--color-base-content)]">menu</span>
-                </a>
-            {% endif %}
-        </div>
+    {# ── Logo centré ── #}
+    <div class="justify-self-center">
+      {% if globalStore is defined %}
+      {% if globalStore.logoName is not null %}
+      <a href="{{ path('app_menu', {slug: globalStore.slug}) }}">
+        <img src="{{ asset('images/store/' ~ globalStore.logoName) }}"
+          class="h-10"
+          alt="{{ globalStore.name }}">
+      </a>
+      {% else %}
+      <a href="{{ path('app_menu', {slug: globalStore.slug}) }}"
+        class="inline-flex items-center gap-1.5 font-black tracking-tight leading-none no-underline">
+        <span class="bg-base-content text-primary-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg">snap!</span>
+        <span class="bg-white text-base-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg -rotate-3 shadow-[2px_2px_0_0_var(--color-base-content)]">{{ globalStore.name }}</span>
+      </a>
+      {% endif %}
+      {% else %}
+      <a href="{{ path('app_default') }}"
+        class="inline-flex items-center gap-1.5 font-black tracking-tight leading-none no-underline">
+        <span class="bg-base-content text-primary-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg">snap!</span>
+        <span class="bg-white text-base-content rounded-full px-2.5 py-1 border-[2.5px] border-base-content text-lg -rotate-3 shadow-[2px_2px_0_0_var(--color-base-content)]">menu</span>
+      </a>
+      {% endif %}
+    </div>
 
-        {# ── Bouton Appeler ── #}
-        <div class="justify-self-end">
-            {% if globalStore is defined and globalStore.phoneNumber is not null %}
-                <a href="tel:{{ globalStore.phoneNumber }}"
-                   class="btn btn-sm rounded-full
-                          border-[2.5px] border-base-content bg-base-100 text-base-content
-                          shadow-[3px_3px_0_0_var(--color-base-content)]
-                          font-extrabold text-xs uppercase tracking-wide
-                          hover:shadow-[4px_4px_0_0_var(--color-base-content)] hover:-translate-x-px hover:-translate-y-px
-                          active:shadow-[1px_1px_0_0_var(--color-base-content)] active:translate-x-0.5 active:translate-y-0.5
-                          transition-all duration-100"
-                   title="{{ globalStore.phoneNumber }}">
-                    {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }} Appeler
-                </a>
-            {% else %}
-                <span class="btn btn-sm rounded-full
-                             border-[2.5px] border-base-content bg-base-100 text-base-content
-                             font-extrabold text-xs uppercase tracking-wide
-                             opacity-30 cursor-default">
-                    {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }} Appeler
-                </span>
-            {% endif %}
-        </div>
+    {# ── Bouton Appeler ── #}
+    <div class="justify-self-end">
+      {% if globalStore is defined and globalStore.phoneNumber is not null %}
+      <a href="tel:{{ globalStore.phoneNumber }}"
+        class="btn btn-sm rounded-full
+        border-[2.5px] border-base-content bg-base-100 text-base-content
+        shadow-[3px_3px_0_0_var(--color-base-content)]
+        font-extrabold text-xs uppercase tracking-wide
+        hover:shadow-[4px_4px_0_0_var(--color-base-content)] hover:-translate-x-px hover:-translate-y-px
+        active:shadow-[1px_1px_0_0_var(--color-base-content)] active:translate-x-0.5 active:translate-y-0.5
+        transition-all duration-100"
+        title="{{ globalStore.phoneNumber }}">
+        {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }} Appeler
+      </a>
+      {% else %}
+      <span class="btn btn-sm rounded-full
+        border-[2.5px] border-base-content bg-base-100 text-base-content
+        font-extrabold text-xs uppercase tracking-wide
+        opacity-30 cursor-default">
+        {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }} Appeler
+      </span>
+      {% endif %}
+    </div>
 
 
-    </header>
-   {# ── Overlay QR Code — carte sticker ── #}
-    {% if globalStore is defined %}
+  </header>
+  {# ── Overlay QR Code — carte sticker ── #}
+  {% if globalStore is defined %}
   {% set uri = app.request.schemeAndHttpHost %} 
-        <div {{ stimulus_target('qr', 'panel') }}
-             class="hidden fixed inset-0 z-40 flex items-center justify-center bg-black/50 px-5">
+  <div {{ stimulus_target('qr', 'panel') }}
+    class="hidden fixed inset-0 z-40 flex items-center justify-center bg-black/50 px-5">
 
-            <div data-action="click->qr#close:stop"
-                 class="relative w-full max-w-xs
-                        bg-base-100 border-[3px] border-secondary
-                        rounded-[var(--radius-box)] shadow-[5px_5px_0_0_var(--color-base-content)]
-                        rotate-1 p-4 flex flex-col gap-3">
+    <div 
+      {{ stimulus_action('qr', 'close') }}"
+      class="relative w-full max-w-xs
+      bg-base-100 border-[3px] border-secondary
+      rounded-[var(--radius-box)] shadow-[5px_5px_0_0_var(--color-base-content)]
+      rotate-1 p-4 flex flex-col gap-3">
 
-                {# Sticker haut-droite #}
-                <div class="absolute -top-4 -right-3
-                            bg-secondary text-secondary-content
-                            rounded-full border-[2px] border-base-content
-                            shadow-[2px_2px_0_0_var(--color-base-content)]
-                            px-3 py-1 rotate-[12deg]
-                            font-black text-[10px] uppercase tracking-wide whitespace-nowrap">
-                    SCAN &amp; MANGE !
-                </div>
+      {# Sticker haut-droite #}
+      <div class="absolute -top-4 -right-3
+        bg-secondary text-secondary-content
+        rounded-full border-[2px] border-base-content
+        shadow-[2px_2px_0_0_var(--color-base-content)]
+        px-3 py-1 rotate-[12deg]
+        font-black text-[10px] uppercase tracking-wide whitespace-nowrap">
+        SCAN &amp; MANGE !
+      </div>
 
-                {# En-tête : nom + bouton ✕ #}
-                <div class="flex items-center justify-between">
-                    <span class="font-black text-lg leading-none">{{ globalStore.name }}</span>
-                    <button data-action="click->qr#close"
-                            class="w-7 h-7 flex items-center justify-center shrink-0
-                                   rounded-full bg-base-content text-primary-content"
-                            aria-label="Fermer">
-                        {{ ux_icon('lucide:x', {class: 'w-3.5 h-3.5'}) }}
-                    </button>
-                </div>
+      {# En-tête : nom + bouton ✕ #}
+      <div class="flex items-center justify-between">
+        <span class="font-black text-lg leading-none">{{ globalStore.name }}</span>
+        <button data-action="click->qr#close"
+          class="w-7 h-7 flex items-center justify-center shrink-0
+          rounded-full bg-base-content text-primary-content"
+          aria-label="Fermer">
+          {{ ux_icon('lucide:x', {class: 'w-3.5 h-3.5'}) }}
+        </button>
+      </div>
 
-                {# Box blanche : QR + URL #}
-                <div class="bg-white border-2 border-base-content rounded-xl p-4 flex flex-col items-center gap-2">
-                    <img src="{{ qr_code_url(uri) }}"
-                         class="w-44 h-44"
-                         alt="{{ globalStore.name }} — QR code menu">
-                    <span class="font-mono text-[10px] text-base-content/50">{{ uri }}</span>
-                </div>
+      {# Box blanche : QR + URL #}
+      <div class="bg-white border-2 border-base-content rounded-xl p-4 flex flex-col items-center gap-2">
+        <img src="{{ qr_code_url(uri) }}"
+          class="w-44 h-44"
+          alt="{{ globalStore.name }} — QR code menu">
+        <span class="font-mono text-[10px] text-base-content/50">{{ uri }}</span>
+      </div>
 
-                {# Lignes contact #}
-                <ul class="flex flex-col divide-y divide-dashed divide-base-content/25">
-                    {% if globalStore.phoneNumber %}
-                        <li class="flex items-center gap-3 py-2">
-                            <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
-                                {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }}
-                            </div>
-                            <div class="flex flex-col leading-none gap-0.5">
-                                <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Téléphone</span>
-                                <span class="font-black text-sm">{{ globalStore.phoneNumber }}</span>
-                            </div>
-                        </li>
-                    {% endif %}
-                    {% if globalStore.streetName %}
-                        <li class="flex items-center gap-3 py-2">
-                            <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
-                                {{ ux_icon('lucide:map-pin', {class: 'w-3.5 h-3.5'}) }}
-                            </div>
-                            <div class="flex flex-col leading-none gap-0.5">
-                                <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Adresse</span>
-                                <span class="font-black text-sm">{{ globalStore.streetName }} {{ globalStore.houseNumber }} · {{ globalStore.postCode }} {{ globalStore.city }}</span>
-                            </div>
-                        </li>
-                    {% endif %}
-                    <li class="flex items-center gap-3 py-2">
-                        <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
-                            {{ ux_icon('lucide:globe', {class: 'w-3.5 h-3.5'}) }}
-                        </div>
-                        <div class="flex flex-col leading-none gap-0.5 min-w-0">
-                            <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Site web</span>
-                            <span class="font-black text-sm truncate">{{ uri }}</span>
-                        </div>
-                    </li>
-                </ul>
+      {# Lignes contact #}
+      <ul class="flex flex-col divide-y divide-dashed divide-base-content/25">
+        {% if globalStore.phoneNumber %}
+        <li class="flex items-center gap-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
+            {{ ux_icon('lucide:phone', {class: 'w-3.5 h-3.5'}) }}
+          </div>
+          <div class="flex flex-col leading-none gap-0.5">
+            <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Téléphone</span>
+            <span class="font-black text-sm">{{ globalStore.phoneNumber }}</span>
+          </div>
+        </li>
+        {% endif %}
+        {% if globalStore.streetName %}
+        <li class="flex items-center gap-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
+            {{ ux_icon('lucide:map-pin', {class: 'w-3.5 h-3.5'}) }}
+          </div>
+          <div class="flex flex-col leading-none gap-0.5">
+            <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Adresse</span>
+            <span class="font-black text-sm">{{ globalStore.streetName }} {{ globalStore.houseNumber }} · {{ globalStore.postCode }} {{ globalStore.city }}</span>
+          </div>
+        </li>
+        {% endif %}
+        <li class="flex items-center gap-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-base-content text-primary-content flex items-center justify-center shrink-0">
+            {{ ux_icon('lucide:globe', {class: 'w-3.5 h-3.5'}) }}
+          </div>
+          <div class="flex flex-col leading-none gap-0.5 min-w-0">
+            <span class="font-mono text-[9px] uppercase tracking-widest opacity-50">Site web</span>
+            <span class="font-black text-sm truncate">{{ uri }}</span>
+          </div>
+        </li>
+      </ul>
 
-                {# Boutons #}
-                <div class="flex gap-2">
-                    <button class="flex-1 bg-base-content text-primary-content
-                                   rounded-full border-[2px] border-base-content
-                                   font-black text-[10px] uppercase tracking-wide py-2.5">
-                        Copier le lien
-                    </button>
-                    <button class="flex-1 bg-white text-base-content
-                                   rounded-full border-[2px] border-base-content
-                                   font-black text-[10px] uppercase tracking-wide py-2.5">
-                        Partager
-                    </button>
-                </div>
+      {# Boutons #}
+      <div class="flex gap-2">
+        <button {{ stimulus_action('qr', 'copy', 'click', {uri: uri}) }} 
+          class="flex-1 bg-base-content text-primary-content
+          rounded-full border-[2px] border-base-content
+          font-black text-[10px] uppercase tracking-wide py-2.5">
+            Copier le lien 
+        </button>
+        <button class="flex-1 bg-white text-base-content
+          rounded-full border-[2px] border-base-content
+          font-black text-[10px] uppercase tracking-wide py-2.5">
+          Partager
+        </button>
+      </div>
+      <span {{stimulus_target('qr', 'alertCopy')}}
+            class="cat-chip opacity-0 absolute bottom-0 translate-y-8 left-1/2 -translate-x-1/2 flex-shrink-0 btn btn-sm rounded-full
+                  border-[2.5px] border-base-content bg-white text-base-content
+                  font-extrabold text-[13px] uppercase tracking-wide
+                whitespace-nowrap [transition:opacity_150ms_ease,transform_300ms_ease]">
+                Lien copié
+      </span>
 
-            </div>
-        </div>
-    {% endif %}
+
+    </div>
+  </div>
+  {% endif %}
 
 
-    {% include '_partial/_header/_nav.html.twig' %}
+  {% include '_partial/_header/_nav.html.twig' %}
 
 </div>  
