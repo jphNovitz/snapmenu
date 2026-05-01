@@ -153,7 +153,8 @@
           font-black text-[10px] uppercase tracking-wide py-2.5">
             Copier le lien 
         </button>
-        <button class="flex-1 bg-white text-base-content
+        <button {{ stimulus_action('qr', 'share', 'click', {uri: uri}) }}
+          class="flex-1 bg-white text-base-content
           rounded-full border-[2px] border-base-content
           font-black text-[10px] uppercase tracking-wide py-2.5">
           Partager

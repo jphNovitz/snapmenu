@@ -22,6 +22,11 @@ export default class extends Controller {
              .catch(err => console.error(err))
   }
 
+  share(e) {
+   const url = encodeURIComponent(e.params.uri)
+    console.log(url)
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank')  }
+
   showCopy(){
     this.alertCopyTarget.style.opacity = "1"
     this.alertCopyTarget.style.transform = "translateY(-12px)"
