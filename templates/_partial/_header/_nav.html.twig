@@ -23,7 +23,7 @@
             {% if app.user is null %}
                 <a href="{{ path('app_login') }}"> {% trans %} nav.login{% endtrans %}</a>
             {% else %}
-                <a href="{{ path('admin_default') }}">  {% trans %} nav.admin {% endtrans %}</a>
+                <a href="{{ path('admin') }}">  {% trans %} nav.admin {% endtrans %}</a>
                 <a href="/logout">  {% trans %} nav.logout {% endtrans %}</a>
             {% endif %}
         </li>
