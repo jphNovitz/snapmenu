@@ -18,7 +18,7 @@
     <meta property="og:description" content="{% block og_description %}Mettez votre carte dans la poche de chaque client grâce au QR code. Mise à jour instantanée, partage ultra facile. Prêt en 5 minutes.{% endblock %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ app.request.uri }}">
-    <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('images/store/landing.jpg')) }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('images/snapmenu_scan_jphiweb_be.webp')) }}{% endblock %}">
     <meta property="og:locale" content="fr_BE">
     <meta property="og:site_name" content="SnapMenu">
 
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Menu digital — QR moi ça ! | SnapMenu">
     <meta name="twitter:description" content="Mettez votre carte dans la poche de chaque client grâce au QR code. Mise à jour instantanée, partage ultra facile. Prêt en 5 minutes.">
-    <meta name="twitter:image" content="{{ absolute_url(asset('images/store/landing.jpg')) }}">
+    <meta name="twitter:image" content="{{ absolute_url(asset('images/snapmenu_scan_jphiweb_be')) }}">
 
     {% block stylesheets %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,10 +42,11 @@
     {% endblock %}
     {% endblock %}
   </head>
-  <body class="w-screen overflow-x-hidden min-h-screen bg-base-300 text-base">
-    <main class="w-full md:max-w-7xl mx-auto bg-base-200">
+  <body class="min-h-screen bg-base-300 text-base">
       {% include '_partial/_header/_header.html.twig' %}
-      <div class="p-4">{% block body %}{% endblock %}</div>
+
+    <main class="w-full md:max-w-7xl mx-auto bg-base-200">
+       <div class="p-4">{% block body %}{% endblock %}</div>
 
       <footer class="bg-neutral text-neutral-content w-full">
         <div class="container mx-auto px-5 pt-10 pb-6">
