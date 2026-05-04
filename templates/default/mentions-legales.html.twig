@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales{% if globalStore is defined and globalStore.name %} — {{ globalStore.name }}{% endif %}{% endblock %}
+
+{% block meta_description %}Mentions légales du site {% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}SnapMenu{% endif %}.{% endblock %}
+
+{% block body %}
+<div class="max-w-3xl mx-auto py-10 px-4 space-y-8">
+
+    <header>
+        <h1 class="text-3xl font-black tracking-tight mb-2">Mentions légales</h1>
+        <p class="text-sm opacity-60 font-mono">
+            Dernière mise à jour :
+            {% if globalStore is defined and globalStore.updatedAt %}
+                {{ globalStore.updatedAt|date('d/m/Y') }}
+            {% else %}
+                04/05/2026
+            {% endif %}
+        </p>
+    </header>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Éditeur du site</h2>
+        <p class="mb-4">
+            Le site <strong>{{ app.request.schemeAndHttpHost }}</strong> est édité par :
+        </p>
+        <address class="not-italic space-y-1">
+            {% if globalStore is defined and globalStore.name %}
+                <p class="font-bold">{{ globalStore.name }}</p>
+            {% endif %}
+            {# TODO manquant : globalStore.legalForm (forme juridique, ex. SRL, SA…) #}
+            {% if globalStore is defined and globalStore.streetName %}
+                <p>{{ globalStore.streetName }} {{ globalStore.houseNumber }}</p>
+                <p>{{ globalStore.postCode }} {{ globalStore.city }}, Belgique</p>
+            {% endif %}
+        </address>
+        <dl class="mt-4 space-y-1">
+            {# TODO manquant : globalStore.bceNumber (numéro d'entreprise BCE) #}
+            {% if globalStore is defined and globalStore.vatNumber %}
+                <div class="flex gap-2">
+                    <dt class="opacity-60 min-w-32">Numéro de TVA :</dt>
+                    <dd>{{ globalStore.vatNumber }}</dd>
+                </div>
+            {% endif %}
+            {% if globalStore is defined and globalStore.email %}
+                <div class="flex gap-2">
+                    <dt class="opacity-60 min-w-32">Email :</dt>
+                    <dd><a href="mailto:{{ globalStore.email }}" class="link link-neutral">{{ globalStore.email }}</a></dd>
+                </div>
+            {% endif %}
+            {% if globalStore is defined and globalStore.phoneNumber %}
+                <div class="flex gap-2">
+                    <dt class="opacity-60 min-w-32">Téléphone :</dt>
+                    <dd><a href="tel:{{ globalStore.phoneNumber }}" class="link link-neutral">{{ globalStore.phoneNumber }}</a></dd>
+                </div>
+            {% endif %}
+        </dl>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Hébergement</h2>
+        <p class="opacity-60 italic text-sm">
+            {# TODO manquants : globalStore.hostName, globalStore.hostAddress, globalStore.hostCity, globalStore.hostCountry, globalStore.hostUrl #}
+            Informations d'hébergement à compléter.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Propriété intellectuelle</h2>
+        <p>
+            L'ensemble des contenus présents sur ce site (textes, images, graphismes, logo, icônes, code source) est la propriété exclusive de
+            {% if globalStore is defined and globalStore.name %}<strong>{{ globalStore.name }}</strong>{% else %}l'éditeur{% endif %},
+            sauf mention contraire. Toute reproduction, représentation, modification ou adaptation, totale ou partielle, sans autorisation écrite préalable, est interdite et constitue une contrefaçon au sens du droit belge et européen.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Responsabilité</h2>
+        <p class="mb-3">
+            {% if globalStore is defined and globalStore.name %}<strong>{{ globalStore.name }}</strong>{% else %}L'éditeur{% endif %}
+            s'efforce de fournir des informations aussi exactes que possible sur ce site. Toutefois,
+            {% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}l'éditeur{% endif %}
+            ne peut garantir l'exactitude, la complétude ou l'actualité des informations diffusées. En conséquence, l'utilisation de ces informations se fait sous la seule responsabilité du visiteur.
+        </p>
+        <p>
+            {% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}L'éditeur{% endif %}
+            ne saurait être tenu responsable des dommages directs ou indirects résultant de l'accès au site ou de l'utilisation de son contenu.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Liens externes</h2>
+        <p>
+            Le site peut contenir des liens vers des sites tiers.
+            {% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}L'éditeur{% endif %}
+            n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu ou leurs pratiques en matière de protection des données.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Droit applicable et juridiction compétente</h2>
+        <p>
+            Le présent site et ses mentions légales sont soumis au droit belge. En cas de litige, les tribunaux de l'arrondissement judiciaire de
+            {# TODO manquant : globalStore.judicialDistrict (arrondissement judiciaire compétent) #}
+            <span class="opacity-50 italic">[arrondissement judiciaire à compléter]</span>
+            sont seuls compétents.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Contact</h2>
+        <p>
+            Pour toute question relative à ce site, vous pouvez nous contacter à l'adresse
+            {% if globalStore is defined and globalStore.email %}
+                <a href="mailto:{{ globalStore.email }}" class="link link-neutral">{{ globalStore.email }}</a>.
+            {% else %}
+                {# TODO manquant : globalStore.email #}
+                <span class="opacity-50 italic">[email à compléter]</span>.
+            {% endif %}
+        </p>
+    </section>
+
+</div>
+{% endblock %}

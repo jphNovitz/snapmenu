@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de confidentialité{% if globalStore is defined and globalStore.name %} — {{ globalStore.name }}{% endif %}{% endblock %}
+
+{% block meta_description %}Politique de confidentialité et protection des données personnelles du site {% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}SnapMenu{% endif %}.{% endblock %}
+
+{% block body %}
+<div class="max-w-3xl mx-auto py-10 px-4 space-y-8">
+
+    <header>
+        <h1 class="text-3xl font-black tracking-tight mb-2">Politique de confidentialité</h1>
+        <p class="text-sm opacity-60 font-mono">
+            Dernière mise à jour :
+            {% if globalStore is defined and globalStore.updatedAt %}
+                {{ globalStore.updatedAt|date('d/m/Y') }}
+            {% else %}
+                04/05/2026
+            {% endif %}
+        </p>
+    </header>
+
+    <p>
+        La présente politique de confidentialité décrit la manière dont
+        <strong>{% if globalStore is defined and globalStore.name %}{{ globalStore.name }}{% else %}l'éditeur{% endif %}</strong>
+        (ci-après "nous") traite les données à caractère personnel des visiteurs du site
+        <strong>{{ app.request.schemeAndHttpHost }}</strong>
+        (ci-après "le Site"), conformément au Règlement général sur la protection des données (RGPD, Règlement UE 2016/679) et à la législation belge applicable.
+    </p>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Responsable du traitement</h2>
+        <address class="not-italic space-y-1">
+            {% if globalStore is defined and globalStore.name %}
+                <p class="font-bold">{{ globalStore.name }}</p>
+            {% endif %}
+            {% if globalStore is defined and globalStore.streetName %}
+                <p>{{ globalStore.streetName }} {{ globalStore.houseNumber }}</p>
+                <p>{{ globalStore.postCode }} {{ globalStore.city }}, Belgique</p>
+            {% endif %}
+            {% if globalStore is defined and globalStore.email %}
+                <p>Email : <a href="mailto:{{ globalStore.email }}" class="link link-neutral">{{ globalStore.email }}</a></p>
+            {% endif %}
+            {# TODO manquant : globalStore.bceNumber (numéro d'entreprise BCE) #}
+        </address>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Données collectées</h2>
+
+        <h3 class="text-lg font-semibold mt-5 mb-2">Données techniques de connexion</h3>
+        <p>
+            Comme tout site web, notre serveur enregistre automatiquement certaines données techniques lors de votre visite : adresse IP, type et version du navigateur, système d'exploitation, pages consultées, date et heure de l'accès. Ces données sont traitées dans le cadre de notre intérêt légitime (article 6.1.f du RGPD) pour assurer la sécurité, le bon fonctionnement du Site et la détection d'éventuels abus. Elles sont conservées dans les journaux serveur pendant une durée maximale de
+            {# TODO manquant : globalStore.logRetentionDays (durée de conservation des logs serveur en jours) #}
+            <span class="opacity-50 italic">[durée à préciser]</span>
+            jours, puis supprimées automatiquement.
+        </p>
+
+        <h3 class="text-lg font-semibold mt-5 mb-2">Formulaire de contact</h3>
+        <p>
+            Si le Site propose un formulaire de contact, les données que vous y saisissez (nom, adresse email, message) sont utilisées uniquement pour répondre à votre demande. La base légale est votre consentement (article 6.1.a du RGPD) ou l'exécution de mesures précontractuelles (article 6.1.b). Ces données sont conservées le temps nécessaire au traitement de votre demande, et au maximum
+            {# TODO manquant : globalStore.contactRetentionMonths (durée de conservation des messages de contact en mois) #}
+            <span class="opacity-50 italic">[durée à préciser]</span>
+            mois.
+        </p>
+
+        <h3 class="text-lg font-semibold mt-5 mb-2">Services tiers : Google Fonts</h3>
+        <p class="mb-3">
+            Le Site utilise le service Google Fonts, fourni par Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irlande), pour l'affichage de polices de caractères. Lorsque vous accédez au Site, votre navigateur établit une connexion directe avec les serveurs de Google pour télécharger les fichiers de polices. Dans le cadre de cette connexion, Google reçoit votre adresse IP ainsi que certaines informations techniques (en-têtes HTTP, URL de la page consultée, user agent).
+        </p>
+        <p class="mb-3">
+            Google Fonts ne dépose pas de cookies, mais le transfert de votre adresse IP constitue un traitement de données personnelles au sens du RGPD. Ce traitement repose sur notre intérêt légitime (article 6.1.f du RGPD) à assurer une présentation typographique cohérente du Site.
+        </p>
+        <p>
+            Pour plus d'informations sur le traitement des données par Google dans le cadre de ce service, consultez la
+            <a href="https://developers.google.com/fonts/faq/privacy" class="link link-neutral" target="_blank" rel="noopener noreferrer">FAQ Google Fonts relative à la vie privée</a>
+            et la
+            <a href="https://policies.google.com/privacy" class="link link-neutral" target="_blank" rel="noopener noreferrer">politique de confidentialité de Google</a>.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Cookies</h2>
+        <p>
+            Le Site n'utilise aucun cookie publicitaire, analytique ou de suivi. Seuls des cookies strictement nécessaires au fonctionnement technique du Site peuvent être utilisés (par exemple, des cookies de session). Ces cookies ne nécessitent pas votre consentement conformément à l'article 5, paragraphe 3, de la directive ePrivacy (2002/58/CE), car ils sont indispensables à la fourniture du service.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Absence de profilage et de prise de décision automatisée</h2>
+        <p>
+            Nous ne procédons à aucun profilage ni à aucune prise de décision automatisée à partir des données collectées via le Site.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Transferts de données hors UE</h2>
+        <p>
+            L'utilisation de Google Fonts peut impliquer un transfert de données (adresse IP) vers des serveurs de Google situés en dehors de l'Espace économique européen. Ce transfert est encadré par les clauses contractuelles types adoptées par la Commission européenne (article 46.2.c du RGPD).
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Vos droits</h2>
+        <p class="mb-4">Conformément au RGPD, vous disposez des droits suivants concernant vos données personnelles :</p>
+        <ul class="space-y-2 pl-4">
+            <li><strong>Droit d'accès</strong> : obtenir la confirmation que des données vous concernant sont ou ne sont pas traitées, et en recevoir une copie.</li>
+            <li><strong>Droit de rectification</strong> : demander la correction de données inexactes ou incomplètes.</li>
+            <li><strong>Droit à l'effacement</strong> : demander la suppression de vos données dans les cas prévus par le RGPD.</li>
+            <li><strong>Droit à la limitation du traitement</strong> : demander la suspension du traitement dans certaines circonstances.</li>
+            <li><strong>Droit d'opposition</strong> : vous opposer au traitement fondé sur l'intérêt légitime.</li>
+            <li><strong>Droit à la portabilité</strong> : recevoir vos données dans un format structuré et couramment utilisé.</li>
+        </ul>
+        <p class="mt-4">
+            Pour exercer ces droits, contactez-nous à l'adresse
+            {% if globalStore is defined and globalStore.email %}
+                <a href="mailto:{{ globalStore.email }}" class="link link-neutral">{{ globalStore.email }}</a>.
+            {% else %}
+                {# TODO manquant : globalStore.email #}
+                <span class="opacity-50 italic">[email à compléter]</span>.
+            {% endif %}
+        </p>
+        <p class="mt-4">
+            Nous nous engageons à répondre à votre demande dans un délai d'un mois. Si nous ne parvenons pas à donner suite à votre demande de manière satisfaisante, vous avez le droit d'introduire une réclamation auprès de l'Autorité de protection des données belge :
+        </p>
+        <address class="not-italic mt-3 pl-4 border-l-2 border-base-content/20 space-y-1 text-sm">
+            <p class="font-bold">Autorité de protection des données (APD)</p>
+            <p>Rue de la Presse 35</p>
+            <p>1000 Bruxelles</p>
+            <p><a href="https://www.autoriteprotectiondonnees.be" class="link link-neutral" target="_blank" rel="noopener noreferrer">www.autoriteprotectiondonnees.be</a></p>
+            <p>Email : <a href="mailto:contact@apd-gba.be" class="link link-neutral">contact@apd-gba.be</a></p>
+        </address>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-3 pb-1 border-b border-base-content/15">Modifications</h2>
+        <p>
+            Nous nous réservons le droit de modifier la présente politique de confidentialité à tout moment. La version en vigueur est celle accessible sur le Site, identifiée par sa date de mise à jour. Nous vous invitons à la consulter régulièrement.
+        </p>
+    </section>
+
+</div>
+{% endblock %}
