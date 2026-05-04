@@ -1,11 +1,231 @@
 App\Entity\Product:
-  product_{1..18}:
-    name: <foodName()>
-    description: <sentence()>
-    ingredients: <ingredients(6)>
-    price_home: <numberBetween(1, 6)>
-    price_away: <numberBetween(4, 11)>
-    halal: <boolean()>
-    veggie: <boolean()>
-    category: '@category_*'
-    allergens: '[@allergen_*]'
+
+  # ── Entrées ──────────────────────────────────────────────────────────────
+
+  product_1:
+    name: "Velouté de butternut et noix de cajou"
+    description: "Velouté onctueux de courge butternut rôtie, noix de cajou torréfiées, huile de coriandre."
+    ingredients: "butternut, noix de cajou, oignon, crème de coco, gingembre, coriandre fraîche"
+    price_home: 9
+    price_away: 12
+    veggie: true
+    halal: true
+    category: '@category_1'
+    allergens: ['@allergen_2', '@allergen_8']
+
+  product_2:
+    name: "Planche de charcuteries belges"
+    description: "Sélection de charcuteries artisanales : pâté ardennais, jambon de Liège, salami, cornichons et moutarde."
+    ingredients: "pâté ardennais, jambon de Liège, salami, cornichons, moutarde à l ancienne, pain grillé"
+    price_home: 14
+    price_away: 17
+    veggie: false
+    halal: false
+    category: '@category_1'
+    allergens: ['@allergen_10', '@allergen_12', '@allergen_7']
+
+  product_3:
+    name: "Tartare de saumon à l'aneth"
+    description: "Saumon frais taillé au couteau, marinade à l aneth et vodka, câpres et échalotes."
+    ingredients: "saumon frais, aneth, câpres, échalotes, crème fraîche, vodka, citron, huile d olive"
+    price_home: 13
+    price_away: 16
+    veggie: false
+    halal: false
+    category: '@category_1'
+    allergens: ['@allergen_5', '@allergen_12']
+
+  product_4:
+    name: "Soupe à l'oignon gratinée"
+    description: "Soupe à l oignon caramélisé, croûton de pain au levain, gruyère fondu gratinée au four."
+    ingredients: "oignons jaunes, bouillon de légumes, gruyère, pain au levain, beurre, thym, laurier"
+    price_home: 9
+    price_away: 11
+    veggie: true
+    halal: true
+    category: '@category_1'
+    allergens: ['@allergen_7', '@allergen_3']
+
+  # ── Plats principaux ─────────────────────────────────────────────────────
+
+  product_5:
+    name: "Entrecôte Wagyu, sauce béarnaise"
+    description: "Entrecôte de bœuf Wagyu 250g, sauce béarnaise maison, frites fraîches et salade."
+    ingredients: "entrecôte Wagyu, beurre clarifié, estragon, échalotes, vinaigre de vin, jaunes d oeufs, frites fraîches"
+    price_home: 32
+    price_away: 36
+    veggie: false
+    halal: false
+    category: '@category_2'
+    allergens: ['@allergen_4', '@allergen_3', '@allergen_12']
+
+  product_6:
+    name: "Poulet rôti halal aux herbes"
+    description: "Demi-poulet fermier halal rôti au four, marinade romarin-citron, pommes de terre grenaille."
+    ingredients: "poulet fermier halal, ail, romarin, thym, citron, huile d olive, moutarde, pommes de terre grenaille"
+    price_home: 19
+    price_away: 23
+    veggie: false
+    halal: true
+    category: '@category_2'
+    allergens: ['@allergen_10']
+
+  product_7:
+    name: "Carbonnade flamande"
+    description: "Mijoté de bœuf à la bière brune belge, pain d épices et moutarde, servi avec des frites maison."
+    ingredients: "bœuf à braiser, bière brune, oignons, pain d épices, moutarde, thym, laurier, frites maison"
+    price_home: 22
+    price_away: 26
+    veggie: false
+    halal: false
+    category: '@category_2'
+    allergens: ['@allergen_7', '@allergen_10', '@allergen_12']
+
+  product_8:
+    name: "Burger bœuf halal maison"
+    description: "Steak de bœuf halal 180g, cheddar fondu, salade, tomate, cornichons et sauce burger maison sur brioche au sésame."
+    ingredients: "bœuf haché halal 180g, cheddar, salade, tomate, cornichons, oignon, sauce burger, brioche au sésame, frites maison"
+    price_home: 18
+    price_away: 22
+    veggie: false
+    halal: true
+    category: '@category_2'
+    allergens: ['@allergen_7', '@allergen_9', '@allergen_3', '@allergen_4']
+
+  product_9:
+    name: "Filet de bœuf Wellington"
+    description: "Filet de bœuf en croûte, duxelles de champignons, pâte feuilletée dorée, haricots verts et jus de veau."
+    ingredients: "filet de bœuf, duxelles de champignons, jambon de Parme, pâte feuilletée, moutarde, jaunes d oeufs, haricots verts"
+    price_home: 34
+    price_away: 38
+    veggie: false
+    halal: false
+    category: '@category_2'
+    allergens: ['@allergen_7', '@allergen_4', '@allergen_3', '@allergen_10']
+
+  # ── Poissons & Fruits de mer ─────────────────────────────────────────────
+
+  product_10:
+    name: "Saint-Jacques poêlées, beurre d'agrumes"
+    description: "Coquilles Saint-Jacques snackées au beurre noisette, déglacées au vin blanc, mâche et vinaigrette légère."
+    ingredients: "noix de Saint-Jacques, beurre, vin blanc sec, orange, citron, vanille, mâche, vinaigrette"
+    price_home: 24
+    price_away: 28
+    veggie: false
+    halal: false
+    category: '@category_3'
+    allergens: ['@allergen_6', '@allergen_3', '@allergen_12']
+
+  product_11:
+    name: "Filet de cabillaud, légumes de saison"
+    description: "Filet de cabillaud vapeur, légumes du moment rôtis à l huile d olive, quinoa et citron confit."
+    ingredients: "filet de cabillaud, courgettes, carottes, poivrons, huile d olive, citron confit, persil, quinoa"
+    price_home: 20
+    price_away: 24
+    veggie: false
+    halal: true
+    category: '@category_3'
+    allergens: ['@allergen_5']
+
+  product_12:
+    name: "Waterzooi de la mer"
+    description: "Le classique revisité : crevettes grises, moules et sole dans un bouillon crémé au vin blanc et safran, légumes fondants."
+    ingredients: "crevettes grises, moules de Zélande, filet de sole, poireaux, carottes, céleri, crème, vin blanc, bouillon de poisson, safran"
+    price_home: 23
+    price_away: 27
+    veggie: false
+    halal: false
+    category: '@category_3'
+    allergens: ['@allergen_5', '@allergen_6', '@allergen_3', '@allergen_12']
+
+  # ── Végétarien ───────────────────────────────────────────────────────────
+
+  product_13:
+    name: "Risotto champignons et parmesan"
+    description: "Risotto crémeux aux champignons de Paris et shiitaké, parmesan affiné 24 mois, huile de truffe. Mantecato au vin blanc."
+    ingredients: "riz arborio, champignons de Paris, shiitaké, parmesan, oignon, beurre, vin blanc sec, bouillon de légumes, persil, huile de truffe"
+    price_home: 17
+    price_away: 21
+    veggie: true
+    halal: false
+    category: '@category_4'
+    allergens: ['@allergen_3', '@allergen_12']
+
+  product_14:
+    name: "Buddha bowl quinoa & légumes"
+    description: "Quinoa, avocat, edamame, légumes croquants, sauce tahini-sésame et sauce soja."
+    ingredients: "quinoa, avocat, edamame, carottes râpées, concombre, radis, sauce tahini, sauce soja, graines de sésame"
+    price_home: 16
+    price_away: 20
+    veggie: true
+    halal: true
+    category: '@category_4'
+    allergens: ['@allergen_8', '@allergen_9']
+
+  product_15:
+    name: "Burger végétarien betterave"
+    description: "Steak de betterave et légumineuses maison, cheddar végétal, sauce yaourt-ciboulette, brioche au sésame."
+    ingredients: "steak betterave et pois chiches, salade, tomate, cheddar végétal, yaourt, ciboulette, brioche sésame, frites maison"
+    price_home: 16
+    price_away: 20
+    veggie: true
+    halal: true
+    category: '@category_4'
+    allergens: ['@allergen_7', '@allergen_4', '@allergen_9', '@allergen_3']
+
+  product_16:
+    name: "Curry de pois chiches au lait de coco"
+    description: "Curry doux de pois chiches mijotés au lait de coco, tomates et épices, servi avec riz basmati."
+    ingredients: "pois chiches, lait de coco, tomates, oignon, gingembre, ail, curry, cumin, coriandre, riz basmati"
+    price_home: 15
+    price_away: 18
+    veggie: true
+    halal: true
+    category: '@category_4'
+    allergens: []
+
+  # ── Desserts ─────────────────────────────────────────────────────────────
+
+  product_17:
+    name: "Moelleux au chocolat noir"
+    description: "Fondant au chocolat noir 70% Valrhona, cœur coulant au rhum, crème anglaise à la vanille de Madagascar."
+    ingredients: "chocolat noir 70%, beurre, farine, sucre, oeufs, crème entière, rhum ambré, vanille de Madagascar"
+    price_home: 8
+    price_away: 10
+    veggie: true
+    halal: false
+    category: '@category_5'
+    allergens: ['@allergen_4', '@allergen_7', '@allergen_3']
+
+  product_18:
+    name: "Crème brûlée au cognac"
+    description: "Crème brûlée parfumée au cognac et à la vanille de Madagascar, caramel craquant à la cassonade."
+    ingredients: "crème entière, jaunes d oeufs, sucre, gousse de vanille de Madagascar, cognac, cassonade"
+    price_home: 8
+    price_away: 10
+    veggie: true
+    halal: false
+    category: '@category_5'
+    allergens: ['@allergen_4', '@allergen_3']
+
+  product_19:
+    name: "Tarte au citron meringuée"
+    description: "Pâte sablée maison, crème au citron fraîche et acidulée, meringue italienne légèrement flambée."
+    ingredients: "pâte sablée, citrons jaunes, zestes de citron, beurre, sucre, oeufs, meringue italienne"
+    price_home: 8
+    price_away: 10
+    veggie: true
+    halal: true
+    category: '@category_5'
+    allergens: ['@allergen_4', '@allergen_7', '@allergen_3']
+
+  product_20:
+    name: "Sorbet fruits rouges"
+    description: "Sorbet maison aux fruits rouges de saison, coulis de framboise, menthe fraîche."
+    ingredients: "fraises, framboises, myrtilles, sucre, jus de citron, menthe fraîche"
+    price_home: 7
+    price_away: 9
+    veggie: true
+    halal: true
+    category: '@category_5'
+    allergens: []

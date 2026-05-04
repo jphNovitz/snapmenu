@@ -1,48 +1,48 @@
 App\Entity\Allergen:
   allergen_1:
-    name: 'peanuts'
-    description: 'peanuts'
+    name: 'Arachides'
+    description: 'Arachides et produits à base d arachides'
 
   allergen_2:
-    name: 'treenuts'
-    description: 'treenuts'
+    name: 'Fruits à coque'
+    description: 'Amandes, noisettes, noix, noix de cajou, noix de pécan, pistaches'
 
   allergen_3:
-    name: 'milk'
-    description: 'milk'
+    name: 'Lait'
+    description: 'Lait et produits laitiers (lactose inclus)'
 
   allergen_4:
-    name: 'eggs'
-    description: 'eggs'
+    name: 'Oeufs'
+    description: 'Oeufs et produits à base d oeufs'
 
   allergen_5:
-    name: 'fish'
-    description: 'fish'
+    name: 'Poisson'
+    description: 'Poissons et produits à base de poisson'
 
   allergen_6:
-    name: 'shellfish'
-    description: 'shellfish'
+    name: 'Crustacés & Mollusques'
+    description: 'Crustacés, mollusques et produits dérivés'
 
   allergen_7:
-    name: 'wheat'
-    description: 'wheat'
+    name: 'Gluten'
+    description: 'Céréales contenant du gluten : blé, seigle, orge, avoine'
 
   allergen_8:
-    name: 'soy'
-    description: 'soy'
+    name: 'Soja'
+    description: 'Soja et produits à base de soja'
 
   allergen_9:
-    name: 'sesame'
-    description: 'sesame'
+    name: 'Sésame'
+    description: 'Graines de sésame et produits à base de sésame'
 
   allergen_10:
-    name: 'mustard'
-    description: 'mustard'
+    name: 'Moutarde'
+    description: 'Moutarde et produits à base de moutarde'
 
   allergen_11:
-    name: 'lupin'
-    description: 'lupin'
+    name: 'Lupin'
+    description: 'Lupin et produits à base de lupin'
 
   allergen_12:
-    name: 'sulphites'
-    description: 'sulphites'
+    name: 'Sulfites'
+    description: 'Dioxyde de soufre et sulfites (>10 mg/kg ou 10 mg/L)'

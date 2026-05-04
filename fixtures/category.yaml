@@ -1,5 +1,25 @@
 App\Entity\Category:
-  category_{1..10}:
-    name: <words(3, true)>
+  category_1:
+    name: 'Entrées'
     isActive: true
-    rowOrder: <numberBetween(1,10)>
+    rowOrder: 1
+
+  category_2:
+    name: 'Plats principaux'
+    isActive: true
+    rowOrder: 2
+
+  category_3:
+    name: 'Poissons & Fruits de mer'
+    isActive: true
+    rowOrder: 3
+
+  category_4:
+    name: 'Végétarien'
+    isActive: true
+    rowOrder: 4
+
+  category_5:
+    name: 'Desserts'
+    isActive: true
+    rowOrder: 5

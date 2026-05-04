@@ -1,14 +1,15 @@
 App\Entity\Store:
   store_1:
-    name: <company()>
-    description: <sentence()>
-    street_name: <streetName()>
-    house_number: <numberBetween(1,10)>
-    post_code: <postCode(4)>
-    city: <city()>
-    phone_number: <phoneNumber()>
-    email: <email()>
-    vat_number: <randomNumber(9, true)>
+    name: "Water l'Eau"
+    description: "Brasserie conviviale au cœur de Genappe. Cuisine belgo-française généreuse, options végétariennes et halal clairement identifiées. Ouvert du mardi au samedi."
+    street_name: "Place Albert Ier"
+    house_number: 3
+    post_code: "1470"
+    city: "Genappe"
+    phone_number: "+32 67 77 42 18"
+    email: "contact@waterleau.be"
+    vat_number: "BE0789456123"
+    slug: "demo"
     owner: '@user_1'
     logo_name: 'logoipsum-1.svg'
     imageName: 'landing.jpg'
